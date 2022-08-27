@@ -3,7 +3,6 @@ import { client } from "./client";
 import { dummyTodosList } from "./dummy";
 
 // TODO: 백엔드 연결
-
 const TODAY = new Date();
 export const getTodoList = (date = TODAY, req) => {
   try {
@@ -20,10 +19,13 @@ export const getTodoList = (date = TODAY, req) => {
   }
 };
 
-export const postTodo = async (todo, req) => {
+export const postTodo = (todo, req) => {
   // const response = client.post("/login");
+  const randomInt = Math.floor(Math.random() * 100);
+  return { id: randomInt };
 };
 
-export const updateTodo = async (id, req) => {
+export const updateTodo = (id, todo, req) => {
   // const response = client.put("/todo/${id}");
+  return { id, ...todo };
 };
