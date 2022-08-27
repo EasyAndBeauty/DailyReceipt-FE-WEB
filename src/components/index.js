@@ -16,6 +16,7 @@ export { Portal } from "./atoms/Portal";
 export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/receiptBarcode";
+export { ReceiptQuotes } from "./atoms/receiptQuotes";
 
 /**
  * molecules

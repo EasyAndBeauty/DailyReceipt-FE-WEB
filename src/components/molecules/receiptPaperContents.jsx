@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { ReceiptTodo, ReceiptPaperInfo, ReceiptBarcode } from "components";
+import {
+  ReceiptTodo,
+  ReceiptPaperInfo,
+  ReceiptBarcode,
+  ReceiptQuotes,
+} from "components";
 
 const testData = [
   {
@@ -50,9 +55,9 @@ export function ReceiptPaperContents() {
         <ReceiptPaperInfo />
         <div>{line}</div>
         <TodoContainer>
-          {testData.map((todo) => {
+          {testData.map((todo, index) => {
             timerTotal += todo.timer;
-            return <ReceiptTodo>{todo}</ReceiptTodo>;
+            return <ReceiptTodo key={todo.id + index}>{todo}</ReceiptTodo>;
           })}
         </TodoContainer>
         <div>{line}</div>
@@ -69,7 +74,7 @@ export function ReceiptPaperContents() {
           </div>
         </TotalContainer>
         <div>{line}</div>
-        <Quotes>api넣기</Quotes>
+        <ReceiptQuotes />
         <div>{line}</div>
         <ReceiptBarcode />
         <div>{line}</div>
@@ -115,7 +120,4 @@ const TotalContainer = styled.div`
     display: flex;
     justify-content: space-between;
   }
-`;
-const Quotes = styled.div`
-  margin: 16px 0;
 `;
