@@ -4,16 +4,17 @@
 export { TempComponent } from "./TempComponent";
 
 // atoms
-// export { DayOfWeek } from "./atoms/DayOfWeek";
+export { HeaderText } from "./atoms/HeaderText";
+export { DayOfWeek } from "./atoms/DayOfWeek";
+export { SquareBtn } from "./atoms/SquareBtn";
 // molecules
 export { Week } from "./molecules/Week";
+export { TodoHeader } from "./molecules/TodoHeader";
 // organisms
 
 // templates
 
 // Pages
-export { DayOfWeek } from "./atoms/DayOfWeek";
-
 export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
