@@ -7,6 +7,7 @@ export { TempComponent } from "./TempComponent";
 export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/receiptBarcode";
+export { ReceiptQuotes } from "./atoms/receiptQuotes";
 
 // molecules
 export { ReceiptPaper } from "./molecules/receiptPaper";
