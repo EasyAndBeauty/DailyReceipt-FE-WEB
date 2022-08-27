@@ -3,8 +3,8 @@ import { client } from "./client";
 import { dummyTodosList } from "./dummy";
 
 // TODO: 백엔드 연결
-
-export const getTodoList = (date, req) => {
+const TODAY = new Date();
+export const getTodoList = (date = TODAY, req) => {
   try {
     // const response = await client.get("/todo", { params: { date } });
 
