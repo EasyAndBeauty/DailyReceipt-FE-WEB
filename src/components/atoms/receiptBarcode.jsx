@@ -17,6 +17,7 @@ const BarcodeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 24px 0;
+  transform: translateY(8px);
 `;
 
 const Barcode = styled.div`
