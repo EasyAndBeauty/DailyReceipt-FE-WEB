@@ -7,6 +7,9 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.25rem;
   ${(props) => props.isSelected && "background-color:  black;"}
 `;
 

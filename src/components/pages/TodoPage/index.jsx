@@ -2,9 +2,8 @@ import { TempComponent, Week } from "components"; // 절대 경로를 설정했�
 
 export function TodoPage() {
   return (
-    <TempComponent>
+    <>
       <Week />
-    </TempComponent>
+    </>
   );
 }
-

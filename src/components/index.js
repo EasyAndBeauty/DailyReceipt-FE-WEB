@@ -3,9 +3,8 @@
 // Temp
 export { TempComponent } from "./TempComponent";
 
-// atom
-export { DayOfWeek } from "./atom/DayOfWeek";
-
+// atoms
+// export { DayOfWeek } from "./atoms/DayOfWeek";
 // molecules
 export { Week } from "./molecules/Week";
 // organisms
@@ -13,6 +12,8 @@ export { Week } from "./molecules/Week";
 // templates
 
 // Pages
+export { DayOfWeek } from "./atoms/DayOfWeek";
+
 export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";

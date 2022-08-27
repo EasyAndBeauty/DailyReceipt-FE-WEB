@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.p`
-  width: 2rem;
-  height: 2.75;
+export const Container = styled.div`
+  width: 100%;
+  height: 2.75rem;
+  margin: 0.5rem 0;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: space-evenly;
 `;
