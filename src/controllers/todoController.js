@@ -9,11 +9,10 @@ export const getTodoList = (date = TODAY, req) => {
   try {
     // const response = await client.get("/todo", { params: { date } });
 
-    const isTargetDate = (element) => {
-      const formatedDate = new Date(element.date);
+    const dummyTodosFromDate = dummyTodosList.filter((todo) => {
+      const formatedDate = new Date(todo.date);
       return formatedDate.getDate() === date.getDate();
-    };
-    const dummyTodosFromDate = dummyTodosList.filter(isTargetDate);
+    });
 
     return dummyTodosFromDate;
   } catch (err) {
