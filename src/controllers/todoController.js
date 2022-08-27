@@ -25,7 +25,7 @@ export const postTodo = (todo, req) => {
   return { id: randomInt };
 };
 
-export const updateTodo = async (id, todo, req) => {
+export const updateTodo = (id, todo, req) => {
   // const response = client.put("/todo/${id}");
   return { id, ...todo };
 };
