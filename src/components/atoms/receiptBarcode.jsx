@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as BarcodeSvg } from "../../assets/barcode.svg";
+import { ReactComponent as BarcodeSvg } from "assets/barcode.svg";
 
 export function ReceiptBarcode() {
   return (
