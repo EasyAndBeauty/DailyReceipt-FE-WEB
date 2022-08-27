@@ -39,3 +39,8 @@ code {
 p {
   font-size: 0.75rem;
 }
+
+button {
+  outline: none;
+  border: none;
+}
