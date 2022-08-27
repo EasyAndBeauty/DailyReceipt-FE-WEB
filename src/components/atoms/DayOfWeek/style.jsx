@@ -10,9 +10,8 @@ export const Container = styled.div`
   gap: 0.75rem;
   border-radius: 0.5rem;
   padding: 0.5rem 0.25rem;
-  ${(props) => props.isSelected && "background-color:  black;"}
+  color: black;
+  ${(props) => props.isActive && "background-color:  black; color: white;"}
 `;
 
-export const Text = styled.p`
-  color: ${(props) => (props.isSelected ? "white" : "black")};
-`;
+export const Text = styled.p``;

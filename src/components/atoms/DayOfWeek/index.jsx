@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { findDayOfWeek } from "utils/findDayOfWeek";
 import * as S from "./style";
 
@@ -11,19 +12,31 @@ import * as S from "./style";
  *
  * @param {number} dayOfweek - 요일의 index
  * @param {number} date - 요일의 날짜
- * @param {boolean} isSelected - 선택된 요일인지 아닌지
+ * @param {seletedDayOfWeek} selectedDayOfWeek - 선택된 요일의 index
+ * @param {Function} onSelectDayOfWeek - 선택된 요일의 index를 받아와서 요일을 선택하는 함수
  *
  */
+const checkIsActive = (dayOfweek, selectedDayOfWeek) => {
+  return dayOfweek === selectedDayOfWeek;
+};
 
-export function DayOfWeek({ dayOfweek, date, isSelected = false }) {
-  const onClick = () => {
-    console.log(date, "를 서버로 보냅니다.");
+export function DayOfWeek({
+  dayOfweek,
+  date,
+  selectedDayOfWeek,
+  onSelectDayOfWeek,
+}) {
+  const onClick = (dayOfweek) => {
+    onSelectDayOfWeek(dayOfweek);
   };
 
   return (
-    <S.Container isSelected={isSelected} onClick={onClick}>
-      <S.Text isSelected={isSelected}>{findDayOfWeek(dayOfweek)}</S.Text>
-      <S.Text isSelected={isSelected}>{date}</S.Text>
+    <S.Container
+      isActive={checkIsActive(dayOfweek, selectedDayOfWeek)}
+      onClick={() => onClick(dayOfweek)}
+    >
+      <S.Text>{findDayOfWeek(dayOfweek)}</S.Text>
+      <S.Text>{date}</S.Text>
     </S.Container>
   );
 }
