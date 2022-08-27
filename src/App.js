@@ -6,7 +6,7 @@ function App() {
     <Routes>
       <Route path="/" element={<TodoPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/checkout/:date" element={<ReceiptPage />} />
+      <Route path="/receipt" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />/
       <Route
         path="*"
