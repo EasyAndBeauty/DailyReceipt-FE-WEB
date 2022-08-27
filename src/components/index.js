@@ -4,10 +4,11 @@
 export { TempComponent } from "./TempComponent";
 
 // atom
-export { DayOfWeek } from "./atom/DayOfWeek";
+// export { DayOfWeek } from "./atom/DayOfWeek";
+// export { TimerImage } from "./atom/TimerImage";
 
 // molecules
-export { Week } from "./molecules/Week";
+// export { Week } from "./molecules/Week";
 // organisms
 
 // templates
