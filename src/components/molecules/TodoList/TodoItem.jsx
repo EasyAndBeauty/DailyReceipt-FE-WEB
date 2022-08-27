@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
+import styled, { css } from "styled-components";
 
 const TodoItem = ({ todo }) => {
   const { task, isDate } = todo;
@@ -77,6 +77,5 @@ const TodoItemText = styled.div`
 const TimerButton = styled.div`
   padding: 0.25rem;
   line-height: 1rem;
-
   cursor: pointer;
 `;

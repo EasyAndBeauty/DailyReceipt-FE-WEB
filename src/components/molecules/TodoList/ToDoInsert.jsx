@@ -9,7 +9,7 @@ const ToDoInsert = ({ onInsert }) => {
   };
 
   const onClickTodoItemCreateButton = (e) => {
-    if (todoInput) {
+    if (todoInput.trim() !== "") {
       e.preventDefault();
       onInsert(todoInput);
       setTodoInput("");
