@@ -43,11 +43,10 @@ const dummySunTodos = [
   },
 ];
 
+// TODO: 백엔드 연결
 export const getTodoList = async (date, req) => {
   try {
-    // TODO: 백엔드 연결
     // const response = await client.get("/todo", { params: { date } });
-    console.log(date);
   } catch (err) {
     console.log(err);
   }
@@ -56,4 +55,8 @@ export const getTodoList = async (date, req) => {
 
 export const postTodo = async (todo, req) => {
   // const response = client.post("/login");
+};
+
+export const updateTodo = async (id, req) => {
+  // const response = client.put("/todo/${id}");
 };
