@@ -2,15 +2,19 @@ import styled from "styled-components";
 
 export function ReceiptPaperInfo() {
   const date = new Date();
-  const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const month = monthArr[date.getMonth()].toUpperCase();
+  const month = date.toLocaleString("en-US", { month: "long" });
   const day = date.getDate();
   const year = date.getFullYear();
-  const time = `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`
+  const timeArr = date.toLocaleString("ko-KR").split(" ").at(-1).split(":");
+  const time = timeArr.map((el) => el.padStart(2, "0")).join(":");
 
-  return (<Info>
-      <div>{month} {day}, {year} {time}</div>
-    </Info>)
+  return (
+    <Info>
+      <div>
+        {month} {day}, {year} {time}
+      </div>
+    </Info>
+  );
 }
 
 const Info = styled.div`
