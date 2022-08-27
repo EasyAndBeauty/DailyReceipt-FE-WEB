@@ -3,12 +3,14 @@
 // Temp
 export { TempComponent } from "./TempComponent";
 
-// atom
-// export { DayOfWeek } from "./atom/DayOfWeek";
-// export { TimerImage } from "./atom/TimerImage";
-
+// atoms
+export { HeaderText } from "./atoms/HeaderText";
+export { DayOfWeek } from "./atoms/DayOfWeek";
+export { SquareBtn } from "./atoms/SquareBtn";
+export { Portal } from "./atoms/Portal";
 // molecules
-// export { Week } from "./molecules/Week";
+export { Week } from "./molecules/Week";
+export { TodoHeader } from "./molecules/TodoHeader";
 // organisms
 
 // templates
@@ -18,6 +20,3 @@ export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
 export { UserPage } from "./pages/UserPage";
-
-// Molecules
-export { TodoList } from "./molecules/TodoList";
