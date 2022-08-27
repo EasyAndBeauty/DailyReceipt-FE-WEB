@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TodoHeader, Week, SquareBtn } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
+import { TodoHeader, Week, SquareBtn, TempModal } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
 import * as S from "./style";
 /**
  * TodoPage component
@@ -29,6 +29,8 @@ export function TodoPage() {
     dayOfWeek: new Date().getDay(),
   });
 
+  const [modalOn, setModalOn] = useState(false);
+
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
@@ -54,7 +56,15 @@ export function TodoPage() {
         selectedDayOfWeek={selectedDate.dayOfWeek}
         onSelectDayOfWeek={onSelectDayOfWeek}
       />
+      {modalOn && <TempModal onClick={() => setModalOn(false)} />}
       <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
+      <button
+        onClick={() => {
+          setModalOn(true);
+        }}
+      >
+        Modal
+      </button>
     </S.Container>
   );
 }
