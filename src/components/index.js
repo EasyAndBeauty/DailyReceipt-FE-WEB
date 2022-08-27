@@ -3,6 +3,16 @@
 // Temp
 export { TempComponent } from "./TempComponent";
 
+// atoms
+export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
+export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
+export { ReceiptBarcode } from "./atoms/receiptBarcode";
+
+// molecules
+export { ReceiptPaper } from "./molecules/receiptPaper";
+export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
+export { ReceiptTodo } from "./molecules/receiptTodo";
+
 // Pages
 export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
