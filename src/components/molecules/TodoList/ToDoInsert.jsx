@@ -13,7 +13,6 @@ const ToDoInsert = ({ onInsert }) => {
       e.preventDefault();
       onInsert(todoInput);
       setTodoInput("");
-      console.log("POST / 작성완료");
     }
   };
 

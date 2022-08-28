@@ -11,7 +11,6 @@ export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
-
 //ReceiptPage
 export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";

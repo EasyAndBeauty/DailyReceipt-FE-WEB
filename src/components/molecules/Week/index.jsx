@@ -1,5 +1,14 @@
 import { DayOfWeek } from "components";
 import * as S from "./style";
+const dayjs = require("dayjs");
+const weekday = require("dayjs/plugin/weekday");
+const isoWeek = require("dayjs/plugin/isoWeek");
+const weekOfYear = require("dayjs/plugin/weekOfYear");
+
+// day extend
+dayjs.extend(weekday);
+dayjs.extend(isoWeek);
+dayjs.extend(weekOfYear);
 
 /**
  * Week component
@@ -13,14 +22,18 @@ import * as S from "./style";
  * @returns {JSX.Element} - 요일 컴포넌트들을 배치한 컴포넌트
  */
 export function Week({ selectedDayOfWeek, onSelectDayOfWeek }) {
-  const week = [24, 25, 26, 27, 28, 29, 30];
+  const week = new Array(7).fill(0).map((_, index) => {
+    return dayjs().weekday(index);
+  });
+
   return (
     <S.Container>
       {week.map((date, index) => (
         <DayOfWeek
           key={index}
           dayOfweek={index}
-          date={date}
+          date={date.$D}
+          dateInfo={date}
           selectedDayOfWeek={selectedDayOfWeek}
           onSelectDayOfWeek={onSelectDayOfWeek}
         />
