@@ -4,11 +4,8 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
-<<<<<<< HEAD
   MyReceipt,
-=======
   AuthPage,
->>>>>>> LoginPage
 } from "components";
 
 function App() {

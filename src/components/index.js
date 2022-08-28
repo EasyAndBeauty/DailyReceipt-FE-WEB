@@ -11,21 +11,18 @@ export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
-<<<<<<< HEAD
 export { TimerImage } from "./atoms/TimerImage";
 //ReceiptPage
 export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/receiptBarcode";
 export { ReceiptQuotes } from "./atoms/receiptQuotes";
+
+export { BackBtn } from "./atoms/BackBtn";
 /**
  * molecules
  */
 //TodoPage
-=======
-export { BackBtn } from "./atoms/BackBtn";
-// molecules
->>>>>>> LoginPage
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { TodoList } from "./molecules/TodoList";
