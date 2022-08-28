@@ -3,6 +3,7 @@ import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { HeaderText } from "components";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 /**
  * TodoHeader component
@@ -14,14 +15,14 @@ import { useNavigate } from "react-router-dom";
 
 export function TodoHeader({ month }) {
     let navigate = useNavigate();
-    function goMypage(){
-        navigate("/my")
+    function goPage(url){
+        navigate(url);
     }
     return (
         <S.Container>
             <S.Btn
                 onClick={() => {
-                    goMypage()
+                    goPage("/receipt")
                 }}
             >
                 <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
@@ -29,7 +30,7 @@ export function TodoHeader({ month }) {
             <HeaderText>{month}</HeaderText>
             <S.Btn
                 onClick={() => {
-                    goMypage()
+                    goPage("/my")
                 }}
             >
                 <FontAwesomeIcon
