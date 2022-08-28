@@ -25,7 +25,12 @@ export function TodoPage() {
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
-    navigate("/receipt", { state: { todos } });
+    if(!todos.length){
+      alert("항목을 작성해주세요")
+    } else{
+      navigate("/receipt", { state: { todos } });
+
+    }
   };
 
   const onSelectDayOfWeek = (DateTime) => {

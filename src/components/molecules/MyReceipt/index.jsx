@@ -7,7 +7,8 @@ export const MyReceipt = () => {
     <S.MyReceiptContainer>
       <S.HeaderContainer>
         <S.MainText>JAY 반가워요!</S.MainText>
-        <p>뭔가 멋진 문구 추가</p>
+        <p>소중한 당신의 오늘,</p>
+        <p>하루 영수증과 함께 마무리해요</p>
       </S.HeaderContainer>
       <S.MyReceiptSeeAll>
         <S.ReceiptImg
@@ -30,6 +31,7 @@ export const MyReceipt = () => {
       <S.ButtonContainer>
         <S.Button>로그아웃</S.Button>
       </S.ButtonContainer>
+
     </S.MyReceiptContainer>
   );
 };
