@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList } from "controllers/todoController";
@@ -81,7 +82,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
       const newData = [
         ...todos,
         {
-          id: todos.length + 1,
+          id: uuidv4(),
           task,
           date: dayjs().format(),
           isdate: false,
