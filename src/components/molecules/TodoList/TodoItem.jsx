@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, onRemove }) => {
   const { task, isDate } = todo;
 
   const [done, setDone] = useState(isDate);
@@ -12,8 +12,7 @@ const TodoItem = ({ todo }) => {
 
   // TODO : 로직 구현 예정
   const handleClickTimerButton = () => console.log("Timer Start");
-  const handleClickToDoRemoveButton = () =>
-    console.log("DELETE / TodoItem 삭제!");
+  const handleClickToDoRemoveButton = () => onRemove(todo.id);
   const handleClickToDoEditButton = () => console.log("PUT / TodoItem 수정!");
 
   return (
