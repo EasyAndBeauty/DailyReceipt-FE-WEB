@@ -29,3 +29,8 @@ export const Header = styled.header`
   margin-top: 1rem;
   flex-direction: row;
 `;
+
+export const Btn = styled.button`
+  width: 100%;
+  margin-bottom: 3rem;
+`;
