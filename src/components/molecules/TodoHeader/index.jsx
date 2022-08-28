@@ -12,8 +12,6 @@ import * as S from "./style";
  */
 
 export function TodoHeader({ month }) {
-  month = "August"; // DUMMY DATA
-
   return (
     <S.Container>
       <S.Btn
@@ -23,7 +21,7 @@ export function TodoHeader({ month }) {
       >
         <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
       </S.Btn>
-      <HeaderText>August</HeaderText>
+      <HeaderText>{month}</HeaderText>
       <S.Btn
         onClick={() => {
           console.log("MyReceipt으로 갑니다.");

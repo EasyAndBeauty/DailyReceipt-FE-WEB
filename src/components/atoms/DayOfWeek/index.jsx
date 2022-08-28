@@ -23,17 +23,18 @@ const checkIsActive = (dayOfweek, selectedDayOfWeek) => {
 export function DayOfWeek({
   dayOfweek,
   date,
+  dateInfo,
   selectedDayOfWeek,
   onSelectDayOfWeek,
 }) {
-  const onClick = (dayOfweek) => {
-    onSelectDayOfWeek(dayOfweek);
+  const onClick = (dateInfo) => {
+    onSelectDayOfWeek(new Date(dateInfo));
   };
 
   return (
     <S.Container
       isActive={checkIsActive(dayOfweek, selectedDayOfWeek)}
-      onClick={() => onClick(dayOfweek)}
+      onClick={() => onClick(dateInfo)}
     >
       <S.Text>{findDayOfWeek(dayOfweek)}</S.Text>
       <S.Text>{date}</S.Text>
