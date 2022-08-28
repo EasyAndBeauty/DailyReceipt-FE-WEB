@@ -1,5 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { TodoPage, LoginPage, ReceiptPage, UserPage } from "components";
+import {
+  TodoPage,
+  LoginPage,
+  ReceiptPage,
+  UserPage,
+  AuthPage,
+} from "components";
 
 function App() {
   return (
@@ -9,6 +15,7 @@ function App() {
       <Route path="/checkout" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/kakao/callback" element={<AuthPage />} />
       <Route
         path="*"
         element={

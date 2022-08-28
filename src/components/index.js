@@ -22,3 +22,4 @@ export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
 export { UserPage } from "./pages/UserPage";
+export { AuthPage } from "./pages/AuthPage";
