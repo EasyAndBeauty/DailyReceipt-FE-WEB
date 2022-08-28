@@ -19,13 +19,30 @@ export const getTodoList = (date = TODAY, req) => {
   }
 };
 
-export const postTodo = (todo, req) => {
+export const postTodo = async (todo, req) => {
   const todoBody = { isDone: false, ...todo };
-  const response = client.post("/todo", todoBody);
-  return;
+  try {
+    const response = await client.post("/todo", todoBody);
+
+    return response.data;
+  } catch (error) {
+    console.log("Todo를 추가하지 못했습니다.");
+    console.log(error);
+  }
 };
 
-export const updateTodo = (id, todo, req) => {
-  // const response = client.put("/todo/${id}");
-  return { id, ...todo };
+export const updateTodo = async (id, todo, req) => {
+  try {
+    const response = await client.put(`/todo/${id}`, { ...todo });
+    if (response.ok) {
+      const { task, timer, done } = { ...response.data };
+      // Spring과의 예약어 충돌로 인한 재포맷
+      const formatTodo = { task, timer, isDone: done };
+
+      return formatTodo;
+    }
+  } catch (error) {
+    console.log("Todo를 수정하지 못했습니다.");
+    console.log(error);
+  }
 };
