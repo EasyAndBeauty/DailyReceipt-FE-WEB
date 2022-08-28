@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 const AtuhContext = React.createContext({
-  userName: "",
   token: "",
   isLoggedIn: false,
   login: (token) => {},
@@ -20,7 +19,12 @@ const calculateRemainingTime = (expirationTime) => {
 
 // local에 토큰이 유효한지 확인
 const retrieveStoredToken = () => {
-  const storedToken = localStorage.getItem("token");
+  const storedToken = localStorage.getItem("token") || false;
+
+  if (!storedToken) {
+    return false;
+  }
+
   const storedExpirationDate = JSON.parse(storedToken).expires;
   const remainingTime = calculateRemainingTime(storedExpirationDate);
 
@@ -48,12 +52,6 @@ export const AuthContextProvider = (props) => {
   }
   // 사용자의 이름을 담당하는 Hook
 
-  let tempNicName = JSON.parse(initialToken);
-
-  const [userName, setUserName] = useState(
-    tempNicName[Object.keys(tempNicName)[0]] || ""
-  );
-
   // 토큰 상태를 담당하는 Hook
   const [token, setToken] = useState(initialToken);
 
@@ -64,7 +62,6 @@ export const AuthContextProvider = (props) => {
   const loginHandler = (token, expirationTime) => {
     const { id, email, nickname } = token;
     setToken(email);
-    setUserName(nickname);
     localStorage.setItem(
       "token",
       JSON.stringify({
@@ -98,7 +95,6 @@ export const AuthContextProvider = (props) => {
 
   // Provider에서 사용할 상태를을 정리
   const contextValue = {
-    userName,
     token: token,
     isLoggedIn: userIsLoggendIn,
     login: loginHandler,
