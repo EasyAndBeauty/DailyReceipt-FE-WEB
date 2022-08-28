@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
 import { ReceiptPaper } from "components";
@@ -8,12 +8,17 @@ import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
 import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
 
 export function ReceiptPage() {
+  const {
+    state: { todos },
+  } = useLocation();
+
   const navigate = useNavigate();
   const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
 
   function handleShare() {
-    console.log("Share");
+    // console.log("Share");
+    alert("준비중인 기능입니다!");
     //모달만들기
   }
 
@@ -44,7 +49,7 @@ export function ReceiptPage() {
         <BackIcon />
       </BackIconContainer>
       <ReceiptContainer ref={receiptRef} scale={scale}>
-        <ReceiptPaper />
+        <ReceiptPaper todos={todos} />
       </ReceiptContainer>
       <IconContainer>
         <div onClick={handleShare}>

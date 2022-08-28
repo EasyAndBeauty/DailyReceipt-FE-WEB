@@ -6,80 +6,7 @@ import {
   ReceiptQuotes,
 } from "components";
 
-const testData = [
-  {
-    id: "jay@acount.com",
-    task: "Sprint Homework",
-    date: "20220826",
-    isDone: true,
-    timer: 180,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Listening Music",
-    date: "20220826",
-    isDone: true,
-    timer: 25,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Work out",
-    date: "20220826",
-    isDone: true,
-    timer: 80,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Drawing",
-    date: "20220826",
-    isDone: true,
-    timer: 70,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Test Something",
-    date: "20220826",
-    isDone: true,
-    timer: 60,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Sprint Homework",
-    date: "20220826",
-    isDone: true,
-    timer: 180,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Listening Music",
-    date: "20220826",
-    isDone: true,
-    timer: 25,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Work out",
-    date: "20220826",
-    isDone: true,
-    timer: 80,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Drawing",
-    date: "20220826",
-    isDone: true,
-    timer: 70,
-  },
-  {
-    id: "jay@acount.com",
-    task: "Test Something",
-    date: "20220826",
-    isDone: true,
-    timer: 60,
-  },
-];
-
-export function ReceiptPaperContents() {
+export function ReceiptPaperContents({ todos }) {
   const line = "-----------------------------------";
   let timerTotal = 0;
 
@@ -90,7 +17,7 @@ export function ReceiptPaperContents() {
         <ReceiptPaperInfo />
         <div>{line}</div>
         <TodoContainer>
-          {testData.map((todo, index) => {
+          {todos.map((todo, index) => {
             timerTotal += todo.timer;
             return <ReceiptTodo key={todo.id + index}>{todo}</ReceiptTodo>;
           })}
@@ -99,7 +26,7 @@ export function ReceiptPaperContents() {
         <TotalContainer>
           <div>
             <span>ITEM COUNT :</span>
-            <span>{testData.length}</span>
+            <span>{todos.length}</span>
           </div>
           <div>
             <span>TOTAL :</span>

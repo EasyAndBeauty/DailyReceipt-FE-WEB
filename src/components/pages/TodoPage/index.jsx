@@ -25,8 +25,7 @@ export function TodoPage() {
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
-    console.log("투두리스트를 보내며, 페이지 라우트를 합니다.");
-    navigate("/checkout", { state: { todos } });
+    navigate("/receipt", { state: { todos } });
   };
 
   const onSelectDayOfWeek = (DateTime) => {

@@ -1,7 +1,7 @@
 import { ReceiptPaperTriangle, ReceiptPaperContents } from "components";
 import styled from "styled-components";
 
-export function ReceiptPaper() {
+export function ReceiptPaper({ todos }) {
   return (
     <Container id={"receipt"}>
       <Texture
@@ -11,7 +11,7 @@ export function ReceiptPaper() {
       <TrianglePosition y="6px">
         <ReceiptPaperTriangle />
       </TrianglePosition>
-      <ReceiptPaperContents />
+      <ReceiptPaperContents todos={todos} />
       <TrianglePosition y="-7px">
         <ReceiptPaperTriangle />
       </TrianglePosition>
