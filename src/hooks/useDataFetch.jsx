@@ -61,7 +61,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
           task,
           date: dayjs().format(),
           isdate: false,
-          timer: 25,
+          timer: null,
         },
       ]);
     },
@@ -85,7 +85,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
           task,
           date: dayjs().format(),
           isdate: false,
-          timer: 25,
+          timer: null,
         },
       ];
 
