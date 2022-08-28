@@ -29,6 +29,8 @@ export function TodoPage() {
     dayOfWeek: new Date().getDay(),
   });
 
+  const [modalOn, setModalOn] = useState(false);
+
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {

@@ -2,7 +2,6 @@
 
 // Temp
 export { TempComponent } from "./TempComponent";
-
 // atoms
 export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
@@ -12,8 +11,9 @@ export { Portal } from "./atoms/Portal";
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 // organisms
-
+export { LoadingModal } from "./organisms/LoadingModal";
 // templates
+export { ModalTemplate } from "./templates/ModalTemplate";
 
 // Pages
 export { TodoPage } from "./pages/TodoPage";
