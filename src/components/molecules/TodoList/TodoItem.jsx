@@ -113,7 +113,7 @@ const CheckCircle = styled.div`
 const TodoItemText = styled.input`
   flex: 1;
   font-size: 1rem;
-  color: #495057;
+  color: #ced4da;
   outline: none;
   border: none;
   background-color: transparent;
@@ -121,8 +121,13 @@ const TodoItemText = styled.input`
   ${(props) =>
     props.done &&
     css`
-      color: #ced4da;
+      color: black;
     `}
+
+  &:disabled {
+    color: #000000;
+    opacity: 1;
+  }
 `;
 
 const TimerButton = styled.div`

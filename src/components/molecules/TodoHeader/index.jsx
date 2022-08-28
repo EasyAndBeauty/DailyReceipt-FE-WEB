@@ -13,26 +13,31 @@ import { useNavigate } from "react-router-dom";
  */
 
 export function TodoHeader({ month }) {
-    return (
-        <S.Container>
-            <S.Btn
-                onClick={() => {
-                    console.log("MyReceipt으로 갑니다.");
-                }}
-            >
-                <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
-            </S.Btn>
-            <HeaderText>{month}</HeaderText>
-            <S.Btn
-                onClick={() => {
-                    console.log("MyReceipt으로 갑니다.");
-                }}
-            >
-                <FontAwesomeIcon
-                    icon={faCalendarDays}
-                    size="2x"
-                ></FontAwesomeIcon>
-            </S.Btn>
-        </S.Container>
-    );
+  return (
+    <S.Container>
+      <S.Btn
+        onClick={() => {
+          console.log("MyReceipt으로 갑니다.");
+        }}
+      >
+        <FontAwesomeIcon
+          icon={faReceipt}
+          size="2x"
+          color="black"
+        ></FontAwesomeIcon>
+      </S.Btn>
+      <HeaderText>{month}</HeaderText>
+      <S.Btn
+        onClick={() => {
+          console.log("MyReceipt으로 갑니다.");
+        }}
+      >
+        <FontAwesomeIcon
+          icon={faCalendarDays}
+          size="2x"
+          color="black"
+        ></FontAwesomeIcon>
+      </S.Btn>
+    </S.Container>
+  );
 }
