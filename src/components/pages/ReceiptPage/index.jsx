@@ -1,27 +1,38 @@
-import { useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
 import { ReceiptPaper } from "components";
 import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
 import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
 import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export function ReceiptPage() {
   const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
 
+  function handleShare() {
+    console.log("Share");
+    //모달만들기
+  }
+
+  function handleDownload() {
+    console.log("Download");
+    html2canvas(document.getElementById("receipt")).then((canvas) => {
+      const aTag = document.createElement("a");
+      document.body.appendChild(aTag);
+      aTag.href = canvas.toDataURL("image/jpg");
+      aTag.download = "my_receipt.jpg";
+      aTag.click();
+      document.body.removeChild(aTag);
+    });
+  }
+
   useEffect(() => {
-    console.log(receiptRef);
     const ratio = window.innerHeight / 1700;
-    console.log(0, ratio);
     const receiptSectionHeight = window.innerHeight * ratio;
     const receiptHeight = receiptRef.current.offsetHeight;
     if (receiptHeight > receiptSectionHeight) {
-      console.log(1, receiptRef.current.offsetHeight);
-      console.log(2, receiptSectionHeight);
-      console.log(3, receiptSectionHeight / receiptHeight);
-
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
   }, []);
@@ -39,19 +50,17 @@ export function ReceiptPage() {
         <ReceiptPaper />
       </ReceiptContainer>
       <IconContainer>
-        <div>
+        <div onClick={handleShare}>
           <ShareIcon />
           <span>SHARE</span>
         </div>
-        <div>
+        <div onClick={handleDownload}>
           <SaveIcon />
           <span>SAVE</span>
         </div>
       </IconContainer>
     </Container>
   );
-
-  // html2canvas()
 }
 
 const Container = styled.div`
@@ -82,8 +91,6 @@ const ReceiptContainer = styled.div`
   > div {
     transform: scale(${(props) => props.scale});
   }
-
-  //background-color: aqua;
 `;
 
 const IconContainer = styled.div`
@@ -106,7 +113,7 @@ const IconContainer = styled.div`
   }
 
   svg {
-    padding: 4px;
+    padding: 8px;
     opacity: 40%;
   }
 
@@ -115,13 +122,4 @@ const IconContainer = styled.div`
     font-size: 16px;
     color: #fcfcfc;
   }
-`;
-
-const Texture = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 80%;
-  mix-blend-mode: multiply;
-  z-index: 10;
 `;
