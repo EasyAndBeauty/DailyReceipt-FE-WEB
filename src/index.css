@@ -10,10 +10,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* 레이아웃 잡기용 */
-  background-color: black;
+  background-color: #191919;
   width: 100vw;
   height: 100vh;
-  /*overflow: auto;*/
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,7 +37,7 @@ body {
 
   body {
     width: 100vw;
-    background-color: red;
+    background-color: #191919;
   }
 }
 

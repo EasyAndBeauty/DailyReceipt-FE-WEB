@@ -19,6 +19,7 @@ export const Content = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  overflow-y: auto;
 `;
 
 export const Bottom = styled.div`

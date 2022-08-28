@@ -19,8 +19,8 @@ export function TodoHeader({ month }) {
 
   return (
     <S.Container>
+      <HeaderText>{month}</HeaderText>
       <div>
-        <HeaderText>{month}</HeaderText>
         <S.Btn
           onClick={() => {
             setModalOn(true);
@@ -32,18 +32,18 @@ export function TodoHeader({ month }) {
             color="#aaaaaa"
           ></FontAwesomeIcon>
         </S.Btn>
+        <S.Btn
+          onClick={() => {
+            navigate("/my");
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faReceipt}
+            size="2x"
+            color="#aaaaaa"
+          ></FontAwesomeIcon>
+        </S.Btn>
       </div>
-      <S.Btn
-        onClick={() => {
-          navigate("/my");
-        }}
-      >
-        <FontAwesomeIcon
-          icon={faReceipt}
-          size="2x"
-          color="#aaaaaa"
-        ></FontAwesomeIcon>
-      </S.Btn>
       {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
     </S.Container>
   );

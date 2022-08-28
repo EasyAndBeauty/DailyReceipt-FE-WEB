@@ -9,6 +9,8 @@ import { ThemeProvider } from "styled-components";
 const theme = {
   bk: "#191919",
   wt: "#fcfcfc",
+  gray: "#aaaaaa",
+  green: "#81c944",
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
