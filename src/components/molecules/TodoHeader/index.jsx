@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { HeaderText } from "components";
 import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 
 /**
  * TodoHeader component
@@ -12,25 +13,29 @@ import * as S from "./style";
  */
 
 export function TodoHeader({ month }) {
-  month = "August"; // DUMMY DATA
+    month = "August"; // DUMMY DATA
+    const navigate = useNavigate();
 
-  return (
-    <S.Container>
-      <S.Btn
-        onClick={() => {
-          console.log("MyReceipt으로 갑니다.");
-        }}
-      >
-        <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
-      </S.Btn>
-      <HeaderText>August</HeaderText>
-      <S.Btn
-        onClick={() => {
-          console.log("MyReceipt으로 갑니다.");
-        }}
-      >
-        <FontAwesomeIcon icon={faCalendarDays} size="2x"></FontAwesomeIcon>
-      </S.Btn>
-    </S.Container>
-  );
+    return (
+        <S.Container>
+            <S.Btn
+                onClick={() => {
+                    navigate("/my");
+                }}
+            >
+                <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
+            </S.Btn>
+            <HeaderText>August</HeaderText>
+            <S.Btn
+                onClick={() => {
+                    navigate("/my");
+                }}
+            >
+                <FontAwesomeIcon
+                    icon={faCalendarDays}
+                    size="2x"
+                ></FontAwesomeIcon>
+            </S.Btn>
+        </S.Container>
+    );
 }
