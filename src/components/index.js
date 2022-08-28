@@ -31,8 +31,13 @@ export { ReceiptPaper } from "./molecules/receiptPaper";
 export { ReceiptTodo } from "./molecules/receiptTodo";
 export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
 
-// organisms
+/**
+ * * organisms
+ */
+
+// Others
 export { LoadingModal } from "./organisms/LoadingModal";
+export { AlertModal } from "./organisms/AlertModal";
 // templates
 export { ModalTemplate } from "./templates/ModalTemplate";
 

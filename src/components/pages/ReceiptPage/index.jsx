@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
-import { ReceiptPaper } from "components";
+import { ReceiptPaper, AlertModal } from "components";
 import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
 import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
 import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
@@ -15,10 +15,12 @@ export function ReceiptPage() {
   const navigate = useNavigate();
   const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
+  const [modalOn, setModalOn] = useState(false);
 
   function handleShare() {
     // console.log("Share");
-    alert("준비중인 기능입니다!");
+
+    setModalOn(true);
     //모달만들기
   }
 
@@ -61,6 +63,7 @@ export function ReceiptPage() {
           <span>SAVE</span>
         </div>
       </IconContainer>
+      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
     </Container>
   );
 }
