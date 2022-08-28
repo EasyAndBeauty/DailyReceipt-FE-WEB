@@ -1,7 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TodoHeader, Week, SquareBtn, TodoList } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
+import { TodoHeader, Week, SquareBtn, TodoList } from "components";
+import { getTodoList } from "controllers/todoController";
+
 import * as S from "./style";
+import useDataFetch from "hooks/useDataFetch";
 /**
  * TodoPage component
  *
@@ -12,38 +15,17 @@ import * as S from "./style";
  */
 export function TodoPage() {
   // 예시입니다.
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      task: "test 중입니다.",
-      date: 20220827,
-      isDate: false,
-      timer: 25,
-    },
-    {
-      id: 2,
-      task: "test 중입니다2",
-      date: 20220827,
-      isDate: true,
-      timer: 25,
-    },
-    {
-      id: 3,
-      task: "투두리스트 만들기",
-      date: 20220827,
-      isDate: true,
-      timer: 25,
-    },
-  ]);
-
   const [selectedDate, setSelectedDate] = useState({
+    Date: new Date(),
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     date: new Date().getDate(),
     dayOfWeek: new Date().getDay(),
   });
-
   const [modalOn, setModalOn] = useState(false);
+  const { todos, postUseData, postLocalData, deleteLocalData } = useDataFetch({
+    Date: selectedDate.Date,
+  });
 
   const navigate = useNavigate();
 
@@ -63,30 +45,25 @@ export function TodoPage() {
      */
   };
 
-  const nextId = useRef(4);
-  const onInsert = (task) => {
-    const todo = {
-      id: nextId.current,
-      task,
-      isDate: false,
-    };
-    setTodos(todos.concat(todo));
-    nextId.current++;
-  };
-
   return (
-    <S.Container>
-      <TodoHeader />
-      <Week
-        selectedDayOfWeek={selectedDate.dayOfWeek}
-        onSelectDayOfWeek={onSelectDayOfWeek}
-      />
-      <S.Content>
-        <TodoList todos={todos} onInsert={onInsert} />
-      </S.Content>
+    <Fragment>
+      <S.Container>
+        <TodoHeader />
+        <Week
+          selectedDayOfWeek={selectedDate.dayOfWeek}
+          onSelectDayOfWeek={onSelectDayOfWeek}
+        />
+        <S.Content>
+          <TodoList
+            todos={todos}
+            onInsert={postLocalData}
+            onRemove={deleteLocalData}
+          />
+        </S.Content>
+      </S.Container>
       <S.Bottom>
         <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
       </S.Bottom>
-    </S.Container>
+    </Fragment>
   );
 }
