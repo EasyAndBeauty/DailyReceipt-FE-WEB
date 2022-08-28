@@ -12,7 +12,8 @@ body {
   background-color: black;
   width: 100vw;
   height: 100vh;
-  display: flex;
+  overflow: auto;
+  display: table;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -20,7 +21,7 @@ body {
 
 #root {
   /* IPhone 13 기준 */
-  height: 844px;
+  display: table-row;
   width: 390px;
   align-items: center;
   background-color: white;
@@ -29,7 +30,6 @@ body {
 @media screen and (max-width: 768px) {
   #root {
     width: 100vw;
-    height: 100vh;
   }
 }
 

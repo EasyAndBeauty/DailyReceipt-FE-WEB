@@ -24,19 +24,11 @@ export { ReceiptQuotes } from "./atoms/receiptQuotes";
 //TodoPage
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
-
-//ReceiptPage
-export { ReceiptPaper } from "./molecules/receiptPaper";
-export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
-export { ReceiptTodo } from "./molecules/receiptTodo";
-
-/**
- * organisms
- */
-
-/**
- * templates
- */
+export { TodoList } from "./molecules/TodoList";
+// organisms
+export { LoadingModal } from "./organisms/LoadingModal";
+// templates
+export { ModalTemplate } from "./templates/ModalTemplate";
 
 /**
  * Pages
