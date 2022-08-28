@@ -3,20 +3,45 @@
 // Temp
 export { TempComponent } from "./TempComponent";
 
-// atom
-export { DayOfWeek } from "./atom/DayOfWeek";
+/**
+ * atoms
+ */
+//TodoPage
+export { HeaderText } from "./atoms/HeaderText";
+export { DayOfWeek } from "./atoms/DayOfWeek";
+export { SquareBtn } from "./atoms/SquareBtn";
+export { Portal } from "./atoms/Portal";
 
-// molecules
+//ReceiptPage
+export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
+export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
+export { ReceiptBarcode } from "./atoms/receiptBarcode";
+export { ReceiptQuotes } from "./atoms/receiptQuotes";
+
+/**
+ * molecules
+ */
+//TodoPage
 export { Week } from "./molecules/Week";
-// organisms
+export { TodoHeader } from "./molecules/TodoHeader";
 
-// templates
+//ReceiptPage
+export { ReceiptPaper } from "./molecules/receiptPaper";
+export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
+export { ReceiptTodo } from "./molecules/receiptTodo";
 
-// Pages
+/**
+ * organisms
+ */
+
+/**
+ * templates
+ */
+
+/**
+ * Pages
+ */
 export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
 export { UserPage } from "./pages/UserPage";
-
-// Molecules
-export { TodoList } from "./molecules/TodoList";

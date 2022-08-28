@@ -11,10 +11,10 @@ import * as S from "./style";
  * @returns  임시 컴포넌트
  */
 export function TempComponent({ children }) {
-  return (
-    <S.TempContainer>
-      <FontAwesomeIcon icon={faSchool} />
-      <h1>{children}</h1>
-    </S.TempContainer>
-  );
+    return (
+        <S.TempContainer>
+            <FontAwesomeIcon icon={faSchool} />
+            <h1>{children}</h1>
+        </S.TempContainer>
+    );
 }
