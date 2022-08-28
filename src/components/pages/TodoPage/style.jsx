@@ -11,6 +11,8 @@ export const Container = styled.main`
   justify-content: space-between;
   overflow-y: scroll;
   box-sizing: border-box;
+  overflow-x: hidden;
+  scrollbar-width: none;
 `;
 
 export const Content = styled.section`
