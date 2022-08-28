@@ -13,8 +13,8 @@ import { Portal, ModalTemplate } from "components";
 export function AlertModal({ onClick }) {
   return (
     <ModalTemplate onClick={onClick}>
-      <FontAwesomeIcon icon={faFaceGrinBeam} size="4x" />
-      <h1>준비중인 기능입니다ㅎㅎ</h1>
+      <FontAwesomeIcon icon={faFaceGrinBeam} size="2x" />
+      <h1>준비 중인 기능입니다 :)</h1>
     </ModalTemplate>
   );
 }
