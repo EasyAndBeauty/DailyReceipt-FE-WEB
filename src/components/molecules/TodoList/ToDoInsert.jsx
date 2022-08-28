@@ -22,7 +22,7 @@ const ToDoInsert = ({ onInsert }) => {
     <InsertForm>
       <Input
         autoFocus
-        placeholder="add a new task"
+        placeholder="Add a New Task"
         onChange={handleChangeContentValue}
         value={todoInput}
       />
@@ -45,7 +45,7 @@ const Input = styled.input`
   margin-right: 10px;
   padding: 8px;
   width: 100%;
-  font-size: 20px;
+  font-size: 1rem;
   background-color: rgba(0, 0, 0, 0);
   color: ${(props) => props.theme.wt};
   border: none;
