@@ -1,10 +1,18 @@
 import { useCallback, useState } from "react";
 
+/**
+ * useLocalStorage hook
+ *
+ * @param {string} key - localStorage key
+ * @param {any} initialValue - initial value
+ *
+ * @returns {array} [value, setValue, getValue] - [value, setValue, getValue]
+
+ */
 export default function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
-      console.log("item", item, key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(error);
@@ -25,11 +33,11 @@ export default function useLocalStorage(key, initialValue) {
     [initialValue]
   );
 
-  const setValue = (value) => {
+  const setValue = (value, key) => {
     try {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
+      getValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.log(error);

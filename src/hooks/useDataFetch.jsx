@@ -1,9 +1,30 @@
 import { useState, useEffect, useCallback } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList } from "controllers/todoController";
+
+/**
+ * useDataFetch
+ *
+ * date에 따라 데이터를 받아오는 패치 하는 hook
+ *
+ * @param {string} date - 날짜
+ * @returns {array} todos - todos 데이터
+ * @returns {function} getUerData - 유저 데이터를 받아오는 함수
+ * @returns {function} getLocalData - 로컬 데이터를 받아오는 함수
+ * @returns {function} postUesrData - 유저 데이터를 받아오는 함수
+ * @returns {function} postLocalData - 로컬 데이터를 받아오는 함수
+ * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
+ *
+ */
+
 export default function useDataFetch({ date }) {
   const [todos, setTodos] = useState([]);
-  const [storedValue, setValue, getValue] = useLocalStorage(date, []);
+  const [storedValue, setValue, getValue] = useLocalStorage(
+    new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .split("T")[0],
+    []
+  );
 
   // get - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
   const getLocalData = useCallback(() => {
@@ -50,16 +71,25 @@ export default function useDataFetch({ date }) {
   // post - 게스트 사용자  : localStorage에 데이터를 저장한다
 
   const postLocalData = useCallback(
-    async (task) => {
-      setValue((pre) => [
-        ...pre,
+    (task) => {
+      const newDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0];
+
+      const newData = [
+        ...todos,
         {
           id: todos.length + 1,
           task,
           isdate: false,
           timer: 25,
         },
-      ]);
+      ];
+
+      setTodos(newData);
+      setValue(newData, newDate);
     },
     [setValue, todos.length]
   );
@@ -73,10 +103,16 @@ export default function useDataFetch({ date }) {
   // delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
 
   const deleteLocalData = useCallback(
-    async (id) => {
-      setValue((pre) => pre.filter((todo) => todo.id !== id));
+    (id) => {
+      const newDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0];
+      setValue((pre) => pre.filter((todo) => todo.id !== id), newDate);
+      setTodos((pre) => pre.filter((todo) => todo.id !== id));
     },
-    [setValue]
+    [date, setValue]
   );
 
   useEffect(() => {
