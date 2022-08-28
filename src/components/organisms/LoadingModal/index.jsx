@@ -10,16 +10,16 @@ import { Portal } from "components";
  * @returns {JSX.Element} 로딩 모달 컴포넌트
  */
 export function LoadingModal() {
-  return (
-    <Portal>
-      <S.Background>
-        <ReactLoading
+    return (
+        <Portal>
+            <S.Background>
+                {/* <ReactLoading
           type={"spin"}
           color={"black"}
           height={"5%"}
           width={"5%"}
-        />
-      </S.Background>
-    </Portal>
-  );
+        /> */}
+            </S.Background>
+        </Portal>
+    );
 }

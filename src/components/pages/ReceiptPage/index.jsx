@@ -1,13 +1,130 @@
-import { useLocation } from "react-router-dom";
-import { TempComponent } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import html2canvas from "html2canvas";
+import { ReceiptPaper, AlertModal } from "components";
+import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
+import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
+import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
 
 export function ReceiptPage() {
-  /**
-   * Todo List에서 받은 값, location.state에 담겨 있다.
-   * location.state = {todoList: {todo}}
-   */
-  const location = useLocation();
-  console.log(location.state);
+  const {
+    state: { todos },
+  } = useLocation();
 
-  return <TempComponent>ReceiptPage</TempComponent>;
+  const navigate = useNavigate();
+  const receiptRef = useRef(null);
+  const [scale, setScale] = useState(1);
+  const [modalOn, setModalOn] = useState(false);
+
+  function handleShare() {
+    // console.log("Share");
+
+    setModalOn(true);
+    //모달만들기
+  }
+
+  function handleDownload() {
+    console.log("Download");
+    html2canvas(document.getElementById("receipt")).then((canvas) => {
+      const aTag = document.createElement("a");
+      document.body.appendChild(aTag);
+      aTag.href = canvas.toDataURL("image/jpg");
+      aTag.download = "my_receipt.jpg";
+      aTag.click();
+      document.body.removeChild(aTag);
+    });
+  }
+
+  useEffect(() => {
+    const ratio = window.innerHeight / 1700;
+    const receiptSectionHeight = window.innerHeight * ratio;
+    const receiptHeight = receiptRef.current.offsetHeight;
+    if (receiptHeight > receiptSectionHeight) {
+      setScale(receiptSectionHeight / receiptHeight - 0.01);
+    }
+  }, []);
+
+  return (
+    <Container>
+      <BackIconContainer onClick={() => navigate(-1)}>
+        <BackIcon />
+      </BackIconContainer>
+      <ReceiptContainer ref={receiptRef} scale={scale}>
+        <ReceiptPaper todos={todos} />
+      </ReceiptContainer>
+      <IconContainer>
+        <div onClick={handleShare}>
+          <ShareIcon />
+          <span>SHARE</span>
+        </div>
+        <div onClick={handleDownload}>
+          <SaveIcon />
+          <span>SAVE</span>
+        </div>
+      </IconContainer>
+      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
+    </Container>
+  );
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+`;
+
+const BackIconContainer = styled.div`
+  width: 36px;
+  margin-top: 24px;
+  margin-left: 8px;
+  padding: 8px;
+  opacity: 50%;
+  cursor: pointer;
+`;
+
+const ReceiptContainer = styled.div`
+  width: 100%;
+  height: 70%;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    transform: scale(${(props) => props.scale});
+  }
+`;
+
+const IconContainer = styled.div`
+  width: 100%;
+  height: 12%;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 24px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    margin: 4px 24px;
+    cursor: pointer;
+  }
+
+  svg {
+    padding: 8px;
+    opacity: 40%;
+  }
+
+  span {
+    font-family: "Courier Prime", monospace;
+    font-size: 16px;
+    color: #fcfcfc;
+  }
+`;
