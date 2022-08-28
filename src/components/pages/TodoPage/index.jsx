@@ -1,4 +1,6 @@
 import { useState, Fragment } from "react";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   TodoHeader,
@@ -27,6 +29,9 @@ export function TodoPage() {
     setTodos,
     date: selectedDate,
   });
+
+  const { state } = useLocation();
+  console.log(state?.email);
 
   const navigate = useNavigate();
 

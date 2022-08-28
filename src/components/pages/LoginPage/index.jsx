@@ -14,41 +14,7 @@ import { useEffect } from "react";
  */
 
 export function LoginPage() {
-  // const REST_API_KEY = "688155dfbbfe5bca5363ff274b08c04d";
-
-  const REST_API_KEY = "c667de0836de69184d52aa8825eb6922"; // woo
-  // const JAVASCRIPT_API_KEY = "32ec32c9fce4020aa1b5c9df1cde4423"; // woo
-  const JAVASCRIPT_API_KEY = "1375c61b1936f19fab061fdb9b7684e8";
-  const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
-
-  // const REDIRECT_URI = "http://3.36.239.183:8080/auth/kakao/callback"; // woo
-
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=32ec32c9fce4020aa1b5c9df1cde4423&redirect_uri=http://localhost:3000/auth/kakao/callback&response_type=code`;
-  // https://kauth.kakao.com/oauth/authorize?client_id=32ec32c9fce4020aa1b5c9df1cde4423&redirect_uri=http://3.36.239.183:8080/auth/kakao/callback&response_type=code
-  //   return (
-  //     <Router>
-  //     <div className="App">
-  //       <Switch>
-  //         <Route exact path="/">
-  //           <h1><a href={KAKAO_AUTH_URL}>Kakao Login</a></h1>
-  //         </Route>
-  //         <Route path="/oauth/kakao/callback">
-  //           <Auth />
-  //         </Route>
-  //       </Switch>
-  //     </div>
-  //     </Router>
-  //   );
-  // }
-  // export default App;
-
-  const getAccessToken = async () => {
-    const code = new URL(window.location.href).searchParams.get("code");
-    const response = await fetch(KAKAO_AUTH_URL);
-    const json = await response.json();
-    console.log(json);
-    return json.access_token;
-  };
 
   return (
     <S.Container>
