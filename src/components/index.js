@@ -7,10 +7,12 @@ export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
+export { TimerImage } from "./atoms/TimerImage";
 // molecules
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { TodoList } from "./molecules/TodoList";
+
 // organisms
 export { LoadingModal } from "./organisms/LoadingModal";
 // templates

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { TimerImage } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
 
 const TodoItem = ({ todo, onRemove }) => {
+  const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
+  const [count, setCount] = useState(25);
   const { task, isDate } = todo;
 
   const [done, setDone] = useState(isDate);
@@ -11,9 +14,15 @@ const TodoItem = ({ todo, onRemove }) => {
   const handleClickCheckCircleToggle = () => setDone(!done);
 
   // TODO : 로직 구현 예정
-  const handleClickTimerButton = () => console.log("Timer Start");
+  const handleClickTimerButton = () => setIsRunning(!isRunning);
   const handleClickToDoRemoveButton = () => onRemove(todo.id);
   const handleClickToDoEditButton = () => console.log("PUT / TodoItem 수정!");
+
+  useEffect(() => {
+    if (isRunning === false) {
+      console.log("업데이트 발생!");
+    }
+  }, [isRunning]);
 
   return (
     <TodoItemBlock>
@@ -29,7 +38,15 @@ const TodoItem = ({ todo, onRemove }) => {
       </TimerButton>
       <TimerButton onClick={handleClickTimerButton}>
         {/* 타이머 기능 추가되면 삭제 예정 */}
-        <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
+        {isRunning && (
+          <TimerImage
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+            count={count}
+            setCount={setCount}
+          />
+        )}
+        {!isRunning && <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>}
       </TimerButton>
       <TimerButton onClick={handleClickToDoRemoveButton}>
         <FontAwesomeIcon icon={faClose}></FontAwesomeIcon>
