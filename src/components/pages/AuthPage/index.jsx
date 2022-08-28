@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "react-loading";
+import AtuhContext from "store/auth-context";
 import * as S from "./style";
 
 export function AuthPage() {
@@ -8,12 +9,15 @@ export function AuthPage() {
 
   const code = new URL(window.location.href).searchParams.get("code");
 
+  const authCtx = useContext(AtuhContext);
+
   useEffect(() => {
     fetch(`http://3.36.239.183:8080/auth/kakao/callback?code=${code}`)
       .then((res) => res.json())
       .then((json) => {
-        const { id, email, nickname } = json;
-        navigate("/", { state: { id, email, nickname } });
+        const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+        authCtx.login(json, expirationTime);
+        navigate("/");
       });
   }, []);
 

@@ -28,9 +28,6 @@ export function TodoPage() {
     date: selectedDate,
   });
 
-  const { state } = useLocation();
-  console.log(state?.email);
-
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
