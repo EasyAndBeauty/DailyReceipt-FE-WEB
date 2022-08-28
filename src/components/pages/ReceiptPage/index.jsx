@@ -8,6 +8,7 @@ import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
 import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
 
 export function ReceiptPage() {
+  const navigate = useNavigate();
   const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
 
@@ -39,11 +40,7 @@ export function ReceiptPage() {
 
   return (
     <Container>
-      <Texture
-        src="https://img.freepik.com/free-vector/crumpled-paper-texture_1048-2259.jpg?w=1480&t=st=1661600618~exp=1661601218~hmac=b19bc6461fe0adb3315567718519d901453733476abbf08b177d4f43384b4f07"
-        alt="paper texture"
-      />
-      <BackIconContainer>
+      <BackIconContainer onClick={() => navigate(-1)}>
         <BackIcon />
       </BackIconContainer>
       <ReceiptContainer ref={receiptRef} scale={scale}>
