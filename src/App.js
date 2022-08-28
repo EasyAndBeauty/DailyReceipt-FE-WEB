@@ -1,13 +1,19 @@
 import { Routes, Route } from "react-router-dom";
-import { TodoPage, LoginPage, ReceiptPage, UserPage } from "components";
+import {
+  TodoPage,
+  LoginPage,
+  ReceiptPage,
+  UserPage,
+  MyReceipt,
+} from "components";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<TodoPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/receipt" element={<ReceiptPage />} />
-      <Route path="/my" element={<UserPage />} />/
+      <Route path="/checkout" element={<ReceiptPage />} />
+      <Route path="/my" element={<UserPage />} />
       <Route
         path="*"
         element={

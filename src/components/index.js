@@ -17,7 +17,6 @@ export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/receiptBarcode";
 export { ReceiptQuotes } from "./atoms/receiptQuotes";
-
 /**
  * molecules
  */
@@ -28,14 +27,10 @@ export { TodoList } from "./molecules/TodoList";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/receiptPaper";
-export { ReceiptTodo } from "./molecules/receiptTodo";
 export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
+export { ReceiptTodo } from "./molecules/receiptTodo";
 
-/**
- * * organisms
- */
-
-// Others
+// organisms
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
 // templates
