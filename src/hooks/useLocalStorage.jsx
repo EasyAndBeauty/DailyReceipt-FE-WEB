@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
+      console.log("item", item, key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(error);
       return initialValue;
     }
   });
+
+  const getValue = useCallback(
+    (date) => {
+      try {
+        const item = window.localStorage.getItem(date);
+        return item ? JSON.parse(item) : initialValue;
+      } catch (error) {
+        console.log(error);
+        return initialValue;
+      }
+    },
+    [initialValue]
+  );
 
   const setValue = (value) => {
     try {
@@ -22,5 +36,5 @@ export default function useLocalStorage(key, initialValue) {
     }
   };
 
-  return [storedValue, setValue];
+  return [storedValue, setValue, getValue];
 }

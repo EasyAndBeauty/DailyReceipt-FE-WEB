@@ -1,10 +1,8 @@
-import { useState, useRef, Fragment, useEffect } from "react";
+import { useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { TodoHeader, Week, SquareBtn, TodoList } from "components";
-import { getTodoList } from "controllers/todoController";
-
-import * as S from "./style";
 import useDataFetch from "hooks/useDataFetch";
+import * as S from "./style";
 /**
  * TodoPage component
  *
@@ -15,16 +13,10 @@ import useDataFetch from "hooks/useDataFetch";
  */
 export function TodoPage() {
   // 예시입니다.
-  const [selectedDate, setSelectedDate] = useState({
-    Date: new Date(),
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    date: new Date().getDate(),
-    dayOfWeek: new Date().getDay(),
-  });
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalOn, setModalOn] = useState(false);
   const { todos, postUseData, postLocalData, deleteLocalData } = useDataFetch({
-    Date: selectedDate.Date,
+    date: selectedDate,
   });
 
   const navigate = useNavigate();
@@ -34,23 +26,28 @@ export function TodoPage() {
     navigate("/checkout", { state: { todos } });
   };
 
-  const onSelectDayOfWeek = (dayOfWeek) => {
-    setSelectedDate((pre) => ({
-      ...pre,
-      dayOfWeek,
-    }));
-
+  const onSelectDayOfWeek = (DateTime) => {
+    setSelectedDate(DateTime);
     /**
      * 서버에 요청을 보내고, 응답을 받아서 처리한다.
      */
   };
 
+  const selectedMonth = (Date) => {
+    return Date.toLocaleDateString("en-US", {
+      month: "long",
+    });
+  };
+  const selectedDayOfWeek = (Date) => {
+    return Date.getDay();
+  };
+
   return (
     <Fragment>
       <S.Container>
-        <TodoHeader />
+        <TodoHeader month={selectedMonth(selectedDate)} />
         <Week
-          selectedDayOfWeek={selectedDate.dayOfWeek}
+          selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
           onSelectDayOfWeek={onSelectDayOfWeek}
         />
         <S.Content>

@@ -1,24 +1,26 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList } from "controllers/todoController";
-export default function useDataFetch({ Date }) {
+export default function useDataFetch({ date }) {
   const [todos, setTodos] = useState([]);
-  const [storedValue, setValue] = useLocalStorage("todos", []);
-  const nextId = useRef(todos.length + 1);
+  const [storedValue, setValue, getValue] = useLocalStorage(date, []);
 
   // get - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
-  const getLocalData = useCallback(async () => {
-    const data = storedValue;
+  const getLocalData = useCallback(() => {
+    const newDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .split("T")[0];
+    const data = getValue(newDate);
     setTodos(data);
-  }, [storedValue]);
+  }, [date]);
 
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
   const getUserData = useCallback(async () => {
     // const response = await fetch("백엔드서버/파라미터");
-    const data = getTodoList(Date);
+    const data = getTodoList(date);
     setTodos(data);
     // 로컬에 저장
-  }, [Date]);
+  }, [date]);
 
   // post - 로그인 사용자 : 입력시 서버에 데이터를 보낸다 + localStorage에 저장한다.
   const postUseData = useCallback(
@@ -36,13 +38,13 @@ export default function useDataFetch({ Date }) {
         {
           id: todos.length + 1,
           task,
-          date: new Date(),
-          isDate: false,
+          date: new date(),
+          isdate: false,
           timer: 25,
         },
       ]);
     },
-    [Date, todos.length]
+    [date, todos.length]
   );
 
   // post - 게스트 사용자  : localStorage에 데이터를 저장한다
@@ -54,13 +56,12 @@ export default function useDataFetch({ Date }) {
         {
           id: todos.length + 1,
           task,
-          date: Date,
-          isDate: false,
+          isdate: false,
           timer: 25,
         },
       ]);
     },
-    [Date, setValue, todos.length]
+    [setValue, todos.length]
   );
 
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다 + localStorage에 저장한다.
