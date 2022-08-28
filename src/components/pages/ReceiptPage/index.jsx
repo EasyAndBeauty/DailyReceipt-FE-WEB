@@ -18,15 +18,14 @@ export function ReceiptPage() {
   const [modalOn, setModalOn] = useState(false);
 
   function handleShare() {
-    // console.log("Share");
-
     setModalOn(true);
-    //모달만들기
   }
 
-  function handleDownload() {
+  async function handleDownload() {
     console.log("Download");
-    html2canvas(document.getElementById("receipt")).then((canvas) => {
+    await html2canvas(document.getElementById("receipt"), {
+      backgroundColor: "none",
+    }).then((canvas) => {
       const aTag = document.createElement("a");
       document.body.appendChild(aTag);
       aTag.href = canvas.toDataURL("image/jpg");

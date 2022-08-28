@@ -2,14 +2,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  margin: 2.75rem 0;
+  margin: 44px;
+  padding: 8px 24px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const Btn = styled.button`
   background-color: transparent;
-  margin: 0 0.5rem;
+  margin-left: 8px;
+  color: ${(props) => props.wt};
+  &:last-child {
+    transform: translateY(1px);
+  }
 `;
