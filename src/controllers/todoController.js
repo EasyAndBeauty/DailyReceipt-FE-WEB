@@ -1,31 +1,39 @@
-import axios from "axios";
 import { client } from "./client";
-import { dummyTodosList } from "./dummy";
 
-// TODO: 백엔드 연결
-const TODAY = new Date();
-export const getTodoList = (date = TODAY, req) => {
+// 오늘 날짜 설정
+const today = new Date();
+const FORMATTED_TODAY = today.toISOString().split("T")[0];
+
+export const getTodoList = async (user_id, date = FORMATTED_TODAY, req) => {
   try {
-    // const response = await client.get("/todo", { params: { date } });
-
-    const dummyTodosFromDate = dummyTodosList.filter((todo) => {
-      const formatedDate = new Date(todo.date);
-      return formatedDate.getDate() === date.getDate();
+    const response = await client.get(`/v2/todo/${user_id}`, {
+      params: { date },
     });
 
-    return dummyTodosFromDate;
+    return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const postTodo = (todo, req) => {
-  // const response = client.post("/login");
-  const randomInt = Math.floor(Math.random() * 100);
-  return { id: randomInt };
+export const postTodo = async (user_id, todo, req) => {
+  try {
+    const response = await client.post(`/v2/todo/${user_id}`, todo);
+
+    return response.data;
+  } catch (error) {
+    console.log("Todo를 추가하지 못했습니다.");
+    console.log(error);
+  }
 };
 
-export const updateTodo = (id, todo, req) => {
-  // const response = client.put("/todo/${id}");
-  return { id, ...todo };
+export const updateTodo = async (id, todo, req) => {
+  try {
+    const response = await client.put(`/v1/todo/${id}`, todo);
+
+    return response.data;
+  } catch (error) {
+    console.log("Todo를 수정하지 못했습니다.");
+    console.log(error);
+  }
 };
