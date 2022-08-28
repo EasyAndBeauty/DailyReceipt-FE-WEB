@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import dayjs from "dayjs";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList } from "controllers/todoController";
 
@@ -17,8 +18,7 @@ import { getTodoList } from "controllers/todoController";
  *
  */
 
-export default function useDataFetch({ date }) {
-  const [todos, setTodos] = useState([]);
+export default function useDataFetch({ todos, setTodos, date }) {
   const [storedValue, setValue, getValue] = useLocalStorage(
     new Date(date.getTime() - date.getTimezoneOffset() * 60000)
       .toISOString()
@@ -59,7 +59,7 @@ export default function useDataFetch({ date }) {
         {
           id: todos.length + 1,
           task,
-          date: new date(),
+          date: dayjs().format(),
           isdate: false,
           timer: 25,
         },
@@ -83,6 +83,7 @@ export default function useDataFetch({ date }) {
         {
           id: todos.length + 1,
           task,
+          date: dayjs().format(),
           isdate: false,
           timer: 25,
         },
@@ -97,20 +98,40 @@ export default function useDataFetch({ date }) {
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다 + localStorage에 저장한다.
 
   // put - 게스트 사용자  : localStorage에 데이터를 저장한다.
+  const putLocalData = useCallback(
+    async (task, id) => {
+      const newDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0];
+      const newData = [...todos].map((todo) => {
+        if (todo.id === id) {
+          return task;
+        }
+        return todo;
+      });
+      await setValue(newData, newDate);
+      setTodos(newData);
+    },
+    [todos, setValue, setTodos]
+  );
 
   // delete - 로그인 사용자 : 삭제시 서버에 데이터를 보낸다 + localStorage에 저장한다.
 
   // delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
 
   const deleteLocalData = useCallback(
-    (id) => {
+    async (id) => {
       const newDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60000
       )
         .toISOString()
         .split("T")[0];
-      setValue((pre) => pre.filter((todo) => todo.id !== id), newDate);
-      setTodos((pre) => pre.filter((todo) => todo.id !== id));
+
+      const newData = todos.filter((todo) => todo.id !== id);
+      await setValue(newData, newDate);
+      setTodos(newData);
     },
     [date, setValue]
   );
@@ -120,11 +141,11 @@ export default function useDataFetch({ date }) {
   }, [getUserData, getLocalData]);
 
   return {
-    todos,
     getUserData,
     getLocalData,
     postUseData,
     postLocalData,
+    putLocalData,
     deleteLocalData,
   };
 }

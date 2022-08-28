@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
 
-const TodoItem = ({ todo, onRemove }) => {
+const TodoItem = ({ todo, onRemove, onEdit }) => {
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
   const [count, setCount] = useState(25);
   const { task, isDate } = todo;
@@ -14,16 +14,19 @@ const TodoItem = ({ todo, onRemove }) => {
   const handleClickCheckCircleToggle = () => setDone(!done);
 
   // TODO : 로직 구현 예정
-  const handleClickTimerButton = () => setIsRunning(!isRunning);
+  const handleClickTimerButton = () => {
+    setIsRunning(!isRunning);
+  };
   const handleClickToDoRemoveButton = () => onRemove(todo.id);
-  const handleClickToDoEditButton = () => console.log("PUT / TodoItem 수정!");
+  const handleClickToDoEditButton = () => {
+    onEdit({ ...todo, isDone: true }, todo.id);
+  };
 
   useEffect(() => {
     if (isRunning === false) {
-      console.log("업데이트 발생!");
+      onEdit({ ...todo, timer: 25 - count }, todo.id);
     }
   }, [isRunning]);
-
   return (
     <TodoItemBlock>
       <CheckCircle done={done} onClick={handleClickCheckCircleToggle}>

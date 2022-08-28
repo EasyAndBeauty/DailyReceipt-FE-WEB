@@ -13,9 +13,12 @@ import * as S from "./style";
  */
 export function TodoPage() {
   // 예시입니다.
+  const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalOn, setModalOn] = useState(false);
-  const { todos, postUseData, postLocalData, deleteLocalData } = useDataFetch({
+  const { putLocalData, postLocalData, deleteLocalData } = useDataFetch({
+    todos,
+    setTodos,
     date: selectedDate,
   });
 
@@ -55,6 +58,7 @@ export function TodoPage() {
             todos={todos}
             onInsert={postLocalData}
             onRemove={deleteLocalData}
+            onEdit={putLocalData}
           />
         </S.Content>
       </S.Container>
