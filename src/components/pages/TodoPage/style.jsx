@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
+  //position: relative;
   width: 100%;
+  //margin-top: 2.75rem;
+  //padding-bottom: 2.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow-y: scroll;
   box-sizing: border-box;
   overflow-x: hidden;
   scrollbar-width: none;
@@ -17,8 +21,7 @@ export const Content = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  box-sizing: border-box;
-  //overflow-y: auto;
+  overflow-y: auto;
 `;
 
 export const Bottom = styled.div`
@@ -29,7 +32,6 @@ export const Bottom = styled.div`
   position: fixed;
   bottom: 0;
   z-index: 10;
-  box-sizing: border-box;
   //justify-content: flex-start;
 
   div {

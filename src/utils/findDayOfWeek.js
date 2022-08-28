@@ -1,3 +1,3 @@
 export const findDayOfWeek = (index) => {
-  return ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][index];
+  return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][index];
 };

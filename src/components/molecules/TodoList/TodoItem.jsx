@@ -142,6 +142,7 @@ const TimerButton = styled.div`
   cursor: pointer;
 
   &:first-child {
-    transform: scale(1.3) translateY(0.5px) translateX(1px);
+    transform: scale(1.3);
+    margin-right: 8px;
   }
 `;
