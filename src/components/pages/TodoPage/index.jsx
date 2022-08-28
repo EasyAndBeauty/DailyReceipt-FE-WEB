@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { TodoHeader, Week, SquareBtn } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
+import { TodoHeader, Week, SquareBtn, TodoList } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
 import * as S from "./style";
 /**
  * TodoPage component
@@ -12,13 +12,27 @@ import * as S from "./style";
  */
 export function TodoPage() {
   // 예시입니다.
-  const [todoList, setTodoList] = useState([
+  const [todos, setTodos] = useState([
     {
-      id: 1, // 제곧내
-      task: "오늘은 뭘 할라나", // 유저가 적은 투두리스트
-      date: 20220826, // 입력날짜  year + month + day ex) 20220826
-      isDone: false, // 상태 (완료, 미완료)
-      timer: 25, // 뽀모도로 타이머(분 단위)
+      id: 1,
+      task: "test 중입니다.",
+      date: 20220827,
+      isDate: false,
+      timer: 25,
+    },
+    {
+      id: 2,
+      task: "test 중입니다2",
+      date: 20220827,
+      isDate: true,
+      timer: 25,
+    },
+    {
+      id: 3,
+      task: "투두리스트 만들기",
+      date: 20220827,
+      isDate: true,
+      timer: 25,
     },
   ]);
 
@@ -33,7 +47,7 @@ export function TodoPage() {
 
   const onSubmitTodoList = () => {
     console.log("투두리스트를 보내며, 페이지 라우트를 합니다.");
-    navigate("/checkout", { state: { todoList } });
+    navigate("/checkout", { state: { todos } });
   };
 
   const onSelectDayOfWeek = (dayOfWeek) => {
@@ -47,6 +61,17 @@ export function TodoPage() {
      */
   };
 
+  const nextId = useRef(4);
+  const onInsert = (task) => {
+    const todo = {
+      id: nextId.current,
+      task,
+      isDate: false,
+    };
+    setTodos(todos.concat(todo));
+    nextId.current++;
+  };
+
   return (
     <S.Container>
       <TodoHeader />
@@ -54,7 +79,12 @@ export function TodoPage() {
         selectedDayOfWeek={selectedDate.dayOfWeek}
         onSelectDayOfWeek={onSelectDayOfWeek}
       />
-      <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
+      <S.Content>
+        <TodoList todos={todos} onInsert={onInsert} />
+      </S.Content>
+      <S.Bottom>
+        <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
+      </S.Bottom>
     </S.Container>
   );
 }
