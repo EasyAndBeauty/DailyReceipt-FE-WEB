@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 
@@ -28,7 +27,7 @@ const TodoListBlock = ({ todos, onRemove, onEdit }) => {
     <TodoListBlockStyle>
       {todos.map((todo) => (
         <TodoItem
-          key={uuidv4()}
+          key={todo.id}
           id={todo.id}
           todo={todo}
           onRemove={onRemove}
