@@ -14,7 +14,6 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/checkout" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
-      <Route path="/myreceipt" element={<MyReceipt />} />
       <Route
         path="*"
         element={
