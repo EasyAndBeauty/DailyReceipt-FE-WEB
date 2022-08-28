@@ -14,25 +14,25 @@ import { useState } from "react";
  */
 
 export function TodoHeader({ month }) {
-    let navigate = useNavigate();
-    function goPage(url){
-        navigate(url);
-    }
-    return (
-        <S.Container>
-            <S.Btn
-                onClick={() => {
-                    goPage("/my")
-                }}
-            >
-                <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
-            </S.Btn>
-            <HeaderText>{month}</HeaderText>
-            <S.Btn
-                onClick={() => {
-                    alert("기능 준비중입니다!")
-                }}
-            >
+  let navigate = useNavigate();
+  function goPage(url){
+      navigate(url);
+  }
+  return (
+      <S.Container>
+          <S.Btn
+              onClick={() => {
+                  goPage("/my")
+              }}
+          >
+              <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
+          </S.Btn>
+          <HeaderText>{month}</HeaderText>
+          <S.Btn
+              onClick={() => {
+                  alert("기능 준비중입니다!")
+              }}
+          >
                 <FontAwesomeIcon
                     icon={faCalendarDays}
                     size="2x"
