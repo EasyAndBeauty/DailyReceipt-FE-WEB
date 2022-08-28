@@ -13,10 +13,10 @@ export const BtnContainer = styled.button`
   //font-weight: 700;
   //line-height: 150%;
 
-  &:hover {
+  /*  &:hover {
     background-color: rgba(1, 1, 1, 0.9);
   }
   &:active {
     background-color: rgba(1, 1, 1, 0.9);
-  }
+  }*/
 `;

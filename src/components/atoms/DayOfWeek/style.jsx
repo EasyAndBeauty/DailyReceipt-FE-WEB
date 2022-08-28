@@ -18,4 +18,7 @@ export const Text = styled.p`
   &:first-child {
     font-weight: 700;
   }
+  &:last-child {
+    font-size: 0.75rem;
+  }
 `;

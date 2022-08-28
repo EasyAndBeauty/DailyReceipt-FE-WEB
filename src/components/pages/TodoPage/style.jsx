@@ -9,9 +9,9 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  overflow-y: scroll;
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: hidden;
   scrollbar-width: none;
 `;
 
