@@ -4,7 +4,17 @@ import TodoItem from "./TodoItem";
 
 const TodoListBlock = ({ todos, onRemove, onEdit }) => {
   const [todoData, setTodoData] = useState([]);
+  const [hasRunningTimer, setHasRuuningTimer] = useState("");
 
+  const setRunningTimer = (key) => {
+    setHasRuuningTimer(key);
+    return;
+  };
+
+  const resetRunningTimer = () => {
+    setHasRuuningTimer("");
+    return;
+  };
   const getTodoList = async () => {
     console.log("List 데이터 받아오기");
   };
@@ -22,6 +32,9 @@ const TodoListBlock = ({ todos, onRemove, onEdit }) => {
           todo={todo}
           onRemove={onRemove}
           onEdit={onEdit}
+          hasRunningTimer={hasRunningTimer}
+          setRunningTimer={setRunningTimer}
+          resetRunningTimer={resetRunningTimer}
         />
       ))}
     </TodoListBlockStyle>

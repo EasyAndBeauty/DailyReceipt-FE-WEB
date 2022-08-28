@@ -19,7 +19,14 @@ import styled, { css } from "styled-components";
  * @param {*} param0
  * @returns
  */
-const TodoItem = ({ todo, onRemove, onEdit }) => {
+const TodoItem = ({
+  todo,
+  onRemove,
+  onEdit,
+  hasRunningTimer,
+  setRunningTimer,
+  resetRunningTimer,
+}) => {
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
@@ -33,9 +40,20 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
     setDone(!done);
   };
 
-  // TODO : 로직 구현 예정
   const handleClickTimerButton = () => {
-    setIsRunning(!isRunning);
+    if (hasRunningTimer === todo.id) {
+      setIsRunning(!isRunning);
+      resetRunningTimer();
+
+      return;
+    }
+
+    if (!hasRunningTimer) {
+      setIsRunning(!isRunning);
+      setRunningTimer(todo.id);
+
+      return;
+    }
   };
   const handleClickToDoRemoveButton = () => onRemove(todo.id);
   const handleClickToDoEditButton = () => {
@@ -68,7 +86,6 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
         {!isEditing && <FontAwesomeIcon icon={faSquareCheck} />}
       </TimerButton>
       <TimerButton onClick={handleClickTimerButton}>
-        {/* 타이머 기능 추가되면 삭제 예정 */}
         {isRunning && (
           <TimerImage
             isRunning={isRunning}
