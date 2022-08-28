@@ -1,6 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackspace } from "@fortawesome/free-solid-svg-icons";
+import { BackBtn } from "components";
 import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
 import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./style";
@@ -15,20 +13,10 @@ import * as S from "./style";
  */
 
 export function LoginPage() {
-  const navigate = useNavigate();
-  const onClickBack = () => {
-    navigate(-1);
-  };
-
   return (
     <S.Container>
       <S.Header>
-        <FontAwesomeIcon
-          onClick={onClickBack}
-          icon={faBackspace}
-          size="2x"
-          style={{ marginLeft: "16px" }}
-        />
+        <BackBtn />
       </S.Header>
       <S.Img src={ReceiptImg} alt="receipt" />
       <S.H1>우리 하루 영수증 써주셍..(텍스트 들어갈곳.. 아님 이미지..?)</S.H1>

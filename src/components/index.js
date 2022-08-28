@@ -7,6 +7,7 @@ export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
+export { BackBtn } from "./atoms/BackBtn";
 // molecules
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
