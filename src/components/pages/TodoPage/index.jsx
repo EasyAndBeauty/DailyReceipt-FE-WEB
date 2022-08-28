@@ -12,55 +12,60 @@ import * as S from "./style";
  * @returns  {JSX.Element} - TodoPage의 layout을 담당하는 컴포넌트
  */
 export function TodoPage() {
-  // 예시입니다.
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [modalOn, setModalOn] = useState(false);
-  const { todos, postUseData, postLocalData, deleteLocalData } = useDataFetch({
-    date: selectedDate,
-  });
+    // 예시입니다.
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [modalOn, setModalOn] = useState(false);
+    const { todos, postUseData, postLocalData, deleteLocalData } = useDataFetch(
+        {
+            date: selectedDate,
+        }
+    );
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const onSubmitTodoList = () => {
-    console.log("투두리스트를 보내며, 페이지 라우트를 합니다.");
-    navigate("/checkout", { state: { todos } });
-  };
+    const onSubmitTodoList = () => {
+        console.log("투두리스트를 보내며, 페이지 라우트를 합니다.");
+        navigate("/checkout", { state: { todos } });
+    };
 
-  const onSelectDayOfWeek = (DateTime) => {
-    setSelectedDate(DateTime);
-    /**
-     * 서버에 요청을 보내고, 응답을 받아서 처리한다.
-     */
-  };
+    const onSelectDayOfWeek = DateTime => {
+        setSelectedDate(DateTime);
+        /**
+         * 서버에 요청을 보내고, 응답을 받아서 처리한다.
+         */
+    };
 
-  const selectedMonth = (Date) => {
-    return Date.toLocaleDateString("en-US", {
-      month: "long",
-    });
-  };
-  const selectedDayOfWeek = (Date) => {
-    return Date.getDay();
-  };
+    const selectedMonth = Date => {
+        return Date.toLocaleDateString("en-US", {
+            month: "long",
+        });
+    };
+    const selectedDayOfWeek = Date => {
+        return Date.getDay();
+    };
 
-  return (
-    <Fragment>
-      <S.Container>
-        <TodoHeader month={selectedMonth(selectedDate)} />
-        <Week
-          selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
-          onSelectDayOfWeek={onSelectDayOfWeek}
-        />
-        <S.Content>
-          <TodoList
-            todos={todos}
-            onInsert={postLocalData}
-            onRemove={deleteLocalData}
-          />
-        </S.Content>
-      </S.Container>
-      <S.Bottom>
-        <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
-      </S.Bottom>
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <S.Container>
+                <TodoHeader month={selectedMonth(selectedDate)} />
+                <Week
+                    selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
+                    onSelectDayOfWeek={onSelectDayOfWeek}
+                />
+                <S.Content>
+                    <TodoList
+                        todos={todos}
+                        onInsert={postLocalData}
+                        onRemove={deleteLocalData}
+                    />
+                </S.Content>
+            </S.Container>
+            <S.Bottom>
+                <SquareBtn
+                    onClick={onSubmitTodoList}
+                    children={"Give me the check!"}
+                />
+            </S.Bottom>
+        </Fragment>
+    );
 }
