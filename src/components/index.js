@@ -11,6 +11,7 @@ export { Portal } from "./atoms/Portal";
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { TodoList } from "./molecules/TodoList";
+export { MyReceitp } from "./molecules/MyReceitp";
 // organisms
 export { LoadingModal } from "./organisms/LoadingModal";
 // templates

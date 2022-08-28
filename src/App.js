@@ -1,5 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { TodoPage, LoginPage, ReceiptPage, UserPage } from "components";
+import {
+  TodoPage,
+  LoginPage,
+  ReceiptPage,
+  UserPage,
+  MyReceitp,
+} from "components";
 
 function App() {
   return (
@@ -8,6 +14,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/checkout" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
+      <Route path="/myreceitp" element={<MyReceitp />} />
       <Route
         path="*"
         element={
