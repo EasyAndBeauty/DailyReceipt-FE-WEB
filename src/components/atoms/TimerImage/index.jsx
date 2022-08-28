@@ -34,9 +34,9 @@ export function TimerImage({ isRunning, setIsRunning, count, setCount }) {
     <S.TimerContainer>
       <ReactLoading
         type="spinningBubbles"
-        color="black"
-        height={16}
-        width={16}
+        color="#aaaaaa"
+        height={20}
+        width={20}
       />
       <S.CountNumber>{count}</S.CountNumber>
     </S.TimerContainer>

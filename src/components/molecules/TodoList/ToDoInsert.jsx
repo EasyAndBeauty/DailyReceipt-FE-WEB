@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
 import styled from "styled-components";
 
 const ToDoInsert = ({ onInsert }) => {
@@ -17,21 +20,24 @@ const ToDoInsert = ({ onInsert }) => {
   };
 
   return (
-    <InsertForm onClick={onClickTodoItemCreateButton}>
+    <InsertForm>
       <Input
         autoFocus
-        placeholder="add a new task"
+        placeholder="Add a New Task"
         onChange={handleChangeContentValue}
         value={todoInput}
       />
-      <InputButton>✔️</InputButton>
+      <InputButton onClick={onClickTodoItemCreateButton}>
+        {" "}
+        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />
+      </InputButton>
     </InsertForm>
   );
 };
 
 export default ToDoInsert;
 
-const InsertForm = styled.form`
+const InsertForm = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
@@ -39,24 +45,21 @@ const InsertForm = styled.form`
 
 const Input = styled.input`
   margin-right: 10px;
-  padding: 12px;
+  padding: 8px;
   width: 100%;
-  font-size: 16px;
-  border-radius: 0;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0);
+  color: ${(props) => props.theme.wt};
   border: none;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 3px solid ${(props) => props.theme.wt};
   outline: none;
+
   &:focus {
-    border-bottom: 2px solid #000000;
+    border-bottom-color: ${(props) => props.theme.green};
   }
 `;
 
-const InputButton = styled.button`
+const InputButton = styled.div`
+  transform: scale(1.5);
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-
-  &:hover {
-    background-color: #a1a8b0;
-  }
 `;

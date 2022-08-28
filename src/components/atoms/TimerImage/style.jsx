@@ -17,8 +17,9 @@ export const TimerImage = styled.img`
 export const CountNumber = styled.span`
   position: absolute;
   text-align: center;
-  top: 52%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.5rem;
+  color: ${(props) => props.theme.gray};
+  transform: translate(-50%, -55%);
+  font-size: 0.75rem;
 `;

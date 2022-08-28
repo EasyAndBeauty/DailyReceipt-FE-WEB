@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
-import { HeaderText } from "components";
+import { AlertModal, HeaderText } from "components";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -14,29 +14,39 @@ import { useState } from "react";
  */
 
 export function TodoHeader({ month }) {
+  const [modalOn, setModalOn] = useState(false);
   let navigate = useNavigate();
-  function goPage(url){
-      navigate(url);
+  function goPage(url) {
+    navigate(url);
   }
   return (
-      <S.Container>
-          <S.Btn
-              onClick={() => {
-                  goPage("/my")
-              }}
-          >
-              <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
-          </S.Btn>
-          <HeaderText>{month}</HeaderText>
-          <S.Btn
-              onClick={() => {
-                  alert("기능 준비중입니다!")
-              }}
-          >
-                <FontAwesomeIcon
-                    icon={faCalendarDays}
-                    size="2x"
-                ></FontAwesomeIcon>
-            </S.Btn>
-        </S.Container>
-    )}
+    <S.Container>
+      <HeaderText>{month}</HeaderText>
+      <div>
+        <S.Btn
+          onClick={() => {
+            setModalOn(true);
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faCalendarDays}
+            size="2x"
+            color="#aaaaaa"
+          ></FontAwesomeIcon>
+        </S.Btn>
+        <S.Btn
+          onClick={() => {
+            navigate("/my");
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faReceipt}
+            size="2x"
+            color="#aaaaaa"
+          ></FontAwesomeIcon>
+        </S.Btn>
+      </div>
+      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
+    </S.Container>
+  );
+}

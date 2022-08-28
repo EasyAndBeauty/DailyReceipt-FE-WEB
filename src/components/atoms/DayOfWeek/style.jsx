@@ -1,17 +1,24 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 2rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.25rem;
-  color: black;
-  ${(props) => props.isActive && "background-color:  black; color: white;"}
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  //padding: 0.5rem;
+  color: ${(props) => props.theme.wt};
+  ${(props) => props.isActive && "background-color: #fcfcfc; color: #191919;"}
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+  &:first-child {
+    font-weight: 700;
+  }
+  &:last-child {
+    font-size: 0.75rem;
+  }
+`;
