@@ -20,9 +20,9 @@ export const getTodoList = (date = TODAY, req) => {
 };
 
 export const postTodo = (todo, req) => {
-  // const response = client.post("/login");
-  const randomInt = Math.floor(Math.random() * 100);
-  return { id: randomInt };
+  const todoBody = { isDone: false, ...todo };
+  const response = client.post("/todo", todoBody);
+  return;
 };
 
 export const updateTodo = (id, todo, req) => {
