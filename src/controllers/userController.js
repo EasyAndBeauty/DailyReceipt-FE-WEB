@@ -24,4 +24,13 @@ export const getKakaoToken = async (code) => {
   return response.data;
 };
 
-export const getUserName = async (user_id) => {};
+export const getUserName = async (user_id) => {
+  try {
+    const response = await client.get(`/v1/user/${user_id}`);
+
+    return response.data;
+  } catch (err) {
+    console.log("유저 정보 취득에 실패했습니다.");
+    console.log(err);
+  }
+};
