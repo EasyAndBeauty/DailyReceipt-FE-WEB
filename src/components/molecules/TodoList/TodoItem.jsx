@@ -73,32 +73,34 @@ const TodoItem = ({
   }, [isRunning]);
   return (
     <TodoItemBlock>
-      <CheckCircle done={done} onClick={handleClickCheckCircleToggle}>
-        {done && `✔️`}
-      </CheckCircle>
+      <CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
       <TodoItemText
         defaultValue={taskValue || ""}
         disabled={isEditing}
         onChange={onChangeTaskValue}
       />
-      <TimerButton onClick={handleClickToDoEditButton}>
-        {isEditing && <FontAwesomeIcon icon={faPencil} />}
-        {!isEditing && <FontAwesomeIcon icon={faSquareCheck} />}
-      </TimerButton>
-      <TimerButton onClick={handleClickTimerButton}>
-        {isRunning && (
-          <TimerImage
-            isRunning={isRunning}
-            setIsRunning={setIsRunning}
-            count={count}
-            setCount={setCount}
-          />
-        )}
-        {!isRunning && <FontAwesomeIcon icon={faClock} />}
-      </TimerButton>
-      <TimerButton onClick={handleClickToDoRemoveButton}>
-        <FontAwesomeIcon icon={faClose} />
-      </TimerButton>
+      <ButtonContainer>
+        <TimerButton onClick={handleClickToDoRemoveButton}>
+          <FontAwesomeIcon icon={faClose} color={"#a65c5c"} />
+        </TimerButton>
+        <TimerButton onClick={handleClickToDoEditButton}>
+          {isEditing && <FontAwesomeIcon icon={faPencil} color={"#aaaaaa"} />}
+          {!isEditing && (
+            <FontAwesomeIcon icon={faSquareCheck} color={"#aaaaaa"} />
+          )}
+        </TimerButton>
+        <TimerButton onClick={handleClickTimerButton}>
+          {isRunning && (
+            <TimerImage
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+              count={count}
+              setCount={setCount}
+            />
+          )}
+          {!isRunning && <FontAwesomeIcon icon={faClock} color={"#aaaaaa"} />}
+        </TimerButton>
+      </ButtonContainer>
     </TodoItemBlock>
   );
 };
@@ -106,49 +108,56 @@ const TodoItem = ({
 export default TodoItem;
 
 const TodoItemBlock = styled.li`
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0.5rem 0;
+  box-sizing: border-box;
 `;
 
 const CheckCircle = styled.div`
-  margin-right: 1rem;
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 1rem;
-  font-size: 1rem;
+  width: 16px;
+  height: 16px;
+  border: 3px solid ${(props) => props.theme.gray};
+  border-radius: 16px;
   cursor: pointer;
-  ${(props) =>
-    props.done &&
-    css`
-      border: 1px solid #000000;
-      color: #000000;
-    `}
+  background-color: ${(props) =>
+    props.done ? props.theme.green : props.theme.bk};
+  border-color: ${(props) => (props.done ? props.theme.gray : props.theme.wt)};
 `;
 
 const TodoItemText = styled.input`
-  flex: 1;
+  width: 60%;
+  margin-left: 8px;
   font-size: 1rem;
-  color: #ced4da;
+  color: ${(props) => props.theme.gray};
   outline: none;
   border: none;
+  border-bottom: 1px solid ${(props) => props.theme.wt};
   background-color: transparent;
 
-  ${(props) =>
-    props.done &&
-    css`
-      color: black;
-    `}
-
   &:disabled {
-    color: #000000;
+    color: ${(props) => props.theme.wt};
+    border: none;
     opacity: 1;
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-left: 8px;
+`;
+
 const TimerButton = styled.div`
-  padding: 0.25rem;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  padding: 4px;
   line-height: 1rem;
   cursor: pointer;
+
+  &:first-child {
+    transform: scale(1.3) translateY(0.5px) translateX(1px);
+  }
 `;

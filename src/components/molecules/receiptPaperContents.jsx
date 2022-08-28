@@ -55,9 +55,9 @@ const Paper = styled(Center)`
   width: 360px;
   box-sizing: border-box;
   padding: 20px;
-  background-color: white;
+  background-color: #f2f2f2;
   font-size: 16px;
-  font-family: "Courier Prime", monospace; //한글 폰트 추가하기
+  font-family: "Courier Prime", "Gothic A1", monospace, sans-serif; //한글 폰트 추가하기
   letter-spacing: -0.5px;
   line-height: 1.4;
   color: #2f2f2f;

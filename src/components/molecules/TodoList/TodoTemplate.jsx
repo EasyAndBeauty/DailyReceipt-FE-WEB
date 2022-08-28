@@ -8,7 +8,7 @@ const TodoTemplate = ({ children }) => {
 export default TodoTemplate;
 
 const TodoTemplateBlock = styled.div`
-  width: 90%;
-  padding: 16px;
-  border-radius: 16px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
 `;
