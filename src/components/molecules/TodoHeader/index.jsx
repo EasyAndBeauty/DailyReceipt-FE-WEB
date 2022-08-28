@@ -24,7 +24,11 @@ export function TodoHeader({ month }) {
           goMypage();
         }}
       >
-        <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
+        <FontAwesomeIcon
+          icon={faReceipt}
+          size="2x"
+          color="black"
+        ></FontAwesomeIcon>
       </S.Btn>
       <HeaderText>{month}</HeaderText>
       <S.Btn
@@ -32,7 +36,11 @@ export function TodoHeader({ month }) {
           navigate("/my");
         }}
       >
-        <FontAwesomeIcon icon={faCalendarDays} size="2x"></FontAwesomeIcon>
+        <FontAwesomeIcon
+          icon={faCalendarDays}
+          size="2x"
+          color="black"
+        ></FontAwesomeIcon>
       </S.Btn>
     </S.Container>
   );
