@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 
-const TodoListBlock = ({ todos }) => {
+const TodoListBlock = ({ todos, onRemove, onEdit }) => {
   const [todoData, setTodoData] = useState([]);
 
   const getTodoList = async () => {
@@ -16,7 +16,13 @@ const TodoListBlock = ({ todos }) => {
   return (
     <TodoListBlockStyle>
       {todos.map((todo) => (
-        <TodoItem key={todo.id} id={todo.id} todo={todo} />
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          todo={todo}
+          onRemove={onRemove}
+          onEdit={onEdit}
+        />
       ))}
     </TodoListBlockStyle>
   );

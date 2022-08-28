@@ -1,46 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import ReactLoading from "react-loading";
 import useInterval from "hooks/useInterval";
-import min25 from "assets/images/25min.png";
-import min20 from "assets/images/20min.png";
-import min15 from "assets/images/15min.png";
-import min10 from "assets/images/10min.png";
-import min5 from "assets/images/5min.png";
-import congrat from "assets/images/congrat.png";
+import { DLAY_TIME } from "constants";
+import * as S from "./style";
 
 /**
- * 5/10/15/20/25분 단위로 줄어드는 시간에 맞춰 이미지 변화시키는 함수
- * transition을 이용해서 자연스럽게 이미지가 바뀌게끔 하고 싶은데 어떻게 해야될지 모르겠어요.ㅠ
- * 아직 라우팅에 서툴러서 이 내용을 브라우저단에서 확인하고 싶은데 어떻게 해야할지 잘 모르겠네여..미생을 구해쥬세여 선배님들 ㅎㅎ ㅠ
+ * TimerImage
+ *
+ * 포모도르가 작동하는 컴포넌트입니다
+ * useInterval hook를 사용하여 시간을 카운트합니다
+ *
+ * @param {Boolean} isRunning 타이머가 실행중인지 여부
+ * @param {Function} setIsRunning 타이머를 실행하거나 정지하는 함수
+ * @param {Number} count 카운트 값
+ * @param {Function} setCount 카운트 값을 변경하는 함수
+ * @returns
  */
-
-export function TimerImage() {
-  const timeStamp = [min5, min10, min15, min20, min25];
-  const [timerImage, setTimerImage] = useState(timeStamp[0]);
-  const [count, setCount] = useState(0);
-  const [isRunning, setIsRunning] = useState(false); // timer 멈추기!
-  const [delay, setDelay] = useState(500); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
-
-  const onTimerStart = () => {
-    setIsRunning(true);
-  };
+export function TimerImage({ isRunning, setIsRunning, count, setCount }) {
+  const [delay, setDelay] = useState(DLAY_TIME); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
 
   useInterval(
     () => {
-      setCount(count + 1);
-      setTimerImage(timeStamp[Math.floor(count / 5)]);
-      if (count === 25) {
-        // 최대 카운트가 25이면 다시 초기화해줍니다.
+      setCount((prv) => prv - 1);
+      if (count === 1) {
+        // 최대 카운트가 0이면 다시 25분으로 초기화해줍니다.
         setIsRunning(false);
-        setCount(0);
-        setTimerImage(congrat);
       }
     },
     isRunning ? delay : null
   );
 
   return (
-    <div onClick={onTimerStart}>
-      <img src={timerImage} alt={"temp"} />
-    </div>
+    <S.TimerContainer>
+      <ReactLoading
+        type="spinningBubbles"
+        color="black"
+        height={16}
+        width={16}
+      />
+      <S.CountNumber>{count}</S.CountNumber>
+    </S.TimerContainer>
   );
 }
