@@ -1,5 +1,5 @@
 import { useState, Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TodoHeader, Week, SquareBtn, TodoList } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import * as S from "./style";
@@ -22,14 +22,16 @@ export function TodoPage() {
     date: selectedDate,
   });
 
+  const { state } = useLocation();
+  console.log(state?.email);
+
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
-    if(!todos.length){
-      alert("항목을 작성해주세요")
-    } else{
+    if (!todos.length) {
+      alert("항목을 작성해주세요");
+    } else {
       navigate("/receipt", { state: { todos } });
-
     }
   };
 
