@@ -1,13 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Courier Prime, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 레이아웃 잡기용 */
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: table;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  /* IPhone 13 기준 */
+  display: table-row;
+  width: 390px;
+  align-items: center;
+  background-color: white;
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    width: 100vw;
+  }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+p {
+  font-size: 0.75rem;
+}
+
+button {
+  outline: none;
+  border: none;
 }
