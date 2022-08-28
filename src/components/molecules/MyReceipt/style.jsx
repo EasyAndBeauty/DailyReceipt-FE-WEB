@@ -25,6 +25,7 @@ export const MainText = styled.p`
 export const MyReceiptSeeAll = styled.div`
   display: flex;
   width: 20rem;
+  overflow-y: scroll;
   margin-bottom: 1rem;
 `;
 
@@ -44,4 +45,9 @@ export const Button = styled.button`
   text-align: center;
   width: 300px;
   height: 80px;
+  text-align: center;
+  width: 300px;
+  height: 80px;
+  margin-right: 11.8rem
+  
 `;
