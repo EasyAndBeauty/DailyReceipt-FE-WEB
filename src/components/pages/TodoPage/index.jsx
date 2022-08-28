@@ -26,7 +26,7 @@ export function TodoPage() {
 
   const onSubmitTodoList = () => {
     if(!todos.length){
-      console.log("항목을 작성해주세요")
+      alert("항목을 작성해주세요")
     } else{
       navigate("/receipt", { state: { todos } });
 

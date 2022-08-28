@@ -22,7 +22,7 @@ export function TodoHeader({ month }) {
         <S.Container>
             <S.Btn
                 onClick={() => {
-                    goPage("/receipt")
+                    goPage("/my")
                 }}
             >
                 <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
@@ -30,7 +30,7 @@ export function TodoHeader({ month }) {
             <HeaderText>{month}</HeaderText>
             <S.Btn
                 onClick={() => {
-                    goPage("/my")
+                    alert("기능 준비중입니다!")
                 }}
             >
                 <FontAwesomeIcon
