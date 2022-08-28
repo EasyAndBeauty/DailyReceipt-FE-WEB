@@ -2,24 +2,29 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
 import { ReceiptPaper } from "components";
-import { faSchool } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
 import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
 import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export function ReceiptPage() {
-  const receiptRef = useRef();
-  console.log(receiptRef);
-  console.log(window.innerHeight);
+  const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
 
-  // useEffect(() => {
-  //   if (receiptRef.current.offsetHeight > window.innerHeight * 0.7) {
-  //     setScale();
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log(receiptRef);
+    const ratio = window.innerHeight / 1700;
+    console.log(0, ratio);
+    const receiptSectionHeight = window.innerHeight * ratio;
+    const receiptHeight = receiptRef.current.offsetHeight;
+    if (receiptHeight > receiptSectionHeight) {
+      console.log(1, receiptRef.current.offsetHeight);
+      console.log(2, receiptSectionHeight);
+      console.log(3, receiptSectionHeight / receiptHeight);
+
+      setScale(receiptSectionHeight / receiptHeight - 0.01);
+    }
+  }, []);
 
   return (
     <Container>
@@ -30,8 +35,8 @@ export function ReceiptPage() {
       <BackIconContainer>
         <BackIcon />
       </BackIconContainer>
-      <ReceiptContainer scale={1}>
-        <ReceiptPaper ref={receiptRef} />
+      <ReceiptContainer ref={receiptRef} scale={scale}>
+        <ReceiptPaper />
       </ReceiptContainer>
       <IconContainer>
         <div>
@@ -54,9 +59,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  //background-color: #5c5c5c;
-  background-color: #383838;
+  background-color: #1a1a1a;
 `;
 
 const BackIconContainer = styled.div`
@@ -64,40 +67,47 @@ const BackIconContainer = styled.div`
   margin-top: 24px;
   margin-left: 8px;
   padding: 8px;
-  background-color: aqua;
+  opacity: 50%;
   cursor: pointer;
 `;
 
 const ReceiptContainer = styled.div`
   width: 100%;
-  height: 72%;
+  height: 70%;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  transform: scale(${(props) => props.scale});
-  background-color: aqua;
+  > div {
+    transform: scale(${(props) => props.scale});
+  }
+
+  //background-color: aqua;
 `;
 
 const IconContainer = styled.div`
   width: 100%;
   height: 12%;
   display: flex;
+  align-self: flex-end;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: absolute;
   bottom: 24px;
-  background-color: red;
 
   div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #4a2e0d;
     padding: 4px;
     margin: 4px 24px;
     cursor: pointer;
   }
 
   svg {
-    opacity: 80%;
+    padding: 4px;
+    opacity: 40%;
   }
 
   span {

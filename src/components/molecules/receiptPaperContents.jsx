@@ -42,6 +42,41 @@ const testData = [
     isDone: true,
     timer: 60,
   },
+  {
+    id: "jay@acount.com",
+    task: "Sprint Homework",
+    date: "20220826",
+    isDone: true,
+    timer: 180,
+  },
+  {
+    id: "jay@acount.com",
+    task: "Listening Music",
+    date: "20220826",
+    isDone: true,
+    timer: 25,
+  },
+  {
+    id: "jay@acount.com",
+    task: "Work out",
+    date: "20220826",
+    isDone: true,
+    timer: 80,
+  },
+  {
+    id: "jay@acount.com",
+    task: "Drawing",
+    date: "20220826",
+    isDone: true,
+    timer: 70,
+  },
+  {
+    id: "jay@acount.com",
+    task: "Test Something",
+    date: "20220826",
+    isDone: true,
+    timer: 60,
+  },
 ];
 
 export function ReceiptPaperContents() {
@@ -91,7 +126,6 @@ const Center = styled.div`
 
 const Paper = styled(Center)`
   width: 360px;
-  //height: 600px; //임시
   box-sizing: border-box;
   padding: 20px;
   background-color: white;
