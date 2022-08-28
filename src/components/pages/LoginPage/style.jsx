@@ -26,7 +26,7 @@ export const H1 = styled.h1`
 export const Header = styled.header`
   width: 100%;
   display: flex;
-  margin-top: 2.75rem;
+  margin-top: 5.5rem;
   flex-direction: row;
 `;
 
