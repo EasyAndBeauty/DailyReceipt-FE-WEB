@@ -1,17 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { TimerImage } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faClose,
+  faPencil,
+  faSquareCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import { TimerImage } from "components";
+import { POMODORO_TIME } from "constants";
 import styled, { css } from "styled-components";
 
+/**
+ * Todo Item
+ *
+ * tood을 보여주는 컴포넌트 입니다
+ * todo의 변경점을 useDataFetch hook으로 넘겨 반영합니다.
+ *
+ * @param {*} param0
+ * @returns
+ */
 const TodoItem = ({ todo, onRemove, onEdit }) => {
+  const [isEditing, setIsEditing] = useState(true); // 편집 여부
+  const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
-  const [count, setCount] = useState(25);
-  const { task, isDate } = todo;
+  const [count, setCount] = useState(POMODORO_TIME);
+  const { task, isDone } = todo;
 
-  const [done, setDone] = useState(isDate);
+  const [done, setDone] = useState(isDone);
 
-  const handleClickCheckCircleToggle = () => setDone(!done);
+  const handleClickCheckCircleToggle = () => {
+    onEdit({ ...todo, isDone: !done }, todo.id);
+    setDone(!done);
+  };
 
   // TODO : 로직 구현 예정
   const handleClickTimerButton = () => {
@@ -19,12 +39,18 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
   };
   const handleClickToDoRemoveButton = () => onRemove(todo.id);
   const handleClickToDoEditButton = () => {
-    onEdit({ ...todo, isDone: true }, todo.id);
+    setIsEditing(!isEditing);
+    onEdit({ ...todo, task: taskValue }, todo.id);
+  };
+
+  const onChangeTaskValue = (e) => {
+    setTaskValue(e.target.value);
   };
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit({ ...todo, timer: 25 - count }, todo.id);
+      onEdit({ ...todo, timer: todo.timer + POMODORO_TIME - count }, todo.id);
+      setCount(POMODORO_TIME);
     }
   }, [isRunning]);
   return (
@@ -32,12 +58,14 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
       <CheckCircle done={done} onClick={handleClickCheckCircleToggle}>
         {done && `✔️`}
       </CheckCircle>
-
-      <TodoItemText done={done}>
-        <TodoItemText>{task}</TodoItemText>
-      </TodoItemText>
+      <TodoItemText
+        defaultValue={taskValue || ""}
+        disabled={isEditing}
+        onChange={onChangeTaskValue}
+      />
       <TimerButton onClick={handleClickToDoEditButton}>
-        <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+        {isEditing && <FontAwesomeIcon icon={faPencil} />}
+        {!isEditing && <FontAwesomeIcon icon={faSquareCheck} />}
       </TimerButton>
       <TimerButton onClick={handleClickTimerButton}>
         {/* 타이머 기능 추가되면 삭제 예정 */}
@@ -49,10 +77,10 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
             setCount={setCount}
           />
         )}
-        {!isRunning && <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>}
+        {!isRunning && <FontAwesomeIcon icon={faClock} />}
       </TimerButton>
       <TimerButton onClick={handleClickToDoRemoveButton}>
-        <FontAwesomeIcon icon={faClose}></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faClose} />
       </TimerButton>
     </TodoItemBlock>
   );
@@ -82,10 +110,14 @@ const CheckCircle = styled.div`
     `}
 `;
 
-const TodoItemText = styled.div`
+const TodoItemText = styled.input`
   flex: 1;
   font-size: 1rem;
   color: #495057;
+  outline: none;
+  border: none;
+  background-color: transparent;
+
   ${(props) =>
     props.done &&
     css`
