@@ -1,5 +1,30 @@
-import { TempComponent } from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
-
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBackspace } from "@fortawesome/free-solid-svg-icons";
+import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
+import ReceiptImg from "assets/images/receipt_img.png";
+import * as S from "./style";
 export function LoginPage() {
-  return <TempComponent>LoginPage</TempComponent>;
+  const navigate = useNavigate();
+  const onClickBack = () => {
+    navigate(-1);
+  };
+
+  return (
+    <S.Container>
+      <S.Header>
+        <FontAwesomeIcon
+          onClick={onClickBack}
+          icon={faBackspace}
+          size="2x"
+          style={{ marginLeft: "16px" }}
+        />
+      </S.Header>
+      <S.Img src={ReceiptImg} alt="receipt" />
+      <S.H1>당신의 영수증을 저장 해 보세요!</S.H1>
+      <button>
+        <img src={KaKaoLogin} alt="카카오 로그인" />
+      </button>
+    </S.Container>
+  );
 }

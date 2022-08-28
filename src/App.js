@@ -8,6 +8,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/checkout" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route
         path="*"
         element={
