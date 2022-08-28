@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
 export const MyReceiptContainer = styled.section`
+  box-sizing: border-box;
   position: relative;
-  padding: 2rem;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  padding: 2.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: scroll;
 `;
 
 export const HeaderContainer = styled.header`
@@ -18,10 +23,9 @@ export const MainText = styled.p`
 `;
 
 export const MyReceiptSeeAll = styled.div`
-  margin-bottom: 1rem;
   display: flex;
-  width: 30rem;
-  height: 60%;
+  width: 20rem;
+  margin-bottom: 1rem;
 `;
 
 export const ReceiptImg = styled.img`
@@ -30,8 +34,10 @@ export const ReceiptImg = styled.img`
   height: 100%;
 `;
 export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  text-align: center;
 `;
 
 export const Button = styled.button`

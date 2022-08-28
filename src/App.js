@@ -4,7 +4,7 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
-  MyReceitp,
+  MyReceipt,
 } from "components";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/checkout" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
-      <Route path="/myreceitp" element={<MyReceitp />} />
+      <Route path="/myreceipt" element={<MyReceipt />} />
       <Route
         path="*"
         element={

@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./style";
 import ReceiptDemeImage from "assets/images/receipt.png";
 
-export const MyReceitp = () => {
+export const MyReceipt = () => {
   return (
     <S.MyReceiptContainer>
       <S.HeaderContainer>
