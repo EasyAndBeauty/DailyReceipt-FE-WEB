@@ -4,6 +4,7 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
+  MyReceipt,
   AuthPage,
 } from "components";
 
@@ -12,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<TodoPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/checkout" element={<ReceiptPage />} />
+      <Route path="/receipt" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/auth/kakao/callback" element={<AuthPage />} />

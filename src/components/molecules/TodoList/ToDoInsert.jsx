@@ -13,26 +13,25 @@ const ToDoInsert = ({ onInsert }) => {
       e.preventDefault();
       onInsert(todoInput);
       setTodoInput("");
-      console.log("POST / 작성완료");
     }
   };
 
   return (
-    <InsertForm>
+    <InsertForm onClick={onClickTodoItemCreateButton}>
       <Input
         autoFocus
         placeholder="add a new task"
         onChange={handleChangeContentValue}
         value={todoInput}
       />
-      <InputButton onClick={onClickTodoItemCreateButton}>✔️</InputButton>
+      <InputButton>✔️</InputButton>
     </InsertForm>
   );
 };
 
 export default ToDoInsert;
 
-const InsertForm = styled.div`
+const InsertForm = styled.form`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
@@ -43,6 +42,7 @@ const Input = styled.input`
   padding: 12px;
   width: 100%;
   font-size: 16px;
+  border-radius: 0;
   border: none;
   border-bottom: 2px solid #dee2e6;
   outline: none;
