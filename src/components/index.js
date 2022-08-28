@@ -11,6 +11,7 @@ export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
+<<<<<<< HEAD
 export { TimerImage } from "./atoms/TimerImage";
 //ReceiptPage
 export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
@@ -21,6 +22,10 @@ export { ReceiptQuotes } from "./atoms/receiptQuotes";
  * molecules
  */
 //TodoPage
+=======
+export { BackBtn } from "./atoms/BackBtn";
+// molecules
+>>>>>>> LoginPage
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { TodoList } from "./molecules/TodoList";
@@ -43,3 +48,4 @@ export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
 export { UserPage } from "./pages/UserPage";
+export { AuthPage } from "./pages/AuthPage";

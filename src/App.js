@@ -4,7 +4,11 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
+<<<<<<< HEAD
   MyReceipt,
+=======
+  AuthPage,
+>>>>>>> LoginPage
 } from "components";
 
 function App() {
@@ -14,6 +18,8 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/receipt" element={<ReceiptPage />} />
       <Route path="/my" element={<UserPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/kakao/callback" element={<AuthPage />} />
       <Route
         path="*"
         element={
