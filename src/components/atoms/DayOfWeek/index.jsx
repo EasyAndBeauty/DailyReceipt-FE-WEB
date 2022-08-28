@@ -36,8 +36,8 @@ export function DayOfWeek({
       isActive={checkIsActive(dayOfweek, selectedDayOfWeek)}
       onClick={() => onClick(dateInfo)}
     >
-      <S.Text>{findDayOfWeek(dayOfweek)}</S.Text>
       <S.Text>{date}</S.Text>
+      <S.Text>{findDayOfWeek(dayOfweek)}</S.Text>
     </S.Container>
   );
 }

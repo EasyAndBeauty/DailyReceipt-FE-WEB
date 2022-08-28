@@ -1,8 +1,15 @@
 import { useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { TodoHeader, Week, SquareBtn, TodoList } from "components";
+import {
+  TodoHeader,
+  Week,
+  SquareBtn,
+  TodoList,
+  ReceiptPaperTriangle,
+} from "components";
 import useDataFetch from "hooks/useDataFetch";
 import * as S from "./style";
+
 /**
  * TodoPage component
  *
@@ -60,10 +67,24 @@ export function TodoPage() {
             onEdit={putLocalData}
           />
         </S.Content>
+        <S.Bottom>
+          <div>
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+          </div>
+          <SquareBtn
+            onClick={onSubmitTodoList}
+            children={"Print the Receipt"}
+          />
+        </S.Bottom>
       </S.Container>
-      <S.Bottom>
-        <SquareBtn onClick={onSubmitTodoList} children={"Give me the check!"} />
-      </S.Bottom>
     </Fragment>
   );
 }

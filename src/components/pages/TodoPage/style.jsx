@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  position: relative;
+  //position: relative;
   width: 100%;
-  margin-top: 2.75rem;
-  padding-bottom: 2.75rem;
+  //margin-top: 2.75rem;
+  //padding-bottom: 2.75rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   overflow-y: scroll;
+  box-sizing: border-box;
 `;
 
 export const Content = styled.section`
@@ -18,6 +19,7 @@ export const Content = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  overflow-y: auto;
 `;
 
 export const Bottom = styled.div`
@@ -25,7 +27,15 @@ export const Bottom = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   position: fixed;
-  bottom: 8px;
+  bottom: 0;
+  z-index: 10;
+  //justify-content: flex-start;
+
+  div {
+    //삼각형 모음
+    display: flex;
+    position: relative;
+    top: 2px;
+  }
 `;

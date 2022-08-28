@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const ToDoInsert = ({ onInsert }) => {
   const [todoInput, setTodoInput] = useState("");
@@ -24,7 +26,9 @@ const ToDoInsert = ({ onInsert }) => {
         onChange={handleChangeContentValue}
         value={todoInput}
       />
-      <InputButton onClick={onClickTodoItemCreateButton}>✔️</InputButton>
+      <InputButton onClick={onClickTodoItemCreateButton}>
+        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />️
+      </InputButton>
     </InsertForm>
   );
 };
@@ -39,24 +43,21 @@ const InsertForm = styled.div`
 
 const Input = styled.input`
   margin-right: 10px;
-  padding: 12px;
+  padding: 8px;
   width: 100%;
-  font-size: 16px;
-  border-radius: 0;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  color: ${(props) => props.theme.wt};
   border: none;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 3px solid ${(props) => props.theme.wt};
   outline: none;
+
   &:focus {
-    border-bottom: 2px solid #000000;
+    border-bottom-color: ${(props) => props.theme.green};
   }
 `;
 
-const InputButton = styled.button`
+const InputButton = styled.div`
+  transform: scale(1.5);
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-
-  &:hover {
-    background-color: #a1a8b0;
-  }
 `;

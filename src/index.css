@@ -1,7 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Gothic+A1&display=swap');
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Courier Prime, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
@@ -9,14 +10,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* 레이아웃 잡기용 */
-  background-color: black;
+  background-color: #191919;
   width: 100vw;
   height: 100vh;
-  overflow: auto;
-  display: table;
+  overflow-y: auto;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 #root {
@@ -24,7 +26,7 @@ body {
   display: table-row;
   width: 390px;
   align-items: center;
-  background-color: white;
+  background-color: #191919;
 }
 
 @media screen and (max-width: 768px) {
@@ -35,7 +37,7 @@ body {
 
   body {
     width: 100vw;
-    background-color: red;
+    background-color: #191919;
   }
 }
 
