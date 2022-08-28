@@ -26,6 +26,5 @@ export const Bottom = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    position: fixed;
     bottom: 8px;
 `;

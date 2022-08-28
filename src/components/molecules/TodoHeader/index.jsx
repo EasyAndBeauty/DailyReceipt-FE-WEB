@@ -13,11 +13,12 @@ import { useNavigate } from "react-router-dom";
  */
 
 export function TodoHeader({ month }) {
+    const navigate = useNavigate();
     return (
         <S.Container>
             <S.Btn
                 onClick={() => {
-                    console.log("MyReceipt으로 갑니다.");
+                    navigate("/my");
                 }}
             >
                 <FontAwesomeIcon icon={faReceipt} size="2x"></FontAwesomeIcon>
@@ -25,7 +26,7 @@ export function TodoHeader({ month }) {
             <HeaderText>{month}</HeaderText>
             <S.Btn
                 onClick={() => {
-                    console.log("MyReceipt으로 갑니다.");
+                    navigate("/my");
                 }}
             >
                 <FontAwesomeIcon
