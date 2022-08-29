@@ -35,7 +35,6 @@ export function LoginPage() {
         </div>
       </S.H1>
       <S.Btn onClick={onLogin}>
-        {/*<img src={KaKaoLogin} alt="카카오 로그인" />*/}
         <div>
           Login with <span>Kakao</span>
         </div>

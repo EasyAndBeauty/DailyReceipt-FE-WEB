@@ -6,8 +6,13 @@ export const Container = styled.main`
   height: 100%;
   display: flex;
   flex-direction: column;
-
   box-sizing: border-box;
+
+  @media screen and (min-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -88,10 +93,13 @@ export const Background = styled.div`
 
 export const Img = styled.img`
   src: ${(props) => props.src};
-  //position: ;
   transform: translateY(-300px) scale(0.8) rotate(-30deg);
 
-  @media screen and (min-width: 768px) {
-    transform: scale(0.8) rotate(-30deg);
+  @media screen and (min-width: 600px) {
+    transform: scale(1.2) rotate(-45deg);
+  }
+
+  @media screen and (min-width: 1900px) {
+    transform: scale(1.8) rotate(-45deg);
   }
 `;
