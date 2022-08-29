@@ -9,7 +9,6 @@ import {
 export function ReceiptPaperContents({ todos }) {
   const line = "-----------------------------------";
   let timerTotal = 0;
-
   return (
     <Paper>
       <Title>RECEIPT</Title>

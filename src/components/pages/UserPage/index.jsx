@@ -1,5 +1,27 @@
-import { TempComponent} from "components"; // 절대 경로를 설정했기때문에 폴더 이름만 넣어줘도 된다 (현재 경로의 의미 : src 밑에 components에서 파일을 가져온다는 뜻)
-import { MyReceipt} from "components/molecules/MyReceipt/index";
-export function UserPage() {
-  return <MyReceipt></MyReceipt>
-}
+import React, { useState, useEffect, useContext } from "react";
+import * as S from "./style";
+import AtuhContext from "store/auth-context";
+import { getUserInfo } from "controllers/userController";
+import { MyHeader } from "components/molecules/MyHeader";
+import { MySection } from "components/organisms/MySection";
+import { MyFooter } from "components/molecules/MyFooter";
+export const UserPage = () => {
+  const [userInfo, setUserInfo] = useState(null);
+  const authCtx = useContext(AtuhContext);
+
+  const showUserInfo = async () => {
+    const { nickname } = await getUserInfo(authCtx.token);
+    setUserInfo(nickname);
+  };
+
+  useEffect(() => {
+    showUserInfo();
+  }, []);
+  return (
+    <S.MyReceiptContainer>
+      <MyHeader userInfo={userInfo} />
+      <MySection />
+      <MyFooter />
+    </S.MyReceiptContainer>
+  );
+};

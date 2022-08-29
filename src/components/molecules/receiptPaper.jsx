@@ -2,6 +2,8 @@ import { ReceiptPaperTriangle, ReceiptPaperContents } from "components";
 import styled from "styled-components";
 
 export function ReceiptPaper({ todos }) {
+  console.log(todos);
+
   return (
     <Container id={"receipt"}>
       <Texture
