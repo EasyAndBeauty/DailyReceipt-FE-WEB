@@ -18,6 +18,7 @@ export const getTodoList = async (user_id, date = FORMATTED_TODAY, req) => {
 
 export const postTodo = async (user_id, todo, req) => {
   try {
+    console.log(user_id, todo);
     const response = await client.post(`/v2/todo/${user_id}`, todo);
 
     return response.data;
@@ -29,6 +30,7 @@ export const postTodo = async (user_id, todo, req) => {
 
 export const updateTodo = async (id, todo, req) => {
   try {
+    console.log(id, todo);
     const response = await client.put(`/v1/todo/${id}`, todo);
 
     return response.data;

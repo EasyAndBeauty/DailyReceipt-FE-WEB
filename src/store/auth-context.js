@@ -60,12 +60,12 @@ export const AuthContextProvider = (props) => {
 
   // login 할때는 token을 넣자
   const loginHandler = (token, expirationTime) => {
-    const { id, email, nickname } = token;
-    setToken(email);
+    const { id, nickname } = token;
+    setToken(id);
     localStorage.setItem(
       "token",
       JSON.stringify({
-        [email]: nickname,
+        [id]: nickname,
         expires: expirationTime,
       })
     );

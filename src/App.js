@@ -24,18 +24,9 @@ function App() {
         <>
           <Route path="/receipt" element={<ReceiptPage />} />
           <Route path="/my" element={<UserPage />} />
-          <Route path="/login" element={<LoginPage />} />
         </>
       )}
-      <Route
-        path="*"
-        element={
-          <div>
-            <h1>404</h1>
-            <p>Page not found</p>
-          </div>
-        }
-      />
+      <Route path="*" element={<LoginPage />} />
     </Routes>
   );
 }

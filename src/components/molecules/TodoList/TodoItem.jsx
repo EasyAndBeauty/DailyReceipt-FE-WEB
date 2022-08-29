@@ -58,7 +58,9 @@ const TodoItem = ({
   const handleClickToDoRemoveButton = () => onRemove(todo.id);
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
-    onEdit({ ...todo, task: taskValue }, todo.id);
+    if (isEditing === false) {
+      onEdit(todo.id, { ...todo, task: taskValue });
+    }
   };
 
   const onChangeTaskValue = (e) => {
@@ -67,7 +69,7 @@ const TodoItem = ({
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit({ ...todo, timer: todo.timer + POMODORO_TIME - count }, todo.id);
+      onEdit(todo.id, { ...todo, timer: todo.timer + POMODORO_TIME - count });
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);
