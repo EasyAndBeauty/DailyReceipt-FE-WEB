@@ -2,8 +2,8 @@
 
 ## 소개
 
-**Print your time**
-Todo List, Pomodoro Timer, Daily Receipt.
+##**Print your time**
+##Todo List, Pomodoro Timer, Daily Receipt.
 
 **Daily Receipt**는 당신의 시간을 정산해드리는 애플리케이션입니다.
 
