@@ -17,7 +17,7 @@ export function ReceiptPaperContents({ todos }) {
       <TodoContainer>
         {todos.map((todo, index) => {
           timerTotal += todo.timer;
-          return <ReceiptTodo key={todo.id + index}>{todo}</ReceiptTodo>;
+          return <ReceiptTodo key={todo.todoId + index}>{todo}</ReceiptTodo>;
         })}
       </TodoContainer>
       <div>{line}</div>
