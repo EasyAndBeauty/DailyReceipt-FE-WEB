@@ -21,6 +21,7 @@ export const MyReceipt = () => {
   useEffect(() => {
     showUserInfo();
   }, []);
+
   return (
     <S.MyReceiptContainer>
       <S.HeaderContainer>

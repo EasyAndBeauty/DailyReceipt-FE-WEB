@@ -1,8 +1,6 @@
 import { BackBtn } from "components";
-import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
-import ReceiptImg from "assets/images/receipt_img.png";
+import ReceiptImg from "assets/images/loginpage_back.png";
 import * as S from "./style";
-import { useEffect } from "react";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
 
 /**
@@ -21,13 +19,26 @@ export function LoginPage() {
 
   return (
     <S.Container>
+      <S.Background>
+        <S.Img src={ReceiptImg} alt="receipt" />
+        <div></div>
+      </S.Background>
       <S.Header>
         <BackBtn />
       </S.Header>
-      <S.Img src={ReceiptImg} alt="receipt" />
-      <S.H1>우리 하루 영수증 써주셍..(텍스트 들어갈곳.. 아님 이미지..?)</S.H1>
+      <S.H1>
+        <div>Daily Receipt</div>
+        <div>
+          당신의 하루를
+          <br />
+          영수증에 담아드려요.
+        </div>
+      </S.H1>
       <S.Btn onClick={onLogin}>
-        <img src={KaKaoLogin} alt="카카오 로그인" />
+        {/*<img src={KaKaoLogin} alt="카카오 로그인" />*/}
+        <div>
+          Login with <span>Kakao</span>
+        </div>
       </S.Btn>
     </S.Container>
   );
