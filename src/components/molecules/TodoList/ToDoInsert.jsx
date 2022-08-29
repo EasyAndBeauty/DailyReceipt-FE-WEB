@@ -50,6 +50,7 @@ const Input = styled.input`
   color: ${(props) => props.theme.wt};
   border: none;
   border-bottom: 3px solid ${(props) => props.theme.wt};
+  border-radius: 0;
   outline: none;
 
   &:focus {

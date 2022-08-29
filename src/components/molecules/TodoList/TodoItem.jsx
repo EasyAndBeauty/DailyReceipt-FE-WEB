@@ -119,6 +119,7 @@ const TodoItemText = styled.input`
   outline: none;
   border: none;
   border-bottom: 1px solid ${(props) => props.theme.wt};
+  border-radius: 0;
   background-color: transparent;
 
   &:disabled {

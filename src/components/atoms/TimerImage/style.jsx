@@ -7,6 +7,7 @@ export const TimerContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  top: -1px;
 `;
 
 export const TimerImage = styled.img`
@@ -20,6 +21,6 @@ export const CountNumber = styled.span`
   top: 50%;
   left: 50%;
   color: ${(props) => props.theme.gray};
-  transform: translate(-50%, -55%);
+  transform: translate(-50%, -50%);
   font-size: 0.75rem;
 `;
