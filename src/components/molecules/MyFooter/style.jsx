@@ -7,16 +7,24 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-export const Button = styled.button`
+export const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.gray};
+  border-radius: 20px 20px 0 0;
+  color: ${(props) => props.theme.bk};
+  font-size: 1rem;
+  font-family: "Courier Prime", monospace;
   text-align: center;
-  width: 300px;
-  height: 80px;
-  text-align: center;
-  width: 300px;
-  height: 80px;
+  height: 66px;
   width: 100%;
-  position: relative;
+  position: fixed;
   margin-top: 3rem;
   bottom: 0;
-  border-radius: 0.5rem;
+
+  div {
+    position: relative;
+    top: -2px;
+  }
 `;

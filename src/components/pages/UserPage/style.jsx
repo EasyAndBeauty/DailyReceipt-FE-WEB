@@ -4,16 +4,18 @@ export const MyReceiptContainer = styled.section`
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  height: 100%;
   padding: 2.75rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  box-sizing: border-box;
 `;
 
-export const HeaderContainer = styled.header`
-  margin-bottom: 1rem;
-`;
+// export const HeaderContainer = styled.header`
+//   margin-bottom: 1rem;
+// `;
 
 export const MainText = styled.p`
   margin-bottom: 0.5rem;

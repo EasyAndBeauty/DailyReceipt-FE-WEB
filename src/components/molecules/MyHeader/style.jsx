@@ -12,20 +12,28 @@ export const MyReceiptContainer = styled.section`
 `;
 
 export const HeaderContainer = styled.header`
-  margin-bottom: 1rem;
+  margin-left: -16px;
+  margin-top: -44px;
+
+  > div:nth-child(2) {
+    margin-left: 32px;
+    margin-top: 48px;
+  }
 `;
 
 export const MainText = styled.p`
   margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
   color: white;
 `;
 
 export const SubText = styled.p`
-  margin-bottom: 0.5rem;
+  margin-top: 16px;
+  margin-bottom: 16px;
   font-size: 1.25rem;
   color: white;
+  line-height: 24px;
 `;
 
 export const MyReceiptSeeAll = styled.div`

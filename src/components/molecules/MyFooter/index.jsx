@@ -14,7 +14,7 @@ export const MyFooter = () => {
 
   return (
     <S.ButtonContainer>
-      <S.Button onClick={onClick}>로그아웃</S.Button>
+      <S.Button onClick={onClick}>Logout</S.Button>
     </S.ButtonContainer>
   );
 };

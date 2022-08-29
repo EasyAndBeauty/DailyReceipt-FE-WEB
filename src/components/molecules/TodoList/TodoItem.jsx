@@ -127,7 +127,7 @@ const CheckCircle = styled.div`
   cursor: pointer;
   background-color: ${(props) =>
     props.done ? props.theme.green : props.theme.bk};
-  border-color: ${(props) => (props.done ? props.theme.gray : props.theme.wt)};
+  border-color: ${(props) => props.theme.wt};
 `;
 
 const TodoItemText = styled.input`

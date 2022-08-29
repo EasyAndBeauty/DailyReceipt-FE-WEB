@@ -24,14 +24,16 @@ export const MySection = () => {
       <ScrollMenu>
         {allTodos.map((todos) => {
           return (
-            <ReceiptPaper
-              onClick={() => {
-                console.log("영수증 작성");
-                navigate(`/receipt`, { state: { todos } });
-              }}
-              todos={todos}
-              key={uuidv4()}
-            />
+            <PaperContainer>
+              <ReceiptPaper
+                onClick={() => {
+                  console.log("영수증 작성");
+                  navigate(`/receipt`, { state: { todos } });
+                }}
+                todos={todos}
+                key={uuidv4()}
+              />
+            </PaperContainer>
           );
         })}
       </ScrollMenu>
@@ -39,14 +41,22 @@ export const MySection = () => {
   );
 };
 
+const PaperContainer = styled.div`
+  transform: scale(0.5);
+  margin-left: -300px;
+  margin-top: -100px;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  padding: 16px;
 
   .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
     display: none;
   }
+
   .react-horizontal-scrolling-menu--scroll-container {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */

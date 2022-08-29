@@ -21,7 +21,8 @@ export const UserPage = () => {
     <S.MyReceiptContainer>
       <MyHeader userInfo={userInfo} />
       <MySection />
-      {authCtx.isLoggedIn && <MyFooter />}
+      {/*{authCtx.isLoggedIn && <MyFooter />}*/}
+      <MyFooter />
     </S.MyReceiptContainer>
   );
 };
