@@ -72,7 +72,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #1a1a1a;
+  background-color: ${(props) => props.theme.bk};
 `;
 
 const BackIconContainer = styled.div`
@@ -130,6 +130,6 @@ const IconContainer = styled.div`
   span {
     font-family: "Courier Prime", monospace;
     font-size: 16px;
-    color: #fcfcfc;
+    color: #efefef;
   }
 `;

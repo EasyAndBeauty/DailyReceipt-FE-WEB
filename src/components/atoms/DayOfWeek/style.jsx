@@ -11,7 +11,7 @@ export const Container = styled.div`
   border-radius: 0.75rem;
   //padding: 0.5rem;
   color: ${(props) => props.theme.wt};
-  ${(props) => props.isActive && "background-color: #fcfcfc; color: #191919;"}
+  ${(props) => props.isActive && "background-color: #efefef; color: #191919;"}
 `;
 
 export const Text = styled.p`

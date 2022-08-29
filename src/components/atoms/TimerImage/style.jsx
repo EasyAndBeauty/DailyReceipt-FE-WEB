@@ -10,10 +10,10 @@ export const TimerContainer = styled.div`
   top: -1px;
 `;
 
-export const TimerImage = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+// export const TimerImage = styled.img`
+//   width: 100%;
+//   height: 100%;
+// `;
 
 export const CountNumber = styled.span`
   position: absolute;

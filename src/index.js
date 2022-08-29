@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   bk: "#191919",
-  wt: "#fcfcfc",
+  wt: "#efefef",
   gray: "#aaaaaa",
   green: "#81c944",
 };
