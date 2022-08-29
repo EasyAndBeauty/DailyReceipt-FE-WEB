@@ -27,6 +27,7 @@ const TodoItem = ({
   setRunningTimer,
   resetRunningTimer,
 }) => {
+  // console.log("todo", todo);
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
@@ -36,29 +37,29 @@ const TodoItem = ({
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
-    onEdit({ ...todo, isDone: !done }, todo.id);
+    onEdit(todo.todoId, { ...todo, isDone: !done });
     setDone(!done);
   };
 
   const handleClickTimerButton = () => {
-    if (hasRunningTimer === todo.id) {
+    if (hasRunningTimer === todo.todoId) {
       setIsRunning(!isRunning);
       resetRunningTimer();
-
       return;
     }
 
     if (!hasRunningTimer) {
       setIsRunning(!isRunning);
-      setRunningTimer(todo.id);
-
+      setRunningTimer(todo.todoId);
       return;
     }
   };
-  const handleClickToDoRemoveButton = () => onRemove(todo.id);
+  const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
-    onEdit({ ...todo, task: taskValue }, todo.id);
+    if (isEditing === false) {
+      onEdit(todo.todoId, { ...todo, task: taskValue });
+    }
   };
 
   const onChangeTaskValue = (e) => {
@@ -67,7 +68,7 @@ const TodoItem = ({
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit({ ...todo, timer: todo.timer + POMODORO_TIME - count }, todo.id);
+      onEdit(todo.id, { ...todo, timer: todo.timer + POMODORO_TIME - count });
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);

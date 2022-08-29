@@ -22,11 +22,12 @@ export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalOn, setModalOn] = useState(false);
-  const { putLocalData, postLocalData, deleteLocalData } = useDataFetch({
-    todos,
-    setTodos,
-    date: selectedDate,
-  });
+  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
+    useDataFetch({
+      todos,
+      setTodos,
+      date: selectedDate,
+    });
 
   const navigate = useNavigate();
 
@@ -65,9 +66,9 @@ export function TodoPage() {
         <S.Content>
           <TodoList
             todos={todos}
-            onInsert={postLocalData}
+            onInsert={postDataLogic}
             onRemove={deleteLocalData}
-            onEdit={putLocalData}
+            onEdit={putDataLogic}
           />
         </S.Content>
       </S.Container>

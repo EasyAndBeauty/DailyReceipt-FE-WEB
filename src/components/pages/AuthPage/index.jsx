@@ -16,7 +16,10 @@ export function AuthPage() {
       .then((res) => res.json())
       .then((json) => {
         const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
-        authCtx.login(json, expirationTime);
+        console.log(json);
+        const { id, email, nickname } = json;
+
+        authCtx.login({ id, nickname }, expirationTime);
         navigate("/");
       });
   }, []);
