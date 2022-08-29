@@ -36,29 +36,29 @@ const TodoItem = ({
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
-    onEdit({ ...todo, isDone: !done }, todo.id);
+    onEdit(todo.todoId, { ...todo, isDone: !done });
     setDone(!done);
   };
 
   const handleClickTimerButton = () => {
-    if (hasRunningTimer === todo.id) {
+    if (hasRunningTimer === todo.todoId) {
       setIsRunning(!isRunning);
       resetRunningTimer();
-
       return;
     }
 
     if (!hasRunningTimer) {
       setIsRunning(!isRunning);
-      setRunningTimer(todo.id);
-
+      setRunningTimer(todo.todoId);
       return;
     }
   };
-  const handleClickToDoRemoveButton = () => onRemove(todo.id);
+  const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
-    onEdit({ ...todo, task: taskValue }, todo.id);
+    if (isEditing === false) {
+      onEdit(todo.todoId, { ...todo, task: taskValue });
+    }
   };
 
   const onChangeTaskValue = (e) => {
@@ -67,7 +67,10 @@ const TodoItem = ({
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit({ ...todo, timer: todo.timer + POMODORO_TIME - count }, todo.id);
+      onEdit(todo.todoId, {
+        ...todo,
+        timer: todo.timer + POMODORO_TIME - count,
+      });
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);
@@ -80,9 +83,9 @@ const TodoItem = ({
         onChange={onChangeTaskValue}
       />
       <ButtonContainer>
-        <TimerButton onClick={handleClickToDoRemoveButton}>
+        {/* <TimerButton onClick={handleClickToDoRemoveButton}>
           <FontAwesomeIcon icon={faClose} color={"#a65c5c"} />
-        </TimerButton>
+        </TimerButton> */}
         <TimerButton onClick={handleClickToDoEditButton}>
           {isEditing && <FontAwesomeIcon icon={faPencil} color={"#aaaaaa"} />}
           {!isEditing && (
@@ -135,6 +138,7 @@ const TodoItemText = styled.input`
   outline: none;
   border: none;
   border-bottom: 1px solid ${(props) => props.theme.wt};
+  border-radius: 0;
   background-color: transparent;
 
   &:disabled {

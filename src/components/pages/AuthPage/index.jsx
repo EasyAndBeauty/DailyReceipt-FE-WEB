@@ -1,56 +1,37 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Loading from "react-loading";
+import AtuhContext from "store/auth-context";
+import { ReactComponent as KakaoIcon } from "assets/kakao/KakaoTalk_logo.svg";
+import * as S from "./style";
+import { getKakaoToken } from "controllers/userController";
 
 export function AuthPage() {
+  const navigate = useNavigate();
+
   const code = new URL(window.location.href).searchParams.get("code");
 
-  const getAccessToken = async () => {
-    const response = await fetch(
-      `http://3.36.239.183:8080/auth/kakao/callback?code=${code}`
-    );
-    const json = await response.json();
-    console.log(json);
-    return json.access_token;
-  };
+  const authCtx = useContext(AtuhContext);
 
+  const getToken = async (code) => {
+    const token = await getKakaoToken(code);
+    const { id, email, nickname } = token;
+    const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+    authCtx.login({ id, nickname }, expirationTime);
+    navigate("/");
+  };
   useEffect(() => {
-    fetch(`http://3.36.239.183:8080/auth/kakao/callback?code=${code}`)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-      });
+    if (code) {
+      getToken(code);
+    }
   }, []);
 
-  const main = async () => {
-    if (code === null || code === "") {
-      alert("카카오에서 코드를 받는데 실패했습니다");
-      return;
-    } else {
-      await new Promise((resolve) => {
-        getKakaoTokenHandler(resolve, code.toString());
-      });
-      // await loadUserInfo(accessToken)
-    }
-  };
-
-  const getKakaoTokenHandler = async (resolve, code) => {
-    const url = "/oauth2/authorization/kakao";
-    await axios
-      .get(url, { params: { code } })
-      .then((res) => {
-        console.log("res: ", res);
-        resolve(res.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-        resolve(null);
-      });
-  };
-
   return (
-    <>
-      <div onClick={() => getAccessToken()}>{code}</div>
-      <h1>여긴 제 페이지</h1>
-    </>
+    <S.Container>
+      <S.ImageContainer>
+        <KakaoIcon />
+      </S.ImageContainer>
+      <Loading type="spin" color="#fae100" height={144} width={144} />
+    </S.Container>
   );
 }

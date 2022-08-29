@@ -9,4 +9,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   box-sizing: border-box;
+
+  @media screen and (min-width: 768px) {
+    max-width: 1000px;
+  }
 `;

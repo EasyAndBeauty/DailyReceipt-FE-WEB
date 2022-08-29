@@ -9,39 +9,36 @@ import {
 export function ReceiptPaperContents({ todos }) {
   const line = "-----------------------------------";
   let timerTotal = 0;
-
   return (
-    <>
-      <Paper>
-        <Title>RECEIPT</Title>
-        <ReceiptPaperInfo />
-        <div>{line}</div>
-        <TodoContainer>
-          {todos.map((todo, index) => {
-            timerTotal += todo.timer;
-            return <ReceiptTodo key={todo.id + index}>{todo}</ReceiptTodo>;
-          })}
-        </TodoContainer>
-        <div>{line}</div>
-        <TotalContainer>
-          <div>
-            <span>ITEM COUNT :</span>
-            <span>{todos.length}</span>
-          </div>
-          <div>
-            <span>TOTAL :</span>
-            <span>
-              {Math.floor(timerTotal / 60)}:{timerTotal % 60}
-            </span>
-          </div>
-        </TotalContainer>
-        <div>{line}</div>
-        <ReceiptQuotes />
-        <div>{line}</div>
-        <ReceiptBarcode />
-        <div>{line}</div>
-      </Paper>
-    </>
+    <Paper>
+      <Title>RECEIPT</Title>
+      <ReceiptPaperInfo />
+      <div>{line}</div>
+      <TodoContainer>
+        {todos.map((todo, index) => {
+          timerTotal += todo.timer;
+          return <ReceiptTodo key={todo.todoId + index}>{todo}</ReceiptTodo>;
+        })}
+      </TodoContainer>
+      <div>{line}</div>
+      <TotalContainer>
+        <div>
+          <span>ITEM COUNT :</span>
+          <span>{todos.length}</span>
+        </div>
+        <div>
+          <span>TOTAL :</span>
+          <span>
+            {Math.floor(timerTotal / 60)}:{timerTotal % 60}
+          </span>
+        </div>
+      </TotalContainer>
+      <div>{line}</div>
+      <ReceiptQuotes />
+      <div>{line}</div>
+      <ReceiptBarcode />
+      <div>{line}</div>
+    </Paper>
   );
 }
 
@@ -55,7 +52,7 @@ const Paper = styled(Center)`
   width: 360px;
   box-sizing: border-box;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.wt};
   font-size: 16px;
   font-family: "Courier Prime", "Gothic A1", monospace, sans-serif; //한글 폰트 추가하기
   letter-spacing: -0.5px;

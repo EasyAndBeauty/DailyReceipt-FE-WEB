@@ -14,7 +14,8 @@ const ToDoInsert = ({ onInsert }) => {
   const onClickTodoItemCreateButton = (e) => {
     if (todoInput.trim() !== "") {
       e.preventDefault();
-      onInsert(todoInput);
+      const todoItem = { task: todoInput, timer: 1, isDone: false };
+      onInsert(todoItem);
       setTodoInput("");
     }
   };
@@ -52,6 +53,7 @@ const Input = styled.input`
   color: ${(props) => props.theme.wt};
   border: none;
   border-bottom: 3px solid ${(props) => props.theme.wt};
+  border-radius: 0;
   outline: none;
 
   &:focus {

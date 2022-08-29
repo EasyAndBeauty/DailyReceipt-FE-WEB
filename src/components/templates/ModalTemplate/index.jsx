@@ -10,7 +10,6 @@ import * as S from "./style";
  */
 export function ModalTemplate({ children, onClick }) {
   const focusRef = useRef(null);
-  console.log(children, onClick);
 
   // 모달이 아닌 영역을 클릭했을 때 모달을 닫는다.
   const onLeaveFocusLogin = useCallback(
