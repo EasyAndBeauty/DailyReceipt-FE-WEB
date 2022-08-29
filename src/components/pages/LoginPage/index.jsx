@@ -3,6 +3,7 @@ import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
 import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./style";
 import { useEffect } from "react";
+import { KAKAO_LOGIN_URL } from "controllers/userController";
 
 /**
  * LoginPage
@@ -14,7 +15,9 @@ import { useEffect } from "react";
  */
 
 export function LoginPage() {
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=32ec32c9fce4020aa1b5c9df1cde4423&redirect_uri=http://localhost:3000/auth/kakao/callback&response_type=code`;
+  const onLogin = () => {
+    window.location.href = KAKAO_LOGIN_URL;
+  };
 
   return (
     <S.Container>
@@ -23,8 +26,7 @@ export function LoginPage() {
       </S.Header>
       <S.Img src={ReceiptImg} alt="receipt" />
       <S.H1>우리 하루 영수증 써주셍..(텍스트 들어갈곳.. 아님 이미지..?)</S.H1>
-      <S.Btn>
-        <a href={KAKAO_AUTH_URL}>안녕</a>
+      <S.Btn onClick={onLogin}>
         <img src={KaKaoLogin} alt="카카오 로그인" />
       </S.Btn>
     </S.Container>
