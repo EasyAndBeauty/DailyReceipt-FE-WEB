@@ -15,6 +15,7 @@ import { KAKAO_LOGIN_URL } from "controllers/userController";
 export function LoginPage() {
   const onLogin = () => {
     window.location.href = KAKAO_LOGIN_URL;
+    console.log("onLogin");
   };
 
   return (
