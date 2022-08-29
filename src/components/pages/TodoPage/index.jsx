@@ -1,5 +1,5 @@
-import { useState, Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, Fragment, useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   TodoHeader,
   Week,
@@ -8,8 +8,8 @@ import {
   ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
+import BaseContext from "store/base-context";
 import * as S from "./style";
-
 /**
  * TodoPage component
  *
@@ -19,20 +19,26 @@ import * as S from "./style";
  * @returns  {JSX.Element} - TodoPage의 layout을 담당하는 컴포넌트
  */
 export function TodoPage() {
-  // 예시입니다.
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalOn, setModalOn] = useState(false);
-  const { putLocalData, postLocalData, deleteLocalData } = useDataFetch({
-    todos,
-    setTodos,
-    date: selectedDate,
-  });
+  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
+    useDataFetch({
+      todos,
+      setTodos,
+      date: selectedDate,
+    });
+
+  const BaseCtx = useContext(BaseContext);
 
   const navigate = useNavigate();
 
   const onSubmitTodoList = () => {
-    navigate("/receipt", { state: { todos } });
+    if (!todos.length) {
+      alert("항목을 작성해주세요");
+    } else {
+      navigate("/receipt", { state: { todos } });
+    }
   };
 
   const onSelectDayOfWeek = (DateTime) => {
@@ -51,6 +57,10 @@ export function TodoPage() {
     return Date.getDay();
   };
 
+  useEffect(() => {
+    BaseCtx.setIsBase(true);
+  }, []);
+
   return (
     <Fragment>
       <S.Container>
@@ -62,29 +72,26 @@ export function TodoPage() {
         <S.Content>
           <TodoList
             todos={todos}
-            onInsert={postLocalData}
+            onInsert={postDataLogic}
             onRemove={deleteLocalData}
-            onEdit={putLocalData}
+            onEdit={putDataLogic}
           />
         </S.Content>
-        <S.Bottom>
-          <div>
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-          </div>
-          <SquareBtn
-            onClick={onSubmitTodoList}
-            children={"Print the Receipt"}
-          />
-        </S.Bottom>
       </S.Container>
+      <S.Bottom>
+        <div>
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle />
+        </div>
+        <SquareBtn onClick={onSubmitTodoList} children={"Print the Receipt"} />
+      </S.Bottom>
     </Fragment>
   );
 }

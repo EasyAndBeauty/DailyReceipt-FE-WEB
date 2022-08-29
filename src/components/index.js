@@ -18,6 +18,7 @@ export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/receiptBarcode";
 export { ReceiptQuotes } from "./atoms/receiptQuotes";
 
+export { BackBtn } from "./atoms/BackBtn";
 /**
  * molecules
  */
@@ -28,14 +29,10 @@ export { TodoList } from "./molecules/TodoList";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/receiptPaper";
-export { ReceiptTodo } from "./molecules/receiptTodo";
 export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
+export { ReceiptTodo } from "./molecules/receiptTodo";
 
-/**
- * * organisms
- */
-
-// Others
+// organisms
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
 // templates
@@ -48,3 +45,4 @@ export { TodoPage } from "./pages/TodoPage";
 export { LoginPage } from "./pages/LoginPage";
 export { ReceiptPage } from "./pages/ReceiptPage";
 export { UserPage } from "./pages/UserPage";
+export { AuthPage } from "./pages/AuthPage";

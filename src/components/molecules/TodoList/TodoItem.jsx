@@ -19,7 +19,15 @@ import styled, { css } from "styled-components";
  * @param {*} param0
  * @returns
  */
-const TodoItem = ({ todo, onRemove, onEdit }) => {
+const TodoItem = ({
+  todo,
+  onRemove,
+  onEdit,
+  hasRunningTimer,
+  setRunningTimer,
+  resetRunningTimer,
+}) => {
+  // console.log("todo", todo);
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
@@ -29,18 +37,29 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
-    onEdit({ ...todo, isDone: !done }, todo.id);
+    onEdit(todo.todoId, { ...todo, isDone: !done });
     setDone(!done);
   };
 
-  // TODO : 로직 구현 예정
   const handleClickTimerButton = () => {
-    setIsRunning(!isRunning);
+    if (hasRunningTimer === todo.todoId) {
+      setIsRunning(!isRunning);
+      resetRunningTimer();
+      return;
+    }
+
+    if (!hasRunningTimer) {
+      setIsRunning(!isRunning);
+      setRunningTimer(todo.todoId);
+      return;
+    }
   };
-  const handleClickToDoRemoveButton = () => onRemove(todo.id);
+  const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
-    onEdit({ ...todo, task: taskValue }, todo.id);
+    if (isEditing === false) {
+      onEdit(todo.todoId, { ...todo, task: taskValue });
+    }
   };
 
   const onChangeTaskValue = (e) => {
@@ -49,11 +68,10 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit({ ...todo, timer: todo.timer + POMODORO_TIME - count }, todo.id);
+      onEdit(todo.id, { ...todo, timer: todo.timer + POMODORO_TIME - count });
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);
-
   return (
     <TodoItemBlock>
       <CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
@@ -73,7 +91,6 @@ const TodoItem = ({ todo, onRemove, onEdit }) => {
           )}
         </TimerButton>
         <TimerButton onClick={handleClickTimerButton}>
-          {/* 타이머 기능 추가되면 삭제 예정 */}
           {isRunning && (
             <TimerImage
               isRunning={isRunning}

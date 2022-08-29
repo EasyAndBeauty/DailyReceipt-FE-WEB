@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
+import styled from "styled-components";
 
 const ToDoInsert = ({ onInsert }) => {
   const [todoInput, setTodoInput] = useState("");
@@ -13,7 +14,8 @@ const ToDoInsert = ({ onInsert }) => {
   const onClickTodoItemCreateButton = (e) => {
     if (todoInput.trim() !== "") {
       e.preventDefault();
-      onInsert(todoInput);
+      const todoItem = { task: todoInput, timer: 1, isDone: false };
+      onInsert(todoItem);
       setTodoInput("");
     }
   };
@@ -27,7 +29,8 @@ const ToDoInsert = ({ onInsert }) => {
         value={todoInput}
       />
       <InputButton onClick={onClickTodoItemCreateButton}>
-        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />️
+        {" "}
+        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />
       </InputButton>
     </InsertForm>
   );

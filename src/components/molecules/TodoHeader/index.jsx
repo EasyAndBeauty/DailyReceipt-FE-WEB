@@ -15,8 +15,10 @@ import { useState } from "react";
 
 export function TodoHeader({ month }) {
   const [modalOn, setModalOn] = useState(false);
-  const navigate = useNavigate();
-
+  let navigate = useNavigate();
+  function goPage(url) {
+    navigate(url);
+  }
   return (
     <S.Container>
       <HeaderText>{month}</HeaderText>

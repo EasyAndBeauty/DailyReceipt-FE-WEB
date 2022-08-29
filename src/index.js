@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
+import { AuthContextProvider } from "store/auth-context";
+import { BaseContextProvider } from "store/base-context";
 
 const theme = {
   bk: "#191919",
@@ -15,12 +17,14 @@ const theme = {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <AuthContextProvider>
+    <BaseContextProvider>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Reset />
         <App />
       </ThemeProvider>
     </BrowserRouter>
-  </React.StrictMode>
+    </BaseContextProvider>
+  </AuthContextProvider>
 );
