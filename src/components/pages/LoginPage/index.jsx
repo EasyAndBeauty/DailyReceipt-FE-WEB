@@ -1,10 +1,6 @@
 import { BackBtn } from "components";
-<<<<<<< HEAD
-import KaKaoLogin from "assets/kakao/kakao_login_medium_wide.png";
+import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
 import ReceiptImg from "assets/images/receipt_img.png";
-=======
-import ReceiptImg from "assets/images/loginpage_back.png";
->>>>>>> 8553fddff3ff29c74b383b159e4a08cd4040782f
 import * as S from "./style";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
 
