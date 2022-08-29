@@ -4,81 +4,25 @@ import { ReceiptPaper } from "components";
 import * as S from "./style";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 import styled, { css } from "styled-components";
 
 export const MySection = () => {
-  const [allTodos, setAllTodos] = useState([
-    {
-      "2022-08-11": [
-        {
-          date: "2022-08-11",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 1,
-        },
-        {
-          date: "2022-08-11",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 2,
-        },
-        {
-          date: "2022-08-11",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 3,
-        },
-      ],
-    },
-    {
-      "2022-08-12": [
-        {
-          date: "2022-08-12",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 4,
-        },
-        {
-          date: "2022-08-12",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 5,
-        },
-        {
-          date: "2022-08-12",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 6,
-        },
-      ],
-    },
-    {
-      "2022-08-13": [
-        {
-          date: "2022-08-13",
-          task: "영수증 작성",
-          isDone: false,
-          timer: 3,
-          todoId: 7,
-        },
-      ],
-    },
-  ]);
-  const navigate = useNavigate();
+  const week = new Array(7).fill(0).map((_, index) => {
+    const { $d } = dayjs().weekday(index);
+    return (
+      JSON.parse(localStorage.getItem(dayjs($d).format("YYYY-MM-DD"))) || []
+    );
+  });
 
-  const todos = allTodos.map((todos) => Object.values(todos));
-  const realTodos = todos.flat();
+  const [allTodos, setAllTodos] = useState(week);
+
+  const navigate = useNavigate();
 
   return (
     <Container>
       <ScrollMenu>
-        {realTodos.map((todos) => {
+        {allTodos.map((todos) => {
           return (
             <ReceiptPaper
               onClick={() => {
