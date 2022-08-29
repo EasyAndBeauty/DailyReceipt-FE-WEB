@@ -77,21 +77,25 @@ export function TodoPage() {
             onEdit={putDataLogic}
           />
         </S.Content>
+
+        <S.Bottom>
+          <div>
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+            <ReceiptPaperTriangle />
+          </div>
+          <SquareBtn
+            onClick={onSubmitTodoList}
+            children={"Print the Receipt"}
+          />
+        </S.Bottom>
       </S.Container>
-      <S.Bottom>
-        <div>
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-          <ReceiptPaperTriangle />
-        </div>
-        <SquareBtn onClick={onSubmitTodoList} children={"Print the Receipt"} />
-      </S.Bottom>
     </Fragment>
   );
 }

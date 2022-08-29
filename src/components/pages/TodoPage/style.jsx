@@ -37,10 +37,9 @@ export const Bottom = styled.div`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   z-index: 10;
   box-sizing: border-box;
-  //justify-content: flex-start;
 
   > div:first-child {
     //삼각형 모음
