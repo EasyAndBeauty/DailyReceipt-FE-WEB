@@ -2,7 +2,7 @@
 
 ## 소개
 
-**🖨⏱Print your time⏱🖨**
+### 🖨⏱Print your time**
 ### Todo List, Pomodoro Timer, Daily Receipt.
 
 **Daily Receipt**는 당신의 시간을 정산해드리는 애플리케이션입니다.
@@ -36,6 +36,7 @@
 
 - Archaiv Receipt
   로그인 한후에 완료한 항목들을 영수증으로 라이브러리처럼 관리해보세요.
+![vllo](https://user-images.githubusercontent.com/55748886/187217353-c9783313-f4b6-4ea1-93d0-52a359149cd3.gif)
 
 ## 개발 프로세스
 - 피그잼으로 기능단위별로 나누어 역할배분 및 개발
