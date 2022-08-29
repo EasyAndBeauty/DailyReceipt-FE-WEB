@@ -67,10 +67,8 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // post - 로그인 사용자 : 입력시 서버에 데이터를 보낸다 + localStorage에 저장한다.
   const postUseData = useCallback(
     async (newTodo) => {
-      const temp = { ...newTodo, timer: String(newTodo.timer), date: newDate };
-      const res = await postTodo(userId, temp);
-      const todoId = await res.json();
-      console.log(todoId);
+      const temp = { ...newTodo, date: newDate };
+      const todoId = await postTodo(userId, temp);
 
       const { task, timer, isDone } = newTodo;
 
@@ -123,21 +121,17 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
   const putUseData = useCallback(
     async (id, todo) => {
+      console.log(todo);
       const { task, timer, isDone, date } = todo;
       const req = { task, timer, isDone, newDate };
-      const res = await updateTodo(userId, req);
-      const data = res.json();
-
-      console.log(res, data);
-
+      const newTodo = await updateTodo(id, req);
+      console.log(newTodo);
       setTodos((pre) => {
         return pre.map((todo) => {
           if (todo.id === id) {
             return {
               ...todo,
-              task,
-              timer,
-              isDone,
+              ...newTodo,
             };
           }
           return todo;

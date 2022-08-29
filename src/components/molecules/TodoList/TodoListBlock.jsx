@@ -16,6 +16,8 @@ const TodoListBlock = ({ todos, onRemove, onEdit }) => {
     return;
   };
 
+  console.log("todos", todos);
+
   return (
     <TodoListBlockStyle>
       {todos.map((todo) => (

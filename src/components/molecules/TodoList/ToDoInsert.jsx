@@ -15,7 +15,6 @@ const ToDoInsert = ({ onInsert }) => {
     if (todoInput.trim() !== "") {
       e.preventDefault();
       const todoItem = { task: todoInput, timer: 1, isDone: false };
-      console.log(todoItem);
       onInsert(todoItem);
       setTodoInput("");
     }
