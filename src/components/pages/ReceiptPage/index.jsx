@@ -72,16 +72,22 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #1a1a1a;
+  background-color: ${(props) => props.theme.bk};
 `;
 
 const BackIconContainer = styled.div`
   width: 36px;
-  margin-top: 24px;
-  margin-left: 8px;
+  margin-top: 46px;
+  margin-left: 14px;
   padding: 8px;
   opacity: 50%;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    top: 42px;
+    left: 48px;
+  }
 `;
 
 const ReceiptContainer = styled.div`
@@ -101,7 +107,7 @@ const IconContainer = styled.div`
   width: 100%;
   height: 12%;
   display: flex;
-  align-self: flex-end;
+  align-self: center;
   align-items: center;
   justify-content: center;
   position: absolute;
@@ -124,6 +130,6 @@ const IconContainer = styled.div`
   span {
     font-family: "Courier Prime", monospace;
     font-size: 16px;
-    color: #fcfcfc;
+    color: #efefef;
   }
 `;

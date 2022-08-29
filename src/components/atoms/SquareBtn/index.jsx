@@ -12,10 +12,10 @@ import * as S from "./style";
  * @returns {React.Component} 네모난 버튼 컴포넌트
  */
 
-export function SquareBtn({ onClick, children, color = "black" }) {
+export function SquareBtn({ onClick, children, color = "#191919" }) {
   return (
     <S.BtnContainer onClick={onClick} color={color}>
-      {children}
+      <span>{children}</span>
     </S.BtnContainer>
   );
 }

@@ -10,7 +10,7 @@ import { BaseContextProvider } from "store/base-context";
 
 const theme = {
   bk: "#191919",
-  wt: "#fcfcfc",
+  wt: "#efefef",
   gray: "#aaaaaa",
   green: "#81c944",
 };

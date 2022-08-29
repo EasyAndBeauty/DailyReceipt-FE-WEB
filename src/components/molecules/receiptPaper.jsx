@@ -8,24 +8,26 @@ export function ReceiptPaper({ todos }) {
         src="https://img.freepik.com/free-vector/crumpled-paper-texture_1048-2259.jpg?w=1480&t=st=1661600618~exp=1661601218~hmac=b19bc6461fe0adb3315567718519d901453733476abbf08b177d4f43384b4f07"
         alt="paper texture"
       />
-      <TrianglePosition y="6px">
-        <ReceiptPaperTriangle />
-      </TrianglePosition>
-      <ReceiptPaperContents todos={todos} />
-      <TrianglePosition y="-7px">
-        <ReceiptPaperTriangle />
-      </TrianglePosition>
+      <div>
+        <TrianglePosition y="6px">
+          <ReceiptPaperTriangle />
+        </TrianglePosition>
+        <ReceiptPaperContents todos={todos} />
+        <TrianglePosition y="-7px">
+          <ReceiptPaperTriangle />
+        </TrianglePosition>
+      </div>
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #1a1a1a;
+  background-color: ${(props) => props.theme.bk};
 `;
 
 const TrianglePosition = styled.div`
@@ -34,9 +36,9 @@ const TrianglePosition = styled.div`
 
 const Texture = styled.img`
   position: absolute;
-  width: 98%;
-  height: 99%;
-  opacity: 80%;
+  width: 100%;
+  height: 98%;
+  opacity: 50%;
   mix-blend-mode: multiply;
-  z-index: 10;
+  z-index: 100;
 `;
