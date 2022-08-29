@@ -19,13 +19,16 @@ const calculateRemainingTime = (expirationTime) => {
 
 // local에 토큰이 유효한지 확인
 const retrieveStoredToken = () => {
-  const storedToken = localStorage.getItem("token") || false;
+  const getToken = localStorage.getItem("token") || false;
 
-  if (!storedToken) {
+  if (!getToken) {
     return false;
   }
 
-  const storedExpirationDate = JSON.parse(storedToken).expires;
+  const storedToken = JSON.parse(getToken).id;
+
+  const storedExpirationDate = JSON.parse(getToken).expires;
+
   const remainingTime = calculateRemainingTime(storedExpirationDate);
 
   // 이미 지난 토큰이라면
@@ -65,7 +68,8 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem(
       "token",
       JSON.stringify({
-        [id]: nickname,
+        id,
+        nickname,
         expires: expirationTime,
       })
     );
@@ -88,7 +92,7 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     if (tokenData) {
       // 토큰 시간
-      // console.log(tokenData.duration);
+      // console.log(tokenData.duration, tokenData.token, token);
       logoutTimer = setTimeout(logoutHandler, tokenData.duration);
     }
   }, [loginHandler, tokenData]);

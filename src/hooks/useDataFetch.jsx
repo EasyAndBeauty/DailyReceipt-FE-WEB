@@ -1,6 +1,6 @@
 import { useContext, useEffect, useCallback } from "react";
-import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList, postTodo, updateTodo } from "controllers/todoController";
 import AtuhContext from "store/auth-context";
@@ -51,7 +51,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const getUserData = useCallback(async () => {
     const data = await getTodoList(userId, newDate);
     setTodos(data);
-  }, [date]);
+  }, [newDate, setTodos, userId]);
 
   // const getDataLogic = authCtx.isLoggedIn ? getUserData : getLocalData;
 
@@ -68,28 +68,18 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const postUseData = useCallback(
     async (newTodo) => {
       const temp = { ...newTodo, timer: String(newTodo.timer), date: newDate };
-      // const res = await postTodo(userId, temp);
-      const res = await fetch(
-        `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/api/v2/todo/${userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(temp),
-        }
-      );
-      const data = await res.json();
-      console.log(data);
+      const res = await postTodo(userId, temp);
+      const todoId = await res.json();
+      console.log(todoId);
 
       const { task, timer, isDone } = newTodo;
 
       setTodos((pre) => [
         ...pre,
         {
-          id: uuidv4(),
+          todoId,
           task,
-          date: dayjs().format(),
+          date: newDate,
           isDone,
           timer,
         },
@@ -105,9 +95,9 @@ export default function useDataFetch({ todos, setTodos, date }) {
       const newData = [
         ...todos,
         {
-          id: uuidv4(),
+          todoId: uuidv4(),
           task,
-          date: dayjs().format(),
+          date: newDate,
           isDone,
           timer,
         },
@@ -161,7 +151,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const putLocalData = useCallback(
     async (id, task) => {
       const newData = [...todos].map((todo) => {
-        if (todo.id === id) {
+        if (todo.todoId === id) {
           return task;
         }
         return todo;
@@ -188,7 +178,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
 
   const deleteLocalData = useCallback(
     async (id) => {
-      const newData = todos.filter((todo) => todo.id !== id);
+      const newData = todos.filter((todo) => todo.todoId !== id);
       await setValue(newData, newDate);
       setTodos(newData);
     },
