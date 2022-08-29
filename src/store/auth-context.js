@@ -91,8 +91,6 @@ export const AuthContextProvider = (props) => {
 
   useEffect(() => {
     if (tokenData) {
-      // 토큰 시간
-      // console.log(tokenData.duration, tokenData.token, token);
       logoutTimer = setTimeout(logoutHandler, tokenData.duration);
     }
   }, [loginHandler, tokenData]);

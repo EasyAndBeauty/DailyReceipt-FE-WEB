@@ -22,7 +22,6 @@ export function ReceiptPage() {
   }
 
   async function handleDownload() {
-    console.log("Download");
     await html2canvas(document.getElementById("receipt"), {
       backgroundColor: "none",
     }).then((canvas) => {
