@@ -16,13 +16,15 @@ const TodoListBlock = ({ todos, onRemove, onEdit }) => {
     return;
   };
 
-  console.log("todos", todos);
+  useEffect(() => {
+    setHasRuuningTimer("");
+  }, [todos]);
 
   return (
     <TodoListBlockStyle>
       {todos.map((todo) => (
         <TodoItem
-          key={uuidv4()}
+          key={todo.todoId}
           id={todo.todoId}
           todo={todo}
           onRemove={onRemove}
