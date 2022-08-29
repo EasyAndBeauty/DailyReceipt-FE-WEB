@@ -32,9 +32,20 @@ export { ReceiptPaper } from "./molecules/receiptPaper";
 export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
 export { ReceiptTodo } from "./molecules/receiptTodo";
 
-// organisms
+//MyReceiptPage
+export { MyHeader } from "./molecules/MyHeader";
+export { MyFooter } from "./molecules/MyFooter";
+
+/**
+ * organisms
+ */
+
+// MyReceiptPage
+export { MySection } from "./organisms/MySection";
+
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
+
 // templates
 export { ModalTemplate } from "./templates/ModalTemplate";
 

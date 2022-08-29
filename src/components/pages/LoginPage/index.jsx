@@ -1,5 +1,6 @@
 import { BackBtn } from "components";
-import ReceiptImg from "assets/images/loginpage_back.png";
+import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
+import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./style";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
 

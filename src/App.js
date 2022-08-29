@@ -24,14 +24,9 @@ function App() {
     <Routes>
       <Route path="/" element={<TodoPage />} />
       <Route path="/auth/kakao/callback" element={<AuthPage />} />
-      {isBase && (
-        <>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/receipt" element={<ReceiptPage />} />
-        </>
-      )}
-      {isLoggedIn && <Route path="/my" element={<UserPage />} />}
-      {/* 나중에 리다이렉션 페이지가 들어갈것! */}
+      <Route path="/my" element={<UserPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/receipt" element={<ReceiptPage />} />
       <Route path="*" element={<LoginPage />} />
     </Routes>
   );

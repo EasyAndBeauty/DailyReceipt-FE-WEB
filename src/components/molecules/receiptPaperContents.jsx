@@ -9,7 +9,6 @@ import {
 export function ReceiptPaperContents({ todos }) {
   const line = "-----------------------------------";
   let timerTotal = 0;
-
   return (
     <Paper>
       <Title>RECEIPT</Title>
@@ -18,7 +17,7 @@ export function ReceiptPaperContents({ todos }) {
       <TodoContainer>
         {todos.map((todo, index) => {
           timerTotal += todo.timer;
-          return <ReceiptTodo key={todo.id + index}>{todo}</ReceiptTodo>;
+          return <ReceiptTodo key={todo.todoId + index}>{todo}</ReceiptTodo>;
         })}
       </TodoContainer>
       <div>{line}</div>

@@ -20,6 +20,9 @@ export const MainText = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
 `;
+export const Box = styled.div`
+  display: flex-shrink;
+`;
 
 export const MyReceiptSeeAll = styled.div`
   display: flex;

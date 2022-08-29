@@ -83,9 +83,9 @@ const TodoItem = ({
         onChange={onChangeTaskValue}
       />
       <ButtonContainer>
-        <TimerButton onClick={handleClickToDoRemoveButton}>
+        {/* <TimerButton onClick={handleClickToDoRemoveButton}>
           <FontAwesomeIcon icon={faClose} color={"#a65c5c"} />
-        </TimerButton>
+        </TimerButton> */}
         <TimerButton onClick={handleClickToDoEditButton}>
           {isEditing && <FontAwesomeIcon icon={faPencil} color={"#aaaaaa"} />}
           {!isEditing && (

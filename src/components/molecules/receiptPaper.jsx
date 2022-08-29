@@ -1,9 +1,9 @@
 import { ReceiptPaperTriangle, ReceiptPaperContents } from "components";
 import styled from "styled-components";
 
-export function ReceiptPaper({ todos }) {
+export function ReceiptPaper({ todos, onClick = null }) {
   return (
-    <Container id={"receipt"}>
+    <Container id={"receipt"} onClick={onClick}>
       <Texture
         src="https://img.freepik.com/free-vector/crumpled-paper-texture_1048-2259.jpg?w=1480&t=st=1661600618~exp=1661601218~hmac=b19bc6461fe0adb3315567718519d901453733476abbf08b177d4f43384b4f07"
         alt="paper texture"
