@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
+import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
+import * as S from "./style";
 export function BackBtn() {
   const navigate = useNavigate();
   const onClickBack = () => {
@@ -9,11 +8,8 @@ export function BackBtn() {
   };
 
   return (
-    <FontAwesomeIcon
-      onClick={onClickBack}
-      icon={faBackspace}
-      size="2x"
-      style={{ marginLeft: "16px" }}
-    />
+    <S.BackIconContainer onClick={onClickBack}>
+      <BackIcon />
+    </S.BackIconContainer>
   );
 }

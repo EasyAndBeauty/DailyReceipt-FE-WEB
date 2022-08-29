@@ -19,7 +19,7 @@ export const Img = styled.img`
 export const H1 = styled.h1`
   font-size: 1rem;
   font-weight: bold;
-  color: #000000;
+  color: white;
   margin-bottom: 2.75rem;
 `;
 
@@ -32,5 +32,6 @@ export const Header = styled.header`
 
 export const Btn = styled.button`
   width: 100%;
+  background-color: transparent;
   margin-bottom: 3rem;
 `;
