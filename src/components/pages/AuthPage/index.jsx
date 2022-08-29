@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "react-loading";
 import AtuhContext from "store/auth-context";
 import * as S from "./style";
+import { getKakaoToken } from "controllers/userController";
 
 export function AuthPage() {
   const navigate = useNavigate();
@@ -11,17 +12,17 @@ export function AuthPage() {
 
   const authCtx = useContext(AtuhContext);
 
+  const getToken = async (code) => {
+    const token = await getKakaoToken(code);
+    const { id, email, nickname } = token;
+    const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+    authCtx.login({ id, nickname }, expirationTime);
+    navigate("/");
+  };
   useEffect(() => {
-    fetch(`http://3.36.239.183:8080/auth/kakao/callback?code=${code}`)
-      .then((res) => res.json())
-      .then((json) => {
-        const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
-        console.log(json);
-        const { id, email, nickname } = json;
-
-        authCtx.login({ id, nickname }, expirationTime);
-        navigate("/");
-      });
+    if (code) {
+      getToken(code);
+    }
   }, []);
 
   return (
