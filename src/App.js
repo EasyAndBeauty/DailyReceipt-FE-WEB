@@ -23,7 +23,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<TodoPage />} />
-      <Route path="/auth/kakao/callback" element={<AuthPage />} />
+      {/* <Route path="/auth/kakao/callback" element={<AuthPage />} /> */}
       {isLoggedIn && <Route path="/my" element={<UserPage />} />}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/receipt" element={<ReceiptPage />} />
