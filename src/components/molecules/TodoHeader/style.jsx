@@ -13,6 +13,10 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
   }
+
+  @media screen and (min-width: 768px) {
+    max-width: 1000px;
+  }
 `;
 
 export const Btn = styled.button`

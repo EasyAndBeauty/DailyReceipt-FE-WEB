@@ -13,5 +13,9 @@ import * as S from "./style";
  */
 
 export function SquareBtn({ onClick, children }) {
-  return <S.BtnContainer onClick={onClick}>{children}</S.BtnContainer>;
+  return (
+    <S.BtnContainer onClick={onClick}>
+      <span>{children}</span>
+    </S.BtnContainer>
+  );
 }
