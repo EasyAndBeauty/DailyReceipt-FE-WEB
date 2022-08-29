@@ -1,8 +1,9 @@
+import axios from "axios";
 import { client } from "./client";
 
 export const getKakaoLogin = async () => {
   try {
-    const response = await client.get(process.env.REACT_APP_KAKAO_BASE_URL, {
+    const response = await axios.get(process.env.REACT_APP_KAKAO_BASE_URL, {
       params: {
         client_id: process.env.REACT_APP_KAUTH_JS_CLIENT_ID,
         redirect_uri: process.env.REACT_APP_KAUTH_REDIRECT_URI,
@@ -17,7 +18,7 @@ export const getKakaoLogin = async () => {
 };
 
 export const getKakaoToken = async (code) => {
-  const response = await client.get(
+  const response = await axios.get(
     `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`
   );
 
