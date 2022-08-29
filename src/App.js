@@ -23,10 +23,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<TodoPage />} />
+      <Route path="/auth/kakao/callback" element={<AuthPage />} />
       {isBase && (
         <>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/auth/kakao/callback" element={<AuthPage />} />
           <Route path="/receipt" element={<ReceiptPage />} />
         </>
       )}

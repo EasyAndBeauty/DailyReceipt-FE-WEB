@@ -27,7 +27,6 @@ const TodoItem = ({
   setRunningTimer,
   resetRunningTimer,
 }) => {
-  // console.log("todo", todo);
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
@@ -68,7 +67,10 @@ const TodoItem = ({
 
   useEffect(() => {
     if (isRunning === false) {
-      onEdit(todo.id, { ...todo, timer: todo.timer + POMODORO_TIME - count });
+      onEdit(todo.todoId, {
+        ...todo,
+        timer: todo.timer + POMODORO_TIME - count,
+      });
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);

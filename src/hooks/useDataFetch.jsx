@@ -19,6 +19,9 @@ import AtuhContext from "store/auth-context";
  * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
  *
  */
+const rand = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 export default function useDataFetch({ todos, setTodos, date }) {
   const authCtx = useContext(AtuhContext);
@@ -53,10 +56,10 @@ export default function useDataFetch({ todos, setTodos, date }) {
     setTodos(data);
   }, [newDate, setTodos, userId]);
 
-  // const getDataLogic = authCtx.isLoggedIn ? getUserData : getLocalData;
+  const getDataLogic = authCtx.isLoggedIn ? getUserData : getLocalData;
 
   // 임시
-  const getDataLogic = getLocalData;
+  // const getDataLogic = getLocalData;
 
   /**
    * POST - 로그인 사용자 : 서버에 새로운 데이터를 저장한다
@@ -107,10 +110,10 @@ export default function useDataFetch({ todos, setTodos, date }) {
     [setValue, todos.length]
   );
 
-  // const postDataLogic = authCtx.isLoggedIn ? postUseData : postLocalData;
+  const postDataLogic = authCtx.isLoggedIn ? postUseData : postLocalData;
 
   // 임시
-  const postDataLogic = postLocalData;
+  // const postDataLogic = postLocalData;
 
   /**
    * PUT - 로그인 사용자 : 서버에서 데이터를 업데이트한다.
@@ -121,14 +124,12 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
   const putUseData = useCallback(
     async (id, todo) => {
-      console.log(todo);
       const { task, timer, isDone, date } = todo;
-      const req = { task, timer, isDone, newDate };
+      const req = { task, timer, isDone };
       const newTodo = await updateTodo(id, req);
-      console.log(newTodo);
       setTodos((pre) => {
         return pre.map((todo) => {
-          if (todo.id === id) {
+          if (todo.todoId === id) {
             return {
               ...todo,
               ...newTodo,
@@ -156,10 +157,10 @@ export default function useDataFetch({ todos, setTodos, date }) {
     [todos, setValue, setTodos]
   );
 
-  // const putDataLogic = authCtx.isLoggedIn ? putUseData : putLocalData;
+  const putDataLogic = authCtx.isLoggedIn ? putUseData : putLocalData;
 
   // 임시
-  const putDataLogic = putLocalData;
+  // const putDataLogic = putLocalData;
 
   /**
    * Delete - 로그인 사용자 : 서버에서 데이터를 삭제한다.
