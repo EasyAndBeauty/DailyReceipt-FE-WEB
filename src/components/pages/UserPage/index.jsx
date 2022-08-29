@@ -5,6 +5,7 @@ import { getUserInfo } from "controllers/userController";
 import { MyHeader } from "components/molecules/MyHeader";
 import { MySection } from "components/organisms/MySection";
 import { MyFooter } from "components/molecules/MyFooter";
+
 export const UserPage = () => {
   const [userInfo, setUserInfo] = useState("새로운 사용자");
   const authCtx = useContext(AtuhContext);
@@ -21,8 +22,7 @@ export const UserPage = () => {
     <S.MyReceiptContainer>
       <MyHeader userInfo={userInfo} />
       <MySection />
-      {/*{authCtx.isLoggedIn && <MyFooter />}*/}
-      <MyFooter />
+      {authCtx.isLoggedIn && <MyFooter />}
     </S.MyReceiptContainer>
   );
 };

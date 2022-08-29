@@ -41,18 +41,11 @@ export const MySection = () => {
   );
 };
 
-const PaperContainer = styled.div`
-  transform: scale(0.5);
-  margin-left: -300px;
-  margin-top: -100px;
-`;
-
 const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding: 16px;
-
+  box-sizing: border-box;
   .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
     display: none;
   }
@@ -64,4 +57,10 @@ const Container = styled.div`
     flex-direction: row;
     gap: 5rem;
   }
+`;
+
+const PaperContainer = styled.div`
+  transform: scale(0.5);
+  margin-left: -300px;
+  margin-top: -100px;
 `;

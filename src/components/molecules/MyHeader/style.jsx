@@ -25,14 +25,14 @@ export const MainText = styled.p`
   margin-bottom: 0.5rem;
   font-size: 1.75rem;
   font-weight: bold;
-  color: white;
+  color: ${(props) => props.theme.wt}; ;
 `;
 
 export const SubText = styled.p`
   margin-top: 16px;
   margin-bottom: 16px;
   font-size: 1.25rem;
-  color: white;
+  color: ${(props) => props.theme.gray};
   line-height: 24px;
 `;
 
