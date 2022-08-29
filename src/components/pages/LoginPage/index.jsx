@@ -1,8 +1,7 @@
 import { BackBtn } from "components";
-import KaKaoLogin from "assets/images/kakao_login_medium_wide.png";
+import KaKaoLogin from "assets/kakao/kakao_login_medium_wide.png";
 import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./style";
-import { useEffect } from "react";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
 
 /**
