@@ -1,4 +1,4 @@
-# Daily Receipt - 하루 
+# Daily Receipt - 하루 영수증
 
 ## 🖨Print your time⏱
 ### Todo List, Pomodoro Timer, Daily Receipt.
