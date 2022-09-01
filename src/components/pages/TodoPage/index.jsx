@@ -37,7 +37,7 @@ export function TodoPage() {
     if (!todos.length) {
       alert("항목을 작성해주세요");
     } else {
-      navigate("/receipt", { state: { todos } });
+      navigate("/receipt", { state: { todos, date: selectedDate } });
     }
   };
 
