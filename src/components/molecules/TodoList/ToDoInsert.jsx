@@ -33,7 +33,6 @@ const ToDoInsert = ({ onInsert }) => {
         value={todoInput}
       />
       <InputButton onClick={onClickTodoItemCreateButton}>
-        {" "}
         <FontAwesomeIcon icon={faCheck} color={"#81c944"} />
       </InputButton>
     </InsertForm>
