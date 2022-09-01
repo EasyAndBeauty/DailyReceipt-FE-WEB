@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { makeEllipsis } from "utils/makeEllipsis";
 export function ReceiptTodo({ children: { task, timer } }) {
   return (
     <Container>
@@ -7,7 +7,7 @@ export function ReceiptTodo({ children: { task, timer } }) {
         <div></div>
       </Info>
       <Todo>
-        <Task>{task}</Task>
+        <Task>{makeEllipsis(task)}</Task>
         <Timer>
           {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}
         </Timer>

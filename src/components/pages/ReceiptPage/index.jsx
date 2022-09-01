@@ -12,6 +12,8 @@ export function ReceiptPage() {
     state: { todos },
   } = useLocation();
 
+  
+
   const navigate = useNavigate();
   const receiptRef = useRef(null);
   const [scale, setScale] = useState(1);
