@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import parperTexture from "assets/receiptPage/paper-texture.webp";
 import {
   ReceiptTodo,
   ReceiptPaperInfo,
@@ -58,6 +59,7 @@ const Paper = styled(Center)`
   letter-spacing: -0.5px;
   line-height: 1.4;
   color: #2f2f2f;
+  background-image: url(${parperTexture});
 `;
 
 const Title = styled.h1`

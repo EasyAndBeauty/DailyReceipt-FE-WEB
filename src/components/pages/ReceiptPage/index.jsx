@@ -56,7 +56,7 @@ export function ReceiptPage() {
           <ShareIcon />
           <span>SHARE</span>
         </div>
-        <div onClick={handleDownload}>
+        <div onClick={async () => await handleDownload()}>
           <SaveIcon />
           <span>SAVE</span>
         </div>
