@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./LoadingModal.styles";
 import ReactLoading from "react-loading";
 import { Portal } from "components";
 
@@ -13,12 +13,12 @@ export function LoadingModal() {
   return (
     <Portal>
       <S.Background>
-        {/* <ReactLoading
+        <ReactLoading
           type={"spin"}
           color={"black"}
           height={"5%"}
           width={"5%"}
-        /> */}
+        />
       </S.Background>
     </Portal>
   );

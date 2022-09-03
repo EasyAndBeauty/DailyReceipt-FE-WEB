@@ -1,7 +1,6 @@
-import * as S from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceGrinBeam } from "@fortawesome/free-solid-svg-icons";
-import { Portal, ModalTemplate } from "components";
+import { ModalTemplate } from "components";
 
 /**
  * AlertModal

@@ -10,14 +10,15 @@ export const UserPage = () => {
   const [userInfo, setUserInfo] = useState("새로운 사용자");
   const authCtx = useContext(AtuhContext);
 
-  const showUserInfo = async () => {
-    const { nickname } = await getUserInfo(authCtx.token);
-    setUserInfo(nickname);
-  };
+  // 서버와 연결이 되어있지 않음, 아직 사용 불가능
+  // const showUserInfo = async () => {
+  //   const { nickname } = await getUserInfo(authCtx.token);
+  //   setUserInfo(nickname);
+  // };
 
-  useEffect(() => {
-    showUserInfo();
-  }, []);
+  // useEffect(() => {
+  //   showUserInfo();
+  // }, []);
   return (
     <S.MyReceiptContainer>
       <MyHeader userInfo={userInfo} />

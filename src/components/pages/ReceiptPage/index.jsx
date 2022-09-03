@@ -44,10 +44,10 @@ export function ReceiptPage() {
   }
 
   // 서버와 연결이 되어있지 않음, 아직 사용 불가능
-  const showUserInfo = async () => {
-    const { nickname } = await getUserInfo(authCtx.token);
-    setUserInfo(nickname);
-  };
+  // const showUserInfo = async () => {
+  //   const { nickname } = await getUserInfo(authCtx.token);
+  //   setUserInfo(nickname);
+  // };
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;

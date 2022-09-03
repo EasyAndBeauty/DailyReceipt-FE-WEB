@@ -37,7 +37,7 @@ export function TodoHeader({ month }) {
             color="#aaaaaa"
           ></FontAwesomeIcon>
         </S.Btn>
-        <S.Btn onClick={goPage.bind(this, "/receipt")}>
+        <S.Btn onClick={goPage.bind(this, "/my")}>
           <FontAwesomeIcon
             icon={faReceipt}
             size="2x"
