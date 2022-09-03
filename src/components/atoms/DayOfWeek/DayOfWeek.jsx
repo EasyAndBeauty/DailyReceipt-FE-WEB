@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { findDayOfWeek } from "utils/findDayOfWeek";
-import * as S from "./style";
+import * as S from "./DayOfWeek.styles";
 
 /**
  * DayOfWeek component

@@ -1,6 +1,14 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+import * as S from "./ReceiptQuotes.styles";
 
+/**
+ * ReceiptQuotes
+ *
+ * 영수증의 문구를 보여주는 컴포넌트입니다
+ * 랜덤 영어 명언 API를 사용해 랜덤으로 문구를 보여줍니다
+ *
+ * @returns
+ */
 export function ReceiptQuotes() {
   const [quotesState, setQuotes] = useState();
 
@@ -15,10 +23,5 @@ export function ReceiptQuotes() {
     getQuotes();
   }, []);
 
-  return <Quotes>{quotesState}</Quotes>;
+  return <S.Quotes>{quotesState || "Well done!"}</S.Quotes>;
 }
-const Quotes = styled.div`
-  width: 92%;
-  margin: 24px 0;
-  text-align: center;
-`;

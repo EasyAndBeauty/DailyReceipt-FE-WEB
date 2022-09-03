@@ -1,4 +1,11 @@
-import styled from "styled-components";
+import * as S from "./ReceiptPaperInfo.styles";
+
+/**
+ * ReceiptPaperInfo
+ *
+ * 영수증을 정보(날짜)를 보여주는 컴포넌트입니다
+ *
+ */
 
 export function ReceiptPaperInfo() {
   const date = new Date();
@@ -9,15 +16,10 @@ export function ReceiptPaperInfo() {
   const time = timeArr.map((el) => el.padStart(2, "0")).join(":");
 
   return (
-    <Info>
+    <S.Info>
       <div>
         {month} {day}, {year} {time}
       </div>
-    </Info>
+    </S.Info>
   );
 }
-
-const Info = styled.div`
-  transform: translateX(4px);
-  align-self: flex-start;
-`;

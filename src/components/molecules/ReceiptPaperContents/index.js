@@ -1,0 +1,1 @@
+export { ReceiptPaperContents } from "./ReceiptPaperContents";

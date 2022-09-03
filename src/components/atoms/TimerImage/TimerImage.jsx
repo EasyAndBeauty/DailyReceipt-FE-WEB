@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactLoading from "react-loading";
 import useInterval from "hooks/useInterval";
 import { DLAY_TIME } from "constants";
-import * as S from "./style";
+import * as S from "./TimerImage.styles";
 
 /**
  * TimerImage

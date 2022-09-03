@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { BackBtn } from "../../atoms/BackBtn";
+import { BackBtn } from "../../atoms/BackBtn/BackBtn";
 export const MyHeader = ({ userInfo }) => {
   return (
     <S.HeaderContainer>

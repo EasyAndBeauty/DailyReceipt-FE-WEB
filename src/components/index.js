@@ -13,10 +13,10 @@ export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
 export { TimerImage } from "./atoms/TimerImage";
 //ReceiptPage
-export { ReceiptPaperTriangle } from "./atoms/receiptPaperTriangle";
-export { ReceiptPaperInfo } from "./atoms/receiptPaperInfo";
-export { ReceiptBarcode } from "./atoms/receiptBarcode";
-export { ReceiptQuotes } from "./atoms/receiptQuotes";
+export { ReceiptPaperTriangle } from "./atoms/ReceiptPaperTriangle";
+export { ReceiptPaperInfo } from "./atoms/ReceiptPaperInfo";
+export { ReceiptBarcode } from "./atoms/ReceiptBarcode";
+export { ReceiptQuotes } from "./atoms/ReceiptQuotes";
 
 export { BackBtn } from "./atoms/BackBtn";
 /**
@@ -28,9 +28,9 @@ export { TodoHeader } from "./molecules/TodoHeader";
 export { TodoList } from "./molecules/TodoList";
 
 //ReceiptPage
-export { ReceiptPaper } from "./molecules/receiptPaper";
-export { ReceiptPaperContents } from "./molecules/receiptPaperContents";
-export { ReceiptTodo } from "./molecules/receiptTodo";
+export { ReceiptPaper } from "./molecules/ReceiptPaper";
+export { ReceiptPaperContents } from "./molecules/ReceiptPaperContents";
+export { ReceiptTodo } from "./molecules/ReceiptTodo";
 
 //MyReceiptPage
 export { MyHeader } from "./molecules/MyHeader";
