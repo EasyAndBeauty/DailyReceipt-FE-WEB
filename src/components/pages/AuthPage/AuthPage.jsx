@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "react-loading";
 import AtuhContext from "store/auth-context";
@@ -15,7 +15,7 @@ export function AuthPage() {
 
   const getToken = async (code) => {
     const token = await getKakaoToken(code);
-    const { id, email, nickname } = token;
+    const { id, nickname } = token;
     const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
     authCtx.login({ id, nickname }, expirationTime);
     navigate("/");

@@ -18,6 +18,7 @@ import * as S from "./TodoPage.styles";
  *
  * @returns  {JSX.Element} - TodoPage의 layout을 담당하는 컴포넌트
  */
+
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -25,6 +26,10 @@ export function TodoPage() {
     todos,
     setTodos,
     date: selectedDate,
+  });
+
+  const Triangle = new Array(9).fill(0).map((_, idx) => {
+    return <ReceiptPaperTriangle key={idx} />;
   });
 
   const BaseCtx = useContext(BaseContext);
@@ -77,20 +82,10 @@ export function TodoPage() {
         </S.Content>
 
         <S.Bottom>
-          <div>
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-            <ReceiptPaperTriangle />
-          </div>
+          <div>{Triangle}</div>
           <SquareBtn
             onClick={onSubmitTodoList}
-            children={"Print the Receipt"}
+            children={"Print the Receipt ->"}
           />
         </S.Bottom>
       </S.Container>
