@@ -1,5 +1,13 @@
-import * as S from "./style";
+import * as S from "./MyHeader.styles";
 import { BackBtn } from "../../atoms/BackBtn/BackBtn";
+
+/**
+ * MyHeader
+ *
+ * 헤더입니다, 사용자의 이름이 표시됩니다
+ *
+ * @param {string} userInfo 사용자의 이름
+ */
 export const MyHeader = ({ userInfo }) => {
   return (
     <S.HeaderContainer>

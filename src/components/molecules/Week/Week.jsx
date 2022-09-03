@@ -1,5 +1,5 @@
 import { DayOfWeek } from "components";
-import * as S from "./style";
+import * as S from "./Week.style";
 const dayjs = require("dayjs");
 const weekday = require("dayjs/plugin/weekday");
 const isoWeek = require("dayjs/plugin/isoWeek");

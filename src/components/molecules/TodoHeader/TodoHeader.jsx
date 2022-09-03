@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { AlertModal, HeaderText } from "components";
-import * as S from "./style";
+import * as S from "./TodoHeader.styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,14 +11,17 @@ import { useState } from "react";
  * 상단 헤더의 layout을 담당하는 컴포넌트
  * month 값을 받아와 헤더를 담당한다
  *
+ * @param {string} month - month
+ *
  */
 
 export function TodoHeader({ month }) {
   const [modalOn, setModalOn] = useState(false);
   let navigate = useNavigate();
-  function goPage(url) {
+
+  const goPage = (url) => {
     navigate(url);
-  }
+  };
   return (
     <S.Container>
       <HeaderText>{month}</HeaderText>
@@ -34,11 +37,7 @@ export function TodoHeader({ month }) {
             color="#aaaaaa"
           ></FontAwesomeIcon>
         </S.Btn>
-        <S.Btn
-          onClick={() => {
-            navigate("/my");
-          }}
-        >
+        <S.Btn onClick={goPage.bind(this, "/receipt")}>
           <FontAwesomeIcon
             icon={faReceipt}
             size="2x"

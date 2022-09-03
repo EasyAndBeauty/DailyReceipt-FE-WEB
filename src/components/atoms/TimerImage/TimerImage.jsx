@@ -17,7 +17,7 @@ import * as S from "./TimerImage.styles";
  * @returns
  */
 export function TimerImage({ isRunning, setIsRunning, count, setCount }) {
-  const [delay, setDelay] = useState(DLAY_TIME); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
+  const [delay] = useState(DLAY_TIME); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
 
   useInterval(
     () => {

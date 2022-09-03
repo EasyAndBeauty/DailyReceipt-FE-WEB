@@ -6,6 +6,14 @@ import {
 } from "components";
 import * as S from "./ReceiptPaperContents.styles";
 
+/**
+ * ReceiptPaperContents
+ *
+ * 영수증의 내용이 들어가는 컴포넌트입니다
+ *
+ * @param {Array} todos todo 리스트
+ * @returns
+ */
 export function ReceiptPaperContents({ todos }) {
   const line = "-----------------------------------";
   let timerTotal = 0;
@@ -29,7 +37,8 @@ export function ReceiptPaperContents({ todos }) {
         <div>
           <span>TOTAL :</span>
           <span>
-            {Math.floor(timerTotal / 60)}:{timerTotal % 60}
+            {Math.floor(timerTotal / 60)}:
+            {(timerTotal % 60).toString().padStart(2, "0")}
           </span>
         </div>
       </S.TotalContainer>

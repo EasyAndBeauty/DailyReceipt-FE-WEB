@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClock,
-  faClose,
+  // faClose,
   faPencil,
   faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { TimerImage } from "components";
 import { POMODORO_TIME } from "constants";
-import styled, { css } from "styled-components";
+import * as S from "./TodoListBlock.styles";
 
 /**
  * Todo Item
@@ -19,19 +19,19 @@ import styled, { css } from "styled-components";
  * @param {*} param0
  * @returns
  */
-const TodoItem = ({
+function TodoItem({
   todo,
   onRemove,
   onEdit,
   hasRunningTimer,
   setRunningTimer,
   resetRunningTimer,
-}) => {
+}) {
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
   const [count, setCount] = useState(POMODORO_TIME);
-  const { task, isDone } = todo;
+  const { isDone } = todo;
 
   const [done, setDone] = useState(isDone);
 
@@ -53,7 +53,10 @@ const TodoItem = ({
       return;
     }
   };
-  const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
+
+  // delelte item
+  // const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
+
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
     if (isEditing === false) {
@@ -75,24 +78,24 @@ const TodoItem = ({
     }
   }, [isRunning]);
   return (
-    <TodoItemBlock>
-      <CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
-      <TodoItemText
+    <S.TodoItemBlock>
+      <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
+      <S.TodoItemText
         defaultValue={taskValue || ""}
         disabled={isEditing}
         onChange={onChangeTaskValue}
       />
-      <ButtonContainer>
-        {/* <TimerButton onClick={handleClickToDoRemoveButton}>
+      <S.ButtonContainer>
+        {/* <S.TimerButton onClick={handleClickToDoRemoveButton}>
           <FontAwesomeIcon icon={faClose} color={"#a65c5c"} />
-        </TimerButton> */}
-        <TimerButton onClick={handleClickToDoEditButton}>
+        </S.TimerButton> */}
+        <S.TimerButton onClick={handleClickToDoEditButton}>
           {isEditing && <FontAwesomeIcon icon={faPencil} color={"#aaaaaa"} />}
           {!isEditing && (
             <FontAwesomeIcon icon={faSquareCheck} color={"#aaaaaa"} />
           )}
-        </TimerButton>
-        <TimerButton onClick={handleClickTimerButton}>
+        </S.TimerButton>
+        <S.TimerButton onClick={handleClickTimerButton}>
           {isRunning && (
             <TimerImage
               isRunning={isRunning}
@@ -102,66 +105,55 @@ const TodoItem = ({
             />
           )}
           {!isRunning && <FontAwesomeIcon icon={faClock} color={"#aaaaaa"} />}
-        </TimerButton>
-      </ButtonContainer>
-    </TodoItemBlock>
+        </S.TimerButton>
+      </S.ButtonContainer>
+    </S.TodoItemBlock>
   );
-};
+}
 
-export default TodoItem;
+/**
+ * Todo List Block
+ *
+ * todoList를 보여주는 컴포넌트 입니다.
+ * todoList의 변경점을 useDataFetch hook으로 넘겨 반영합니다.
+ *
+ * @param {Array} todos - todo list
+ * @param {Function} onRemove - todo 삭제
+ * @param {Function} onEdit - todo 수정
+ * @returns
+ */
 
-const TodoItemBlock = styled.li`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0;
-  box-sizing: border-box;
-`;
+export function TodoListBlock({ todos, onRemove, onEdit }) {
+  const [hasRunningTimer, setHasRuuningTimer] = useState("");
 
-const CheckCircle = styled.div`
-  width: 16px;
-  height: 16px;
-  border: 3px solid ${(props) => props.theme.gray};
-  border-radius: 16px;
-  cursor: pointer;
-  background-color: ${(props) =>
-    props.done ? props.theme.green : props.theme.bk};
-  border-color: ${(props) => props.theme.wt};
-`;
+  const setRunningTimer = (key) => {
+    setHasRuuningTimer(key);
+    return;
+  };
 
-const TodoItemText = styled.input`
-  width: 60%;
-  margin-left: 8px;
-  font-size: 1rem;
-  color: ${(props) => props.theme.gray};
-  outline: none;
-  border: none;
-  border-bottom: 1px solid ${(props) => props.theme.wt};
-  border-radius: 0;
-  background-color: transparent;
+  const resetRunningTimer = () => {
+    setHasRuuningTimer("");
+    return;
+  };
 
-  &:disabled {
-    color: ${(props) => props.theme.wt};
-    border: none;
-    opacity: 1;
-  }
-`;
+  useEffect(() => {
+    setHasRuuningTimer("");
+  }, [todos]);
 
-const ButtonContainer = styled.div`
-  display: flex;
-  margin-left: 8px;
-`;
-
-const TimerButton = styled.div`
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-  padding: 4px;
-  line-height: 1rem;
-  cursor: pointer;
-
-  &:first-child {
-    transform: scale(1.3) translateY(0.5px) translateX(1px);
-  }
-`;
+  return (
+    <S.TodoListBlockStyle>
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.todoId}
+          id={todo.todoId}
+          todo={todo}
+          onRemove={onRemove}
+          onEdit={onEdit}
+          hasRunningTimer={hasRunningTimer}
+          setRunningTimer={setRunningTimer}
+          resetRunningTimer={resetRunningTimer}
+        />
+      ))}
+    </S.TodoListBlockStyle>
+  );
+}

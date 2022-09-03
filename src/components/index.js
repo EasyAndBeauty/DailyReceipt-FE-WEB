@@ -25,7 +25,8 @@ export { BackBtn } from "./atoms/BackBtn";
 //TodoPage
 export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
-export { TodoList } from "./molecules/TodoList";
+export { ToDoInsert } from "./molecules/ToDoInsert";
+export { TodoListBlock } from "./molecules/TodoListBlock";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/ReceiptPaper";
@@ -39,6 +40,9 @@ export { MyFooter } from "./molecules/MyFooter";
 /**
  * organisms
  */
+
+//TodoPage
+export { TodoList } from "./organisms/TodoList";
 
 // MyReceiptPage
 export { MySection } from "./organisms/MySection";

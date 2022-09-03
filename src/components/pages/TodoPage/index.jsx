@@ -1,5 +1,5 @@
 import { useState, Fragment, useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   TodoHeader,
   Week,
@@ -21,13 +21,11 @@ import * as S from "./style";
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [modalOn, setModalOn] = useState(false);
-  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
-    useDataFetch({
-      todos,
-      setTodos,
-      date: selectedDate,
-    });
+  const { postDataLogic, putDataLogic, deleteLocalData } = useDataFetch({
+    todos,
+    setTodos,
+    date: selectedDate,
+  });
 
   const BaseCtx = useContext(BaseContext);
 
