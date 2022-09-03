@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BackBtn, AlertModal } from "components";
 import ReceiptImg from "assets/images/receipt_img.png";
-import * as S from "./style";
+import * as S from "./LoginPage.styles";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
 
 /**

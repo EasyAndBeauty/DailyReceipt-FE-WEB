@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import * as S from "./style";
+import * as S from "./UserPage.styles";
 import AtuhContext from "store/auth-context";
 import { getUserInfo } from "controllers/userController";
 import { MyHeader } from "components/molecules/MyHeader";

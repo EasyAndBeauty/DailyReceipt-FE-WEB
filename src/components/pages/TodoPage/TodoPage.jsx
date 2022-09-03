@@ -9,7 +9,7 @@ import {
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/base-context";
-import * as S from "./style";
+import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
  *

@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
 import { Portal } from "components";
-import * as S from "./style";
+import * as S from "./ModalTemplate.styles";
 
 /**
  *  ModalTemplate
