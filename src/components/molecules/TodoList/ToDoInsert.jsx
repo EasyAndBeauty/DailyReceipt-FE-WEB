@@ -20,8 +20,12 @@ const ToDoInsert = ({ onInsert }) => {
     }
   };
 
+  const onSubmit = (e) => {
+    onClickTodoItemCreateButton(e);
+  };
+
   return (
-    <InsertForm>
+    <InsertForm onSubmit={onSubmit}>
       <Input
         autoFocus
         placeholder="Add a New Task"
@@ -37,7 +41,7 @@ const ToDoInsert = ({ onInsert }) => {
 
 export default ToDoInsert;
 
-const InsertForm = styled.div`
+const InsertForm = styled.form`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
