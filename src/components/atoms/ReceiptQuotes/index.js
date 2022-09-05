@@ -1,0 +1,1 @@
+export { ReceiptQuotes } from "./ReceiptQuotes";

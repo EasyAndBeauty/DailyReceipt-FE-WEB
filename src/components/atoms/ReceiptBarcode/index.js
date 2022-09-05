@@ -1,0 +1,1 @@
+export { ReceiptBarcode } from "./ReceiptBarcode";
