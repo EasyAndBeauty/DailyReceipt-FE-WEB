@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import parperTexture from "assets/receiptPage/paper-texture.webp";
+import parperTexture from "assets/svg/paper-texture.webp";
 
 export const Center = styled.div`
   display: flex;
