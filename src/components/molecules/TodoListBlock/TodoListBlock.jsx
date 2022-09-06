@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-  faClock,
-  // faClose,
-  faPencil,
-  faSquareCheck,
+  faClock, // faClose,
+  faPencil, faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { TimerImage } from "components";
-import { POMODORO_TIME } from "constants";
+import {TimerImage} from "components";
+import {POMODORO_TIME} from "constants";
 import * as S from "./TodoListBlock.styles";
+import {ReactComponent as CheckIcon} from "assets/svg/todo_check_icon.svg";
 
 /**
  * Todo Item
@@ -79,7 +78,9 @@ function TodoItem({
   }, [isRunning]);
   return (
     <S.TodoItemBlock>
-      <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
+      <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done}>
+        {done && <CheckIcon />}
+      </S.CheckCircle>
       <S.TodoItemText
         defaultValue={taskValue || ""}
         disabled={isEditing}
@@ -123,7 +124,7 @@ function TodoItem({
  * @returns
  */
 
-export function TodoListBlock({ todos, onRemove, onEdit }) {
+export function TodoListBlock({todos, onRemove, onEdit}) {
   const [hasRunningTimer, setHasRuuningTimer] = useState("");
 
   const setRunningTimer = (key) => {
@@ -140,10 +141,8 @@ export function TodoListBlock({ todos, onRemove, onEdit }) {
     setHasRuuningTimer("");
   }, [todos]);
 
-  return (
-    <S.TodoListBlockStyle>
-      {todos.map((todo) => (
-        <TodoItem
+  return (<S.TodoListBlockStyle>
+      {todos.map((todo) => (<TodoItem
           key={todo.todoId}
           id={todo.todoId}
           todo={todo}
@@ -152,8 +151,6 @@ export function TodoListBlock({ todos, onRemove, onEdit }) {
           hasRunningTimer={hasRunningTimer}
           setRunningTimer={setRunningTimer}
           resetRunningTimer={resetRunningTimer}
-        />
-      ))}
-    </S.TodoListBlockStyle>
-  );
+        />))}
+    </S.TodoListBlockStyle>);
 }

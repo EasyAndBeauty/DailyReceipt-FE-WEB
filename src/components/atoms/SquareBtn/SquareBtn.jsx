@@ -1,5 +1,5 @@
 import * as S from "./SquareBtn.styles";
-import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow-below-sm.svg";
+import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow_below_sm_icon.svg";
 
 /**
  * SquareBtn component
