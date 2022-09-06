@@ -22,11 +22,12 @@ import * as S from "./TodoPage.styles";
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { postDataLogic, putDataLogic, deleteLocalData } = useDataFetch({
-    todos,
-    setTodos,
-    date: selectedDate,
-  });
+  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
+    useDataFetch({
+      todos,
+      setTodos,
+      date: selectedDate,
+    });
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} />;
@@ -63,6 +64,10 @@ export function TodoPage() {
   useEffect(() => {
     BaseCtx.setIsBase(true);
   }, []);
+
+  useEffect(() => {
+    getDataLogic();
+  }, [getDataLogic]);
 
   return (
     <Fragment>

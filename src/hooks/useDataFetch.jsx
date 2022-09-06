@@ -19,9 +19,6 @@ import AtuhContext from "store/auth-context";
  * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
  *
  */
-const rand = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 
 export default function useDataFetch({ todos, setTodos, date }) {
   const authCtx = useContext(AtuhContext);
@@ -31,12 +28,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
     .toISOString()
     .split("T")[0];
 
-  const [storedValue, setValue, getValue] = useLocalStorage(
-    new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-      .toISOString()
-      .split("T")[0],
-    []
-  );
+  const [storedValue, setValue, getValue] = useLocalStorage(newDate, []);
 
   /**
    * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
@@ -48,7 +40,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const getLocalData = useCallback(() => {
     const data = getValue(newDate);
     setTodos(data);
-  }, [date]);
+  }, [newDate]);
 
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
   const getUserData = useCallback(async () => {
@@ -86,7 +78,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
         },
       ]);
     },
-    [date, todos]
+    [newDate, setTodos, userId]
   );
 
   // post - 게스트 사용자  : localStorage에 데이터를 저장한다
@@ -107,7 +99,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
       setTodos(newData);
       setValue(newData, newDate);
     },
-    [setValue, todos.length]
+    [newDate, setTodos, setValue, todos]
   );
 
   const postDataLogic = authCtx.isLoggedIn ? postUseData : postLocalData;
@@ -124,7 +116,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
   const putUseData = useCallback(
     async (id, todo) => {
-      const { task, timer, isDone, date } = todo;
+      const { task, timer, isDone } = todo;
       const req = { task, timer, isDone };
       const newTodo = await updateTodo(id, req);
       setTodos((pre) => {
@@ -139,7 +131,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
         });
       });
     },
-    [date, todos]
+    [setTodos]
   );
 
   // put - 게스트 사용자  : localStorage에 데이터를 수정한다.
@@ -154,7 +146,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
       await setValue(newData, newDate);
       setTodos(newData);
     },
-    [todos, setValue, setTodos]
+    [todos, setValue, newDate, setTodos]
   );
 
   const putDataLogic = authCtx.isLoggedIn ? putUseData : putLocalData;
@@ -177,12 +169,8 @@ export default function useDataFetch({ todos, setTodos, date }) {
       await setValue(newData, newDate);
       setTodos(newData);
     },
-    [date, setValue]
+    [newDate, setTodos, setValue, todos]
   );
-
-  useEffect(() => {
-    getDataLogic();
-  }, [getDataLogic]);
 
   return {
     getDataLogic,
