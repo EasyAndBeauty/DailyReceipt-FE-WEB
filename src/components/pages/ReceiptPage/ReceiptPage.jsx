@@ -43,11 +43,10 @@ export function ReceiptPage() {
     });
   }
 
-  // 서버와 연결이 되어있지 않음, 아직 사용 불가능
-  // const showUserInfo = async () => {
-  //   const { nickname } = await getUserInfo(authCtx.token);
-  //   setUserInfo(nickname);
-  // };
+  const showUserInfo = async () => {
+    const { nickname } = await getUserInfo(authCtx.token);
+    setUserInfo(nickname);
+  };
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;
@@ -56,6 +55,10 @@ export function ReceiptPage() {
     if (receiptHeight > receiptSectionHeight) {
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
+  }, []);
+
+  useEffect(() => {
+    showUserInfo();
   }, []);
 
   return (
@@ -67,7 +70,21 @@ export function ReceiptPage() {
         <ReceiptPaper todos={todos} />
       </S.ReceiptContainer>
       <S.IconContainer>
-        <div onClick={handleShare}>
+        <div
+          onClick={async () => {
+            console.log("눌리긴함", navigator);
+            try {
+              await navigator.share({
+                title: "재그지그의 개발 블로그",
+                text: "디자인과 UI, UX에 관심이 많은 주니어 웹 프론트엔드 개발자입니다.",
+                url: "https://wormwlrm.github.io",
+              });
+              console.log("공유 성공");
+            } catch (e) {
+              console.log("공유 실패");
+            }
+          }}
+        >
           <ShareIcon />
           <span>SHARE</span>
         </div>

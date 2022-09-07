@@ -20,9 +20,13 @@ export function AuthPage() {
     authCtx.login({ id, nickname }, expirationTime);
     navigate("/");
   };
+
+  // url에 code가 없으면 로그인 페이지로 이동
   useEffect(() => {
     if (code) {
       getToken(code);
+    } else {
+      navigate("/");
     }
   }, []);
 

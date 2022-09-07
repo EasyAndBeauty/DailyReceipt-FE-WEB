@@ -8,6 +8,8 @@ export const getKakaoToken = async (code) => {
     `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`
   );
 
+  console.log("response", response);
+
   return response.data;
 };
 
