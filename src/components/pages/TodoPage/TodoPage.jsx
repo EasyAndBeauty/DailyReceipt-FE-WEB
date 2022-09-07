@@ -1,11 +1,11 @@
 import { useState, Fragment, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  TodoHeader,
-  Week,
-  SquareBtn,
-  TodoList,
-  ReceiptPaperTriangle,
+	TodoHeader,
+	Week,
+	SquareBtn,
+	TodoList,
+	ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/base-context";
@@ -20,75 +20,75 @@ import * as S from "./TodoPage.styles";
  */
 
 export function TodoPage() {
-  const [todos, setTodos] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const { postDataLogic, putDataLogic, deleteLocalData } = useDataFetch({
-    todos,
-    setTodos,
-    date: selectedDate,
-  });
+	const [todos, setTodos] = useState([]);
+	const [selectedDate, setSelectedDate] = useState(new Date());
+	const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
+		todos,
+		setTodos,
+		date: selectedDate,
+	});
 
-  const Triangle = new Array(9).fill(0).map((_, idx) => {
-    return <ReceiptPaperTriangle key={idx} />;
-  });
+	const Triangle = new Array(9).fill(0).map((_, idx) => {
+		return <ReceiptPaperTriangle key={idx} />;
+	});
 
-  const BaseCtx = useContext(BaseContext);
+	const BaseCtx = useContext(BaseContext);
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const onSubmitTodoList = () => {
-    if (!todos.length) {
-      alert("항목을 작성해주세요");
-    } else {
-      navigate("/receipt", { state: { todos, date: selectedDate } });
-    }
-  };
+	const onSubmitTodoList = () => {
+		if (!todos.length) {
+			alert("항목을 작성해주세요");
+		} else {
+			navigate("/receipt", { state: { todos, date: selectedDate } });
+		}
+	};
 
-  const onSelectDayOfWeek = (DateTime) => {
-    setSelectedDate(DateTime);
-    /**
-     * 서버에 요청을 보내고, 응답을 받아서 처리한다.
-     */
-  };
+	const onSelectDayOfWeek = DateTime => {
+		setSelectedDate(DateTime);
+		/**
+		 * 서버에 요청을 보내고, 응답을 받아서 처리한다.
+		 */
+	};
 
-  const selectedMonth = (Date) => {
-    return Date.toLocaleDateString("en-US", {
-      month: "long",
-    });
-  };
-  const selectedDayOfWeek = (Date) => {
-    return Date.getDay();
-  };
+	const selectedMonth = Date => {
+		return Date.toLocaleDateString("en-US", {
+			month: "long",
+		});
+	};
+	const selectedDayOfWeek = Date => {
+		return Date.getDay();
+	};
 
-  useEffect(() => {
-    BaseCtx.setIsBase(true);
-  }, []);
+	useEffect(() => {
+		BaseCtx.setIsBase(true);
+	}, []);
 
-  return (
-    <Fragment>
-      <S.Container>
-        <TodoHeader month={selectedMonth(selectedDate)} />
-        <Week
-          selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
-          onSelectDayOfWeek={onSelectDayOfWeek}
-        />
-        <S.Content>
-          <TodoList
-            todos={todos}
-            onInsert={postDataLogic}
-            onRemove={deleteLocalData}
-            onEdit={putDataLogic}
-          />
-        </S.Content>
+	return (
+		<Fragment>
+			<S.Container>
+				<TodoHeader month={selectedMonth(selectedDate)} />
+				<Week
+					selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
+					onSelectDayOfWeek={onSelectDayOfWeek}
+				/>
+				<S.Content>
+					<TodoList
+						todos={todos}
+						onInsert={postDataLogic}
+						onRemove={deleteDataLogic}
+						onEdit={putDataLogic}
+					/>
+				</S.Content>
 
-        <S.Bottom>
-          <div>{Triangle}</div>
-          <SquareBtn
-            onClick={onSubmitTodoList}
-            children={"Print the Receipt ->"}
-          />
-        </S.Bottom>
-      </S.Container>
-    </Fragment>
-  );
+				<S.Bottom>
+					<div>{Triangle}</div>
+					<SquareBtn
+						onClick={onSubmitTodoList}
+						children={"Print the Receipt ->"}
+					/>
+				</S.Bottom>
+			</S.Container>
+		</Fragment>
+	);
 }

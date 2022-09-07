@@ -12,36 +12,36 @@ import * as S from "./ToDoInsert.styles";
  * @returns
  */
 export function ToDoInsert({ onInsert }) {
-  const [todoInput, setTodoInput] = useState("");
+	const [todoInput, setTodoInput] = useState("");
 
-  const handleChangeContentValue = (e) => {
-    setTodoInput(e.target.value);
-  };
+	const handleChangeContentValue = e => {
+		setTodoInput(e.target.value);
+	};
 
-  const onClickTodoItemCreateButton = (e) => {
-    if (todoInput.trim() !== "") {
-      e.preventDefault();
-      const todoItem = { task: todoInput, timer: 1, isDone: false };
-      onInsert(todoItem);
-      setTodoInput("");
-    }
-  };
+	const onClickTodoItemCreateButton = e => {
+		if (todoInput.trim() !== "") {
+			e.preventDefault();
+			const todoItem = { task: todoInput, timer: 1, isDone: false };
+			onInsert(todoItem);
+			setTodoInput("");
+		}
+	};
 
-  const onSubmit = (e) => {
-    onClickTodoItemCreateButton(e);
-  };
+	const onSubmit = e => {
+		onClickTodoItemCreateButton(e);
+	};
 
-  return (
-    <S.InsertForm onSubmit={onSubmit}>
-      <S.Input
-        autoFocus
-        placeholder="Add a New Task"
-        onChange={handleChangeContentValue}
-        value={todoInput}
-      />
-      <S.InputButton onClick={onClickTodoItemCreateButton}>
-        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />
-      </S.InputButton>
-    </S.InsertForm>
-  );
+	return (
+		<S.InsertForm onSubmit={onSubmit}>
+			<S.Input
+				autoFocus
+				placeholder="Add a New Task"
+				onChange={handleChangeContentValue}
+				value={todoInput}
+			/>
+			<S.InputButton onClick={onClickTodoItemCreateButton}>
+				<FontAwesomeIcon icon={faCheck} color={"#81c944"} />
+			</S.InputButton>
+		</S.InsertForm>
+	);
 }
