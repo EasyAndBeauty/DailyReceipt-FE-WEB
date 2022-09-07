@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./ToDoInsert.styles";
+import {ReactComponent as PlusIcon} from "assets/svg/plus_icon.svg";
 
 /**
  * Todo Insert
@@ -40,7 +39,7 @@ export function ToDoInsert({ onInsert }) {
         value={todoInput}
       />
       <S.InputButton onClick={onClickTodoItemCreateButton}>
-        <FontAwesomeIcon icon={faCheck} color={"#81c944"} />
+        <PlusIcon />
       </S.InputButton>
     </S.InsertForm>
   );

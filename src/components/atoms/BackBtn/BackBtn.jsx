@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
+import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import * as S from "./BackBtn.styles";
 
 /**

@@ -1,4 +1,4 @@
-import { ReactComponent as BarcodeSvg } from "assets/receiptPage/barcode.svg";
+import { ReactComponent as BarcodeSvg } from "assets/svg/barcode.svg";
 import * as S from "./ReceiptBarcode.styles";
 
 /**

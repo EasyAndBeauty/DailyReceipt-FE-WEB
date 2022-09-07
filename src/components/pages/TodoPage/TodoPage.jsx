@@ -85,7 +85,7 @@ export function TodoPage() {
           <div>{Triangle}</div>
           <SquareBtn
             onClick={onSubmitTodoList}
-            children={"Print the Receipt ->"}
+            children={"Print the Receipt"}
           />
         </S.Bottom>
       </S.Container>
