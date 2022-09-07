@@ -6,6 +6,7 @@ import {
   ReceiptPage,
   UserPage,
   AuthPage,
+  RedirectionPage,
 } from "components";
 import AtuhContext from "store/auth-context";
 import BaseContext from "store/base-context";
@@ -32,7 +33,7 @@ function App() {
         </>
       )}
       {/* 여기에 리다이렉트 페이즈를 만들어줘야할듯 */}
-      <Route path="*" element={<LoginPage />} />
+      <Route path="*" element={<RedirectionPage />} />
     </Routes>
   );
 }
