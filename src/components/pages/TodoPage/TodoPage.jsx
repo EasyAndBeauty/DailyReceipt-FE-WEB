@@ -8,7 +8,7 @@ import {
   ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
-import BaseContext from "store/base-context";
+import BaseContext from "store/baseContext";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
