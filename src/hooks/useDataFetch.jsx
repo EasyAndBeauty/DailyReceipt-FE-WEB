@@ -2,13 +2,8 @@ import { useContext, useEffect, useCallback } from "react";
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "./useLocalStorage";
-import {
-	getTodoList,
-	postTodo,
-	updateTodo,
-	deleteTodo,
-} from "controllers/todoController";
-import AtuhContext from "store/auth-context";
+import { getTodoList, postTodo, updateTodo } from "controllers/todoController";
+import AtuhContext from "store/authContext";
 
 /**
  * useDataFetch

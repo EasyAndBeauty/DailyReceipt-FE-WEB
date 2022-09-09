@@ -1,15 +1,14 @@
-import { useEffect, useState, useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-	faClock,
-	faClose,
-	faPencil,
-	faSquareCheck,
+  faClock, // faClose,
+  faPencil, faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { TimerImage } from "components";
-import { POMODORO_TIME } from "constants";
-import AtuhContext from "store/auth-context";
+import {TimerImage} from "components";
+import {POMODORO_TIME} from "constants";
+
 import * as S from "./TodoListBlock.styles";
+import {ReactComponent as CheckIcon} from "assets/svg/todo_check_icon.svg";
 
 /**
  * Todo Item
@@ -129,38 +128,34 @@ function TodoItem({
  * @param {Function} onEdit - todo 수정
  * @returns
  */
+ 
+export function TodoListBlock({todos, onRemove, onEdit}) {
+  const [hasRunningTimer, setHasRuuningTimer] = useState("");
 
-export function TodoListBlock({ todos, onRemove, onEdit }) {
-	const [hasRunningTimer, setHasRuuningTimer] = useState("");
+  const setRunningTimer = (key) => {
+    setHasRuuningTimer(key);
+    return;
+  };
 
-	const setRunningTimer = key => {
-		setHasRuuningTimer(key);
-		return;
-	};
+  const resetRunningTimer = () => {
+    setHasRuuningTimer("");
+    return;
+  };
 
-	const resetRunningTimer = () => {
-		setHasRuuningTimer("");
-		return;
-	};
+  useEffect(() => {
+    setHasRuuningTimer("");
+  }, [todos]);
 
-	useEffect(() => {
-		setHasRuuningTimer("");
-	}, [todos]);
-
-	return (
-		<S.TodoListBlockStyle>
-			{todos.map(todo => (
-				<TodoItem
-					key={todo.todoId}
-					id={todo.todoId}
-					todo={todo}
-					onRemove={onRemove}
-					onEdit={onEdit}
-					hasRunningTimer={hasRunningTimer}
-					setRunningTimer={setRunningTimer}
-					resetRunningTimer={resetRunningTimer}
-				/>
-			))}
-		</S.TodoListBlockStyle>
-	);
+  return (<S.TodoListBlockStyle>
+      {todos.map((todo) => (<TodoItem
+          key={todo.todoId}
+          id={todo.todoId}
+          todo={todo}
+          onRemove={onRemove}
+          onEdit={onEdit}
+          hasRunningTimer={hasRunningTimer}
+          setRunningTimer={setRunningTimer}
+          resetRunningTimer={resetRunningTimer}
+        />))}
+    </S.TodoListBlockStyle>);
 }

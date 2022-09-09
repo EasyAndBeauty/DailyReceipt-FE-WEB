@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./MyFooter.styles";
 
-import AtuhContext from "store/auth-context";
+import AtuhContext from "store/authContext";
 
 /**
  * My page의 하단 부분입니다.

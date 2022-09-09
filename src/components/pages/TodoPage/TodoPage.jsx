@@ -8,7 +8,7 @@ import {
 	ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
-import BaseContext from "store/base-context";
+import BaseContext from "store/baseContext";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
@@ -80,15 +80,14 @@ export function TodoPage() {
 						onEdit={putDataLogic}
 					/>
 				</S.Content>
-
-				<S.Bottom>
-					<div>{Triangle}</div>
-					<SquareBtn
-						onClick={onSubmitTodoList}
-						children={"Print the Receipt ->"}
-					/>
-				</S.Bottom>
-			</S.Container>
-		</Fragment>
-	);
+        <S.Bottom>
+          <div>{Triangle}</div>
+          <SquareBtn
+            onClick={onSubmitTodoList}
+            children={"Print the Receipt"}
+          />
+        </S.Bottom>
+      </S.Container>
+    </Fragment>
+  );
 }

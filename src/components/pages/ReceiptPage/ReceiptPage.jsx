@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
-import { getUserInfo } from "controllers/userController";
-import AtuhContext from "store/auth-context";
+import AtuhContext from "store/authContext";
 import { ReceiptPaper, AlertModal } from "components";
-import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
-import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
-import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
+import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
+import { ReactComponent as ShareIcon } from "assets/svg/share_icon.svg";
+import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import dayjs from "dayjs";
 import * as S from "./ReceiptPage.styles";
 
