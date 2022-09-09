@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import * as S from "./UserPage.styles";
-import AtuhContext from "store/auth-context";
-import { getUserInfo } from "controllers/userController";
+import AtuhContext from "store/authContext";
 import { MyHeader } from "components/molecules/MyHeader";
 import { MySection } from "components/organisms/MySection";
 import { MyFooter } from "components/molecules/MyFooter";
