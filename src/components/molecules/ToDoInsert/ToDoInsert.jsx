@@ -11,25 +11,24 @@ import {ReactComponent as PlusIcon} from "assets/svg/plus_icon.svg";
  * @returns
  */
 export function ToDoInsert({ onInsert }) {
-  const [todoInput, setTodoInput] = useState("");
+	const [todoInput, setTodoInput] = useState("");
 
-  const handleChangeContentValue = (e) => {
-    setTodoInput(e.target.value);
-  };
+	const handleChangeContentValue = e => {
+		setTodoInput(e.target.value);
+	};
 
-  const onClickTodoItemCreateButton = (e) => {
-    if (todoInput.trim() !== "") {
-      e.preventDefault();
-      const todoItem = { task: todoInput, timer: 1, isDone: false };
-      onInsert(todoItem);
-      setTodoInput("");
-    }
-  };
+	const onClickTodoItemCreateButton = e => {
+		if (todoInput.trim() !== "") {
+			e.preventDefault();
+			const todoItem = { task: todoInput, timer: 1, isDone: false };
+			onInsert(todoItem);
+			setTodoInput("");
+		}
+	};
 
-  const onSubmit = (e) => {
-    onClickTodoItemCreateButton(e);
-  };
-
+	const onSubmit = e => {
+		onClickTodoItemCreateButton(e);
+	};
   return (
     <S.InsertForm onSubmit={onSubmit}>
       <S.Input
