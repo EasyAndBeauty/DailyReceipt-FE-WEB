@@ -1,11 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
-import { localToken } from "helper/jwt";
-
-const token = localToken;
 
 const initialAuth = {
-  isLoggedIn: "" || !!token,
-  token: "" || token,
+  isLoggedIn: false,
+  // Todo: 토큰 구별
+  accessToken: "",
+  refreshToken: "",
 };
 
 const AuthStateContext = createContext(initialAuth);
@@ -15,7 +14,8 @@ export const AuthReducer = (initialState, action) => {
   const reducers = {
     LOGIN: {
       isLoggedIn: action.payload.user,
-      token: action.payload.auth_token,
+      accessToken: action.payload.accessToken,
+      refreshToken: action.payload.refreshToken,
     },
     LOGOUT: { ...initialState },
   };
@@ -41,7 +41,7 @@ export function useAuthDispatch() {
   return context;
 }
 
-export const AuthProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
   const [user, dispatch] = useReducer(AuthReducer, initialAuth);
 
   return (

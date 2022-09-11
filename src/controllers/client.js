@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../store/authContext";
+import { useEffect } from "react";
+import { useAuthDispatch, useAuthState } from "../store/authContext";
 
 const client = axios.create({
   baseURL: `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/api`,
@@ -12,7 +12,7 @@ const client = axios.create({
 
 export const AuthClient = () => {
   const refresh = RefreshToken();
-  const { auth } = useContext(AuthContext);
+  const auth = useAuthState();
 
   useEffect(() => {
     // 리퀘스트 전에 실행. header에 인증정보를 부여함
@@ -56,14 +56,14 @@ export const AuthClient = () => {
   return client;
 };
 
+// cookie에 보존된 refresh_token을 보내서access_token을 취득함
 const RefreshToken = () => {
-  const { setAuth } = useContext(AuthContext);
+  const dispatch = useAuthDispatch();
 
   const refresh = async () => {
-    // cookie에 보존된 refresh_token을 보내서access_token을 취득함
     // Todo: refresh 토큰 받아오는 API주소 수정
     const response = await client.get("/refresh");
-    setAuth((prev) => {
+    dispatch((prev) => {
       // access_token을 저장함
       return { ...prev, accessToken: response.data.accessToken };
     });
