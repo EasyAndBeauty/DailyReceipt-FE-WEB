@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLogout } from "hooks/useUser";
 import * as S from "./MyFooter.styles";
-
-import AtuhContext from "store/authContext";
 
 /**
  * My page의 하단 부분입니다.
@@ -11,16 +8,9 @@ import AtuhContext from "store/authContext";
  * @returns
  */
 export const MyFooter = () => {
-  // const authCtx = useContext(AtuhContext);
-  const navigate = useNavigate();
-  const onClick = () => {
-    // authCtx.logout();
-    navigate("/");
-  };
-
   return (
     <S.ButtonContainer>
-      <S.Button onClick={onClick}>Logout</S.Button>
+      <S.Button onClick={useLogout}>Logout</S.Button>
     </S.ButtonContainer>
   );
 };

@@ -1,5 +1,4 @@
 import * as S from "./UserPage.styles";
-// import AtuhContext from "store/authContext";
 import { MyHeader } from "components/molecules/MyHeader";
 import { MySection } from "components/organisms/MySection";
 import { MyFooter } from "components/molecules/MyFooter";
