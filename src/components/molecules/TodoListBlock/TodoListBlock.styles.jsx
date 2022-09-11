@@ -15,9 +15,12 @@ export const CheckCircle = styled.div`
   border: 3px solid ${(props) => props.theme.gray};
   border-radius: 16px;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.done ? props.theme.green : props.theme.bk};
-  border-color: ${(props) => props.theme.wt};
+  border-color: ${(props) =>
+          props.done ? "rgba(200,200,200,0.25)" : props.theme.wt};
+  svg {
+    transform: scale(1.15) translate(-2px, -3px);
+    stroke: ${(props) => props.theme.green};
+  }
 `;
 
 export const TodoItemText = styled.input`

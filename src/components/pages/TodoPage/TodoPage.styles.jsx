@@ -46,5 +46,6 @@ export const Bottom = styled.div`
     display: flex;
     position: relative;
     top: 6px;
+    box-shadow: 0px -10px 5px 0px rgba(0, 0, 0, 0.2);
   }
 `;

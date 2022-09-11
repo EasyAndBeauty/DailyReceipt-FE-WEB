@@ -8,7 +8,7 @@ import {
   ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
-import BaseContext from "store/base-context";
+import BaseContext from "store/baseContext";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
@@ -33,7 +33,7 @@ export function TodoPage() {
     return <ReceiptPaperTriangle key={idx} />;
   });
 
-  const BaseCtx = useContext(BaseContext);
+  // const BaseCtx = useContext(BaseContext);
 
   const navigate = useNavigate();
 
@@ -61,13 +61,9 @@ export function TodoPage() {
     return Date.getDay();
   };
 
-  useEffect(() => {
-    BaseCtx.setIsBase(true);
-  }, []);
-
-  useEffect(() => {
-    getDataLogic();
-  }, [getDataLogic]);
+  // useEffect(() => {
+  // 	BaseCtx.setIsBase(true);
+  // }, []);
 
   return (
     <Fragment>
@@ -81,16 +77,15 @@ export function TodoPage() {
           <TodoList
             todos={todos}
             onInsert={postDataLogic}
-            onRemove={deleteLocalData}
+            onRemove={deleteDataLogic}
             onEdit={putDataLogic}
           />
         </S.Content>
-
         <S.Bottom>
           <div>{Triangle}</div>
           <SquareBtn
             onClick={onSubmitTodoList}
-            children={"Print the Receipt ->"}
+            children={"Print the Receipt"}
           />
         </S.Bottom>
       </S.Container>

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "./useLocalStorage";
 import { getTodoList, postTodo, updateTodo } from "controllers/todoController";
-import AtuhContext from "store/auth-context";
+import AtuhContext from "store/authContext";
 
 /**
  * useDataFetch
@@ -19,6 +19,9 @@ import AtuhContext from "store/auth-context";
  * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
  *
  */
+const rand = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 export default function useDataFetch({ todos, setTodos, date }) {
   const authCtx = useContext(AtuhContext);
@@ -160,6 +163,14 @@ export default function useDataFetch({ todos, setTodos, date }) {
    *
    */
   // delete - 로그인 사용자 : 삭제시 서버에 데이터를 보낸다 + localStorage에 저장한다.
+  const deleteUseData = useCallback(
+    async (id) => {
+      const newData = todos.filter((todo) => todo.todoId !== id);
+      await deleteTodo(id);
+      setTodos(newData);
+    },
+    [date, setValue]
+  );
 
   // delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
 
@@ -172,10 +183,12 @@ export default function useDataFetch({ todos, setTodos, date }) {
     [newDate, setTodos, setValue, todos]
   );
 
+  const deleteDataLogic = !authCtx.isLoggedIn ? deleteUseData : deleteLocalData;
+
   return {
     getDataLogic,
     postDataLogic,
     putDataLogic,
-    deleteLocalData,
+    deleteDataLogic,
   };
 }

@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "react-loading";
-import AtuhContext from "store/auth-context";
+import AtuhContext from "store/authContext";
 import { ReactComponent as KakaoIcon } from "assets/kakao/KakaoTalk_logo.svg";
 import * as S from "./AuthPage.styles";
 import { getKakaoToken } from "controllers/userController";

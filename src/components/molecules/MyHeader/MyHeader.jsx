@@ -1,5 +1,5 @@
 import * as S from "./MyHeader.styles";
-import { BackBtn } from "../../atoms/BackBtn/BackBtn";
+import { BackBtn } from "components";
 
 /**
  * MyHeader
