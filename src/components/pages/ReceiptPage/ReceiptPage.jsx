@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
-import AtuhContext from "store/authContext";
+// import AtuhContext from "store/authContext";
 import { ReceiptPaper, AlertModal } from "components";
 import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
 import { ReactComponent as ShareIcon } from "assets/svg/share_icon.svg";
@@ -13,7 +13,7 @@ export function ReceiptPage() {
   const {
     state: { todos, date },
   } = useLocation();
-  const authCtx = useContext(AtuhContext);
+  // const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
   const receiptRef = useRef(null);
 

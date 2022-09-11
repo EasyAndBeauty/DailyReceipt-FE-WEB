@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import * as S from "./UserPage.styles";
-import AtuhContext from "store/authContext";
+// import AtuhContext from "store/authContext";
 import { MyHeader } from "components/molecules/MyHeader";
 import { MySection } from "components/organisms/MySection";
 import { MyFooter } from "components/molecules/MyFooter";
 
 export const UserPage = () => {
   const [userInfo, setUserInfo] = useState("새로운 사용자");
-  const authCtx = useContext(AtuhContext);
+  // const authCtx = useContext(AtuhContext);
 
   // 서버와 연결이 되어있지 않음, 아직 사용 불가능
   // const showUserInfo = async () => {
@@ -22,7 +22,7 @@ export const UserPage = () => {
     <S.MyReceiptContainer>
       <MyHeader userInfo={userInfo} />
       <MySection />
-      {authCtx.isLoggedIn && <MyFooter />}
+      {/* {authCtx.isLoggedIn && <MyFooter />} */}
     </S.MyReceiptContainer>
   );
 };

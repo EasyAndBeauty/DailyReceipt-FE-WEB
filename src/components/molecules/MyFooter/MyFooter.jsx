@@ -11,10 +11,10 @@ import AtuhContext from "store/authContext";
  * @returns
  */
 export const MyFooter = () => {
-  const authCtx = useContext(AtuhContext);
+  // const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
   const onClick = () => {
-    authCtx.logout();
+    // authCtx.logout();
     navigate("/");
   };
 
