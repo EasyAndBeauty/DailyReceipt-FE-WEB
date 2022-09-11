@@ -11,8 +11,8 @@ export async function useLogin(code) {
   const { accessToken, refreshToken } = await getUserToken(code);
 
   // 액세스, 리프레쉬 토큰을 로컬에 저장
-  window.localStorage.setItem("DR-Access-Token", accessToken);
-  window.localStorage.setItem("DR-Refresh-Token", refreshToken);
+  window.localStorage.setItem("dr-access-token", accessToken);
+  window.localStorage.setItem("dr-refresh-token", refreshToken);
 
   // 액세스, 리프레쉬 토큰을 스테이트에 저장하고 로그인 상태 변경
   dispatch({
