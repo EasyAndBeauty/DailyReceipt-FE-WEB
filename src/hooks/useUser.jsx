@@ -16,8 +16,7 @@ export async function useLogin(code) {
   const { accessToken, refreshToken } = await getUserToken(code);
 
   // 액세스, 리프레쉬 토큰을 로컬에 저장
-  window.localStorage.setItem("dr-access-token", accessToken);
-  window.localStorage.setItem("dr-refresh-token", refreshToken);
+  window.localStorage.setItem("dr-token", { accessToken, refreshToken });
 
   dispatch({
     type: "LOGIN",
@@ -33,8 +32,7 @@ export function useLogout() {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  window.localStorage.removeItem("dr-access-token");
-  window.localStorage.removeItem("dr-refresh-token");
+  window.localStorage.removeItem("dr-token");
 
   dispatch({ type: "LOGOUT" });
   navigate("/");
