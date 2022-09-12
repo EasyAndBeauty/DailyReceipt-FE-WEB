@@ -8,12 +8,12 @@ import { BackBtn } from "components";
  *
  * @param {string} userInfo 사용자의 이름
  */
-export const MyHeader = ({ userInfo }) => {
+export const MyHeader = () => {
   return (
     <S.HeaderContainer>
       <BackBtn />
       <div>
-        <S.MainText>{userInfo}님 반가워요 :)</S.MainText>
+        <S.MainText> 반가워요 :)</S.MainText>
         <S.SubText>
           소중한 당신의 오늘,
           <br />

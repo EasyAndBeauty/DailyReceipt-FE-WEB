@@ -17,8 +17,7 @@ export function LoginPage() {
   const [modalOn, setModalOn] = useState(false);
   const onLogin = () => {
     window.location.href = KAKAO_LOGIN_URL;
-    // console.log("onLogin");
-    // setModalOn(!modalOn);
+    setModalOn(!modalOn);
   };
 
   return (

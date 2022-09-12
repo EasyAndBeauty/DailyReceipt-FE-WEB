@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactLoading from "react-loading";
 import useInterval from "hooks/useInterval";
-import { TIME_HOUR } from "constants";
+import { TIME_HOUR } from "helper/constants";
 import * as S from "./TimerImage.styles";
 
 /**
