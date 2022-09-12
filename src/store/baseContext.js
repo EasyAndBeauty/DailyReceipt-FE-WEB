@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 const BaseContext = React.createContext({
   isBase: false,
   setIsBase: () => {},
