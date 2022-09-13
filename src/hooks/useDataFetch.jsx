@@ -28,12 +28,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
     .toISOString()
     .split("T")[0];
 
-  const [storedValue, setValue, getValue] = useLocalStorage(
-    new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-      .toISOString()
-      .split("T")[0],
-    []
-  );
+  const [storedValue, setValue, getValue] = useLocalStorage(newDate, []);
 
   /**
    * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
@@ -138,7 +133,6 @@ export default function useDataFetch({ todos, setTodos, date }) {
   //   },
   //   [date, todos]
   // );
-
   // put - 게스트 사용자  : localStorage에 데이터를 수정한다.
   const putLocalData = useCallback(
     async (id, task) => {
@@ -168,6 +162,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const deleteUseData = useCallback(
     async (id) => {
       const newData = todos.filter((todo) => todo.todoId !== id);
+
       //   await deleteTodo(id);
       setTodos(newData);
     },
