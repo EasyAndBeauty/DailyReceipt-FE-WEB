@@ -22,7 +22,7 @@ import * as S from "./TodoPage.styles";
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
+  const { getDataLogic, postDataLogic, putDataLogic, deleteDataLogic } =
     useDataFetch({
       todos,
       setTodos,

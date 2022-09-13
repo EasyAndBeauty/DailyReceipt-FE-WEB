@@ -8,7 +8,7 @@ export const KAKAO_LOGIN_URL = `${process.env.REACT_APP_KAKAO_BASE_URL}?client_i
 /**
  * 백엔드에 인가코드 전달 후 JWT를 수신합니다.
  * @param {string} code 카카오톡 인가코드
- * @returns {Object} accessCode refreshCode
+ * @returns {Promise} accessCode refreshCode
  */
 export const getUserToken = async (code) => {
   try {

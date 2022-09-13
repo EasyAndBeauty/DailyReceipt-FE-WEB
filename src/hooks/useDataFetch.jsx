@@ -180,7 +180,9 @@ export default function useDataFetch({ todos, setTodos, date }) {
     [date, setValue]
   );
 
-  const deleteDataLogic = !authCtx.isLoggedIn ? deleteUseData : deleteLocalData;
+  // const deleteDataLogic = !authCtx.isLoggedIn ? deleteUseData : deleteLocalData;
+  // 임시
+  const deleteDataLogic = deleteLocalData;
 
   useEffect(() => {
     getDataLogic();

@@ -42,10 +42,10 @@ export function ReceiptPage() {
     });
   }
 
-  const showUserInfo = async () => {
-    const { nickname } = await getUserInfo(authCtx.token);
-    setUserInfo(nickname);
-  };
+  // const showUserInfo = async () => {
+  //   const { nickname } = await getUserInfo(authCtx.token);
+  //   setUserInfo(nickname);
+  // };
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;
@@ -56,9 +56,9 @@ export function ReceiptPage() {
     }
   }, []);
 
-  useEffect(() => {
-    showUserInfo();
-  }, []);
+  // useEffect(() => {
+  //   showUserInfo();
+  // }, []);
 
   return (
     <S.Container>
