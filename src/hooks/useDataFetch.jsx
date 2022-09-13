@@ -19,14 +19,10 @@ import { useAuthState } from "store/authContext";
  * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
  *
  */
-const rand = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 
 export default function useDataFetch({ todos, setTodos, date }) {
   const authCtx = useAuthState();
   // let userId = authCtx.token;
-  let userId;
 
   const newDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
     .toISOString()

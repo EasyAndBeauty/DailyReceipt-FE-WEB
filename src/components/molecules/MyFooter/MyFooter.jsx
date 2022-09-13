@@ -1,4 +1,5 @@
-import { useLogout } from "hooks/useUser";
+import { useNavigate } from "react-router-dom";
+import { useAuthDispatch } from "store/authContext";
 import * as S from "./MyFooter.styles";
 
 /**
@@ -8,9 +9,19 @@ import * as S from "./MyFooter.styles";
  * @returns
  */
 export const MyFooter = () => {
+  const dispatch = useAuthDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    window.localStorage.removeItem("dr-tokens");
+
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
+
   return (
     <S.ButtonContainer>
-      <S.Button onClick={useLogout}>Logout</S.Button>
+      <S.Button onClick={logout}>Logout</S.Button>
     </S.ButtonContainer>
   );
 };
