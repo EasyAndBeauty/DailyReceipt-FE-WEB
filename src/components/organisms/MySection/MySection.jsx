@@ -20,9 +20,6 @@ export const MySection = () => {
   });
 
   const [allTodos] = useState(week.filter((todo) => todo !== null));
-
-  console.log(allTodos);
-
   const navigate = useNavigate();
 
   return (

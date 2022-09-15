@@ -2,7 +2,6 @@ import { createContext, useContext, useReducer } from "react";
 
 const initialAuth = {
   isLoggedIn: false,
-  // Todo: 토큰 구별
   accessToken: "",
   refreshToken: "",
 };
@@ -10,17 +9,21 @@ const initialAuth = {
 const AuthStateContext = createContext(initialAuth);
 const AuthDispatchContext = createContext();
 
-export const AuthReducer = (initialState, action) => {
-  const reducers = {
-    LOGIN: {
-      isLoggedIn: action.payload.isLoggedIn,
-      accessToken: action.payload.accessToken,
-      refreshToken: action.payload.refreshToken,
-    },
-    LOGOUT: { ...initialState },
-  };
-
-  return reducers[action.type];
+export const AuthReducer = (userState, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return {
+        isLoggedIn: action.payload.isLoggedIn,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+      };
+    case "LOGOUT":
+      return {
+        ...userState,
+      };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
 };
 
 export function useAuthState() {

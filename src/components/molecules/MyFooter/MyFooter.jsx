@@ -13,9 +13,9 @@ export const MyFooter = () => {
   const navigate = useNavigate();
 
   const logout = () => {
+    dispatch({ type: "LOGOUT" });
     window.localStorage.removeItem("dr-tokens");
 
-    dispatch({ type: "LOGOUT" });
     navigate("/");
   };
 
