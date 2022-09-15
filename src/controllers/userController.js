@@ -16,16 +16,10 @@ export const getUserToken = async (code) => {
       `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`
     );
 
-    if (response.ok) {
-      // Todo: 백엔드 연결 후 body확인할 것
-      const jwtToken = response.data;
-
-      const accessToken = jwtToken.accessToken;
-      const refreshToken = jwtToken.refreshToken;
-      return { accessToken, refreshToken };
-    }
+    const accessToken = response.data.accessToken;
+    const refreshToken = response.data.refreshToken;
+    return { accessToken, refreshToken };
   } catch (err) {
-    // Todo: 에러페이지로 리다이렉트
     console.log(err);
   }
 };

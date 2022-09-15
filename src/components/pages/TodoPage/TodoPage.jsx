@@ -33,7 +33,7 @@ export function TodoPage() {
     return <ReceiptPaperTriangle key={idx} />;
   });
 
-  // const BaseCtx = useContext(BaseContext);
+  const BaseCtx = useContext(BaseContext);
 
   const navigate = useNavigate();
 
@@ -61,9 +61,9 @@ export function TodoPage() {
     return Date.getDay();
   };
 
-  // useEffect(() => {
-  // 	BaseCtx.setIsBase(true);
-  // }, []);
+  useEffect(() => {
+    BaseCtx.setIsBase(true);
+  }, []);
 
   return (
     <Fragment>

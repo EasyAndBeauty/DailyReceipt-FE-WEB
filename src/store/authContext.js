@@ -13,7 +13,7 @@ const AuthDispatchContext = createContext();
 export const AuthReducer = (initialState, action) => {
   const reducers = {
     LOGIN: {
-      isLoggedIn: action.payload.user,
+      isLoggedIn: action.payload.isLoggedIn,
       accessToken: action.payload.accessToken,
       refreshToken: action.payload.refreshToken,
     },
