@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   AuthPage,
@@ -7,12 +7,23 @@ import {
   ReceiptPage,
   UserPage,
 } from "components";
-import { useAuthState } from "store/authContext";
+import { useAuthDispatch, useAuthState } from "store/authContext";
 import BaseContext from "store/baseContext";
 
 function App() {
   const user = useAuthState();
+  const dispatch = useAuthDispatch();
   const BaseCtx = useContext(BaseContext);
+  const currentToken = localStorage.getItem("dr-tokens");
+
+  useEffect(() => {
+    if (currentToken) {
+      dispatch({
+        type: "LOGIN",
+        payload: { isLoggedIn: true, ...currentToken },
+      });
+    }
+  }, [currentToken, dispatch]);
 
   const isBase = BaseCtx.isBase;
   return (
