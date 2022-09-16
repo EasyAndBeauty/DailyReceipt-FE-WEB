@@ -19,7 +19,7 @@ export const AuthReducer = (userState, action) => {
       };
     case "LOGOUT":
       return {
-        ...userState,
+        ...initialAuth,
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
