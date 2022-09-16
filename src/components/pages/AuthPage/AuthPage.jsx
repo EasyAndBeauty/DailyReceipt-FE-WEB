@@ -1,16 +1,15 @@
 // AuthPage.jsx
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useMemo, useCallback } from "react";
-import { useAuthDispatch } from "store/authContext";
-import { useLogin, useAuthCallback } from "hooks/useUser";
 import Loading from "react-loading";
+import { useAuthDispatch } from "store/authContext";
+import { getUserToken } from "controllers/userController";
+import { TOKEN_KEY } from "helper/constants";
 import * as S from "./AuthPage.styles";
 import { ReactComponent as KakaoIcon } from "assets/kakao/KakaoTalk_logo.svg";
-import { getUserToken } from "controllers/userController";
 
 export function AuthPage() {
   const [loading, setLoading] = useState(true);
-  const [tokens, setTokens] = useState({});
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
@@ -24,7 +23,7 @@ export function AuthPage() {
         const { accessToken, refreshToken } = res;
 
         window.localStorage.setItem(
-          "dr-tokens",
+          TOKEN_KEY,
           JSON.stringify({ accessToken, refreshToken })
         );
 

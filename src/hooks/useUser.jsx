@@ -1,8 +1,9 @@
 // useUser.jsx
-import { useNavigate } from "react-router-dom";
-import { getUserToken } from "controllers/userController";
-import { useAuthDispatch } from "store/authContext";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthDispatch } from "store/authContext";
+import { getUserToken } from "controllers/userController";
+import { TOKEN_KEY } from "helper/constants";
 
 //
 /**
@@ -22,7 +23,7 @@ export async function useLogin() {
       const { accessToken, refreshToken } = await getUserToken(code);
       // 액세스, 리프레쉬 토큰을 로컬에 저장
       console.log("토큰값", accessToken, refreshToken);
-      window.localStorage.setItem("dr-tokens", { accessToken, refreshToken });
+      window.localStorage.setItem(TOKEN_KEY, { accessToken, refreshToken });
       dispatch({
         type: "LOGIN",
         payload: { isLoggedIn: true, accessToken, refreshToken },
@@ -59,7 +60,7 @@ export function useLogout() {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  window.localStorage.removeItem("dr-tokens");
+  window.localStorage.removeItem(TOKEN_KEY);
 
   dispatch({ type: "LOGOUT" });
   navigate("/");

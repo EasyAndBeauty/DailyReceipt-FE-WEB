@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthDispatch } from "store/authContext";
+import { TOKEN_KEY } from "helper/constants";
 import * as S from "./MyFooter.styles";
 
 /**
@@ -14,7 +15,7 @@ export const MyFooter = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    window.localStorage.removeItem("dr-tokens");
+    window.localStorage.removeItem(TOKEN_KEY);
 
     navigate("/");
   };
