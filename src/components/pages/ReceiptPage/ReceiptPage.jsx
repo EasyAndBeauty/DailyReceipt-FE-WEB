@@ -21,8 +21,17 @@ export function ReceiptPage() {
   const [scale, setScale] = useState(1);
   const [modalOn, setModalOn] = useState(false);
 
-  function handleCopy() {
-
+  const { ClipboardItem } = window;
+  async function handleCopy() {
+    await html2canvas(document.getElementById("receipt"), {
+      backgroundColor: "none",
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        navigator.clipboard.write([
+          new ClipboardItem({"image/png": blob})
+        ])
+      })
+    });
   }
 
   const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""}.jpg`;
@@ -50,22 +59,22 @@ export function ReceiptPage() {
   }, []);
 
   return (<S.Container>
-      <S.BackIconContainer onClick={() => navigate(-1)}>
-        <BackIcon/>
-      </S.BackIconContainer>
-      <S.ReceiptContainer ref={receiptRef} scale={scale}>
-        <ReceiptPaper todos={todos}/>
-      </S.ReceiptContainer>
-      <S.IconContainer>
-        <div onClick={handleCopy}>
-          <CopyIcon />
-          <span>COPY</span>
-        </div>
-        <div onClick={async () => await handleDownload()}>
-          <SaveIcon/>
-          <span>SAVE</span>
-        </div>
-      </S.IconContainer>
-      {modalOn && <AlertModal onClick={() => setModalOn(false)}/>}
-    </S.Container>);
+    <S.BackIconContainer onClick={() => navigate(-1)}>
+      <BackIcon/>
+    </S.BackIconContainer>
+    <S.ReceiptContainer ref={receiptRef} scale={scale}>
+      <ReceiptPaper todos={todos}/>
+    </S.ReceiptContainer>
+    <S.IconContainer>
+      <div onClick={async () => await handleCopy()}>
+        <CopyIcon/>
+        <span>COPY</span>
+      </div>
+      <div onClick={async () => await handleDownload()}>
+        <SaveIcon/>
+        <span>SAVE</span>
+      </div>
+    </S.IconContainer>
+    {modalOn && <AlertModal onClick={() => setModalOn(false)}/>}
+  </S.Container>);
 }
