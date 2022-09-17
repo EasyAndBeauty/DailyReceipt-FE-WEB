@@ -59,6 +59,10 @@ export const IconContainer = styled.div`
     padding: 8px;
     opacity: 40%;
   }
+  
+  div:first-child svg {
+    transform: translate(-1px,1px);
+  }
 
   span {
     font-family: "Courier Prime", monospace;
