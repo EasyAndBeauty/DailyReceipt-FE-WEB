@@ -34,7 +34,7 @@ export function ReceiptPage() {
     });
   }
 
-  const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""}.jpg`;
+  const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""}.png`;
 
   async function handleDownload() {
     await html2canvas(document.getElementById("receipt"), {
@@ -42,7 +42,7 @@ export function ReceiptPage() {
     }).then((canvas) => {
       const aTag = document.createElement("a");
       document.body.appendChild(aTag);
-      aTag.href = canvas.toDataURL("image/jpg");
+      aTag.href = canvas.toDataURL("image/png");
       aTag.download = downloadFileName;
       aTag.click();
       document.body.removeChild(aTag);
