@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import paperTexture from "assets/images/paper-texture.webp";
 
 export const TriContainer = styled.div`
   display: flex;
@@ -12,4 +13,5 @@ export const Triangle = styled.div`
   margin-right: 4px;
   background-color: ${(props) => props.theme.wt};
   transform: rotate(45deg);
+  background: url(${paperTexture});
 `;
