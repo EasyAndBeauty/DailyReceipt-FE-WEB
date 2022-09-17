@@ -22,6 +22,7 @@ export function ReceiptPage() {
   const [modalOn, setModalOn] = useState(false);
 
   const { ClipboardItem } = window;
+
   async function handleCopy() {
     await html2canvas(document.getElementById("receipt"), {
       backgroundColor: "none",
@@ -32,6 +33,8 @@ export function ReceiptPage() {
         ])
       })
     });
+
+    alert('복사가 완료되었어요 :)')
   }
 
   const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""}.png`;
