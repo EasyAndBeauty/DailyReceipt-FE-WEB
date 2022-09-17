@@ -1,41 +1,54 @@
-import { useEffect, useContext } from "react";
+// AuthPage.jsx
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "react-loading";
-import AtuhContext from "store/authContext";
-import { ReactComponent as KakaoIcon } from "assets/kakao/KakaoTalk_logo.svg";
+import { useAuthDispatch } from "store/authContext";
+import { getUserToken } from "controllers/userController";
+import { TOKEN_KEY } from "helper/constants";
 import * as S from "./AuthPage.styles";
-import { getKakaoToken } from "controllers/userController";
+import { ReactComponent as KakaoIcon } from "assets/kakao/KakaoTalk_logo.svg";
 
 export function AuthPage() {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
   const code = new URL(window.location.href).searchParams.get("code");
 
-  const authCtx = useContext(AtuhContext);
-
-  const getToken = async (code) => {
-    const token = await getKakaoToken(code);
-    const { id, nickname } = token;
-    const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
-    authCtx.login({ id, nickname }, expirationTime);
-    navigate("/");
-  };
-
-  // url에 code가 없으면 로그인 페이지로 이동
   useEffect(() => {
-    if (code) {
-      getToken(code);
-    } else {
-      navigate("/");
-    }
-  }, []);
+    getUserToken(code)
+      .then((res) => {
+        setLoading(true);
+
+        const { accessToken, refreshToken } = res;
+
+        window.localStorage.setItem(
+          TOKEN_KEY,
+          JSON.stringify({ accessToken, refreshToken })
+        );
+
+        dispatch({
+          type: "LOGIN",
+          payload: { isLoggedIn: true, accessToken, refreshToken },
+        });
+      })
+      .catch((error) => {
+        console.log("로그인 에러", error);
+      })
+      .finally(() => {
+        setLoading(false);
+        navigate("/");
+      });
+  });
 
   return (
     <S.Container>
       <S.ImageContainer>
         <KakaoIcon />
       </S.ImageContainer>
-      <Loading type="spin" color="#fae100" height={144} width={144} />
+      {loading && (
+        <Loading type="spin" color="#fae100" height={144} width={144} />
+      )}
     </S.Container>
   );
 }

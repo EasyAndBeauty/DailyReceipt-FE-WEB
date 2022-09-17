@@ -23,5 +23,5 @@ export const parseJWT = (token) => {
 
 // 토큰 만료 여부 판정
 export const isValidToken = (iat, exp) => {
-  return iat - exp > 3600;
+  return exp - iat > 3600;
 };

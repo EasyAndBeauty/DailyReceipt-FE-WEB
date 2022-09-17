@@ -2,6 +2,7 @@ import { AuthClient } from "./client";
 
 const authClient = AuthClient();
 
+// Todo: 백엔드 갱신 후 API요청 URL 수정
 export const getTodoList = async (date) => {
   return await authClient.get("/v2/todo", {
     params: { date },

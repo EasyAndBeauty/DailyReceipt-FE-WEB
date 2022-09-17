@@ -22,7 +22,7 @@ import * as S from "./TodoPage.styles";
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { getDataLogic, postDataLogic, putDataLogic, deleteLocalData } =
+  const { getDataLogic, postDataLogic, putDataLogic, deleteDataLogic } =
     useDataFetch({
       todos,
       setTodos,
@@ -33,7 +33,7 @@ export function TodoPage() {
     return <ReceiptPaperTriangle key={idx} />;
   });
 
-  // const BaseCtx = useContext(BaseContext);
+  const BaseCtx = useContext(BaseContext);
 
   const navigate = useNavigate();
 
@@ -61,9 +61,9 @@ export function TodoPage() {
     return Date.getDay();
   };
 
-  // useEffect(() => {
-  // 	BaseCtx.setIsBase(true);
-  // }, []);
+  useEffect(() => {
+    BaseCtx.setIsBase(true);
+  }, []);
 
   return (
     <Fragment>

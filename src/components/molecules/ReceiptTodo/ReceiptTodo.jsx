@@ -1,4 +1,4 @@
-import { ELLIPSISLENGTH } from "constants";
+import { ELLIPSISLENGTH } from "helper/constants";
 import * as S from "./ReceiptTodo.styles";
 
 /**

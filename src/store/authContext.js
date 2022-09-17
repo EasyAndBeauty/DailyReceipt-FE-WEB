@@ -1,26 +1,29 @@
 import { createContext, useContext, useReducer } from "react";
-import { localToken } from "helper/jwt";
-
-const token = localToken;
 
 const initialAuth = {
-  isLoggedIn: "" || !!token,
-  token: "" || token,
+  isLoggedIn: false,
+  accessToken: "",
+  refreshToken: "",
 };
 
 const AuthStateContext = createContext(initialAuth);
 const AuthDispatchContext = createContext();
 
-export const AuthReducer = (initialState, action) => {
-  const reducers = {
-    LOGIN: {
-      isLoggedIn: action.payload.user,
-      token: action.payload.auth_token,
-    },
-    LOGOUT: { ...initialState },
-  };
-
-  return reducers[action.type];
+export const AuthReducer = (userState, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return {
+        isLoggedIn: action.payload.isLoggedIn,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+      };
+    case "LOGOUT":
+      return {
+        ...initialAuth,
+      };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
 };
 
 export function useAuthState() {
@@ -41,7 +44,7 @@ export function useAuthDispatch() {
   return context;
 }
 
-export const AuthProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
   const [user, dispatch] = useReducer(AuthReducer, initialAuth);
 
   return (
