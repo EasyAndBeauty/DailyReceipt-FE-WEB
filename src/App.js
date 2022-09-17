@@ -10,7 +10,7 @@ import {
   UserPage,
 } from "components";
 import { TOKEN_KEY } from "helper/constants";
-import { isValidToken, parseJWT } from "helper/jwt";
+import { isValidToken } from "helper/jwt";
 
 function App() {
   const user = useAuthState();
