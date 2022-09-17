@@ -10,6 +10,7 @@ import {
   UserPage,
 } from "components";
 import { TOKEN_KEY } from "helper/constants";
+import { isValidToken, parseJWT } from "helper/jwt";
 
 function App() {
   const user = useAuthState();
@@ -19,10 +20,12 @@ function App() {
 
   useEffect(() => {
     if (currentToken) {
-      dispatch({
-        type: "LOGIN",
-        payload: { isLoggedIn: true, ...currentToken },
-      });
+      isValidToken(currentToken)
+        ? dispatch({
+            type: "LOGIN",
+            payload: { ...currentToken },
+          })
+        : dispatch({ type: "LOGOUT" });
     }
   }, [currentToken, dispatch]);
 
