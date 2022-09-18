@@ -1,17 +1,17 @@
-import {useEffect, useRef, useState, useContext} from "react";
-import {useNavigate, useLocation} from "react-router-dom";
+import { useEffect, useRef, useState, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
 // import AtuhContext from "store/authContext";
-import {ReceiptPaper, AlertModal} from "components";
-import {ReactComponent as SaveIcon} from "assets/svg/save_icon.svg";
-import {ReactComponent as CopyIcon} from "assets/svg/copy_icon.svg";
-import {ReactComponent as BackIcon} from "assets/svg/back_icon.svg";
+import { ReceiptPaper, AlertModal } from "components";
+import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
+import { ReactComponent as CopyIcon } from "assets/svg/copy_icon.svg";
+import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import dayjs from "dayjs";
 import * as S from "./ReceiptPage.styles";
 
 export function ReceiptPage() {
   const {
-    state: {todos, date},
+    state: { todos, date },
   } = useLocation();
   // const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
@@ -28,16 +28,16 @@ export function ReceiptPage() {
       backgroundColor: "none",
     }).then((canvas) => {
       canvas.toBlob((blob) => {
-        navigator.clipboard.write([
-          new ClipboardItem({"image/png": blob})
-        ])
-      })
+        navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      });
     });
 
-    alert('복사가 완료되었어요 :)')
+    alert("복사가 완료되었어요 :)");
   }
 
-  const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""}.png`;
+  const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${
+    date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""
+  }.png`;
 
   async function handleDownload() {
     await html2canvas(document.getElementById("receipt"), {
@@ -61,23 +61,25 @@ export function ReceiptPage() {
     }
   }, []);
 
-  return (<S.Container>
-    <S.BackIconContainer onClick={() => navigate(-1)}>
-      <BackIcon/>
-    </S.BackIconContainer>
-    <S.ReceiptContainer ref={receiptRef} scale={scale}>
-      <ReceiptPaper todos={todos}/>
-    </S.ReceiptContainer>
-    <S.IconContainer>
-      <div onClick={async () => await handleCopy()}>
-        <CopyIcon/>
-        <span>COPY</span>
-      </div>
-      <div onClick={async () => await handleDownload()}>
-        <SaveIcon/>
-        <span>SAVE</span>
-      </div>
-    </S.IconContainer>
-    {modalOn && <AlertModal onClick={() => setModalOn(false)}/>}
-  </S.Container>);
+  return (
+    <S.Container>
+      <S.BackIconContainer onClick={() => navigate(-1)}>
+        <BackIcon />
+      </S.BackIconContainer>
+      <S.ReceiptContainer ref={receiptRef} scale={scale}>
+        <ReceiptPaper todos={todos} />
+      </S.ReceiptContainer>
+      <S.IconContainer>
+        <div onClick={async () => await handleCopy()}>
+          <CopyIcon />
+          <span>COPY</span>
+        </div>
+        <div onClick={async () => await handleDownload()}>
+          <SaveIcon />
+          <span>SAVE</span>
+        </div>
+      </S.IconContainer>
+      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
+    </S.Container>
+  );
 }
