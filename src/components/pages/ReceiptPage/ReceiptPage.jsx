@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
-// import AtuhContext from "store/authContext";
 import { ReceiptPaper, AlertModal } from "components";
 import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
 import { ReactComponent as CopyIcon } from "assets/svg/copy_icon.svg";
@@ -13,11 +12,10 @@ export function ReceiptPage() {
   const {
     state: { todos, date },
   } = useLocation();
-  // const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
   const receiptRef = useRef(null);
 
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState();
   const [scale, setScale] = useState(1);
   const [modalOn, setModalOn] = useState(false);
 
@@ -26,13 +24,20 @@ export function ReceiptPage() {
   async function handleCopy() {
     await html2canvas(document.getElementById("receipt"), {
       backgroundColor: "none",
-    }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-      });
-    });
-
-    alert("복사가 완료되었어요 :)");
+    })
+      .then((canvas) => {
+        canvas.toBlob((blob) => {
+          navigator.clipboard.write([
+            new ClipboardItem(
+              Object.defineProperty({}, blob.type, {
+                value: blob,
+                enumerable: true,
+              })
+            ),
+          ]);
+        });
+      })
+      .then(alert("복사가 완료되었어요 :)"));
   }
 
   const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${
