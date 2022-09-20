@@ -29,7 +29,7 @@ export function AuthPage() {
 
         dispatch({
           type: "LOGIN",
-          payload: { isLoggedIn: true, accessToken, refreshToken },
+          payload: { accessToken, refreshToken },
         });
       })
       .catch((error) => {

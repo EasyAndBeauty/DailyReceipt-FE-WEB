@@ -11,11 +11,14 @@ const AuthDispatchContext = createContext();
 
 export const AuthReducer = (userState, action) => {
   switch (action.type) {
+    case "UPDATE":
+      return {
+        ...action.payload,
+      };
     case "LOGIN":
       return {
-        isLoggedIn: action.payload.isLoggedIn,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
+        ...action.payload,
       };
     case "LOGOUT":
       return {
