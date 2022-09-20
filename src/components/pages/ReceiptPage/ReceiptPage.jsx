@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
-// import AtuhContext from "store/authContext";
 import { ReceiptPaper, AlertModal } from "components";
 import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
-import { ReactComponent as ShareIcon } from "assets/svg/share_icon.svg";
+import { ReactComponent as CopyIcon } from "assets/svg/copy_icon.svg";
 import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import dayjs from "dayjs";
 import * as S from "./ReceiptPage.styles";
@@ -13,21 +12,37 @@ export function ReceiptPage() {
   const {
     state: { todos, date },
   } = useLocation();
-  // const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
   const receiptRef = useRef(null);
 
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState();
   const [scale, setScale] = useState(1);
   const [modalOn, setModalOn] = useState(false);
 
-  function handleShare() {
-    setModalOn(true);
+  const { ClipboardItem } = window;
+
+  async function handleCopy() {
+    await html2canvas(document.getElementById("receipt"), {
+      backgroundColor: "none",
+    })
+      .then((canvas) => {
+        canvas.toBlob((blob) => {
+          navigator.clipboard.write([
+            new ClipboardItem(
+              Object.defineProperty({}, blob.type, {
+                value: blob,
+                enumerable: true,
+              })
+            ),
+          ]);
+        });
+      })
+      .then(alert("복사가 완료되었어요 :)"));
   }
 
   const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${
     date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""
-  }.jpg`;
+  }.png`;
 
   async function handleDownload() {
     await html2canvas(document.getElementById("receipt"), {
@@ -35,17 +50,12 @@ export function ReceiptPage() {
     }).then((canvas) => {
       const aTag = document.createElement("a");
       document.body.appendChild(aTag);
-      aTag.href = canvas.toDataURL("image/jpg");
+      aTag.href = canvas.toDataURL("image/png");
       aTag.download = downloadFileName;
       aTag.click();
       document.body.removeChild(aTag);
     });
   }
-
-  // const showUserInfo = async () => {
-  //   const { nickname } = await getUserInfo(authCtx.token);
-  //   setUserInfo(nickname);
-  // };
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;
@@ -56,10 +66,6 @@ export function ReceiptPage() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   showUserInfo();
-  // }, []);
-
   return (
     <S.Container>
       <S.BackIconContainer onClick={() => navigate(-1)}>
@@ -69,23 +75,9 @@ export function ReceiptPage() {
         <ReceiptPaper todos={todos} />
       </S.ReceiptContainer>
       <S.IconContainer>
-        <div
-          onClick={async () => {
-            console.log("눌리긴함", navigator);
-            try {
-              await navigator.share({
-                title: "재그지그의 개발 블로그",
-                text: "디자인과 UI, UX에 관심이 많은 주니어 웹 프론트엔드 개발자입니다.",
-                url: "https://wormwlrm.github.io",
-              });
-              console.log("공유 성공");
-            } catch (e) {
-              console.log("공유 실패");
-            }
-          }}
-        >
-          <ShareIcon />
-          <span>SHARE</span>
+        <div onClick={async () => await handleCopy()}>
+          <CopyIcon />
+          <span>COPY</span>
         </div>
         <div onClick={async () => await handleDownload()}>
           <SaveIcon />
