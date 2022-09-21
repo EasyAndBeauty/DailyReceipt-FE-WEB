@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 // import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "./useLocalStorage";
-// import { getTodoList, postTodo, updateTodo } from "controllers/todoController";
+// import { getTodoList } from "controllers/todoController";
 import { useAuthState } from "store/authContext";
 
 /**
@@ -40,6 +40,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   const getLocalData = useCallback(() => {
     const data = getValue(newDate);
     setTodos(data);
+    console.log("authCtx", authCtx);
   }, [date]);
 
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
