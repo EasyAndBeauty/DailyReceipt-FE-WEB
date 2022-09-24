@@ -1,22 +1,26 @@
 import { AuthClient } from "./client";
 
-const authClient = AuthClient();
+export const useTodoClient = () => {
+  const authClient = AuthClient();
 
-// Todo: 백엔드 갱신 후 API요청 URL 수정
-export const getTodoList = async (date) => {
-  return await authClient.get("/v2/todo", {
-    params: { date },
-  });
-};
+  // Todo: 백엔드 갱신 후 API요청 URL 수정
+  const getTodoList = async (date) => {
+    return await authClient.get("/api/v1/todo", {
+      params: { date },
+    });
+  };
 
-export const postTodo = async (todo) => {
-  return await authClient.post(`/v2/todo`, todo);
-};
+  const postTodo = async (todo) => {
+    return await authClient.post(`/api/v1/todo`, todo);
+  };
 
-export const updateTodo = async (todoId, todo) => {
-  return await authClient.put(`/v1/todo/${todoId}`, todo);
-};
+  const updateTodo = async (todoId, todo) => {
+    return await authClient.put(`/api/v1/todo/${todoId}`, todo);
+  };
 
-export const deleteTodo = async (todoId) => {
-  return await authClient.delete(`/v1/todo/${todoId}`);
+  const deleteTodo = async (todoId) => {
+    return await authClient.delete(`/api/v1/todo/${todoId}`);
+  };
+
+  return { getTodoList, postTodo, updateTodo, deleteTodo };
 };

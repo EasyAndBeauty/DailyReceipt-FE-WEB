@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAuthDispatch, useAuthState } from "../store/authContext";
 
 const client = axios.create({
-  baseURL: `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/api`,
+  baseURL: `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}`,
   headers: {
     "Content-Type": "application/json",
   },
