@@ -48,8 +48,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
   const getUserData = useCallback(async () => {
     const { data } = (await getTodoList(newDate)) || [];
-    const newTodos = data.filter((todo) => todo.date === newDate);
-    setTodos(newTodos);
+    setTodos(data);
   }, [newDate]);
 
   const getDataLogic = isLoggedIn ? getUserData : getLocalData;

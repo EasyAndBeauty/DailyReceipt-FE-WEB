@@ -6,7 +6,7 @@ export const useTodoClient = () => {
   // Todo: 백엔드 갱신 후 API요청 URL 수정
   const getTodoList = async (date) => {
     return await authClient.get("/api/v1/todo", {
-      params: { date },
+      params: { targetDate: date },
     });
   };
 
