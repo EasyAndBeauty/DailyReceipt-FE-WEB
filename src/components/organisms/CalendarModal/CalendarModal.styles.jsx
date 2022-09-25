@@ -4,6 +4,10 @@ export const CalendarContainer = styled.div`
   width: calc(100% - 32px);
   position: absolute;
   top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   z-index: 999;
   padding: 24px 20px;
   background-color: ${({ theme }) => theme.wt};

@@ -71,9 +71,8 @@ export function CalendarModal({
         year={yearMonth.year}
         month={yearMonth.month}
         setCalendarOn={setCalendarOn}
+        selectedDate={selectedDate}
       />
-      {/*투두 기록을 어디에서 가져오는지 확인하기(투두 있는 날 표시)*/}
-      {/*날짜를 누르면 해당하는 날짜로 이동하기 => 일요일 기준으로 이동?*/}
     </S.CalendarContainer>
   );
 }
