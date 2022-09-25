@@ -68,7 +68,7 @@ export function TodoPage() {
 
   useEffect(() => {
     getDataLogic();
-  }, [getDataLogic]);
+  }, [getDataLogic, selectedDate]);
 
   return (
     <Fragment>

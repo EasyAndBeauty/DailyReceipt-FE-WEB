@@ -14,9 +14,7 @@ export const useCurrentToken = () => {
       isValidToken(currentToken)
         ? dispatch({
             type: "LOGIN",
-            payload: {
-              token: JSON.parse(currentToken),
-            },
+            payload: JSON.parse(currentToken),
           })
         : dispatch({ type: "LOGOUT" });
     }
