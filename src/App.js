@@ -1,6 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useAuthDispatch, useAuthState } from "store/authContext";
 import BaseContext from "store/baseContext";
 import {
   AuthPage,
@@ -9,26 +8,11 @@ import {
   ReceiptPage,
   UserPage,
 } from "components";
-import { TOKEN_KEY } from "helper/constants";
-import { isValidToken } from "helper/jwt";
+import { useCurrentToken } from "hooks/useCurrentToken";
 
 function App() {
-  const user = useAuthState();
-  const dispatch = useAuthDispatch();
   const BaseCtx = useContext(BaseContext);
-  const currentToken = localStorage.getItem(TOKEN_KEY);
-
-  useEffect(() => {
-    if (currentToken) {
-      isValidToken(currentToken)
-        ? dispatch({
-            type: "LOGIN",
-            payload: { ...currentToken },
-          })
-        : dispatch({ type: "LOGOUT" });
-    }
-  }, [currentToken, dispatch]);
-
+  const user = useCurrentToken();
   const isBase = BaseCtx.isBase;
 
   return (
