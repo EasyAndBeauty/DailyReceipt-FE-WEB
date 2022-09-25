@@ -1,7 +1,7 @@
-import * as S from "./CalendarModal.styles";
-import { ReactComponent as SmallArrowIcon } from "assets/svg/arrow-s.svg";
-import styled from "styled-components";
 import { useState } from "react";
+import { Calendar } from "components";
+import { ReactComponent as SmallArrowIcon } from "assets/svg/arrow-s.svg";
+import * as S from "./CalendarModal.styles";
 
 /**
  * CalendarModal
@@ -56,15 +56,17 @@ export function CalendarModal({ selectedDate, onSelectDayOfWeek }) {
           <SmallArrowIcon />
         </S.PrevBtn>
         <S.CalendarTitle>
-          {yearMonth.year}년 {yearMonth.month}월
+          {yearMonth.year}. {yearMonth.month}.
         </S.CalendarTitle>
         <S.NextBtn onClick={() => changeMonth(1)}>
           <SmallArrowIcon />
         </S.NextBtn>
       </S.CalendarHeader>
-      {/*<Calendar />*/}
-      {/*날짜를 어디에서 가져오는지 확인하기 (동일한 날짜에서 달력을 시작하게 하거나 현재 날짜로)*/}
-      {/*현재 달을 기준으로 이전 달, 다음 달을 가져와서 렌더링하기 (슬라이딩)*/}
+      <Calendar
+        onSelectDayOfWeek={onSelectDayOfWeek}
+        year={yearMonth.year}
+        month={yearMonth.month}
+      />
       {/*투두 기록을 어디에서 가져오는지 확인하기(투두 있는 날 표시)*/}
       {/*날짜를 누르면 해당하는 날짜로 이동하기 => 일요일 기준으로 이동?*/}
     </S.CalendarContainer>

@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
 export const CalendarContainer = styled.div`
-  width: 80vw;
-  height: 276px;
+  width: calc(100% - 40px);
   position: absolute;
-  top: 40px;
-  right: -130%;
-  display: flex;
-  justify-content: center;
+  top: 110px;
   z-index: 999;
   padding: 24px 20px;
   background-color: ${({ theme }) => theme.wt};
   border-radius: 20px;
   box-sizing: border-box;
+  color: ${({ theme }) => theme.bk};
 `;
 export const CalendarHeader = styled.div`
   width: 100%;
@@ -22,7 +19,11 @@ export const CalendarHeader = styled.div`
   justify-content: space-between;
 `;
 
-export const CalendarTitle = styled.div``;
+export const CalendarTitle = styled.div`
+  font-family: "Courier Prime";
+  font-weight: 700;
+  font-size: 20px;
+`;
 
 export const PrevBtn = styled.div`
   width: 20px;

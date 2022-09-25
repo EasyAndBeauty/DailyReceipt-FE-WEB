@@ -43,6 +43,7 @@ export { MyFooter } from "./molecules/MyFooter";
 //TodoPage
 export { TodoList } from "./organisms/TodoList";
 export { CalendarModal } from "./organisms/CalendarModal";
+export { Calendar } from "./organisms/Calendar";
 
 // MyReceiptPage
 export { MySection } from "./organisms/MySection";
