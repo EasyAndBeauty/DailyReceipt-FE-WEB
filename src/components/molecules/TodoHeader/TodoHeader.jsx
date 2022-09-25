@@ -30,34 +30,35 @@ export function TodoHeader({ selectedDate, onSelectDayOfWeek }) {
   };
 
   return (
-    <S.Container>
-      <HeaderText>{selectedMonth(selectedDate)}</HeaderText>
-      <div>
-        <S.Btn onClick={() => setCalendarOn(true)}>
-          <FontAwesomeIcon
-            icon={faCalendarDays}
-            size="2x"
-            color="#aaaaaa"
-          ></FontAwesomeIcon>
-          {calendarOn && (
-            <>
-              <CalendarModal
-                selectedDate={selectedDate}
-                onSelectDayOfWeek={onSelectDayOfWeek}
-              />
-              {/* setCalendarOn 실행이 안됨 */}
-              <S.Dimmed onClick={() => setCalendarOn(false)} />
-            </>
-          )}
-        </S.Btn>
-        <S.Btn onClick={goPage.bind(this, "/my")}>
-          <FontAwesomeIcon
-            icon={faReceipt}
-            size="2x"
-            color="#aaaaaa"
-          ></FontAwesomeIcon>
-        </S.Btn>
-      </div>
-    </S.Container>
+    <>
+      <S.Container>
+        <HeaderText>{selectedMonth(selectedDate)}</HeaderText>
+        <div>
+          <S.Btn onClick={() => setCalendarOn(true)}>
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              size="2x"
+              color="#aaaaaa"
+            ></FontAwesomeIcon>
+          </S.Btn>
+          <S.Btn onClick={goPage.bind(this, "/my")}>
+            <FontAwesomeIcon
+              icon={faReceipt}
+              size="2x"
+              color="#aaaaaa"
+            ></FontAwesomeIcon>
+          </S.Btn>
+        </div>
+      </S.Container>
+      {calendarOn && (
+        <>
+          <CalendarModal
+            selectedDate={selectedDate}
+            onSelectDayOfWeek={onSelectDayOfWeek}
+          />
+          <S.Dimmed onClick={() => setCalendarOn(false)} />
+        </>
+      )}
+    </>
   );
 }

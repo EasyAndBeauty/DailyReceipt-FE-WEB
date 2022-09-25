@@ -20,7 +20,6 @@ export const Container = styled.div`
 `;
 
 export const Btn = styled.button`
-  position: relative;
   margin-left: 8px;
   background-color: transparent;
   color: ${(props) => props.wt};
