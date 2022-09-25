@@ -8,6 +8,7 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
+  RedirectionPage,
 } from "components";
 import { TOKEN_KEY } from "helper/constants";
 import { isValidToken } from "helper/jwt";
@@ -43,6 +44,7 @@ function App() {
           <Route path="*" element={<LoginPage />} />
         </>
       )}
+      <Route path="*" element={<RedirectionPage />} />
     </Routes>
   );
 }
