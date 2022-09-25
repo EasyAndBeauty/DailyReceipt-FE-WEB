@@ -7,6 +7,7 @@ import {
   LoginPage,
   ReceiptPage,
   UserPage,
+  RedirectionPage,
 } from "components";
 import { useCurrentToken } from "hooks/useCurrentToken";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="*" element={<LoginPage />} />
         </>
       )}
+      <Route path="*" element={<RedirectionPage />} />
     </Routes>
   );
 }
