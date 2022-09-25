@@ -9,6 +9,8 @@ export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
 export { TimerImage } from "./atoms/TimerImage";
+export { CalendarDay } from "./atoms/CalendarDay";
+
 //ReceiptPage
 export { ReceiptPaperTriangle } from "./atoms/ReceiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/ReceiptPaperInfo";
