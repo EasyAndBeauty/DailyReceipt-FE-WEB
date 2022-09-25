@@ -11,7 +11,11 @@ import * as S from "./CalendarModal.styles";
  *
  * @returns {JSX.Element} 달력 모달 컴포넌트
  */
-export function CalendarModal({ selectedDate, onSelectDayOfWeek }) {
+export function CalendarModal({
+  selectedDate,
+  onSelectDayOfWeek,
+  setCalendarOn,
+}) {
   const [yearMonth, setYearMonth] = useState({
     year: selectedDate.getFullYear(),
     month: selectedDate.getMonth() + 1,
@@ -66,6 +70,7 @@ export function CalendarModal({ selectedDate, onSelectDayOfWeek }) {
         onSelectDayOfWeek={onSelectDayOfWeek}
         year={yearMonth.year}
         month={yearMonth.month}
+        setCalendarOn={setCalendarOn}
       />
       {/*투두 기록을 어디에서 가져오는지 확인하기(투두 있는 날 표시)*/}
       {/*날짜를 누르면 해당하는 날짜로 이동하기 => 일요일 기준으로 이동?*/}

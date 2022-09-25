@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as S from "./Calendar.styles";
 
-export function Calendar({ onSelectDayOfWeek, year, month }) {
+export function Calendar({ onSelectDayOfWeek, year, month, setCalendarOn }) {
   const now = new Date();
   const startDay = new Date(year, month - 1, 1).getDay();
   const lastDay = new Date(year, month, 0).getDate();
@@ -31,6 +31,11 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
     setDays(dayArr);
   }, [year, month]);
 
+  function changeDay(day) {
+    onSelectDayOfWeek(new Date(year, month - 1, day));
+    setCalendarOn(false);
+  }
+
   return (
     <S.DayContainer>
       {days.map((day, index) => {
@@ -44,11 +49,7 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
           now.getDate() === day
         ) {
           return (
-            <S.Day
-              key={index}
-              className="today"
-              onClick={() => onSelectDayOfWeek(new Date(year, month - 1, day))}
-            >
+            <S.Day key={index} className="today" onClick={() => changeDay(day)}>
               <span>{day}</span>
             </S.Day>
           );
@@ -56,10 +57,7 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
 
         // 디폴트
         return (
-          <S.Day
-            key={index}
-            onClick={() => onSelectDayOfWeek(new Date(year, month - 1, day))}
-          >
+          <S.Day key={index} onClick={() => changeDay(day)}>
             <span>{day}</span>
           </S.Day>
         );

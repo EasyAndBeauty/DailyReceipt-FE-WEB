@@ -55,6 +55,7 @@ export function TodoHeader({ selectedDate, onSelectDayOfWeek }) {
           <CalendarModal
             selectedDate={selectedDate}
             onSelectDayOfWeek={onSelectDayOfWeek}
+            setCalendarOn={setCalendarOn}
           />
           <S.Dimmed onClick={() => setCalendarOn(false)} />
         </>
