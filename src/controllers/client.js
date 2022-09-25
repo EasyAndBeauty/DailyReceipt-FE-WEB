@@ -15,7 +15,7 @@ const requestIntercept = (user) => {
   client.interceptors.request.use(
     (config) => {
       if (!config.headers["Authorization"]) {
-        config.headers["Authorization"] = `Bearer ${user.accessToken}`;
+        config.headers["Authorization"] = `Bearer ${user?.token?.accessToken}`;
       }
       return config;
     },

@@ -22,6 +22,7 @@ import * as S from "./TodoPage.styles";
 export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+
   const { getDataLogic, postDataLogic, putDataLogic, deleteDataLogic } =
     useDataFetch({
       todos,
@@ -64,6 +65,10 @@ export function TodoPage() {
   useEffect(() => {
     BaseCtx.setIsBase(true);
   }, []);
+
+  useEffect(() => {
+    getDataLogic();
+  }, [getDataLogic]);
 
   return (
     <Fragment>

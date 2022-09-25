@@ -34,7 +34,6 @@ function TodoItem({
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
   const [count, setCount] = useState(POMODORO_TIME);
   const { isDone } = todo;
-  //   const authCtx = useContext(AtuhContext);
 
   const [done, setDone] = useState(isDone);
 
@@ -57,9 +56,6 @@ function TodoItem({
     }
   };
 
-  // delelte item
-  // const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
-
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
     if (isEditing === false) {
@@ -68,7 +64,6 @@ function TodoItem({
   };
 
   const handleClickToDoRemoveButton = (e) => {
-    console.log("다음의 Todo 항목을 삭제합니다.");
     onRemove(todo.todoId);
   };
 
@@ -85,6 +80,7 @@ function TodoItem({
       setCount(POMODORO_TIME);
     }
   }, [isRunning]);
+
   return (
     <S.TodoItemBlock>
       <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
@@ -150,7 +146,7 @@ export function TodoListBlock({ todos, onRemove, onEdit }) {
 
   return (
     <S.TodoListBlockStyle>
-      {todos.map((todo) => (
+      {todos?.map((todo) => (
         <TodoItem
           key={todo.todoId}
           id={todo.todoId}
