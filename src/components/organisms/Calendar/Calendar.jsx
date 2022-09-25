@@ -44,7 +44,11 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
           now.getDate() === day
         ) {
           return (
-            <S.Day key={index} className="today">
+            <S.Day
+              key={index}
+              className="today"
+              onClick={() => onSelectDayOfWeek(new Date(year, month - 1, day))}
+            >
               <span>{day}</span>
             </S.Day>
           );
@@ -52,7 +56,10 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
 
         // 디폴트
         return (
-          <S.Day key={index}>
+          <S.Day
+            key={index}
+            onClick={() => onSelectDayOfWeek(new Date(year, month - 1, day))}
+          >
             <span>{day}</span>
           </S.Day>
         );
