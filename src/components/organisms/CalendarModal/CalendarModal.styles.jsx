@@ -20,14 +20,20 @@ export const CalendarHeader = styled.div`
 `;
 
 export const CalendarTitle = styled.div`
-  font-family: "Courier Prime";
+  font-family: "Courier Prime", monospace;
   font-weight: 700;
   font-size: 20px;
+  cursor: default;
 `;
 
 export const PrevBtn = styled.div`
   width: 20px;
   height: 20px;
+  cursor: pointer;
+
+  &:active {
+    opacity: 0.4;
+  }
 `;
 
 export const NextBtn = styled(PrevBtn)`
