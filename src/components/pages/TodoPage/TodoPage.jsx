@@ -52,11 +52,6 @@ export function TodoPage() {
      */
   };
 
-  const selectedMonth = (Date) => {
-    return Date.toLocaleDateString("en-US", {
-      month: "long",
-    });
-  };
   const selectedDayOfWeek = (Date) => {
     return Date.getDay();
   };
@@ -68,7 +63,10 @@ export function TodoPage() {
   return (
     <Fragment>
       <S.Container>
-        <TodoHeader month={selectedMonth(selectedDate)} />
+        <TodoHeader
+          selectedDate={selectedDate}
+          onSelectDayOfWeek={onSelectDayOfWeek}
+        />
         <Week
           selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
           onSelectDayOfWeek={onSelectDayOfWeek}
