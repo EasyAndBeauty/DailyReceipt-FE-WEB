@@ -73,6 +73,7 @@ export function TodoPage() {
           onSelectDayOfWeek={onSelectDayOfWeek}
         />
         <Week
+          selectedDate={selectedDate}
           selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
           onSelectDayOfWeek={onSelectDayOfWeek}
         />
