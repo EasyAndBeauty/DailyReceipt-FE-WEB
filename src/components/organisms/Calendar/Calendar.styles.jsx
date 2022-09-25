@@ -16,9 +16,11 @@ export const Day = styled.div`
   justify-content: center;
   cursor: pointer;
 
+  &.today,
   &:hover {
     font-weight: 700;
     span {
+      transform: translateY(1.3px);
       border-bottom: 2px solid ${({ theme }) => theme.bk};
     }
   }

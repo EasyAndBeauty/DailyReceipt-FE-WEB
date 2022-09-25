@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "./Calendar.styles";
 
 export function Calendar({ onSelectDayOfWeek, year, month }) {
+  const now = new Date();
   const startDay = new Date(year, month - 1, 1).getDay();
   const lastDay = new Date(year, month, 0).getDate();
   const [days, setDays] = useState([]);
@@ -33,7 +34,23 @@ export function Calendar({ onSelectDayOfWeek, year, month }) {
   return (
     <S.DayContainer>
       {days.map((day, index) => {
+        // 1일 이전이나 말일 이후 빈칸
         if (day === 0) return <S.Day key={index} />;
+
+        // 오늘 날짜
+        if (
+          now.getFullYear() === year &&
+          now.getMonth() + 1 === month &&
+          now.getDate() === day
+        ) {
+          return (
+            <S.Day key={index} className="today">
+              <span>{day}</span>
+            </S.Day>
+          );
+        }
+
+        // 디폴트
         return (
           <S.Day key={index}>
             <span>{day}</span>
