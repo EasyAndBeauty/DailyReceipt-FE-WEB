@@ -83,7 +83,9 @@ function TodoItem({
 
   return (
     <S.TodoItemBlock>
-      <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
+      <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done}>
+        {done && <CheckIcon />}
+      </S.CheckCircle>
       <S.TodoItemText
         defaultValue={taskValue || ""}
         disabled={isEditing}
