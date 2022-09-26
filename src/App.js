@@ -13,7 +13,8 @@ import { useCurrentToken } from "hooks/useCurrentToken";
 
 function App() {
   const BaseCtx = useContext(BaseContext);
-  const user = useCurrentToken();
+  const { user } = useCurrentToken();
+  const { isLoggedIn } = user;
   const isBase = BaseCtx.isBase;
 
   return (
@@ -22,7 +23,7 @@ function App() {
       <Route path="/auth/kakao/callback" element={<AuthPage />} />
       {isBase && (
         <>
-          {user.isLoggedIn && <Route path="/my" element={<UserPage />} />}
+          {isLoggedIn && <Route path="/my" element={<UserPage />} />}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/receipt" element={<ReceiptPage />} />
           <Route path="*" element={<LoginPage />} />

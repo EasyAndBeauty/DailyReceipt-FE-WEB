@@ -6,22 +6,18 @@ import { isValidToken } from "helper/jwt";
 export const useCurrentToken = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
-  const currentToken = localStorage.getItem(TOKEN_KEY);
 
   useEffect(() => {
+    const currentToken = localStorage.getItem(TOKEN_KEY);
+
     if (currentToken) {
       isValidToken(currentToken)
         ? dispatch({
             type: "LOGIN",
-            payload: {
-              token: JSON.parse(currentToken),
-            },
+            payload: JSON.parse(currentToken),
           })
         : dispatch({ type: "LOGOUT" });
     }
-  }, [currentToken, dispatch]);
-
-  console.log("user", user);
-
-  return user;
+  }, [dispatch]);
+  return { user };
 };

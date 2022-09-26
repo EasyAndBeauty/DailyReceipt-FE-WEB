@@ -15,7 +15,7 @@ const requestIntercept = (user) => {
   client.interceptors.request.use(
     (config) => {
       if (!config.headers["Authorization"]) {
-        config.headers["Authorization"] = `Bearer ${user.accessToken}`;
+        config.headers["Authorization"] = `Bearer ${user?.accessToken}`;
       }
       return config;
     },
@@ -23,10 +23,28 @@ const requestIntercept = (user) => {
   );
 };
 
+// cookie에 보존된 refresh_token을 보내서access_token을 취득함
+const RefreshToken = () => {
+  const user = useAuthState();
+  const dispatch = useAuthDispatch();
+
+  const refresh = async () => {
+    requestIntercept(user);
+    const response = await axios.post("/re-issuance");
+    dispatch({
+      type: "UPDATE",
+      payload: { isLoggedIn: true, ...response.data },
+    });
+
+    return response.data.accessToken;
+  };
+
+  return refresh;
+};
+
 export const AuthClient = () => {
   const refresh = RefreshToken();
   const user = useAuthState();
-
   useEffect(() => {
     requestIntercept(user);
 
@@ -57,26 +75,6 @@ export const AuthClient = () => {
   }, [user, refresh]);
 
   return client;
-};
-
-// cookie에 보존된 refresh_token을 보내서access_token을 취득함
-const RefreshToken = () => {
-  const user = useAuthState();
-  const dispatch = useAuthDispatch();
-
-  const refresh = async () => {
-    requestIntercept(user);
-    const response = await axios.post("/re-issuance");
-
-    dispatch({
-      type: "UPDATE",
-      payload: { isLoggedIn: true, ...response.data },
-    });
-
-    return response.data.accessToken;
-  };
-
-  return refresh;
 };
 
 export default AuthClient;
