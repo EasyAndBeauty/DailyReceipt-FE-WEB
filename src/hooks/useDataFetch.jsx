@@ -42,15 +42,26 @@ export default function useDataFetch({ todos, setTodos, date }) {
 
   // get - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
   const getLocalData = useCallback(async () => {
-    const data = await getValue(newDate);
-    setTodos(data);
+    try {
+      const data = await getValue(newDate);
+      setTodos(data);
+    } catch (e) {
+      console.log(e);
+    }
   }, [newDate]);
 
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
   const getUserData = useCallback(async () => {
-    const { data } = (await getTodoList(newDate)) || [];
-    console.log(data);
-    setTodos(data);
+    try {
+      const res = await getTodoList(newDate);
+      if (res.status !== 200) {
+        throw new Error(res.status);
+      }
+      const { data } = res;
+      setTodos(data);
+    } catch (e) {
+      console.log(e);
+    }
   }, [newDate]);
 
   const getDataLogic = isLoggedIn ? getUserData : getLocalData;
@@ -64,42 +75,56 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // post - 로그인 사용자 : 입력시 서버에 데이터를 보낸다 + localStorage에 저장한다.
   const postUseData = useCallback(
     async (newTodo) => {
-      const nextTodo = { ...newTodo, date: newDate };
-      const todoId = await postTodo(nextTodo);
+      try {
+        const nextTodo = { ...newTodo, date: newDate };
+        const res = await postTodo(nextTodo);
 
-      const { task, timer, isDone } = newTodo;
+        if (res.status !== 201) {
+          throw new Error(res.status);
+        }
+        const { data } = res;
 
-      setTodos((pre) => [
-        ...pre,
-        {
-          todoId,
-          task,
-          date: newDate,
-          isDone,
-          timer,
-        },
-      ]);
+        const todoId = data;
+        const { task, timer, isDone } = newTodo;
+
+        setTodos((pre) => [
+          ...pre,
+          {
+            todoId,
+            task,
+            date: newDate,
+            isDone,
+            timer,
+          },
+        ]);
+      } catch (e) {
+        console.log(e);
+      }
     },
     [newDate, postTodo, setTodos]
   );
 
   // post - 게스트 사용자  : localStorage에 데이터를 저장한다
   const postLocalData = useCallback(
-    (todo) => {
-      const { task, timer, isDone } = todo;
-      const newData = [
-        ...todos,
-        {
-          todoId: uuidv4(),
-          task,
-          date: newDate,
-          isDone,
-          timer,
-        },
-      ];
+    async (todo) => {
+      try {
+        const { task, timer, isDone } = todo;
+        const newData = [
+          ...todos,
+          {
+            todoId: uuidv4(),
+            task,
+            date: newDate,
+            isDone,
+            timer,
+          },
+        ];
 
-      setTodos(newData);
-      setValue(newData, newDate);
+        setTodos(newData);
+        setValue(newData, newDate);
+      } catch (e) {
+        console.log(e);
+      }
     },
     [todos, newDate, setTodos, setValue]
   );
@@ -115,20 +140,30 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
   const putUseData = useCallback(
     async (id, todo) => {
-      const { task, timer, isDone, date } = todo;
-      const req = { task, timer, isDone, date };
-      const newTodo = await updateTodo(id, req);
-      setTodos((pre) => {
-        return pre.map((todo) => {
-          if (todo.todoId === id) {
-            return {
-              ...todo,
-              ...newTodo,
-            };
-          }
-          return todo;
+      try {
+        const { task, timer, isDone, date } = todo;
+        const req = { task, timer, isDone, date };
+        const res = await updateTodo(id, req);
+
+        if (res.status !== 200) {
+          throw new Error(res.status);
+        }
+
+        const { data } = res;
+        setTodos((pre) => {
+          return pre.map((todo) => {
+            if (todo.todoId === id) {
+              return {
+                ...todo,
+                ...data,
+              };
+            }
+            return todo;
+          });
         });
-      });
+      } catch (e) {
+        console.log(e);
+      }
     },
     [setTodos, updateTodo]
   );
@@ -136,14 +171,18 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // put - 게스트 사용자  : localStorage에 데이터를 수정한다.
   const putLocalData = useCallback(
     async (id, task) => {
-      const newData = [...todos].map((todo) => {
-        if (todo.todoId === id) {
-          return task;
-        }
-        return todo;
-      });
-      await setValue(newData, newDate);
-      setTodos(newData);
+      try {
+        const newData = [...todos].map((todo) => {
+          if (todo.todoId === id) {
+            return task;
+          }
+          return todo;
+        });
+        await setValue(newData, newDate);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
     },
     [todos, setValue, setTodos, newDate]
   );
@@ -161,9 +200,13 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // delete - 로그인 사용자 : 삭제시 서버에 데이터를 보낸다 + localStorage에 저장한다.
   const deleteUseData = useCallback(
     async (id) => {
-      const newData = todos.filter((todo) => todo.todoId !== id);
-      await deleteTodo(id);
-      setTodos(newData);
+      try {
+        const newData = todos.filter((todo) => todo.todoId !== id);
+        await deleteTodo(id);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
     },
     [deleteTodo, setTodos, todos]
   );
@@ -172,9 +215,13 @@ export default function useDataFetch({ todos, setTodos, date }) {
 
   const deleteLocalData = useCallback(
     async (id) => {
-      const newData = todos.filter((todo) => todo.todoId !== id);
-      await setValue(newData, newDate);
-      setTodos(newData);
+      try {
+        const newData = todos.filter((todo) => todo.todoId !== id);
+        await setValue(newData, newDate);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
     },
     [newDate, setTodos, setValue, todos]
   );
@@ -192,6 +239,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
         }
       }
       await clearAllDateValue();
+      getDataLogic();
     } catch (e) {
       console.log(e);
     }

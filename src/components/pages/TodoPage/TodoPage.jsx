@@ -23,12 +23,17 @@ export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const { getDataLogic, postDataLogic, putDataLogic, deleteDataLogic } =
-    useDataFetch({
-      todos,
-      setTodos,
-      date: selectedDate,
-    });
+  const {
+    getDataLogic,
+    postDataLogic,
+    putDataLogic,
+    deleteDataLogic,
+    registeTodos,
+  } = useDataFetch({
+    todos,
+    setTodos,
+    date: selectedDate,
+  });
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} />;
@@ -68,8 +73,7 @@ export function TodoPage() {
 
   useEffect(() => {
     getDataLogic();
-    console.log("selectedDate", todos);
-  }, [getDataLogic, selectedDate, setTodos]);
+  }, [getDataLogic, selectedDate]);
 
   return (
     <Fragment>
