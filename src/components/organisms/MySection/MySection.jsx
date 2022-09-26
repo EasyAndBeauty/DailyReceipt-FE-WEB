@@ -30,7 +30,6 @@ export const MySection = () => {
             <S.PaperContainer key={idx}>
               <ReceiptPaper
                 onClick={() => {
-                  console.log("영수증 작성");
                   navigate(`/receipt`, { state: { todos } });
                 }}
                 todos={todos}
