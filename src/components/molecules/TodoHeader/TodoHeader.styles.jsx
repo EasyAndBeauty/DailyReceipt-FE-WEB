@@ -20,10 +20,21 @@ export const Container = styled.div`
 `;
 
 export const Btn = styled.button`
-  background-color: transparent;
   margin-left: 8px;
+  background-color: transparent;
   color: ${(props) => props.wt};
+
   &:last-child {
     transform: translateY(1px);
   }
+`;
+
+export const Dimmed = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
 `;

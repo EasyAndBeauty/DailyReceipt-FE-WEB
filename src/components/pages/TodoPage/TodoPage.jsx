@@ -35,6 +35,11 @@ export function TodoPage() {
     date: selectedDate,
   });
 
+  // 캘린더 날짜 선택시 selectedDate가 변경되는지 확인하는 용
+  useEffect(() => {
+    console.log(selectedDate);
+  }, [selectedDate]);
+
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} />;
   });
@@ -58,11 +63,6 @@ export function TodoPage() {
      */
   };
 
-  const selectedMonth = (Date) => {
-    return Date.toLocaleDateString("en-US", {
-      month: "long",
-    });
-  };
   const selectedDayOfWeek = (Date) => {
     return Date.getDay();
   };
@@ -78,8 +78,12 @@ export function TodoPage() {
   return (
     <Fragment>
       <S.Container>
-        <TodoHeader month={selectedMonth(selectedDate)} />
+        <TodoHeader
+          selectedDate={selectedDate}
+          onSelectDayOfWeek={onSelectDayOfWeek}
+        />
         <Week
+          selectedDate={selectedDate}
           selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
           onSelectDayOfWeek={onSelectDayOfWeek}
         />
