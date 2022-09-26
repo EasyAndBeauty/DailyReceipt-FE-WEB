@@ -20,25 +20,16 @@ import * as S from "./TodoPage.styles";
  */
 
 export function TodoPage() {
+  const [allTodos, setAllTodos] = useState([]);
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const {
-    getDataLogic,
-    postDataLogic,
-    putDataLogic,
-    deleteDataLogic,
-    registeTodos,
-  } = useDataFetch({
+  const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
     todos,
     setTodos,
+    setAllTodos,
     date: selectedDate,
   });
-
-  // 캘린더 날짜 선택시 selectedDate가 변경되는지 확인하는 용
-  useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} />;
@@ -67,13 +58,13 @@ export function TodoPage() {
     return Date.getDay();
   };
 
+  const navigateUserPage = () => {
+    navigate("/my", { state: { allTodos } });
+  };
+
   useEffect(() => {
     BaseCtx.setIsBase(true);
   }, []);
-
-  useEffect(() => {
-    getDataLogic();
-  }, [getDataLogic, selectedDate]);
 
   return (
     <Fragment>
@@ -81,6 +72,7 @@ export function TodoPage() {
         <TodoHeader
           selectedDate={selectedDate}
           onSelectDayOfWeek={onSelectDayOfWeek}
+          navigateUserPage={navigateUserPage}
         />
         <Week
           selectedDate={selectedDate}

@@ -15,13 +15,8 @@ import { useState } from "react";
  *
  */
 
-export function TodoHeader({ selectedDate, onSelectDayOfWeek }) {
+export function TodoHeader({ selectedDate, onSelectDayOfWeek, navigateUserPage }) {
   const [calendarOn, setCalendarOn] = useState(false);
-  let navigate = useNavigate();
-
-  const goPage = (url) => {
-    navigate(url);
-  };
 
   const selectedMonth = (Date) => {
     return Date.toLocaleDateString("en-US", {
@@ -41,7 +36,7 @@ export function TodoHeader({ selectedDate, onSelectDayOfWeek }) {
               color="#aaaaaa"
             ></FontAwesomeIcon>
           </S.Btn>
-          <S.Btn onClick={goPage.bind(this, "/my")}>
+          <S.Btn onClick={() => navigateUserPage()}>
             <FontAwesomeIcon
               icon={faReceipt}
               size="2x"

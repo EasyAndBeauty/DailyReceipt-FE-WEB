@@ -20,7 +20,7 @@ import { useCurrentToken } from "hooks/useCurrentToken";
  *
  */
 
-export default function useDataFetch({ todos, setTodos, date }) {
+export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
   const { user } = useCurrentToken();
 
   const { isLoggedIn } = user;
@@ -65,6 +65,20 @@ export default function useDataFetch({ todos, setTodos, date }) {
   }, [newDate]);
 
   const getDataLogic = isLoggedIn ? getUserData : getLocalData;
+
+  const getAllUserData = useCallback(async () => {
+    try {
+      const res = await getTodoList();
+
+      if (res.status !== 200) {
+        throw new Error(res.status);
+      }
+      const { data } = res;
+      setAllTodos(data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, []);
 
   /**
    * POST - 로그인 사용자 : 서버에 새로운 데이터를 저장한다
@@ -252,11 +266,20 @@ export default function useDataFetch({ todos, setTodos, date }) {
     }
   }, []);
 
+  useEffect(() => {
+    getDataLogic();
+  }, [getDataLogic, newDate]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getAllUserData();
+    }
+  }, [getAllUserData, isLoggedIn, todos]);
+
   return {
-    getDataLogic,
     postDataLogic,
     putDataLogic,
     deleteDataLogic,
-    registeTodos,
+    getAllUserData,
   };
 }
