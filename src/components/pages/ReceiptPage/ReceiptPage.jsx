@@ -10,7 +10,7 @@ import * as S from "./ReceiptPage.styles";
 
 export function ReceiptPage() {
   const {
-    state: { todos, date },
+    state: { todos, date, receiptNumber },
   } = useLocation();
   const navigate = useNavigate();
   const receiptRef = useRef(null);

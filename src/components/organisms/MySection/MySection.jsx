@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { v4 as uuidv4 } from "uuid";
-import dayjs from "dayjs";
-import { ReceiptPaper } from "components";
+import { ReceiptPaper, ScrollArrow } from "components";
 import * as S from "./MySection.styles";
 
 /**
@@ -14,25 +13,34 @@ import * as S from "./MySection.styles";
  *
  * */
 export const MySection = () => {
-  const week = new Array(7).fill(0).map((_, index) => {
-    const { $d } = dayjs().weekday(index);
-    return JSON.parse(localStorage.getItem(dayjs($d).format("YYYY-MM-DD")));
-  });
+  const {
+    state: { allTodos },
+  } = useLocation();
 
-  const [allTodos] = useState(week.filter((todo) => todo !== null));
   const navigate = useNavigate();
+
+  const [totalTodos, setTotalTodos] = useState(() => {
+    const result = [];
+    const date = allTodos.map((todo) => todo.date);
+    const uniqueDate = [...new Set(date)];
+    uniqueDate.forEach((date) => {
+      const sameDateTodos = allTodos.filter((todo) => todo.date === date);
+      result.push(sameDateTodos);
+    });
+    return result;
+  });
 
   return (
     <S.Container>
       <ScrollMenu>
-        {allTodos.map((todos, idx) => {
+        {totalTodos.map((todos, idx) => {
           return (
             <S.PaperContainer key={idx}>
               <ReceiptPaper
                 onClick={() => {
                   navigate(`/receipt`, { state: { todos } });
                 }}
-                todos={todos}
+                todos={Array.from(todos)}
                 key={uuidv4()}
               />
             </S.PaperContainer>

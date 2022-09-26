@@ -9,6 +9,7 @@ import {
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/baseContext";
+import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
@@ -20,25 +21,16 @@ import * as S from "./TodoPage.styles";
  */
 
 export function TodoPage() {
+  const [allTodos, setAllTodos] = useState([]);
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const {
-    getDataLogic,
-    postDataLogic,
-    putDataLogic,
-    deleteDataLogic,
-    registeTodos,
-  } = useDataFetch({
+  const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
     todos,
     setTodos,
+    setAllTodos,
     date: selectedDate,
   });
-
-  // 캘린더 날짜 선택시 selectedDate가 변경되는지 확인하는 용
-  useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} />;
@@ -52,7 +44,16 @@ export function TodoPage() {
     if (!todos.length) {
       alert("항목을 작성해주세요");
     } else {
-      navigate("/receipt", { state: { todos, date: selectedDate } });
+      const date = allTodos.map((todo) => todo.date);
+      const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
+        return (
+          dayjs(date).format("YYYY-MM-DD") ===
+          dayjs(selectedDate).format("YYYY-MM-DD")
+        );
+      });
+      navigate("/receipt", {
+        state: { todos, date: selectedDate, receiptNumber: receiptNumber + 1 },
+      });
     }
   };
 
@@ -67,13 +68,13 @@ export function TodoPage() {
     return Date.getDay();
   };
 
+  const navigateUserPage = () => {
+    navigate("/my", { state: { allTodos } });
+  };
+
   useEffect(() => {
     BaseCtx.setIsBase(true);
   }, []);
-
-  useEffect(() => {
-    getDataLogic();
-  }, [getDataLogic, selectedDate]);
 
   return (
     <Fragment>
@@ -81,6 +82,7 @@ export function TodoPage() {
         <TodoHeader
           selectedDate={selectedDate}
           onSelectDayOfWeek={onSelectDayOfWeek}
+          navigateUserPage={navigateUserPage}
         />
         <Week
           selectedDate={selectedDate}
