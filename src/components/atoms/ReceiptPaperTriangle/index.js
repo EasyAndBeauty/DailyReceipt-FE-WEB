@@ -1,0 +1,1 @@
+export { ReceiptPaperTriangle } from "./ReceiptPaperTriangle";

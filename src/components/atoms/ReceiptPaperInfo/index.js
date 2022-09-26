@@ -1,0 +1,1 @@
+export { ReceiptPaperInfo } from "./ReceiptPaperInfo";

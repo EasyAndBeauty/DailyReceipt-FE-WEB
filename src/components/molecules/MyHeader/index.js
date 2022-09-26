@@ -1,0 +1,1 @@
+export { MyHeader } from "./MyHeader";

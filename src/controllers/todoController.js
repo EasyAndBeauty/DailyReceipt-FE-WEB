@@ -1,39 +1,26 @@
-import { client } from "./client";
+import { AuthClient } from "./client";
 
-// 오늘 날짜 설정
-const today = new Date();
-const FORMATTED_TODAY = today.toISOString().split("T")[0];
+export const useTodoClient = () => {
+  const authClient = AuthClient();
 
-export const getTodoList = async (user_id, date = FORMATTED_TODAY, req) => {
-  try {
-    const response = await client.get(`/v2/todo/${user_id}`, {
-      params: { date },
+  // Todo: 백엔드 갱신 후 API요청 URL 수정
+  const getTodoList = async (date) => {
+    return await authClient.get("/api/v1/todo", {
+      params: { targetDate: date },
     });
+  };
 
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
+  const postTodo = async (todo) => {
+    return await authClient.post(`/api/v1/todo`, todo);
+  };
 
-export const postTodo = async (user_id, todo, req) => {
-  try {
-    const response = await client.post(`/v2/todo/${user_id}`, todo);
+  const updateTodo = async (todoId, todo) => {
+    return await authClient.put(`/api/v1/todo/${todoId}`, todo);
+  };
 
-    return response.data;
-  } catch (error) {
-    console.log("Todo를 추가하지 못했습니다.");
-    console.log(error);
-  }
-};
+  const deleteTodo = async (todoId) => {
+    return await authClient.delete(`/api/v1/todo/${todoId}`);
+  };
 
-export const updateTodo = async (id, todo, req) => {
-  try {
-    const response = await client.put(`/v1/todo/${id}`, todo);
-
-    return response.data;
-  } catch (error) {
-    console.log("Todo를 수정하지 못했습니다.");
-    console.log(error);
-  }
+  return { getTodoList, postTodo, updateTodo, deleteTodo };
 };
