@@ -31,7 +31,8 @@ export default function useDataFetch({ todos, setTodos, date }) {
     .toISOString()
     .split("T")[0];
 
-  const [storedValue, setValue, getValue] = useLocalStorage(newDate, []);
+  const { setValue, getValue, getAllDateValue, clearAllDateValue } =
+    useLocalStorage(newDate, []);
 
   /**
    * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
@@ -48,6 +49,7 @@ export default function useDataFetch({ todos, setTodos, date }) {
   // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
   const getUserData = useCallback(async () => {
     const { data } = (await getTodoList(newDate)) || [];
+    console.log(data);
     setTodos(data);
   }, [newDate]);
 
@@ -178,13 +180,35 @@ export default function useDataFetch({ todos, setTodos, date }) {
   );
 
   const deleteDataLogic = isLoggedIn ? deleteUseData : deleteLocalData;
-  // 임시
-  // const deleteDataLogic = deleteLocalData;
+
+  const registeTodos = async () => {
+    let allTodos = getAllDateValue();
+    try {
+      for (let todosWithnDate in allTodos) {
+        for (let todo of allTodos[todosWithnDate]) {
+          const { task, timer, isDone } = todo;
+          const req = { task, timer, isDone, date: todosWithnDate };
+          await postTodo(req);
+        }
+      }
+      await clearAllDateValue();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    let allTodos = getAllDateValue();
+    if (allTodos) {
+      registeTodos();
+    }
+  }, []);
 
   return {
     getDataLogic,
     postDataLogic,
     putDataLogic,
     deleteDataLogic,
+    registeTodos,
   };
 }
