@@ -9,6 +9,7 @@ import {
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/baseContext";
+import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
@@ -43,7 +44,16 @@ export function TodoPage() {
     if (!todos.length) {
       alert("항목을 작성해주세요");
     } else {
-      navigate("/receipt", { state: { todos, date: selectedDate } });
+      const date = allTodos.map((todo) => todo.date);
+      const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
+        return (
+          dayjs(date).format("YYYY-MM-DD") ===
+          dayjs(selectedDate).format("YYYY-MM-DD")
+        );
+      });
+      navigate("/receipt", {
+        state: { todos, date: selectedDate, receiptNumber: receiptNumber + 1 },
+      });
     }
   };
 
