@@ -117,3 +117,123 @@ export const dummyTodosList = [
     timer: 0,
   },
 ];
+
+export const dummyPinnedReceipts = [
+  {
+    id: 2,
+    todos: [
+      {
+        task: "create a meeting agenda",
+        date: "2022-08-29T12:41:21",
+        isDone: true,
+        timer: 0,
+      },
+    ],
+    pinned: true,
+    famous_saying: "Eat food. Not too much, mostly plants.",
+    createdAt: "",
+    updatedAt: "",
+  },
+  {
+    id: 16,
+    todos: [
+      {
+        task: "create a meeting agenda",
+        date: "2022-08-29T12:41:21",
+        isDone: true,
+        timer: 0,
+      },
+      {
+        task: "Update project plan ",
+        date: "2022-08-29T12:41:21",
+        isDone: false,
+        timer: 172,
+      },
+    ],
+    pinned: true,
+    famous_saying:
+      "Good advice is something a man gives when he is too old to set a bad example.",
+    createdAt: "",
+    updatedAt: "",
+  },
+  {
+    id: 17,
+    todos: [
+      {
+        task: "create a meeting agenda",
+        date: "2022-08-30T12:41:21",
+        isDone: true,
+        timer: 0,
+      },
+      {
+        task: "Update project plan ",
+        date: "2022-08-30T12:41:21",
+        isDone: false,
+        timer: 172,
+      },
+      {
+        task: "60 mins plank",
+        date: "2022-08-30T12:41:21",
+        isDone: false,
+        timer: 60,
+      },
+      {
+        task: "Take vitamins",
+        date: "2022-08-30T12:41:21",
+        isDone: true,
+        timer: 0,
+      },
+      {
+        id: 10,
+        task: "Study Typescript",
+        date: "2022-08-30T12:41:21",
+        isDone: true,
+        timer: 200,
+      },
+      {
+        task: "Learn Angular",
+        date: "2022-08-30T12:41:21",
+        isDone: true,
+        timer: 90,
+      },
+    ],
+    pinned: true,
+    famous_saying: "Respect your elders.",
+    createdAt: "",
+    updatedAt: "",
+  },
+  {
+    id: 1,
+    todos: [
+      {
+        task: "60 mins plank",
+        date: "2022-10-30T12:41:21",
+        isDone: false,
+        timer: 60,
+      },
+      {
+        task: "Take vitamins",
+        date: "2022-10-30T12:41:21",
+        isDone: true,
+        timer: 0,
+      },
+      {
+        id: 10,
+        task: "Study Typescript",
+        date: "2022-10-30T12:41:21",
+        isDone: true,
+        timer: 200,
+      },
+      {
+        task: "Learn Angular",
+        date: "2022-10-30T12:41:21",
+        isDone: true,
+        timer: 90,
+      },
+    ],
+    pinned: true,
+    famous_saying: "Most things done in secrecy are better left undone.",
+    createdAt: "",
+    updatedAt: "",
+  },
+];
