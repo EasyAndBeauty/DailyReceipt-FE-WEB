@@ -28,6 +28,7 @@ function TodoItem({
   hasRunningTimer,
   setRunningTimer,
   resetRunningTimer,
+  onOpenBottomSheet,
 }) {
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
@@ -43,6 +44,7 @@ function TodoItem({
   };
 
   const handleClickTimerButton = () => {
+    onOpenBottomSheet();
     if (hasRunningTimer === todo.todoId) {
       setIsRunning(!isRunning);
       resetRunningTimer();
@@ -129,7 +131,7 @@ function TodoItem({
  * @returns
  */
 
-export function TodoListBlock({ todos, onRemove, onEdit }) {
+export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
   const [hasRunningTimer, setHasRuuningTimer] = useState("");
 
   const setRunningTimer = (key) => {
@@ -158,6 +160,7 @@ export function TodoListBlock({ todos, onRemove, onEdit }) {
           hasRunningTimer={hasRunningTimer}
           setRunningTimer={setRunningTimer}
           resetRunningTimer={resetRunningTimer}
+          onOpenBottomSheet={onOpenBottomSheet}
         />
       ))}
     </S.TodoListBlockStyle>

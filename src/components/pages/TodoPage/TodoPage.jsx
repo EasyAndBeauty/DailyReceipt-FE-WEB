@@ -6,6 +6,7 @@ import {
   SquareBtn,
   TodoList,
   ReceiptPaperTriangle,
+  PomodoroBottomSheet,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/baseContext";
@@ -24,6 +25,7 @@ export function TodoPage() {
   const [allTodos, setAllTodos] = useState([]);
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
     todos,
@@ -72,6 +74,10 @@ export function TodoPage() {
     navigate("/my", { state: { allTodos } });
   };
 
+  const onOpenBottomSheet = (time) => {
+    setIsBottomSheetOpen(!isBottomSheetOpen);
+  };
+
   useEffect(() => {
     BaseCtx.setIsBase(true);
   }, []);
@@ -95,6 +101,7 @@ export function TodoPage() {
             onInsert={postDataLogic}
             onRemove={deleteDataLogic}
             onEdit={putDataLogic}
+            onOpenBottomSheet={onOpenBottomSheet}
           />
         </S.Content>
         <S.Bottom>
@@ -104,6 +111,10 @@ export function TodoPage() {
             children={"Print the Receipt"}
           />
         </S.Bottom>
+        <PomodoroBottomSheet
+          isOpen={isBottomSheetOpen}
+          onClick={() => setIsBottomSheetOpen(false)}
+        />
       </S.Container>
     </Fragment>
   );
