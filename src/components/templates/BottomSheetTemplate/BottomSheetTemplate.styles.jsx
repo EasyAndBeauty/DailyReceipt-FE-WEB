@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Background = styled.div`
-  height: 95%;
+  height: 100%;
   width: 100%;
   background-color: red;
   display: flex;
@@ -11,7 +11,7 @@ export const Background = styled.div`
   position: fixed;
   top: 0;
   text-align: center;
-  transform: translateY(120%);
+  transform: translateY(110%);
   animation-name: ${(props) =>
     props.isOpen !== null && (props.isOpen ? "open" : "close")};
   animation-fill-mode: forwards;
@@ -23,12 +23,12 @@ export const Background = styled.div`
       transform: translateY(110%);
     }
     to {
-      transform: translateY(10%);
+      transform: translateY(3%);
     }
   }
   @keyframes close {
     from {
-      transform: translateY(10%);
+      transform: translateY(3%);
     }
     to {
       transform: translateY(110%);

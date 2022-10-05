@@ -25,7 +25,7 @@ export function TodoPage() {
   const [allTodos, setAllTodos] = useState([]);
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
 
   const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
     todos,
