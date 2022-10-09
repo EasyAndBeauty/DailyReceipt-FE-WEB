@@ -13,9 +13,14 @@ import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow_below_sm_icon
  * @returns {React.Component} 네모난 버튼 컴포넌트
  */
 
-export function SquareBtn({ onClick, children, color = "#191919" }) {
+export function SquareBtn({
+  onClick,
+  children,
+  type = "default",
+  color = "#191919",
+}) {
   return (
-    <S.BtnContainer onClick={onClick} color={color}>
+    <S.BtnContainer onClick={onClick} color={color} type={type}>
       <span>{children}</span>
       {/*<ArrowBelowIcon />*/}
     </S.BtnContainer>
