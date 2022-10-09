@@ -69,6 +69,13 @@ function TodoItem({
 	const handleClickToDoRemoveButton = e => {
 		console.log("다음의 Todo 항목을 삭제합니다.");
 		onRemove(todo.todoId);
+		const isNotDeletedToDo = () => {
+			console.log(todo);
+			let todos = localStorage.getItem(todo.todoId); // -해당
+			console.log(todos);
+			// todos.forEach();
+		};
+		isNotDeletedToDo();
 	};
 
 	const onChangeTaskValue = e => {
