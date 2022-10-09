@@ -13,22 +13,22 @@ import * as S from "./ReceiptTodo.styles";
  */
 
 const makeEllipsis = (str, len) => {
-  if (str.length > len) {
-    return str.slice(0, len) + "...";
-  }
-  return str;
+	if (str.length > len) {
+		return str.slice(0, len) + "...";
+	}
+	return str;
 };
 
 export function ReceiptTodo({ children: { task, timer } }) {
-  return (
-    <S.Container>
-      <S.Info />
-      <S.Todo>
-        <S.Task>{makeEllipsis(task, ELLIPSISLENGTH)}</S.Task>
-        <S.Timer>
-          {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}
-        </S.Timer>
-      </S.Todo>
-    </S.Container>
-  );
+	return (
+		<S.Container>
+			<S.Info />
+			<S.Todo>
+				<S.Task>{makeEllipsis(task, ELLIPSISLENGTH)}</S.Task>
+				<S.Timer>
+					{Math.floor(timer / 60)}:{String(timer % 60).padStart(2, "0")}
+				</S.Timer>
+			</S.Todo>
+		</S.Container>
+	);
 }
