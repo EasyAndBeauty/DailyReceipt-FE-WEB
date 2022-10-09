@@ -21,9 +21,9 @@ dayjs.extend(weekOfYear);
  *
  * @returns {JSX.Element} - 요일 컴포넌트들을 배치한 컴포넌트
  */
-export function Week({ selectedDayOfWeek, onSelectDayOfWeek }) {
+export function Week({ selectedDate, selectedDayOfWeek, onSelectDayOfWeek }) {
   const week = new Array(7).fill(0).map((_, index) => {
-    return dayjs().weekday(index);
+    return dayjs(selectedDate).weekday(index);
   });
 
   return (

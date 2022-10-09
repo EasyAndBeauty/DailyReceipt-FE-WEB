@@ -1,14 +1,15 @@
 import { useState, Fragment, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-	TodoHeader,
-	Week,
-	SquareBtn,
-	TodoList,
-	ReceiptPaperTriangle,
+  TodoHeader,
+  Week,
+  SquareBtn,
+  TodoList,
+  ReceiptPaperTriangle,
 } from "components";
 import useDataFetch from "hooks/useDataFetch";
-import BaseContext from "store/base-context";
+import BaseContext from "store/baseContext";
+import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
 /**
  * TodoPage component
@@ -20,75 +21,90 @@ import * as S from "./TodoPage.styles";
  */
 
 export function TodoPage() {
-	const [todos, setTodos] = useState([]);
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
-		todos,
-		setTodos,
-		date: selectedDate,
-	});
+  const [allTodos, setAllTodos] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-	const Triangle = new Array(9).fill(0).map((_, idx) => {
-		return <ReceiptPaperTriangle key={idx} />;
-	});
+  const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
+    todos,
+    setTodos,
+    setAllTodos,
+    date: selectedDate,
+  });
 
-	const BaseCtx = useContext(BaseContext);
+  const Triangle = new Array(9).fill(0).map((_, idx) => {
+    return <ReceiptPaperTriangle key={idx} />;
+  });
 
-	const navigate = useNavigate();
+  const BaseCtx = useContext(BaseContext);
 
-	const onSubmitTodoList = () => {
-		if (!todos.length) {
-			alert("항목을 작성해주세요");
-		} else {
-			navigate("/receipt", { state: { todos, date: selectedDate } });
-		}
-	};
+  const navigate = useNavigate();
 
-	const onSelectDayOfWeek = DateTime => {
-		setSelectedDate(DateTime);
-		/**
-		 * 서버에 요청을 보내고, 응답을 받아서 처리한다.
-		 */
-	};
+  const onSubmitTodoList = () => {
+    if (!todos.length) {
+      alert("항목을 작성해주세요");
+    } else {
+      const date = allTodos.map((todo) => todo.date);
+      const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
+        return (
+          dayjs(date).format("YYYY-MM-DD") ===
+          dayjs(selectedDate).format("YYYY-MM-DD")
+        );
+      });
+      navigate("/receipt", {
+        state: { todos, date: selectedDate, receiptNumber: receiptNumber + 1 },
+      });
+    }
+  };
 
-	const selectedMonth = Date => {
-		return Date.toLocaleDateString("en-US", {
-			month: "long",
-		});
-	};
-	const selectedDayOfWeek = Date => {
-		return Date.getDay();
-	};
+  const onSelectDayOfWeek = (DateTime) => {
+    setSelectedDate(DateTime);
+    /**
+     * 서버에 요청을 보내고, 응답을 받아서 처리한다.
+     */
+  };
 
-	useEffect(() => {
-		BaseCtx.setIsBase(true);
-	}, []);
+  const selectedDayOfWeek = (Date) => {
+    return Date.getDay();
+  };
 
-	return (
-		<Fragment>
-			<S.Container>
-				<TodoHeader month={selectedMonth(selectedDate)} />
-				<Week
-					selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
-					onSelectDayOfWeek={onSelectDayOfWeek}
-				/>
-				<S.Content>
-					<TodoList
-						todos={todos}
-						onInsert={postDataLogic}
-						onRemove={deleteDataLogic}
-						onEdit={putDataLogic}
-					/>
-				</S.Content>
+  const navigateUserPage = () => {
+    navigate("/my", { state: { allTodos } });
+  };
 
-				<S.Bottom>
-					<div>{Triangle}</div>
-					<SquareBtn
-						onClick={onSubmitTodoList}
-						children={"Print the Receipt ->"}
-					/>
-				</S.Bottom>
-			</S.Container>
-		</Fragment>
-	);
+  useEffect(() => {
+    BaseCtx.setIsBase(true);
+  }, []);
+
+  return (
+    <Fragment>
+      <S.Container>
+        <TodoHeader
+          selectedDate={selectedDate}
+          onSelectDayOfWeek={onSelectDayOfWeek}
+          navigateUserPage={navigateUserPage}
+        />
+        <Week
+          selectedDate={selectedDate}
+          selectedDayOfWeek={selectedDayOfWeek(selectedDate)}
+          onSelectDayOfWeek={onSelectDayOfWeek}
+        />
+        <S.Content>
+          <TodoList
+            todos={todos}
+            onInsert={postDataLogic}
+            onRemove={deleteDataLogic}
+            onEdit={putDataLogic}
+          />
+        </S.Content>
+        <S.Bottom>
+          <div>{Triangle}</div>
+          <SquareBtn
+            onClick={onSubmitTodoList}
+            children={"Print the Receipt"}
+          />
+        </S.Bottom>
+      </S.Container>
+    </Fragment>
+  );
 }

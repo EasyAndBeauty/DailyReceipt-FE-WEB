@@ -1,14 +1,9 @@
-import { useContext, useEffect, useCallback } from "react";
-import dayjs from "dayjs";
+import { useEffect, useCallback } from "react";
+// import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "./useLocalStorage";
-import {
-	getTodoList,
-	postTodo,
-	updateTodo,
-	deleteTodo,
-} from "controllers/todoController";
-import AtuhContext from "store/auth-context";
+import { useTodoClient } from "controllers/todoController";
+import { useCurrentToken } from "hooks/useCurrentToken";
 
 /**
  * useDataFetch
@@ -24,185 +19,267 @@ import AtuhContext from "store/auth-context";
  * @returns {function} deleteLocalData - 로컬 데이터를 삭제하는 함수
  *
  */
-const rand = (min, max) => {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 
-export default function useDataFetch({ todos, setTodos, date }) {
-	const authCtx = useContext(AtuhContext);
-	let userId = authCtx.token;
+export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
+  const { user } = useCurrentToken();
 
-	const newDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-		.toISOString()
-		.split("T")[0];
+  const { isLoggedIn } = user;
 
-	const [storedValue, setValue, getValue] = useLocalStorage(
-		new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-			.toISOString()
-			.split("T")[0],
-		[]
-	);
+  const { getTodoList, postTodo, updateTodo, deleteTodo } = useTodoClient();
 
-	/**
-	 * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
-	 * GET - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
-	 *
-	 */
+  const newDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split("T")[0];
 
-	// get - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
-	const getLocalData = useCallback(() => {
-		const data = getValue(newDate);
-		setTodos(data);
-	}, [date]);
+  const { setValue, getValue, getAllDateValue, clearAllDateValue } =
+    useLocalStorage(newDate, []);
 
-	// get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
-	const getUserData = useCallback(async () => {
-		const data = await getTodoList(userId, newDate);
-		setTodos(data);
-	}, [newDate, setTodos, userId]);
+  /**
+   * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
+   * GET - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
+   *
+   */
 
-	const getDataLogic = authCtx.isLoggedIn ? getUserData : getLocalData;
+  // get - 게스트 사용자 : 랜더링시 localStorage에서 데이터를 받아온다.
+  const getLocalData = useCallback(async () => {
+    try {
+      const data = await getValue(newDate);
+      setTodos(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [newDate]);
 
-	// 임시
-	// const getDataLogic = getLocalData;
+  // get - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
+  const getUserData = useCallback(async () => {
+    try {
+      const res = await getTodoList(newDate);
+      if (res.status !== 200) {
+        throw new Error(res.status);
+      }
+      const { data } = res;
+      setTodos(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [newDate]);
 
-	/**
-	 * POST - 로그인 사용자 : 서버에 새로운 데이터를 저장한다
-	 * POST - 게스트 사용자 : localStorage에 새로운 데이터를 저장한다
-	 *
-	 */
+  const getDataLogic = isLoggedIn ? getUserData : getLocalData;
 
-	// post - 로그인 사용자 : 입력시 서버에 데이터를 보낸다 + localStorage에 저장한다.
-	const postUseData = useCallback(
-		async newTodo => {
-			const temp = { ...newTodo, date: newDate };
-			const todoId = await postTodo(userId, temp);
+  const getAllUserData = useCallback(async () => {
+    try {
+      const res = await getTodoList();
 
-			const { task, timer, isDone } = newTodo;
+      if (res.status !== 200) {
+        throw new Error(res.status);
+      }
+      const { data } = res;
+      setAllTodos(data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, []);
 
-			setTodos(pre => [
-				...pre,
-				{
-					todoId,
-					task,
-					date: newDate,
-					isDone,
-					timer,
-				},
-			]);
-		},
-		[date, todos]
-	);
+  /**
+   * POST - 로그인 사용자 : 서버에 새로운 데이터를 저장한다
+   * POST - 게스트 사용자 : localStorage에 새로운 데이터를 저장한다
+   *
+   */
 
-	// post - 게스트 사용자  : localStorage에 데이터를 저장한다
-	const postLocalData = useCallback(
-		todo => {
-			const { task, timer, isDone } = todo;
-			const newData = [
-				...todos,
-				{
-					todoId: uuidv4(),
-					task,
-					date: newDate,
-					isDone,
-					timer,
-				},
-			];
+  // post - 로그인 사용자 : 입력시 서버에 데이터를 보낸다 + localStorage에 저장한다.
+  const postUseData = useCallback(
+    async (newTodo) => {
+      try {
+        const nextTodo = { ...newTodo, date: newDate };
+        const res = await postTodo(nextTodo);
 
-			setTodos(newData);
-			setValue(newData, newDate);
-		},
-		[setValue, todos.length]
-	);
+        if (res.status !== 201) {
+          throw new Error(res.status);
+        }
+        const { data } = res;
 
-	const postDataLogic = authCtx.isLoggedIn ? postUseData : postLocalData;
+        const todoId = data;
+        const { task, timer, isDone } = newTodo;
 
-	// 임시
-	// const postDataLogic = postLocalData;
+        setTodos((pre) => [
+          ...pre,
+          {
+            todoId,
+            task,
+            date: newDate,
+            isDone,
+            timer,
+          },
+        ]);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [newDate, postTodo, setTodos]
+  );
 
-	/**
-	 * PUT - 로그인 사용자 : 서버에서 데이터를 업데이트한다.
-	 * PUT - 게스트 사용자 : localStorage에 데이터를 업데이트한다.
-	 *
-	 */
+  // post - 게스트 사용자  : localStorage에 데이터를 저장한다
+  const postLocalData = useCallback(
+    async (todo) => {
+      try {
+        const { task, timer, isDone } = todo;
+        const newData = [
+          ...todos,
+          {
+            todoId: uuidv4(),
+            task,
+            date: newDate,
+            isDone,
+            timer,
+          },
+        ];
 
-	// put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
-	const putUseData = useCallback(
-		async (id, todo) => {
-			const { task, timer, isDone, date } = todo;
-			const req = { task, timer, isDone };
-			const newTodo = await updateTodo(id, req);
-			setTodos(pre => {
-				return pre.map(todo => {
-					if (todo.todoId === id) {
-						return {
-							...todo,
-							...newTodo,
-						};
-					}
-					return todo;
-				});
-			});
-		},
-		[date, todos]
-	);
+        setTodos(newData);
+        setValue(newData, newDate);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [todos, newDate, setTodos, setValue]
+  );
 
-	// put - 게스트 사용자  : localStorage에 데이터를 수정한다.
-	const putLocalData = useCallback(
-		async (id, task) => {
-			const newData = [...todos].map(todo => {
-				if (todo.todoId === id) {
-					return task;
-				}
-				return todo;
-			});
-			await setValue(newData, newDate);
-			setTodos(newData);
-		},
-		[todos, setValue, setTodos]
-	);
+  const postDataLogic = isLoggedIn ? postUseData : postLocalData;
 
-	const putDataLogic = authCtx.isLoggedIn ? putUseData : putLocalData;
+  /**
+   * PUT - 로그인 사용자 : 서버에서 데이터를 업데이트한다.
+   * PUT - 게스트 사용자 : localStorage에 데이터를 업데이트한다.
+   *
+   */
 
-	// 임시
-	// const putDataLogic = putLocalData;
+  // put - 로그인 사용자 : 수정시 서버에 데이터를 보낸다
+  const putUseData = useCallback(
+    async (id, todo) => {
+      try {
+        const { task, timer, isDone, date } = todo;
+        const req = { task, timer, isDone, date };
+        const res = await updateTodo(id, req);
 
-	/**
-	 * Delete - 로그인 사용자 : 서버에서 데이터를 삭제한다.
-	 * Delete - 게스트 사용자 : localStorage에서 데이터를 삭제한다.
-	 *
-	 */
-	// delete - 로그인 사용자 : 삭제시 서버에 데이터를 보낸다 + localStorage에 저장한다.
-	const deleteUseData = useCallback(
-		async id => {
-			const newData = todos.filter(todo => todo.todoId !== id);
-			await deleteTodo(id);
-			setTodos(newData);
-		},
-		[date, setValue]
-	);
+        if (res.status !== 200) {
+          throw new Error(res.status);
+        }
 
-	// delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
+        const { data } = res;
+        setTodos((pre) => {
+          return pre.map((todo) => {
+            if (todo.todoId === id) {
+              return {
+                ...todo,
+                ...data,
+              };
+            }
+            return todo;
+          });
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [setTodos, updateTodo]
+  );
 
-	const deleteLocalData = useCallback(
-		async id => {
-			const newData = todos.filter(todo => todo.todoId !== id);
-			await setValue(newData, newDate);
-			setTodos(newData);
-		},
-		[date, setValue]
-	);
+  // put - 게스트 사용자  : localStorage에 데이터를 수정한다.
+  const putLocalData = useCallback(
+    async (id, task) => {
+      try {
+        const newData = [...todos].map((todo) => {
+          if (todo.todoId === id) {
+            return task;
+          }
+          return todo;
+        });
+        await setValue(newData, newDate);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [todos, setValue, setTodos, newDate]
+  );
 
-	const deleteDataLogic = !authCtx.isLoggedIn ? deleteUseData : deleteLocalData;
+  const putDataLogic = isLoggedIn ? putUseData : putLocalData;
 
-	useEffect(() => {
-		getDataLogic();
-	}, [getDataLogic]);
+  // 임시
+  // const putDataLogic = putLocalData;
 
-	return {
-		getDataLogic,
-		postDataLogic,
-		putDataLogic,
-		deleteDataLogic,
-	};
+  /**
+   * Delete - 로그인 사용자 : 서버에서 데이터를 삭제한다.
+   * Delete - 게스트 사용자 : localStorage에서 데이터를 삭제한다.
+   *
+   */
+  // delete - 로그인 사용자 : 삭제시 서버에 데이터를 보낸다 + localStorage에 저장한다.
+  const deleteUseData = useCallback(
+    async (id) => {
+      try {
+        const newData = todos.filter((todo) => todo.todoId !== id);
+        await deleteTodo(id);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [deleteTodo, setTodos, todos]
+  );
+
+  // delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
+
+  const deleteLocalData = useCallback(
+    async (id) => {
+      try {
+        const newData = todos.filter((todo) => todo.todoId !== id);
+        await setValue(newData, newDate);
+        setTodos(newData);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [newDate, setTodos, setValue, todos]
+  );
+
+  const deleteDataLogic = isLoggedIn ? deleteUseData : deleteLocalData;
+
+  const registeTodos = async () => {
+    let allTodos = getAllDateValue();
+    try {
+      for (let todosWithnDate in allTodos) {
+        for (let todo of allTodos[todosWithnDate]) {
+          const { task, timer, isDone } = todo;
+          const req = { task, timer, isDone, date: todosWithnDate };
+          await postTodo(req);
+        }
+      }
+      await clearAllDateValue();
+      getDataLogic();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    let allTodos = getAllDateValue();
+    if (allTodos) {
+      registeTodos();
+    }
+  }, []);
+
+  useEffect(() => {
+    getDataLogic();
+  }, [getDataLogic, newDate]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getAllUserData();
+    }
+  }, [getAllUserData, isLoggedIn, todos]);
+
+  return {
+    postDataLogic,
+    putDataLogic,
+    deleteDataLogic,
+    getAllUserData,
+  };
 }

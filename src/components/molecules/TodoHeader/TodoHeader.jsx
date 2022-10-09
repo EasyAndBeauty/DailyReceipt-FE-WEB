@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
-import { AlertModal, HeaderText } from "components";
+import { CalendarModal, HeaderText } from "components";
 import * as S from "./TodoHeader.styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -15,37 +15,46 @@ import { useState } from "react";
  *
  */
 
-export function TodoHeader({ month }) {
-  const [modalOn, setModalOn] = useState(false);
-  let navigate = useNavigate();
+export function TodoHeader({ selectedDate, onSelectDayOfWeek, navigateUserPage }) {
+  const [calendarOn, setCalendarOn] = useState(false);
 
-  const goPage = (url) => {
-    navigate(url);
+  const selectedMonth = (Date) => {
+    return Date.toLocaleDateString("en-US", {
+      month: "long",
+    });
   };
+
   return (
-    <S.Container>
-      <HeaderText>{month}</HeaderText>
-      <div>
-        <S.Btn
-          onClick={() => {
-            setModalOn(true);
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faCalendarDays}
-            size="2x"
-            color="#aaaaaa"
-          ></FontAwesomeIcon>
-        </S.Btn>
-        <S.Btn onClick={goPage.bind(this, "/my")}>
-          <FontAwesomeIcon
-            icon={faReceipt}
-            size="2x"
-            color="#aaaaaa"
-          ></FontAwesomeIcon>
-        </S.Btn>
-      </div>
-      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
-    </S.Container>
+    <>
+      <S.Container>
+        <HeaderText>{selectedMonth(selectedDate)}</HeaderText>
+        <div>
+          <S.Btn onClick={() => setCalendarOn(true)}>
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              size="2x"
+              color="#aaaaaa"
+            ></FontAwesomeIcon>
+          </S.Btn>
+          <S.Btn onClick={() => navigateUserPage()}>
+            <FontAwesomeIcon
+              icon={faReceipt}
+              size="2x"
+              color="#aaaaaa"
+            ></FontAwesomeIcon>
+          </S.Btn>
+        </div>
+      </S.Container>
+      {calendarOn && (
+        <>
+          <CalendarModal
+            selectedDate={selectedDate}
+            onSelectDayOfWeek={onSelectDayOfWeek}
+            setCalendarOn={setCalendarOn}
+          />
+          <S.Dimmed onClick={() => setCalendarOn(false)} />
+        </>
+      )}
+    </>
   );
 }

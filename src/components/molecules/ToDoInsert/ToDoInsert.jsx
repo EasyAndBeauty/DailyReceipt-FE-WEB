@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./ToDoInsert.styles";
+import {ReactComponent as PlusIcon} from "assets/svg/plus_icon.svg";
 
 /**
  * Todo Insert
@@ -30,18 +29,17 @@ export function ToDoInsert({ onInsert }) {
 	const onSubmit = e => {
 		onClickTodoItemCreateButton(e);
 	};
-
-	return (
-		<S.InsertForm onSubmit={onSubmit}>
-			<S.Input
-				autoFocus
-				placeholder="Add a New Task"
-				onChange={handleChangeContentValue}
-				value={todoInput}
-			/>
-			<S.InputButton onClick={onClickTodoItemCreateButton}>
-				<FontAwesomeIcon icon={faCheck} color={"#81c944"} />
-			</S.InputButton>
-		</S.InsertForm>
-	);
+  return (
+    <S.InsertForm onSubmit={onSubmit}>
+      <S.Input
+        autoFocus
+        placeholder="Add a New Task"
+        onChange={handleChangeContentValue}
+        value={todoInput}
+      />
+      <S.InputButton onClick={onClickTodoItemCreateButton}>
+        <PlusIcon />
+      </S.InputButton>
+    </S.InsertForm>
+  );
 }

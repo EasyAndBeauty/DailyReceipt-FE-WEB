@@ -14,11 +14,10 @@ import { KAKAO_LOGIN_URL } from "controllers/userController";
  */
 
 export function LoginPage() {
-  const [modalOn, setModalOn] = useState(false);
+  // const [modalOn, setModalOn] = useState(false);
   const onLogin = () => {
-    // window.location.href = KAKAO_LOGIN_URL;
-    // console.log("onLogin");
-    setModalOn(!modalOn);
+    window.location.href = KAKAO_LOGIN_URL;
+    // setModalOn(!modalOn);
   };
 
   return (
@@ -43,7 +42,7 @@ export function LoginPage() {
           Login with <span>Kakao</span>
         </div>
       </S.Btn>
-      {modalOn && <AlertModal onClick={onLogin} />}
+      {/* {modalOn && <AlertModal onClick={onLogin} />} */}
     </S.Container>
   );
 }

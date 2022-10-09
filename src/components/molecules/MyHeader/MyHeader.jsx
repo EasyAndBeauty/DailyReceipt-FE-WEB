@@ -1,5 +1,5 @@
 import * as S from "./MyHeader.styles";
-import { BackBtn } from "../../atoms/BackBtn/BackBtn";
+import { BackBtn } from "components";
 
 /**
  * MyHeader
@@ -8,12 +8,12 @@ import { BackBtn } from "../../atoms/BackBtn/BackBtn";
  *
  * @param {string} userInfo 사용자의 이름
  */
-export const MyHeader = ({ userInfo }) => {
+export const MyHeader = () => {
   return (
     <S.HeaderContainer>
       <BackBtn />
       <div>
-        <S.MainText>{userInfo}님 반가워요 :)</S.MainText>
+        <S.MainText> 반가워요 :)</S.MainText>
         <S.SubText>
           소중한 당신의 오늘,
           <br />

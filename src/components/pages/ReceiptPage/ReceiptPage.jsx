@@ -1,34 +1,48 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
-import { getUserInfo } from "controllers/userController";
-import AtuhContext from "store/auth-context";
 import { ReceiptPaper, AlertModal } from "components";
-import { ReactComponent as SaveIcon } from "assets/receiptPage/save_icon.svg";
-import { ReactComponent as ShareIcon } from "assets/receiptPage/share_icon.svg";
-import { ReactComponent as BackIcon } from "assets/receiptPage/back_icon.svg";
+import { ReactComponent as SaveIcon } from "assets/svg/save_icon.svg";
+import { ReactComponent as CopyIcon } from "assets/svg/copy_icon.svg";
+import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import dayjs from "dayjs";
 import * as S from "./ReceiptPage.styles";
 
 export function ReceiptPage() {
   const {
-    state: { todos, date },
+    state: { todos, date, receiptNumber },
   } = useLocation();
-  const authCtx = useContext(AtuhContext);
   const navigate = useNavigate();
   const receiptRef = useRef(null);
 
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState();
   const [scale, setScale] = useState(1);
   const [modalOn, setModalOn] = useState(false);
 
-  function handleShare() {
-    setModalOn(true);
+  const { ClipboardItem } = window;
+
+  async function handleCopy() {
+    await html2canvas(document.getElementById("receipt"), {
+      backgroundColor: "none",
+    })
+      .then((canvas) => {
+        canvas.toBlob((blob) => {
+          navigator.clipboard.write([
+            new ClipboardItem(
+              Object.defineProperty({}, blob.type, {
+                value: blob,
+                enumerable: true,
+              })
+            ),
+          ]);
+        });
+      })
+      .then(alert("복사가 완료되었어요 :)"));
   }
 
   const downloadFileName = `${userInfo ? `_` + userInfo : `my_receipt`}${
     date ? `_` + dayjs(date).format("YYYY-MM-DD") : ""
-  }.jpg`;
+  }.png`;
 
   async function handleDownload() {
     await html2canvas(document.getElementById("receipt"), {
@@ -36,18 +50,12 @@ export function ReceiptPage() {
     }).then((canvas) => {
       const aTag = document.createElement("a");
       document.body.appendChild(aTag);
-      aTag.href = canvas.toDataURL("image/jpg");
+      aTag.href = canvas.toDataURL("image/png");
       aTag.download = downloadFileName;
       aTag.click();
       document.body.removeChild(aTag);
     });
   }
-
-  // 서버와 연결이 되어있지 않음, 아직 사용 불가능
-  // const showUserInfo = async () => {
-  //   const { nickname } = await getUserInfo(authCtx.token);
-  //   setUserInfo(nickname);
-  // };
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;
@@ -67,9 +75,9 @@ export function ReceiptPage() {
         <ReceiptPaper todos={todos} />
       </S.ReceiptContainer>
       <S.IconContainer>
-        <div onClick={handleShare}>
-          <ShareIcon />
-          <span>SHARE</span>
+        <div onClick={async () => await handleCopy()}>
+          <CopyIcon />
+          <span>COPY</span>
         </div>
         <div onClick={async () => await handleDownload()}>
           <SaveIcon />

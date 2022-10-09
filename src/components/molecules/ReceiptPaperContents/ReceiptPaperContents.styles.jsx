@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import parperTexture from "assets/receiptPage/paper-texture.webp";
+import paperTexture from "assets/images/paper-texture.webp";
 
 export const Center = styled.div`
   display: flex;
@@ -11,13 +11,12 @@ export const Paper = styled(Center)`
   width: 360px;
   box-sizing: border-box;
   padding: 20px;
-  background-color: ${(props) => props.theme.wt};
   font-size: 16px;
   font-family: "Courier Prime", "Gothic A1", monospace, sans-serif; //한글 폰트 추가하기
   letter-spacing: -0.5px;
   line-height: 1.4;
   color: #2f2f2f;
-  background-image: url(${parperTexture});
+  background: url(${paperTexture});
 `;
 
 export const Title = styled.h1`

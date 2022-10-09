@@ -14,7 +14,7 @@ export const Input = styled.input`
   background-color: rgba(0, 0, 0, 0);
   color: ${(props) => props.theme.wt};
   border: none;
-  border-bottom: 3px solid ${(props) => props.theme.wt};
+  border-bottom: 3px solid ${(props) => props.theme.gray};
   border-radius: 0;
   outline: none;
 
@@ -25,5 +25,5 @@ export const Input = styled.input`
 
 export const InputButton = styled.div`
   transform: scale(1.5);
-  padding: 12px;
+  padding: 8px;
 `;

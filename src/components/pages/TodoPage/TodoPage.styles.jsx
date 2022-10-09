@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   overflow-x: hidden;
   scrollbar-width: none;
@@ -46,5 +46,6 @@ export const Bottom = styled.div`
     display: flex;
     position: relative;
     top: 6px;
+    box-shadow: 0px -10px 5px 0px rgba(0, 0, 0, 0.2);
   }
 `;

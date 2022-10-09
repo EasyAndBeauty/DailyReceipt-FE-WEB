@@ -1,4 +1,5 @@
 import * as S from "./SquareBtn.styles";
+import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow_below_sm_icon.svg";
 
 /**
  * SquareBtn component
@@ -16,6 +17,7 @@ export function SquareBtn({ onClick, children, color = "#191919" }) {
   return (
     <S.BtnContainer onClick={onClick} color={color}>
       <span>{children}</span>
+      {/*<ArrowBelowIcon />*/}
     </S.BtnContainer>
   );
 }

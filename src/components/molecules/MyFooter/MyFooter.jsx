@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthDispatch } from "store/authContext";
+import { TOKEN_KEY } from "helper/constants";
 import * as S from "./MyFooter.styles";
-
-import AtuhContext from "store/auth-context";
 
 /**
  * My page의 하단 부분입니다.
@@ -11,16 +10,19 @@ import AtuhContext from "store/auth-context";
  * @returns
  */
 export const MyFooter = () => {
-  const authCtx = useContext(AtuhContext);
+  const dispatch = useAuthDispatch();
   const navigate = useNavigate();
-  const onClick = () => {
-    authCtx.logout();
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    window.localStorage.removeItem(TOKEN_KEY);
+
     navigate("/");
   };
 
   return (
     <S.ButtonContainer>
-      <S.Button onClick={onClick}>Logout</S.Button>
+      <S.Button onClick={logout}>Logout</S.Button>
     </S.ButtonContainer>
   );
 };
