@@ -17,7 +17,7 @@ export const Background = styled.div`
 export const NicknameContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 80%;
 `;
@@ -27,16 +27,18 @@ export const CurrentNickname = styled.span`
   font-size: 14px;
   font-weight: bold;
   margin: 10px;
-  padding-left: 5px;
+`;
+
+export const ErrorNotification = styled.span`
+  color: red;
 `;
 
 export const Divider = styled.hr`
   border: none;
   border-top: 1.5px dashed;
-  background-color: #fff;
   height: 1.5px;
-  width: 100%;
-  margin-top: 48px;
+  width: 80%;
+  margin-top: 1rem;
 `;
 
 export const SelectDiv = styled.div`
