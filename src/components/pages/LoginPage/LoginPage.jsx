@@ -14,10 +14,15 @@ import { KAKAO_LOGIN_URL } from "controllers/userController";
  */
 
 export function LoginPage() {
+  const [visible, setVisible] = useState(true);
   // const [modalOn, setModalOn] = useState(false);
   const onLogin = () => {
     window.location.href = KAKAO_LOGIN_URL;
     // setModalOn(!modalOn);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
   };
 
   return (
@@ -43,7 +48,7 @@ export function LoginPage() {
         </div>
       </S.Btn>
       {/* {modalOn && <AlertModal onClick={onLogin} />} */}
-      <NicknameModal />
+      {visible && <NicknameModal onClose={handleClose} />}
     </S.Container>
   );
 }

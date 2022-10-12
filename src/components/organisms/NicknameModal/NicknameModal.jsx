@@ -1,7 +1,8 @@
 import { ModalTemplate, TextBtn, ErrorText, Spacer } from "components";
 import * as S from "./NicknameModal.styles";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { isNull, isOverMaxLength } from "helper/validations";
+import { IS_NULL, IS_OVER } from "helper/constants";
 /**
  * AlertModal
  *
@@ -11,12 +12,22 @@ import { useState } from "react";
  */
 export function NicknameModal({ onClose }) {
   const [newUserName, setNewUserName] = useState("");
-  const [userName, setUserName] = useState("테스트");
-  const [error, setError] = useState("닉네임이 비어있어요.");
+  const [userName, setUserName] = useState("");
+  const [error, setError] = useState("");
 
-  const handleNicknameSubmit = async () => {
-    console.log(newUserName);
+  const handleNicknameSubmit = () => {
+    if (error) return;
   };
+
+  useEffect(() => {
+    if (isNull(newUserName)) {
+      setError(IS_NULL);
+    } else if (isOverMaxLength(newUserName)) {
+      setError(IS_OVER);
+    } else {
+      setError("");
+    }
+  }, [newUserName]);
 
   return (
     <S.Background>
@@ -29,7 +40,7 @@ export function NicknameModal({ onClose }) {
             placeholder="새로운 닉네임을 입력해주세요"
             onChange={(e) => setNewUserName(e.target.value)}
           />
-          <ErrorText children={error} />
+          <S.ErrorDiv>{error && <ErrorText children={error} />}</S.ErrorDiv>
         </S.NicknameContainer>
         <S.Divider />
         <S.SelectDiv>

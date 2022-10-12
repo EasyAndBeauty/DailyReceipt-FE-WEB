@@ -29,6 +29,12 @@ export const CurrentNickname = styled.span`
   margin: 10px;
 `;
 
+export const ErrorDiv = styled.div`
+  weight: 100%;
+  min-height: 35px;
+  display: flex;
+`;
+
 export const ErrorNotification = styled.span`
   color: red;
 `;
