@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthDispatch } from "store/authContext";
+import { NicknameModal } from "components";
 import { TOKEN_KEY } from "helper/constants";
 import * as S from "./MyFooter.styles";
 
@@ -12,6 +14,7 @@ import * as S from "./MyFooter.styles";
 export const MyFooter = () => {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
+  const [visibleModal, setVisibleModal] = useState(false);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -20,9 +23,19 @@ export const MyFooter = () => {
     navigate("/");
   };
 
+  const showModal = () => {
+    setVisibleModal(true);
+  };
+
+  const closeModal = () => {
+    setVisibleModal(false);
+  };
+
   return (
     <S.ButtonContainer>
+      <S.Button onClick={showModal}>Change My Nickname</S.Button>
       <S.Button onClick={logout}>Logout</S.Button>
+      {visibleModal && <NicknameModal onClose={closeModal} />}
     </S.ButtonContainer>
   );
 };

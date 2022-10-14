@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BackBtn, AlertModal, NicknameModal } from "components";
+import { BackBtn } from "components";
 import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./LoginPage.styles";
 import { KAKAO_LOGIN_URL } from "controllers/userController";
@@ -14,15 +13,10 @@ import { KAKAO_LOGIN_URL } from "controllers/userController";
  */
 
 export function LoginPage() {
-  const [visible, setVisible] = useState(true);
   // const [modalOn, setModalOn] = useState(false);
   const onLogin = () => {
     window.location.href = KAKAO_LOGIN_URL;
     // setModalOn(!modalOn);
-  };
-
-  const handleClose = () => {
-    setVisible(false);
   };
 
   return (
@@ -48,7 +42,6 @@ export function LoginPage() {
         </div>
       </S.Btn>
       {/* {modalOn && <AlertModal onClick={onLogin} />} */}
-      {visible && <NicknameModal onClose={handleClose} />}
     </S.Container>
   );
 }

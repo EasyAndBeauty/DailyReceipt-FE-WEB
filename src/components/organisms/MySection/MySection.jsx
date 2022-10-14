@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { v4 as uuidv4 } from "uuid";
-import { ReceiptPaper, ScrollArrow } from "components";
+import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
 
 /**

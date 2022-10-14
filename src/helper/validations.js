@@ -1,4 +1,5 @@
 export const isNull = (word) => {
+  if (!word.length) return;
   if (!word.replace(/\s/g, "").length) return true;
 };
 
