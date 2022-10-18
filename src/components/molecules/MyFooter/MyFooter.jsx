@@ -33,8 +33,13 @@ export const MyFooter = () => {
 
   return (
     <S.ButtonContainer>
-      <S.Button onClick={showModal}>Change My Nickname</S.Button>
-      <S.Button onClick={logout}>Logout</S.Button>
+      <S.Button onClick={showModal}>
+        <S.ButtonText>Change My Nickname</S.ButtonText>
+        <S.StyledIcon />
+      </S.Button>
+      <S.Button onClick={logout}>
+        <S.ButtonText>Logout</S.ButtonText>
+      </S.Button>
       {visibleModal && <NicknameModal onClose={closeModal} />}
     </S.ButtonContainer>
   );
