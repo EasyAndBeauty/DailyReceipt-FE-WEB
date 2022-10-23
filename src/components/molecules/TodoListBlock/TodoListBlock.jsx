@@ -7,7 +7,7 @@ import {
 	faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { TimerImage } from "components";
-import { POMODORO_TIME } from "constants";
+import { POMODORO_TIME } from "helper/constants";
 import AtuhContext from "store/auth-context";
 import * as S from "./TodoListBlock.styles";
 
