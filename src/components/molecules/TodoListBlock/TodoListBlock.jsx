@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { TimerImage } from "components";
 import { POMODORO_TIME } from "helper/constants";
-import AtuhContext from "store/auth-context";
 import * as S from "./TodoListBlock.styles";
 
 /**
@@ -33,7 +32,6 @@ function TodoItem({
 	const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
 	const [count, setCount] = useState(POMODORO_TIME);
 	const { isDone } = todo;
-	const authCtx = useContext(AtuhContext);
 
 	const [done, setDone] = useState(isDone);
 
