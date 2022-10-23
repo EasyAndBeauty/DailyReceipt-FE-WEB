@@ -20,7 +20,7 @@ export function ToDoInsert({ onInsert }) {
 	const onClickTodoItemCreateButton = e => {
 		if (todoInput.trim() !== "") {
 			e.preventDefault();
-			const todoItem = { task: todoInput, timer: 1, isDone: false };
+			const todoItem = { task: todoInput, timer: 0, isDone: false };
 			onInsert(todoItem);
 			setTodoInput("");
 		}
