@@ -14,16 +14,33 @@ export const Container = styled.div`
   .react-horizontal-scrolling-menu--scroll-container {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    dispaly: flex;
+    display: flex;
     flex-direction: row;
   }
 `;
 
-export const PaperContainer = styled.div`
-  height: 100%;
+export const ScrollMenu = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
+  overflow: auto;
+`
+
+export const PaperContainer = styled.div`
+  margin-top: -9.5rem;
+  margin-left: -10rem;
   transform: scale(0.5);
-  margin-top: -100px;
+  
+  &:nth-child(1) {
+  margin-left: -4.5rem;
+  }
 `;
+
+export const CreatedDate = styled.div`
+  margin-bottom: 0.5rem;
+  font-family: Courier Prime;
+  font-size: 1.5rem;
+  text-align: left;
+  color: #AAAAAA;
+  line-height: 1rem;
+  letter-spacing: -0.005em;
+`
