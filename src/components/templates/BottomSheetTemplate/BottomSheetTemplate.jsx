@@ -13,8 +13,6 @@ import * as S from "./BottomSheetTemplate.styles";
  */
 
 export function BottomSheetTemplate({ children, isOpen, onClick }) {
-  console.log("bottom", isOpen);
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

@@ -26,6 +26,7 @@ export function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
+  const [selectedTodo, setSelectedTodo] = useState(null);
 
   const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
     todos,
@@ -74,8 +75,9 @@ export function TodoPage() {
     navigate("/my", { state: { allTodos } });
   };
 
-  const onOpenBottomSheet = (time) => {
+  const onOpenBottomSheet = (todo) => {
     setIsBottomSheetOpen(!isBottomSheetOpen);
+    setSelectedTodo(todo);
   };
 
   useEffect(() => {
@@ -113,6 +115,8 @@ export function TodoPage() {
         </S.Bottom>
         <PomodoroBottomSheet
           isOpen={isBottomSheetOpen}
+          todo={selectedTodo}
+          onEdit={putDataLogic}
           onClick={() => setIsBottomSheetOpen(false)}
         />
       </S.Container>

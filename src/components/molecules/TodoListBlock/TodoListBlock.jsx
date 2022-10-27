@@ -44,7 +44,7 @@ function TodoItem({
   };
 
   const handleClickTimerButton = () => {
-    onOpenBottomSheet();
+    onOpenBottomSheet(todo);
     if (hasRunningTimer === todo.todoId) {
       setIsRunning(!isRunning);
       resetRunningTimer();
@@ -104,14 +104,14 @@ function TodoItem({
           )}
         </S.TimerButton>
         <S.TimerButton onClick={handleClickTimerButton}>
-          {isRunning && (
+          {/* {isRunning && (
             <TimerImage
               isRunning={isRunning}
               setIsRunning={setIsRunning}
               count={count}
               setCount={setCount}
             />
-          )}
+          )} */}
           {!isRunning && <FontAwesomeIcon icon={faClock} color={"#aaaaaa"} />}
         </S.TimerButton>
       </S.ButtonContainer>
