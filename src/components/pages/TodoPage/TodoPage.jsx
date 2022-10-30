@@ -12,6 +12,7 @@ import useDataFetch from "hooks/useDataFetch";
 import BaseContext from "store/baseContext";
 import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
+
 /**
  * TodoPage component
  *
@@ -36,7 +37,7 @@ export function TodoPage() {
   });
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
-    return <ReceiptPaperTriangle key={idx} />;
+    return <ReceiptPaperTriangle key={idx} isPaper={false} />;
   });
 
   const BaseCtx = useContext(BaseContext);
