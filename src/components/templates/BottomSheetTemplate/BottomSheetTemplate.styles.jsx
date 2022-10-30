@@ -12,8 +12,7 @@ export const Background = styled.div`
   top: 0;
   text-align: center;
   transform: translateY(110%);
-  animation-name: ${(props) =>
-    props.isOpen !== null && (props.isOpen ? "open" : "close")};
+  animation-name: ${(props) => props.isOpen !== null && (props.isOpen ? "open" : "close")};
   animation-fill-mode: forwards;
   animation-delay: 0s;
   animation-duration: 0.5s;
@@ -40,13 +39,12 @@ export const Content = styled.div`
   display: flex;
   width: 100%;
   border-radius: 30px;
-  border: 1px solid #AAAAAA;
+  border: 1px solid #aaaaaa;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-  padding: 10px
+  box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  padding: 10px;
   position: relative;
   overflow: scroll;
   background-color: #191919;
