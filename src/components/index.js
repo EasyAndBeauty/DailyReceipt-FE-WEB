@@ -4,6 +4,8 @@
  * atoms
  */
 //TodoPage
+import SaveBtn from "./atoms/ReceiptPageBtns/SaveBtn";
+
 export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
@@ -16,6 +18,9 @@ export { ReceiptPaperTriangle } from "./atoms/ReceiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/ReceiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/ReceiptBarcode";
 export { ReceiptQuotes } from "./atoms/ReceiptQuotes";
+export { SaveBtn } from "./atoms/ReceiptPageBtns/SaveBtn";
+export { CopyBtn } from "./atoms/ReceiptPageBtns/CopyBtn";
+export { PinBtn } from "./atoms/ReceiptPageBtns/PinBtn";
 
 // common
 export { BackBtn } from "./atoms/BackBtn";
