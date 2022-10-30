@@ -8,9 +8,9 @@ import * as S from "./ReceiptPaperTriangle.styles";
  *
  * @returns
  */
-export function ReceiptPaperTriangle() {
+export function ReceiptPaperTriangle({ isPaper }) {
   const Triangle = new Array(23).fill(0).map((_, i) => {
-    return <S.Triangle key={i} />;
+    return <S.Triangle key={i} isPaper={isPaper} />;
   });
 
   return <S.TriContainer>{Triangle}</S.TriContainer>;

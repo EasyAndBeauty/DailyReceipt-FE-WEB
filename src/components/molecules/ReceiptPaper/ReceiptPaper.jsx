@@ -17,11 +17,11 @@ export function ReceiptPaper({ todos, onClick = null }) {
     <S.Container id={"receipt"} onClick={onClick}>
       <div>
         <S.TrianglePosition y="6px">
-          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle isPaper={true} />
         </S.TrianglePosition>
         <ReceiptPaperContents todos={todos} />
         <S.TrianglePosition y="-7px">
-          <ReceiptPaperTriangle />
+          <ReceiptPaperTriangle isPaper={true} />
         </S.TrianglePosition>
       </div>
     </S.Container>
