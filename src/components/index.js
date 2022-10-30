@@ -19,6 +19,9 @@ export { ReceiptQuotes } from "./atoms/ReceiptQuotes";
 
 // common
 export { BackBtn } from "./atoms/BackBtn";
+export { TextBtn } from "./atoms/TextBtn";
+export { ErrorText } from "./atoms/ErrorText";
+export { Spacer } from "./atoms/Spacer";
 
 /**
  * molecules
@@ -54,6 +57,7 @@ export { MySection } from "./organisms/MySection";
 
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
+export { NicknameModal } from "./organisms/NicknameModal";
 
 /**
  * templates

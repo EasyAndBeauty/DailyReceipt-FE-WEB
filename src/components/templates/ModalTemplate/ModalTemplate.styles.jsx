@@ -16,8 +16,9 @@ export const Background = styled.div`
 
 export const Content = styled.div`
   width: 20.5rem;
-  height: 19rem;
-  border-radius: 0.5rem;
+  max-height: 19rem;
+  min-height: 250px;
+  border-radius: 24px;
   background-color: white;
   display: flex;
   flex-direction: column;

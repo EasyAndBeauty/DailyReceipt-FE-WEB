@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { v4 as uuidv4 } from "uuid";
-import { ReceiptPaper, ScrollArrow } from "components";
+import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
+import { useReceiptClient } from "controllers/receiptController";
+import { useEffect } from "react";
 
 /**
  * MySection
@@ -19,23 +21,36 @@ export const MySection = () => {
 
   const navigate = useNavigate();
 
-  const [totalTodos, setTotalTodos] = useState(() => {
-    const result = [];
-    const date = allTodos.map((todo) => todo.date);
-    const uniqueDate = [...new Set(date)];
-    uniqueDate.forEach((date) => {
-      const sameDateTodos = allTodos.filter((todo) => todo.date === date);
-      result.push(sameDateTodos);
-    });
-    return result;
-  });
+  // const [totalTodos, setTotalTodos] = useState(() => {
+  //   const result = [];
+  //   const date = allTodos.map((todo) => todo.date);
+  //   const uniqueDate = [...new Set(date)];
+  //   uniqueDate.forEach((date) => {
+  //     const sameDateTodos = allTodos.filter((todo) => todo.date === date);
+  //     result.push(sameDateTodos);
+  //   });
+  //   return result;
+  // });
+
+  const {getPinnedReceipts} = useReceiptClient()
+  const [totalTodos, setTotalTodos] = useState([])
+  const setAllTodos = async (todos) => {
+    const data = await getPinnedReceipts()
+    setTotalTodos(data)
+  }
+
+  useEffect(() => {
+    setAllTodos()
+  },[])
 
   return (
     <S.Container>
-      <ScrollMenu>
-        {totalTodos.map((todos, idx) => {
+      <S.ScrollMenu>
+        {totalTodos.map((todoDate, idx) => {
+          const { todos } = todoDate;
           return (
             <S.PaperContainer key={idx}>
+              <S.CreatedDate>2022. 08. 20</S.CreatedDate>
               <ReceiptPaper
                 onClick={() => {
                   navigate(`/receipt`, { state: { todos } });
@@ -46,7 +61,7 @@ export const MySection = () => {
             </S.PaperContainer>
           );
         })}
-      </ScrollMenu>
+      </S.ScrollMenu>
     </S.Container>
   );
 };
