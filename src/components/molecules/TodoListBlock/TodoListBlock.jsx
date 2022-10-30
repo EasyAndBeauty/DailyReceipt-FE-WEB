@@ -32,10 +32,7 @@ function TodoItem({
 }) {
   const [isEditing, setIsEditing] = useState(true); // 편집 여부
   const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
-  const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
-  const [count, setCount] = useState(POMODORO_TIME);
   const { isDone } = todo;
-
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
@@ -45,17 +42,6 @@ function TodoItem({
 
   const handleClickTimerButton = () => {
     onOpenBottomSheet(todo);
-    if (hasRunningTimer === todo.todoId) {
-      setIsRunning(!isRunning);
-      resetRunningTimer();
-      return;
-    }
-
-    if (!hasRunningTimer) {
-      setIsRunning(!isRunning);
-      setRunningTimer(todo.todoId);
-      return;
-    }
   };
 
   const handleClickToDoEditButton = () => {
@@ -72,16 +58,6 @@ function TodoItem({
   const onChangeTaskValue = (e) => {
     setTaskValue(e.target.value);
   };
-
-  useEffect(() => {
-    if (isRunning === false) {
-      onEdit(todo.todoId, {
-        ...todo,
-        timer: todo.timer + POMODORO_TIME - count,
-      });
-      setCount(POMODORO_TIME);
-    }
-  }, [isRunning]);
 
   return (
     <S.TodoItemBlock>
@@ -104,15 +80,7 @@ function TodoItem({
           )}
         </S.TimerButton>
         <S.TimerButton onClick={handleClickTimerButton}>
-          {/* {isRunning && (
-            <TimerImage
-              isRunning={isRunning}
-              setIsRunning={setIsRunning}
-              count={count}
-              setCount={setCount}
-            />
-          )} */}
-          {!isRunning && <FontAwesomeIcon icon={faClock} color={"#aaaaaa"} />}
+          <FontAwesomeIcon icon={faClock} color={"#aaaaaa"} />
         </S.TimerButton>
       </S.ButtonContainer>
     </S.TodoItemBlock>

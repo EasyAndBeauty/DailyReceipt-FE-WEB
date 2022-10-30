@@ -52,7 +52,8 @@ function Descipt({ text }) {
 export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit, todos }) {
   const { task, timer, todoId } = todo || {};
 
-  const [accTime, setAccTime] = useState(timer || 0);
+  const [accTime, setAccTime] = useState(timer ?? 0);
+
   const [desiptText, setDesiptText] = useState(
     "play를 눌러 타이머를 시작하세요"
   );
