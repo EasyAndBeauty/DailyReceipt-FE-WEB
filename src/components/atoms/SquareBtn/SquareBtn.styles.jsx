@@ -5,15 +5,12 @@ export const BtnContainer = styled.div`
   height: 68px;
   display: flex;
   flex-direction: column;
-  //justify-content: space-between;
   justify-content: center;
   align-items: center;
-  //padding: 16px 0 20px 0;
   box-sizing: border-box;
   background-color: ${(props) => props.theme.wt};
   color: ${(props) => props.theme.bk};
   font-family: "Courier Prime", monospace;
-  box-shadow: inset -1px -4px 8px 0px rgba(255, 255, 255, 0.9);
   font-size: 1.125rem;
 
   &:hover {
@@ -24,11 +21,10 @@ export const BtnContainer = styled.div`
   }
 
   svg {
-    //transform: scale(0.8) rotate(180deg);
     transform: scale(0.8);
     opacity: 0.7;
   }
-  
+
   span {
     position: relative;
     top: -2px;
