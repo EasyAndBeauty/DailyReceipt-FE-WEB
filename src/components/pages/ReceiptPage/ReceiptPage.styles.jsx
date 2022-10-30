@@ -39,7 +39,8 @@ export const ReceiptContainer = styled.div`
 export const IconContainer = styled.div`
   width: 100%;
   height: 12%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 84px);
   align-self: center;
   align-items: center;
   justify-content: center;
@@ -59,9 +60,9 @@ export const IconContainer = styled.div`
     padding: 8px;
     opacity: 40%;
   }
-  
+
   div:first-child svg {
-    transform: translate(-1px,1px);
+    transform: translate(-1px, 1px);
   }
 
   span {
