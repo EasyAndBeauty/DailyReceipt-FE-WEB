@@ -63,6 +63,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit, todos }) {
   const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
 
   const [btnText, setBtnText] = useState("play");
+  const [activeBtn, setActiveBtn] = useState(2);
   const [delay] = useState(TIME_HOUR);
 
   const onClickPlayOrPause = (type) => {
@@ -71,7 +72,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit, todos }) {
         setIsRunning(true);
         setBtnText("pause");
         setDesiptText(
-          "조금 더 집중한 이 시간이 더 빛나는 내일을 만들어 줄거예요"
+          `조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`
         );
         if (count === 0) {
           setCount(POMODORO_TIME);
@@ -125,7 +126,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit, todos }) {
         <S.TimerText>
           <Time count={count} />
         </S.TimerText>
-        <Descipt text={desiptText} />
+        <S.DesciptText>{desiptText}</S.DesciptText>
         <TwotBtn
           onClick1={() => {
             onClick();
@@ -136,6 +137,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit, todos }) {
           }}
           btnName1={"Stop"}
           btnName2={btnText}
+          activeBtn={btnText === "play" ? 2 : 1}
         />
       </S.Container>
     </BottomSheetTemplate>

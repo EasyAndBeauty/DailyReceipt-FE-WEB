@@ -47,4 +47,10 @@ export const Button2 = styled.div`
   font-weight: 400;
   font-family: "Courier Prime", monospace;
   text-align: center;
+
+  ${(props) =>
+    props.active &&
+    `
+    font-weight: 700;
+    `}
 `;

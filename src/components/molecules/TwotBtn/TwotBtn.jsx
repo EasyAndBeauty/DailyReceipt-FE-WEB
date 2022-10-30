@@ -6,14 +6,23 @@ import * as S from "./TwotBtn.styles";
  *
  * @returns
  */
-export const TwotBtn = ({ onClick1, onClick2, btnName1, btnName2 }) => {
+export const TwotBtn = ({
+  onClick1,
+  onClick2,
+  btnName1,
+  btnName2,
+  activeBtn,
+}) => {
+  console.log(activeBtn);
   const wv = Math.floor(window.innerWidth) / 8;
   return (
     <S.Container>
       <span>{`-`.padStart(wv, "-")}</span>
       <S.ButtonContainer>
         <S.Button1 onClick={onClick1}>{btnName1}</S.Button1>
-        <S.Button2 onClick={onClick2}>{btnName2}</S.Button2>
+        <S.Button2 onClick={onClick2} active={activeBtn === 2 ? true : false}>
+          {btnName2}
+        </S.Button2>
       </S.ButtonContainer>
     </S.Container>
   );
