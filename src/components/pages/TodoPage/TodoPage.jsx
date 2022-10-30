@@ -115,6 +115,7 @@ export function TodoPage() {
         </S.Bottom>
         <PomodoroBottomSheet
           isOpen={isBottomSheetOpen}
+          todos={todos}
           todo={selectedTodo}
           onEdit={putDataLogic}
           onClick={() => setIsBottomSheetOpen(false)}

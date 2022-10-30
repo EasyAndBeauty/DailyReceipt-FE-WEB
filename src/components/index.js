@@ -28,6 +28,7 @@ export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { ToDoInsert } from "./molecules/ToDoInsert";
 export { TodoListBlock } from "./molecules/TodoListBlock";
+export { TwotBtn } from "./molecules/TwotBtn";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/ReceiptPaper";

@@ -49,5 +49,5 @@ export const Content = styled.div`
   padding: 10px
   position: relative;
   overflow: scroll;
-  background-color: #F7F7FA;
+  background-color: #191919;
 `;
