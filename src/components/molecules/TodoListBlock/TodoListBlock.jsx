@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faClock,
-  faClose,
-  faPencil,
-  faSquareCheck,
+	faClock,
+	faClose,
+	faPencil,
+	faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { TimerImage } from "components";
-import { POMODORO_TIME } from "helper/constants";
-
+import { POMODORO_TIME } from "constants";
+import AtuhContext from "store/auth-context";
 import * as S from "./TodoListBlock.styles";
-import { ReactComponent as CheckIcon } from "assets/svg/todo_check_icon.svg";
 
 /**
  * Todo Item
