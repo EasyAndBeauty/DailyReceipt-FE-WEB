@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faClose, faPencil, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { ReactComponent as CheckIcon } from 'assets/svg/todo_check_icon.svg';
 import * as S from './TodoListBlock.styles';
 
 /**
@@ -89,22 +90,6 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
  */
 
 export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
-    const [hasRunningTimer, setHasRuuningTimer] = useState('');
-
-    const setRunningTimer = (key) => {
-        setHasRuuningTimer(key);
-        return;
-    };
-
-    const resetRunningTimer = () => {
-        setHasRuuningTimer('');
-        return;
-    };
-
-    useEffect(() => {
-        setHasRuuningTimer('');
-    }, [todos]);
-
     return (
         <S.TodoListBlockStyle>
             {todos?.map((todo) => (
@@ -114,9 +99,6 @@ export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
                     todo={todo}
                     onRemove={onRemove}
                     onEdit={onEdit}
-                    hasRunningTimer={hasRunningTimer}
-                    setRunningTimer={setRunningTimer}
-                    resetRunningTimer={resetRunningTimer}
                     onOpenBottomSheet={onOpenBottomSheet}
                 />
             ))}
