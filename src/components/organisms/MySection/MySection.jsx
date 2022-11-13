@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
-import { v4 as uuidv4 } from "uuid";
 import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
 import { useReceiptClient } from "controllers/receiptController";
 import { useEffect } from "react";
+import { formatReceiptDate } from "helper/formatter";
 
 /**
  * MySection
@@ -15,52 +15,55 @@ import { useEffect } from "react";
  *
  * */
 export const MySection = () => {
-  const {
-    state: { allTodos },
-  } = useLocation();
-
   const navigate = useNavigate();
 
-  // const [totalTodos, setTotalTodos] = useState(() => {
-  //   const result = [];
-  //   const date = allTodos.map((todo) => todo.date);
-  //   const uniqueDate = [...new Set(date)];
-  //   uniqueDate.forEach((date) => {
-  //     const sameDateTodos = allTodos.filter((todo) => todo.date === date);
-  //     result.push(sameDateTodos);
-  //   });
-  //   return result;
-  // });
-
-  const {getPinnedReceipts} = useReceiptClient()
-  const [totalTodos, setTotalTodos] = useState([])
-  const setAllTodos = async (todos) => {
-    const data = await getPinnedReceipts()
-    setTotalTodos(data)
-  }
+  const { getPinnedReceipts } = useReceiptClient();
+  const [receipts, setReceipts] = useState([]);
 
   useEffect(() => {
-    setAllTodos()
-  },[])
+    (async () => {
+      const data = await getPinnedReceipts();
+      setReceipts(data);
+    })();
+  });
+
+  const RenderReceipts = (receipt) => {
+    return (
+      <S.PaperContainer key={receipt.id}>
+        <S.CreatedDate>{formatReceiptDate(receipt.date)}</S.CreatedDate>
+        <ReceiptPaper
+          onClick={() => {
+            navigate(`/receipt`, { state: receipt.todos });
+          }}
+          todos={Array.from(receipt.todos)}
+          key={receipt.id}
+        />
+      </S.PaperContainer>
+    );
+  };
+
+  const RenderBlankPage = () => {
+    return (
+      <S.BlankContainer>
+        <S.BlankTitle>Pinned Receipts</S.BlankTitle>
+        <S.BlankText>
+          <p>보관한 영수증이 없어요.</p>
+          <p>보관해서 모아보고 싶은 하루가 있다면</p>
+          <p>
+            영수증을 만든 후에 <span>PIN</span>버튼을 눌러보세요!
+          </p>
+        </S.BlankText>
+      </S.BlankContainer>
+    );
+  };
 
   return (
     <S.Container>
       <S.ScrollMenu>
-        {totalTodos.map((todoDate, idx) => {
-          const { todos } = todoDate;
-          return (
-            <S.PaperContainer key={idx}>
-              <S.CreatedDate>2022. 08. 20</S.CreatedDate>
-              <ReceiptPaper
-                onClick={() => {
-                  navigate(`/receipt`, { state: { todos } });
-                }}
-                todos={Array.from(todos)}
-                key={uuidv4()}
-              />
-            </S.PaperContainer>
-          );
-        })}
+        {/* {receipts
+          ? console.log(receipts, "receipts")
+          : console.log(receipts, "no receipts")} */}
+        {receipts.length ? receipts.map(RenderReceipts) : RenderBlankPage()}
       </S.ScrollMenu>
     </S.Container>
   );

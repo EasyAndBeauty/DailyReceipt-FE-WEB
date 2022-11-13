@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faClose, faPencil, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
-import { ReactComponent as CheckIcon } from 'assets/svg/todo_check_icon.svg';
+import { TimerImage } from 'components';
+import { POMODORO_TIME } from 'helper/constants';
 import * as S from './TodoListBlock.styles';
 
 /**
@@ -13,10 +14,13 @@ import * as S from './TodoListBlock.styles';
  * @param {*} param0
  * @returns
  */
-function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
+function TodoItem({ todo, onRemove, onEdit, hasRunningTimer, setRunningTimer, resetRunningTimer }) {
     const [isEditing, setIsEditing] = useState(true); // 편집 여부
     const [taskValue, setTaskValue] = useState(todo.task); // 편집한 task값
+    const [isRunning, setIsRunning] = useState(null); // timer 멈추기!
+    const [count, setCount] = useState(POMODORO_TIME);
     const { isDone } = todo;
+
     const [done, setDone] = useState(isDone);
 
     const handleClickCheckCircleToggle = () => {
@@ -25,8 +29,21 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
     };
 
     const handleClickTimerButton = () => {
-        onOpenBottomSheet(todo);
+        if (hasRunningTimer === todo.todoId) {
+            setIsRunning(!isRunning);
+            resetRunningTimer();
+            return;
+        }
+
+        if (!hasRunningTimer) {
+            setIsRunning(!isRunning);
+            setRunningTimer(todo.todoId);
+            return;
+        }
     };
+
+    // delelte item
+    // const handleClickToDoRemoveButton = () => onRemove(todo.todoId);
 
     const handleClickToDoEditButton = () => {
         setIsEditing(!isEditing);
@@ -51,11 +68,18 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
         setTaskValue(e.target.value);
     };
 
+    useEffect(() => {
+        if (isRunning === false) {
+            onEdit(todo.todoId, {
+                ...todo,
+                timer: todo.timer + POMODORO_TIME - count,
+            });
+            setCount(POMODORO_TIME);
+        }
+    }, [isRunning]);
     return (
         <S.TodoItemBlock>
-            <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done}>
-                {done && <CheckIcon />}
-            </S.CheckCircle>
+            <S.CheckCircle onClick={handleClickCheckCircleToggle} done={done} />
             <S.TodoItemText
                 defaultValue={taskValue || ''}
                 disabled={isEditing}
@@ -70,7 +94,15 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
                     {!isEditing && <FontAwesomeIcon icon={faSquareCheck} color={'#aaaaaa'} />}
                 </S.TimerButton>
                 <S.TimerButton onClick={handleClickTimerButton}>
-                    <FontAwesomeIcon icon={faClock} color={'#aaaaaa'} />
+                    {isRunning && (
+                        <TimerImage
+                            isRunning={isRunning}
+                            setIsRunning={setIsRunning}
+                            count={count}
+                            setCount={setCount}
+                        />
+                    )}
+                    {!isRunning && <FontAwesomeIcon icon={faClock} color={'#aaaaaa'} />}
                 </S.TimerButton>
             </S.ButtonContainer>
         </S.TodoItemBlock>
@@ -89,17 +121,35 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
  * @returns
  */
 
-export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
+export function TodoListBlock({ todos, onRemove, onEdit }) {
+    const [hasRunningTimer, setHasRuuningTimer] = useState('');
+
+    const setRunningTimer = (key) => {
+        setHasRuuningTimer(key);
+        return;
+    };
+
+    const resetRunningTimer = () => {
+        setHasRuuningTimer('');
+        return;
+    };
+
+    useEffect(() => {
+        setHasRuuningTimer('');
+    }, [todos]);
+
     return (
         <S.TodoListBlockStyle>
-            {todos?.map((todo) => (
+            {todos.map((todo) => (
                 <TodoItem
                     key={todo.todoId}
                     id={todo.todoId}
                     todo={todo}
                     onRemove={onRemove}
                     onEdit={onEdit}
-                    onOpenBottomSheet={onOpenBottomSheet}
+                    hasRunningTimer={hasRunningTimer}
+                    setRunningTimer={setRunningTimer}
+                    resetRunningTimer={resetRunningTimer}
                 />
             ))}
         </S.TodoListBlockStyle>
