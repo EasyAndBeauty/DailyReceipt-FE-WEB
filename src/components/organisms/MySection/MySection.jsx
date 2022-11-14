@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
-import { ReceiptPaper } from "components";
-import * as S from "./MySection.styles";
-import { useReceiptClient } from "controllers/receiptController";
-import { useEffect } from "react";
-import { formatReceiptDate } from "helper/formatter";
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
+import { ReceiptPaper } from 'components';
+import * as S from './MySection.styles';
+import { useReceiptClient } from 'controllers/receiptController';
+import { useEffect } from 'react';
+import { formatReceiptDate } from 'helper/formatter';
 
 /**
  * MySection
@@ -15,56 +15,57 @@ import { formatReceiptDate } from "helper/formatter";
  *
  * */
 export const MySection = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const { getPinnedReceipts } = useReceiptClient();
-  const [receipts, setReceipts] = useState([]);
+    const { getPinnedReceipts } = useReceiptClient();
+    const [receipts, setReceipts] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const data = await getPinnedReceipts();
-      setReceipts(data);
-    })();
-  });
+    useEffect(() => {
+        (async () => {
+            const data = await getPinnedReceipts();
+            setReceipts(data);
+        })();
+    });
 
-  const RenderReceipts = (receipt) => {
+    const renderReceipts = (receipts) => {
+        const pinnedReceipts = receipts.map((receipt) => {
+            return (
+                <S.PaperContainer key={receipt.id}>
+                    <S.CreatedDate>{receipt.date && formatReceiptDate(receipt.date)}</S.CreatedDate>
+                    <ReceiptPaper
+                        onClick={() => {
+                            navigate(`/receipt`, { state: receipt.todos });
+                        }}
+                        todos={Array.from(receipt.todos)}
+                        key={receipt.id}
+                    />
+                </S.PaperContainer>
+            );
+        });
+
+        return pinnedReceipts;
+    };
+
+    const renderBlankPage = () => {
+        return (
+            <S.BlankContainer>
+                <S.BlankTitle>Pinned Receipts</S.BlankTitle>
+                <S.BlankText>
+                    <p>보관한 영수증이 없어요.</p>
+                    <p>보관해서 모아보고 싶은 하루가 있다면</p>
+                    <p>
+                        영수증을 만든 후에 <span>PIN</span>버튼을 눌러보세요!
+                    </p>
+                </S.BlankText>
+            </S.BlankContainer>
+        );
+    };
+
     return (
-      <S.PaperContainer key={receipt.id}>
-        <S.CreatedDate>{formatReceiptDate(receipt.date)}</S.CreatedDate>
-        <ReceiptPaper
-          onClick={() => {
-            navigate(`/receipt`, { state: receipt.todos });
-          }}
-          todos={Array.from(receipt.todos)}
-          key={receipt.id}
-        />
-      </S.PaperContainer>
+        <S.Container>
+            <S.ScrollMenu>
+                {receipts.length ? renderReceipts(receipts) : renderBlankPage()}
+            </S.ScrollMenu>
+        </S.Container>
     );
-  };
-
-  const RenderBlankPage = () => {
-    return (
-      <S.BlankContainer>
-        <S.BlankTitle>Pinned Receipts</S.BlankTitle>
-        <S.BlankText>
-          <p>보관한 영수증이 없어요.</p>
-          <p>보관해서 모아보고 싶은 하루가 있다면</p>
-          <p>
-            영수증을 만든 후에 <span>PIN</span>버튼을 눌러보세요!
-          </p>
-        </S.BlankText>
-      </S.BlankContainer>
-    );
-  };
-
-  return (
-    <S.Container>
-      <S.ScrollMenu>
-        {/* {receipts
-          ? console.log(receipts, "receipts")
-          : console.log(receipts, "no receipts")} */}
-        {receipts.length ? receipts.map(RenderReceipts) : RenderBlankPage()}
-      </S.ScrollMenu>
-    </S.Container>
-  );
 };
