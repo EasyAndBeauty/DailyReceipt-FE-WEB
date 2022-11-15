@@ -64,7 +64,7 @@ export const MySection = () => {
     return (
         <S.Container>
             <S.ScrollMenu>
-                {receipts.length ? renderReceipts(receipts) : renderBlankPage()}
+                {receipts.length > 0 ? renderReceipts(receipts) : renderBlankPage()}
             </S.ScrollMenu>
         </S.Container>
     );

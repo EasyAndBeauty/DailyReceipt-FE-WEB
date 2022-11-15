@@ -24,10 +24,12 @@ export const MyFooter = () => {
   };
 
   const showModal = () => {
+    document.body.style.overflow = "hidden";
     setVisibleModal(true);
   };
 
   const closeModal = () => {
+    document.body.style.overflow = "unset";
     setVisibleModal(false);
   };
 
