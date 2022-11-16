@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
+  padding: 10px;
   overflow: hidden;
   box-sizing: border-box;
   .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
@@ -17,18 +18,27 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
   }
+
+  @media (max-width: 768px) {
+    max-width: 350px;
+  }
 `;
 
 export const ScrollMenu = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
   overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const PaperContainer = styled.div`
+  transform: scale(0.5);
   margin-top: -9.5rem;
   margin-left: -10rem;
-  transform: scale(0.5);
 
   &:nth-child(1) {
     margin-left: -4.5rem;
