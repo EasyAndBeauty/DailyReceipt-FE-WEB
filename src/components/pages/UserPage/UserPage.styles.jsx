@@ -4,8 +4,9 @@ export const MyReceiptContainer = styled.section`
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 100%;
+  max-height: 784px;
   padding: 2.75rem 1rem;
+  padding-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
