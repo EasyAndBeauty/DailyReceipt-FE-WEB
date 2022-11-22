@@ -123,6 +123,7 @@ export const dummyPinnedReceipts = [
     id: 2,
     todos: [
       {
+        id: 1,
         task: "create a meeting agenda",
         date: "2022-08-29",
         isDone: true,
@@ -138,12 +139,14 @@ export const dummyPinnedReceipts = [
     id: 16,
     todos: [
       {
+        id: 2,
         task: "create a meeting agenda",
         date: "2022-08-29",
         isDone: true,
         timer: 0,
       },
       {
+        id: 3,
         task: "Update project plan ",
         date: "2022-08-29",
         isDone: false,
@@ -151,8 +154,7 @@ export const dummyPinnedReceipts = [
       },
     ],
     pinned: true,
-    famous_saying:
-      "Good advice is something a man gives when he is too old to set a bad example.",
+    famous_saying: "Good advice is something a man gives when he is too old to set a bad example.",
     createdAt: "2022-08-01",
     updatedAt: "",
   },
@@ -160,24 +162,28 @@ export const dummyPinnedReceipts = [
     id: 17,
     todos: [
       {
+        id: 4,
         task: "create a meeting agenda",
         date: "2022-08-30",
         isDone: true,
         timer: 0,
       },
       {
+        id: 5,
         task: "Update project plan ",
         date: "2022-08-30",
         isDone: false,
         timer: 172,
       },
       {
+        id: 6,
         task: "60 mins plank",
         date: "2022-08-30",
         isDone: false,
         timer: 60,
       },
       {
+        id: 7,
         task: "Take vitamins",
         date: "2022-08-30",
         isDone: true,
@@ -191,6 +197,8 @@ export const dummyPinnedReceipts = [
         timer: 200,
       },
       {
+        id: 11,
+
         task: "Learn Angular",
         date: "2022-08-30",
         isDone: true,
@@ -206,25 +214,28 @@ export const dummyPinnedReceipts = [
     id: 1,
     todos: [
       {
+        id: 12,
         task: "60 mins plank",
         date: "2022-10-30",
         isDone: false,
         timer: 60,
       },
       {
+        id: 13,
         task: "Take vitamins",
         date: "2022-10-30",
         isDone: true,
         timer: 0,
       },
       {
-        id: 10,
+        id: 14,
         task: "Study Typescript",
         date: "2022-10-30",
         isDone: true,
         timer: 200,
       },
       {
+        id: 15,
         task: "Learn Angular",
         date: "2022-10-30",
         isDone: true,

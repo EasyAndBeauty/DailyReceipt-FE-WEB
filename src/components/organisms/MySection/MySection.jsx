@@ -33,7 +33,7 @@ export const MySection = () => {
           <S.CreatedDate>{receipt.date && formatReceiptDate(receipt.date)}</S.CreatedDate>
           <ReceiptPaper
             onClick={() => {
-              navigate(`/receipt`, { state: receipt.todos });
+              navigate(`/receipt`, { state: { todos: receipt.todos } });
             }}
             todos={Array.from(receipt.todos)}
             key={receipt.id}
