@@ -6,7 +6,7 @@ import * as S from "./ReceiptPage.styles";
 
 export function ReceiptPage() {
   const {
-    state: { todos, date, receiptNumber },
+    state: { todos, pinned, date, receiptNumber },
   } = useLocation();
   const navigate = useNavigate();
   const receiptRef = useRef(null);
@@ -34,7 +34,7 @@ export function ReceiptPage() {
       <S.IconContainer>
         <CopyBtn />
         <SaveBtn date={date} />
-        <PinBtn />
+        <PinBtn isPinned={pinned} />
       </S.IconContainer>
       {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
     </S.Container>
