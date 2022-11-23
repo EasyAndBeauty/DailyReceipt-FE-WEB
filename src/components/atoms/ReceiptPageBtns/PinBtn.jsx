@@ -1,9 +1,13 @@
 import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export function PinBtn() {
+export function PinBtn({ isPinned }) {
   const [pinned, setPinned] = useState(false);
+
+  useEffect(() => {
+    if (isPinned) setPinned(true);
+  }, [isPinned]);
 
   function handlePin() {
     // todo: 서버로 pin 데이터 보내는 기능 추가
