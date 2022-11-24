@@ -7,8 +7,8 @@ import { useCurrentToken } from "hooks/useCurrentToken";
 function App() {
   const BaseCtx = useContext(BaseContext);
   const { user } = useCurrentToken();
-  // const { isLoggedIn } = user;
-  const isLoggedIn = true;
+  const { isLoggedIn } = user;
+  // const isLoggedIn = true;
   const isBase = BaseCtx.isBase;
 
   return (

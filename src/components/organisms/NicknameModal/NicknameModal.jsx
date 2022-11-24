@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { isNull, isOverMaxLength } from "helper/validations";
 import { IS_NULL, IS_OVER } from "helper/constants";
 import { useUserClient } from "controllers/userController";
+
 /**
  * AlertModal
  *
@@ -23,22 +24,23 @@ export function NicknameModal({ onClose }) {
       return;
     }
 
-    const response = await client.putUser();
+    const response = await client.putUser(newUserName);
 
-    if (response.ok) {
+    // TODO: 에러핸들링
+    if (response.status === 200) {
       alert("닉네임 변경이 완료 되었습니다.");
     }
     onClose();
   };
 
-  // TODO: 백엔드 연결 이후 코멘트 해제
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await client.getUser();
-  //     setUserName(response.data.nickname);
-  //   })();
-  // }, [client]);
+  useEffect(() => {
+    (async () => {
+      const response = await client.getUser();
+      setUserName(response.data.nickname);
+    })(); // Q. ()() 이건 어떤 문법인가요?!
+  }, []);
 
+  // 닉네임 유효성검사
   useEffect(() => {
     if (isNull(newUserName)) {
       setError(IS_NULL);
