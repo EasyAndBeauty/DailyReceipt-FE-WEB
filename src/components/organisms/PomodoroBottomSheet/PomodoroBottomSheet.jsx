@@ -3,7 +3,7 @@ import { BottomSheetTemplate, TwotBtn } from "components";
 import { POMODORO_TIME } from "helper/constants";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
-import { TIME_HOUR } from "helper/constants";
+import { INTERVAL_PER_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
 
 /**
@@ -30,22 +30,18 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
   const { task, timer, todoId } = todo || {};
 
   const [accTime, setAccTime] = useState(timer);
-  const [desiptText, setDesiptText] = useState(
-    "play를 눌러 타이머를 시작하세요"
-  );
+  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [count, setCount] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(null);
   const [btnText, setBtnText] = useState("play");
-  const [delay] = useState(TIME_HOUR);
+  const [delay] = useState(INTERVAL_PER_SECOND);
 
   const onClickPlayOrPause = (type) => {
     switch (type) {
       case "play":
         setIsRunning(true);
         setBtnText("pause");
-        setDesiptText(
-          `조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`
-        );
+        setDesiptText(`조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`);
         if (count === 0) {
           setCount(POMODORO_TIME);
         }
@@ -67,7 +63,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
         onClickPlayOrPause("pause");
       }
     },
-    isRunning ? delay : null
+    isRunning ? delay : null,
   );
 
   useEffect(() => {
