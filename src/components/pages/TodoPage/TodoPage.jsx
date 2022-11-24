@@ -50,10 +50,7 @@ export function TodoPage() {
     } else {
       const date = allTodos.map((todo) => todo.date);
       const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
-        return (
-          dayjs(date).format("YYYY-MM-DD") ===
-          dayjs(selectedDate).format("YYYY-MM-DD")
-        );
+        return dayjs(date).format("YYYY-MM-DD") === dayjs(selectedDate).format("YYYY-MM-DD");
       });
       navigate("/receipt", {
         state: { todos, date: selectedDate, receiptNumber: receiptNumber + 1 },
@@ -109,10 +106,7 @@ export function TodoPage() {
         </S.Content>
         <S.Bottom>
           <div>{Triangle}</div>
-          <SquareBtn
-            onClick={onSubmitTodoList}
-            children={"Print the Receipt"}
-          />
+          <SquareBtn onClick={onSubmitTodoList} children={"Print the Receipt"} />
         </S.Bottom>
         <PomodoroBottomSheet
           isOpen={isBottomSheetOpen}
