@@ -19,7 +19,7 @@ export function ReceiptPaperContents({ todos }) {
       <div>{line}</div>
       <S.TodoContainer>
         {todos.map((todo) => {
-          timerTotal += todo.timer;
+          timerTotal += parseInt(todo.timer);
           return <ReceiptTodo key={todo.id}>{todo}</ReceiptTodo>;
         })}
       </S.TodoContainer>
