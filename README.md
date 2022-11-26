@@ -5,7 +5,7 @@
 ### Todo List, Pomodoro Timer, Daily Receipt.
 **Daily Receipt**는 하루의 일과를 영수증 형태로 출력해주는 서비스입니다.
 
-![Group 38](https://user-images.githubusercontent.com/82160479/204096781-9c3c1092-aabd-4546-8203-e0728262c7dd.png)
+![dailyReceipt](https://user-images.githubusercontent.com/82160479/204097778-46654200-5872-44c8-af55-08e889c2b56f.png)
 
 ### 🎙 서비스 기획의도
 
