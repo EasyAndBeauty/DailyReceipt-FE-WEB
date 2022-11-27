@@ -14,7 +14,7 @@ export const KAKAO_LOGIN_URL = `${process.env.REACT_APP_KAKAO_BASE_URL}?client_i
 export const getUserToken = async (code) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`
+      `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`,
     );
 
     const accessToken = response.data.accessToken;
@@ -33,7 +33,7 @@ export const useUserClient = () => {
   };
 
   const putUser = async (user) => {
-    return await authClient.put("/api/v1/user", user);
+    return await authClient.put("/api/v1/user", { nickname: user });
   };
 
   return { getUser, putUser };
