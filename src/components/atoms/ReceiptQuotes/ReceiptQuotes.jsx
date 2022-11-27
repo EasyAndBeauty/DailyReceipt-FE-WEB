@@ -13,14 +13,14 @@ export function ReceiptQuotes() {
   const [quotesState, setQuotes] = useState();
 
   useEffect(() => {
-    const getQuotes = async () => {
+    (async () => {
       await fetch("https://api.adviceslip.com/advice")
         .then((response) => response.json())
         .then((data) => setQuotes(data.slip.advice))
         .catch((e) => console.error(e));
-    };
+    })();
 
-    getQuotes();
+    // 세션에 저장
   }, []);
 
   return <S.Quotes>{quotesState || "Well done!"}</S.Quotes>;
