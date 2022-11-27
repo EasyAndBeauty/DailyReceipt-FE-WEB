@@ -26,7 +26,11 @@ export function NicknameModal({ onClose }) {
 
     const response = await client.putUser(newUserName);
 
-    // TODO: 에러핸들링
+    if (response.status !== 200) {
+      alert("에러가 발생했습니다. 다시 시도해주세요.");
+      return;
+    }
+
     if (response.status === 200) {
       alert("닉네임 변경이 완료 되었습니다.");
     }
@@ -37,7 +41,7 @@ export function NicknameModal({ onClose }) {
     (async () => {
       const response = await client.getUser();
       setUserName(response.data.nickname);
-    })(); // Q. ()() 이건 어떤 문법인가요?!
+    })();
   }, []);
 
   // 닉네임 유효성검사
