@@ -37,9 +37,8 @@ export const ScrollMenu = styled.div`
 
 export const PaperContainer = styled.div`
   transform: scale(0.5);
-  margin-top: -9.5rem;
+  transform-origin: center 0;
   margin-left: -10rem;
-
   &:nth-child(1) {
     margin-left: -4.5rem;
   }
