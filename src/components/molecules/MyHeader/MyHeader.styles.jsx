@@ -12,12 +12,16 @@ export const MyReceiptContainer = styled.section`
 `;
 
 export const HeaderContainer = styled.header`
-  margin-left: -16px;
-  margin-top: -44px;
+  > div:first-child {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 16px 0;
+  }
 
   > div:nth-child(2) {
     margin-left: 32px;
-    margin-top: 48px;
+    margin-top: 20px;
   }
 `;
 
