@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
+  display: block;
   padding: 10px;
   overflow: hidden;
   box-sizing: border-box;
@@ -17,10 +18,6 @@ export const Container = styled.div`
     scrollbar-width: none; /* Firefox */
     display: flex;
     flex-direction: row;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 350px;
   }
 `;
 

@@ -5,7 +5,11 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90%;
+  position: fixed;
+  bottom: 0;
+  background-color: ${(props) => props.theme.bk};
+  box-shadow: 0px -6px 10px ${(props) => props.theme.bk};
 `;
 
 export const Button = styled.div`

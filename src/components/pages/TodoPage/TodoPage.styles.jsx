@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
+  transform: scale(1);
   width: 100%;
   height: 100%;
   display: flex;
@@ -9,12 +10,6 @@ export const Container = styled.main`
   box-sizing: border-box;
   overflow: hidden;
   scrollbar-width: none;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 44px;
-  }
 `;
 
 export const Content = styled.section`
@@ -24,9 +19,6 @@ export const Content = styled.section`
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  @media screen and (min-width: 768px) {
-    max-width: 1000px;
-  }
 `;
 
 export const Bottom = styled.div`
