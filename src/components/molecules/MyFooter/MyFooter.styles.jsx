@@ -5,8 +5,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 350px;
-  width: 70%;
+  width: 100%;
 `;
 
 export const Button = styled.div`

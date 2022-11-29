@@ -7,7 +7,7 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: hidden;
   scrollbar-width: none;
 
   @media screen and (min-width: 768px) {
@@ -25,7 +25,6 @@ export const Content = styled.section`
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-
   @media screen and (min-width: 768px) {
     max-width: 1000px;
   }
