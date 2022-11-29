@@ -9,7 +9,6 @@ export const Container = styled.main`
   box-sizing: border-box;
   overflow: hidden;
   scrollbar-width: none;
-
   @media screen and (min-width: 768px) {
     position: absolute;
     top: 0;
