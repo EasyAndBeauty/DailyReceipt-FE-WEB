@@ -15,8 +15,7 @@ export const CheckCircle = styled.div`
   border: 3px solid ${(props) => props.theme.gray};
   border-radius: 16px;
   cursor: pointer;
-  border-color: ${(props) =>
-          props.done ? "rgba(200,200,200,0.25)" : props.theme.wt};
+  border-color: ${(props) => (props.done ? "rgba(200,200,200,0.25)" : props.theme.wt)};
   svg {
     transform: scale(1.15) translate(-2px, -3px);
     stroke: ${(props) => props.theme.green};
@@ -61,4 +60,21 @@ export const TimerButton = styled.div`
 
 export const TodoListBlockStyle = styled.ul`
   width: 100%;
+  height: ${44 * 8}px;
+  overflow-y: scroll;
+  @media (max-height: 600px) {
+    height: ${44 * 6}px;
+  }
+  @media (max-height: 500px) {
+    height: ${44 * 4}px;
+  }
+  @media (max-height: 400px) {
+    height: ${44 * 2}px;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  li:last-child {
+    margin-bottom: 96px;
+  }
 `;

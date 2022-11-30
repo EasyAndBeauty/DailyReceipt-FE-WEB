@@ -103,11 +103,11 @@ export function TodoPage() {
             onEdit={putDataLogic}
             onOpenBottomSheet={onOpenBottomSheet}
           />
+          <S.Bottom>
+            <div>{Triangle}</div>
+            <SquareBtn onClick={onSubmitTodoList} children={"Print the Receipt"} />
+          </S.Bottom>
         </S.Content>
-        <S.Bottom>
-          <div>{Triangle}</div>
-          <SquareBtn onClick={onSubmitTodoList} children={"Print the Receipt"} />
-        </S.Bottom>
         <PomodoroBottomSheet
           isOpen={isBottomSheetOpen}
           todo={selectedTodo}
