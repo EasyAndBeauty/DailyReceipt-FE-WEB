@@ -21,8 +21,11 @@ export function ReceiptPage() {
     if (receiptHeight > receiptSectionHeight) {
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
-    // TODO를 세션스토리지에 저장
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <S.Container>

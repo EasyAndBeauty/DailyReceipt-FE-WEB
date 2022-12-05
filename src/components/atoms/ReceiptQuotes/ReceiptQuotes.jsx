@@ -19,9 +19,11 @@ export function ReceiptQuotes() {
         .then((data) => setQuotes(data.slip.advice))
         .catch((e) => console.error(e));
     })();
-
-    // 세션에 저장
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("famous_saying", quotesState);
+  }, [quotesState]);
 
   return <S.Quotes>{quotesState || "Well done!"}</S.Quotes>;
 }

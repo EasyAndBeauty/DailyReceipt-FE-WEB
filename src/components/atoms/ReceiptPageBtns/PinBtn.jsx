@@ -2,6 +2,7 @@ import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useReceiptClient } from "controllers/receiptController";
+import { AbortIfError } from "controllers/error";
 
 export function PinBtn({ isPinned }) {
   const client = useReceiptClient();
@@ -12,18 +13,25 @@ export function PinBtn({ isPinned }) {
   }, [isPinned]);
 
   const handlePin = async () => {
-    // todo: 서버로 pin 데이터 보내는 기능 추가
-    // 세션 스토리지에서 TODO, 명언, 영수증 아이디 정보 취득
-    if (isPinned === false) {
-      // 이 때 PINNED는 무조건 true, 유저 이름은 컨텍스트에서 취득
-      // 영수증 정보 취합하기
-      // POST Pinned Receipt
-      const response = await client.postPinnedReceipt(pinned);
-      // clear session storage
+    if (!isPinned) {
+      const famousSaying = sessionStorage.getItem("famous_saying");
+      const todos = sessionStorage.getItem("todos");
+      const userName = "test";
+
+      try {
+        await client.postPinnedReceipt({
+          todos,
+          famous_saying: famousSaying,
+          receipt_name: userName,
+          pinned: true,
+        });
+      } catch (error) {
+        AbortIfError(error);
+      }
     }
-    if (isPinned === true) {
-      //PUT Pinned Receipt
-      const response = await client.putPinnedReceipt(pinned);
+    if (isPinned) {
+      const id = "todo";
+      await client.updatePinnedReceipt({ pinned: false }, id);
     }
     setPinned(!pinned);
   };
