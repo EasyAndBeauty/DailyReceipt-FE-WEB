@@ -19,7 +19,7 @@ export function ModalTemplate({ children, onClick }) {
         onClick();
       }
     },
-    [onClick]
+    [onClick],
   );
   return (
     <Portal>

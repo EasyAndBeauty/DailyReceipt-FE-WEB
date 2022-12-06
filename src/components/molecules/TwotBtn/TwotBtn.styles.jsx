@@ -12,8 +12,9 @@ export const Container = styled.div`
   width: 100%;
   position: absolute;
   bottom: ${wh * 0.05}px;
+  color: ${(props) => (props.isDark ? props.theme.wt : props.theme.bk)};
   span {
-    color: ${(props) => props.theme.wt};
+    color: ${(props) => (props.isDark ? props.theme.wt : props.theme.bk)};
     min-width: ${wv}px;
     white-space: nowrap;
   }
@@ -31,25 +32,31 @@ export const Button1 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${(props) => props.theme.red};
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "Courier Prime", monospace;
-  text-align: center;
-`;
-
-export const Button2 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${(props) => props.theme.wt};
+  color: ${(props) => (props.color1 ? props.theme[props.color1] : "")};
   font-size: 1rem;
   font-weight: 400;
   font-family: "Courier Prime", monospace;
   text-align: center;
 
   ${(props) =>
-    props.active &&
+    props.type1 === "bold" &&
+    `
+    font-weight: 700;
+    `}
+`;
+
+export const Button2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props) => (props.color2 ? props.theme[props.color2] : "")};
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Courier Prime", monospace;
+  text-align: center;
+
+  ${(props) =>
+    props.type2 === "bold" &&
     `
     font-weight: 700;
     `}

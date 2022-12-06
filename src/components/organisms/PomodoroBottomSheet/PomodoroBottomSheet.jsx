@@ -103,7 +103,9 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
           }}
           btnName1={"Stop"}
           btnName2={btnText}
-          activeBtn={btnText === "play" ? 2 : 1}
+          color1={"red"}
+          type2={btnText === "play" ? "bold" : ""}
+          isDark={true}
         />
       </S.Container>
     </BottomSheetTemplate>
