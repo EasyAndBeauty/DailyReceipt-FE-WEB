@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { BottomSheetTemplate, TwotBtn } from "components";
-import { POMODORO_TIME } from "helper/constants";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
-import { INTERVAL_PER_SECOND } from "helper/constants";
+import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
 
 /**
@@ -27,8 +26,7 @@ import * as S from "./PomodoroBottomSheet.styles";
  */
 
 export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
-  const { task, timer, todoId } = todo || {};
-
+  const { task, timer, id } = todo || {};
   const [accTime, setAccTime] = useState(timer);
   const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [count, setCount] = useState(POMODORO_TIME);
@@ -58,8 +56,8 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
 
   useInterval(
     () => {
-      setCount((prv) => prv - 1000);
-      if (count === 1000) {
+      setCount((prv) => prv - SECOND);
+      if (count === SECOND) {
         onClickPlayOrPause("pause");
       }
     },
@@ -67,17 +65,16 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
   );
 
   useEffect(() => {
-    if (isRunning === false) {
+    if (!isRunning) {
       const remainTime = timer + POMODORO_TIME - count;
-
-      onEdit(todoId, {
+      onEdit(id, {
         ...todo,
         timer: remainTime,
       });
       setAccTime(remainTime);
     }
 
-    if (isOpen === false) {
+    if (!isOpen) {
       setCount(POMODORO_TIME);
     }
   }, [isRunning, isOpen]);
@@ -86,7 +83,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
     <BottomSheetTemplate isOpen={isOpen}>
       <S.Container isOpen={isOpen}>
         <S.TaskText>TODO : {task}</S.TaskText>
-        {timer && (
+        {!isRunning && (
           <S.AccumulateText>
             집중한시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
             {getMin(accTime)}:{getSec(accTime)}

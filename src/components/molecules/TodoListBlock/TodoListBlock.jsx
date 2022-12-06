@@ -20,7 +20,7 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
-    onEdit(todo.todoId, { ...todo, isDone: !done });
+    onEdit(todo.id, { ...todo, isDone: !done });
     setDone(!done);
   };
 
@@ -31,16 +31,16 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
     if (isEditing === false) {
-      onEdit(todo.todoId, { ...todo, task: taskValue });
+      onEdit(todo.id, { ...todo, task: taskValue });
     }
   };
 
   const handleClickToDoRemoveButton = (e) => {
     console.log("다음의 Todo 항목을 삭제합니다.");
-    onRemove(todo.todoId);
+    onRemove(todo.id);
     const isNotDeletedToDo = () => {
       console.log(todo);
-      let todos = localStorage.getItem(todo.todoId); // -해당
+      let todos = localStorage.getItem(todo.id); // -해당
       console.log(todos);
       // todos.forEach();
     };
@@ -110,8 +110,8 @@ export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
     <S.TodoListBlockStyle>
       {todos?.map((todo) => (
         <TodoItem
-          key={todo.todoId}
-          id={todo.todoId}
+          key={todo.id}
+          id={todo.id}
           todo={todo}
           onRemove={onRemove}
           onEdit={onEdit}
