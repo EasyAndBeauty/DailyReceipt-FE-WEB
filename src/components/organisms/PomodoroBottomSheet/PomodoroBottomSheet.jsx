@@ -85,7 +85,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
         <S.TaskText>TODO : {task}</S.TaskText>
         {!isRunning && (
           <S.AccumulateText>
-            집중한시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
+            집중한 시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
             {getMin(accTime)}:{getSec(accTime)}
           </S.AccumulateText>
         )}
