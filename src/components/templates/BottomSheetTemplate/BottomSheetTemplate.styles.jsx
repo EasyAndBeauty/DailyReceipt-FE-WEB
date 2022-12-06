@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Background = styled.div`
   height: 100%;
   width: 100%;
-  background-color: red;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
@@ -46,6 +45,5 @@ export const Content = styled.div`
   box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   padding: 10px;
   position: relative;
-  overflow: scroll;
   background-color: #191919;
 `;
