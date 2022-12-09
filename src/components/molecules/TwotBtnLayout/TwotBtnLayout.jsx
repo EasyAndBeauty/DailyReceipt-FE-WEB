@@ -7,7 +7,7 @@ import * as S from "./TwotBtnLayout.styles";
  * 첫 랜더링의 wv값에 따라 실선의 크기가 결정됩니다
  *
  * @param {String} lineColor - 점선 색 "bk"(default) / "wt"
- * @param {JSX.Element} children - textBt이 두 개 있어야합니다.
+ * @param {JSX.Element} children - TextBtn이 두 개 있어야합니다.
  *
  *
  * @returns {JSX.Element} TwotBtn
