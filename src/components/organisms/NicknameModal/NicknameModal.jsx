@@ -70,10 +70,12 @@ export function NicknameModal({ onClose }) {
         </S.NicknameContainer>
         <S.Divider />
         <S.SelectDiv>
-          <TextBtn onClick={onClose} type="inactive">
+          <TextBtn onClick={onClose} color="lightGray">
             Cancel
           </TextBtn>
-          <TextBtn onClick={handleNicknameSubmit}>Change</TextBtn>
+          <TextBtn onClick={handleNicknameSubmit} type="bold">
+            Change
+          </TextBtn>
         </S.SelectDiv>
       </ModalTemplate>
     </S.Background>

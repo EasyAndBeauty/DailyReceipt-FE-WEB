@@ -12,9 +12,9 @@ export const Container = styled.div`
   width: 100%;
   position: absolute;
   bottom: ${wh * 0.05}px;
-  color: ${(props) => (props.isDark ? props.theme.wt : props.theme.bk)};
+  color: ${(props) => props.theme[props.lineColor]};
   span {
-    color: ${(props) => (props.isDark ? props.theme.wt : props.theme.bk)};
+    color: ${(props) => props.theme[props.lineColor]};
     min-width: ${wv}px;
     white-space: nowrap;
   }

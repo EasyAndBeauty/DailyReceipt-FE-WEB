@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BottomSheetTemplate, TwotBtn } from "components";
+import { BottomSheetTemplate, TwotBtnLayout, TextBtn } from "components";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
 import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
@@ -93,20 +93,26 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
           <Time count={count} />
         </S.TimerText>
         <S.DesciptText>{desiptText}</S.DesciptText>
-        <TwotBtn
-          onClick1={() => {
-            onClick();
-            isRunning && onClickPlayOrPause("pause");
-          }}
-          onClick2={() => {
-            onClickPlayOrPause(btnText);
-          }}
-          btnName1={"Stop"}
-          btnName2={btnText}
-          color1={"red"}
-          type2={btnText === "play" ? "bold" : ""}
-          isDark={true}
-        />
+        <TwotBtnLayout lineColor="wt">
+          <TextBtn
+            onClick={() => {
+              onClick();
+              isRunning && onClickPlayOrPause("pause");
+            }}
+            color="red"
+          >
+            Stop
+          </TextBtn>
+          <TextBtn
+            onClick={() => {
+              onClickPlayOrPause(btnText);
+            }}
+            type={btnText === "play" ? "bold" : ""}
+            color="wt"
+          >
+            {btnText}
+          </TextBtn>
+        </TwotBtnLayout>
       </S.Container>
     </BottomSheetTemplate>
   );
