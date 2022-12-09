@@ -1,10 +1,11 @@
 import * as S from "./Spacer.styles";
 
 /**
- * Header component
+ * Spacer
  *
- * 상단 헤더에 사용되는 컴포넌트
- * children에 text를 넣어 사용함
+ * 아래 위로 공간을 주기 위한 빈 div입니다.
+ *
+ * @param {String} size - "sm" (12px) / "md"(default, 24px) / "lg" (36px)
  *
  */
 

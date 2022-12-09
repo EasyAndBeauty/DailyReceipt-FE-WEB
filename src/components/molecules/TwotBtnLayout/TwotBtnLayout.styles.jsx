@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  position: absolute;
+  position: ${(props) => (props.isAbsolute ? "absolute" : "")};
   bottom: ${wh * 0.05}px;
   color: ${(props) => props.theme[props.lineColor]};
   span {
@@ -18,6 +18,7 @@ export const Container = styled.div`
     min-width: ${wv}px;
     white-space: nowrap;
   }
+  margin-bottom: 10px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -28,36 +29,10 @@ export const ButtonContainer = styled.div`
   width: 60%;
 `;
 
-export const Button1 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${(props) => (props.color1 ? props.theme[props.color1] : "")};
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "Courier Prime", monospace;
-  text-align: center;
-
-  ${(props) =>
-    props.type1 === "bold" &&
-    `
-    font-weight: 700;
-    `}
-`;
-
-export const Button2 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${(props) => (props.color2 ? props.theme[props.color2] : "")};
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "Courier Prime", monospace;
-  text-align: center;
-
-  ${(props) =>
-    props.type2 === "bold" &&
-    `
-    font-weight: 700;
-    `}
+export const Divider = styled.hr`
+  border: none;
+  border-top: 1.5px dashed;
+  height: 1.5px;
+  width: 80%;
+  margin-top: 1rem;
 `;

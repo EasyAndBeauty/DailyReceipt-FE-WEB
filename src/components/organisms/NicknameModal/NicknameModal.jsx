@@ -1,4 +1,4 @@
-import { ModalTemplate, TextBtn, ErrorText, Spacer } from "components";
+import { ModalTemplate, TwotBtnLayout, TextBtn, ErrorText, Spacer } from "components";
 import * as S from "./NicknameModal.styles";
 import { useState, useEffect } from "react";
 import { isNull, isOverMaxLength } from "helper/validations";
@@ -68,15 +68,14 @@ export function NicknameModal({ onClose }) {
           />
           <S.ErrorDiv>{error && <ErrorText children={error} />}</S.ErrorDiv>
         </S.NicknameContainer>
-        <S.Divider />
-        <S.SelectDiv>
+        <TwotBtnLayout isAbsolute={false}>
           <TextBtn onClick={onClose} color="lightGray">
             Cancel
           </TextBtn>
           <TextBtn onClick={handleNicknameSubmit} type="bold">
             Change
           </TextBtn>
-        </S.SelectDiv>
+        </TwotBtnLayout>
       </ModalTemplate>
     </S.Background>
   );

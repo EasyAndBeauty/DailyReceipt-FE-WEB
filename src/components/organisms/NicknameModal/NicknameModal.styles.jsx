@@ -39,21 +39,6 @@ export const ErrorNotification = styled.span`
   color: red;
 `;
 
-export const Divider = styled.hr`
-  border: none;
-  border-top: 1.5px dashed;
-  height: 1.5px;
-  width: 80%;
-  margin-top: 1rem;
-`;
-
-export const SelectDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-`;
-
 export const NicknameInput = styled.input`
   box-sizing: border-box;
   width: 100%;

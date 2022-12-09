@@ -7,6 +7,7 @@ import * as S from "./TwotBtnLayout.styles";
  * 첫 랜더링의 wv값에 따라 실선의 크기가 결정됩니다
  *
  * @param {String} lineColor - 점선 색 "bk"(default) / "wt"
+ * @param {Boolean} isAbsolute - position속성을 지정합니다.
  * @param {JSX.Element} children - TextBtn이 두 개 있어야합니다.
  *
  *
@@ -21,11 +22,10 @@ import * as S from "./TwotBtnLayout.styles";
  * </TwoBtnLayout>
  *
  */
-export const TwotBtnLayout = ({ lineColor = "bk", children }) => {
-  const wv = Math.floor(window.innerWidth) / 8;
+export const TwotBtnLayout = ({ lineColor = "bk", isAbsolute = "true", children }) => {
   return (
-    <S.Container lineColor={lineColor}>
-      <span>{`-`.padStart(wv, "-")}</span>
+    <S.Container lineColor={lineColor} isAbsolute={isAbsolute}>
+      <S.Divider />
       <S.ButtonContainer>{children}</S.ButtonContainer>
     </S.Container>
   );

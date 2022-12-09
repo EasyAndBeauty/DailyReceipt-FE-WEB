@@ -7,7 +7,7 @@ const spacerSize = {
 };
 
 export const Spacer = styled.div`
-  width:100%
-  height:${(props) => spacerSize[props.size]};
-
+  display: block;
+  width: 100%;
+  height: ${(props) => spacerSize[props.size]};
 `;

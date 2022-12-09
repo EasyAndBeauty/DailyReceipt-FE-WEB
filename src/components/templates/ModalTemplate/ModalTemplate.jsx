@@ -5,7 +5,7 @@ import * as S from "./ModalTemplate.styles";
 /**
  *  ModalTemplate
  *
- * children 값을 넣으면 해당화면은 modla 형태로 보여진다.
+ * children 값을 넣으면 해당화면은 modal 형태로 보여진다.
  *
  */
 export function ModalTemplate({ children, onClick }) {
