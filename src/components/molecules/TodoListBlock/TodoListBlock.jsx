@@ -36,15 +36,7 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
   };
 
   const handleClickToDoRemoveButton = (e) => {
-    console.log("다음의 Todo 항목을 삭제합니다.");
     onRemove(todo.id);
-    const isNotDeletedToDo = () => {
-      console.log(todo);
-      let todos = localStorage.getItem(todo.id); // -해당
-      console.log(todos);
-      // todos.forEach();
-    };
-    isNotDeletedToDo();
   };
 
   const onChangeTaskValue = (e) => {
