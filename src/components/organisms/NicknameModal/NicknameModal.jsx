@@ -59,15 +59,15 @@ export function NicknameModal({ onClose }) {
     <S.Background>
       <ModalTemplate>
         <Spacer />
-        <S.NicknameContainer>
-          <S.CurrentNickname>지금 사용하는 별명 : {userName}</S.CurrentNickname>
+        <S.ModalContainer>
+          <S.ModalTitle>지금 사용하는 별명 : {userName}</S.ModalTitle>
           <S.NicknameInput
             type="text"
             placeholder="새로운 닉네임을 입력해주세요"
             onChange={(e) => setNewUserName(e.target.value)}
           />
           <S.ErrorDiv>{error && <ErrorText children={error} />}</S.ErrorDiv>
-        </S.NicknameContainer>
+        </S.ModalContainer>
         <TwotBtnTemplate isAbsolute={false}>
           <TextBtn onClick={onClose} color="lightGray">
             Cancel

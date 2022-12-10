@@ -14,7 +14,7 @@ export const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-export const NicknameContainer = styled.div`
+export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -22,7 +22,7 @@ export const NicknameContainer = styled.div`
   width: 80%;
 `;
 
-export const CurrentNickname = styled.span`
+export const ModalTitle = styled.span`
   text-align: left;
   font-size: 14px;
   font-weight: bold;
