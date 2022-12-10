@@ -6,11 +6,11 @@ import { IS_NULL, IS_OVER } from "helper/constants";
 import { useUserClient } from "controllers/userController";
 
 /**
- * AlertModal
+ * NicknameModal
  *
- * Alert 모달 컴포넌트,
+ * 닉네임 변경 모달 컴포넌트
  *
- * @returns {JSX.Element} 로딩 모달 컴포넌트
+ * @returns {JSX.Element} 닉네임 변경 모달 컴포넌트
  */
 export function NicknameModal({ onClose }) {
   const client = useUserClient();
