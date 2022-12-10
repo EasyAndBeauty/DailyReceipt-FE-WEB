@@ -29,22 +29,9 @@ export const ModalTitle = styled.span`
   margin: 10px;
 `;
 
-export const ErrorDiv = styled.div`
-  weight: 100%;
-  min-height: 35px;
-  display: flex;
-`;
-
-export const ErrorNotification = styled.span`
-  color: red;
-`;
-
-export const NicknameInput = styled.input`
-  box-sizing: border-box;
+export const ModalMessage = styled.span`
   width: 100%;
-  height: 50px;
-  padding: 10px;
-  font-size: 12px;
-  border: 1px solid #191919;
-  border-radius: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
 `;

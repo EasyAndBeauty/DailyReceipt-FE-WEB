@@ -14,6 +14,7 @@ const theme = {
   red: "#F55959",
   gray: "#aaaaaa",
   green: "#81c944",
+  lightGray: "#797979",
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,5 +28,5 @@ root.render(
         </ThemeProvider>
       </BrowserRouter>
     </BaseContextProvider>
-  </AuthContextProvider>
+  </AuthContextProvider>,
 );

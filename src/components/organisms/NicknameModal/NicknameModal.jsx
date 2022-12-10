@@ -1,4 +1,4 @@
-import { ModalTemplate, TextBtn, ErrorText, Spacer } from "components";
+import { ModalTemplate, TwotBtnTemplate, TextBtn, ErrorText, Spacer } from "components";
 import * as S from "./NicknameModal.styles";
 import { useState, useEffect } from "react";
 import { isNull, isOverMaxLength } from "helper/validations";
@@ -6,11 +6,11 @@ import { IS_NULL, IS_OVER } from "helper/constants";
 import { useUserClient } from "controllers/userController";
 
 /**
- * AlertModal
+ * NicknameModal
  *
- * Alert 모달 컴포넌트,
+ * 닉네임 변경 모달 컴포넌트
  *
- * @returns {JSX.Element} 로딩 모달 컴포넌트
+ * @returns {JSX.Element} 닉네임 변경 모달 컴포넌트
  */
 export function NicknameModal({ onClose }) {
   const client = useUserClient();
@@ -59,22 +59,23 @@ export function NicknameModal({ onClose }) {
     <S.Background>
       <ModalTemplate>
         <Spacer />
-        <S.NicknameContainer>
-          <S.CurrentNickname>지금 사용하는 별명 : {userName}</S.CurrentNickname>
+        <S.ModalContainer>
+          <S.ModalTitle>지금 사용하는 별명 : {userName}</S.ModalTitle>
           <S.NicknameInput
             type="text"
             placeholder="새로운 닉네임을 입력해주세요"
             onChange={(e) => setNewUserName(e.target.value)}
           />
           <S.ErrorDiv>{error && <ErrorText children={error} />}</S.ErrorDiv>
-        </S.NicknameContainer>
-        <S.Divider />
-        <S.SelectDiv>
-          <TextBtn onClick={onClose} type="inactive">
+        </S.ModalContainer>
+        <TwotBtnTemplate isAbsolute={false}>
+          <TextBtn onClick={onClose} color="lightGray">
             Cancel
           </TextBtn>
-          <TextBtn onClick={handleNicknameSubmit}>Change</TextBtn>
-        </S.SelectDiv>
+          <TextBtn onClick={handleNicknameSubmit} type="bold">
+            Change
+          </TextBtn>
+        </TwotBtnTemplate>
       </ModalTemplate>
     </S.Background>
   );
