@@ -112,7 +112,7 @@ export function TodoPage() {
           isOpen={isBottomSheetOpen}
           todo={selectedTodo}
           onEdit={putDataLogic}
-          onClick={() => setIsBottomSheetOpen(false)}
+          onClose={() => setIsBottomSheetOpen(false)}
         />
       </S.Container>
     </Fragment>

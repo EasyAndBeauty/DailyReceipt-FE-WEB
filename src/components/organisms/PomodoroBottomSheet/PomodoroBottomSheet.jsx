@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BottomSheetTemplate, TwotBtnTemplate, TextBtn } from "components";
+import { BottomSheetTemplate, TwotBtnTemplate, TextBtn, TimerAlertModal } from "components";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
 import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
@@ -25,12 +25,13 @@ import * as S from "./PomodoroBottomSheet.styles";
  * @returns {JSX.Element} PomodoroBottomSheet
  */
 
-export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
+export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
   const { task, timer, id } = todo || {};
+  const [visibleModal, setVisibleModal] = useState(false);
   const [accTime, setAccTime] = useState(timer);
-  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [count, setCount] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(null);
+  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [btnText, setBtnText] = useState("play");
   const [delay] = useState(INTERVAL_PER_SECOND);
 
@@ -79,6 +80,16 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
     }
   }, [isRunning, isOpen]);
 
+  const showTimerAlertModal = () => {
+    document.body.style.overflow = "hidden";
+    setVisibleModal(true);
+  };
+
+  const closeTimerAlertModal = () => {
+    document.body.style.overflow = "unset";
+    setVisibleModal(false);
+  };
+
   return (
     <BottomSheetTemplate isOpen={isOpen}>
       <S.Container isOpen={isOpen}>
@@ -96,8 +107,8 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
         <TwotBtnTemplate lineColor="wt">
           <TextBtn
             onClick={() => {
-              onClick();
               isRunning && onClickPlayOrPause("pause");
+              showTimerAlertModal();
             }}
             color="red"
           >
@@ -113,6 +124,9 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
             {btnText}
           </TextBtn>
         </TwotBtnTemplate>
+        {visibleModal && (
+          <TimerAlertModal onStop={onClose} onClose={closeTimerAlertModal} task={task} />
+        )}
       </S.Container>
     </BottomSheetTemplate>
   );

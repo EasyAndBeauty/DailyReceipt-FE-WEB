@@ -62,6 +62,7 @@ export { MySection } from "./organisms/MySection";
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
 export { NicknameModal } from "./organisms/NicknameModal";
+export { TimerAlertModal } from "./organisms/TimerAlertModal";
 
 /**
  * templates
