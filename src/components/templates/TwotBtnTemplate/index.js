@@ -1,0 +1,1 @@
+export { TwotBtnTemplate } from "./TwotBtnTemplate";

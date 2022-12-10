@@ -1,1 +1,0 @@
-export { TwotBtnLayout } from "./TwotBtnLayout";

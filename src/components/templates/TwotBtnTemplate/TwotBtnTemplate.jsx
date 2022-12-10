@@ -1,10 +1,10 @@
-import * as S from "./TwotBtnLayout.styles";
+import * as S from "./TwotBtnTemplate.styles";
 
 /**
- * TwotBtn
+ * TwotBtnTemplate
  *
- * 2개의 버튼을 가지는 컴포넌트 입니다.
- * 첫 랜더링의 wv값에 따라 실선의 크기가 결정됩니다
+ * 2개의 버튼을 가지는 템플렛 입니다.
+ * 부모 width의 80%의 값으로 실선의 크기가 결정됩니다
  *
  * @param {String} lineColor - 점선 색 "bk"(default) / "wt"
  * @param {Boolean} isAbsolute - position속성을 지정합니다.
@@ -22,7 +22,7 @@ import * as S from "./TwotBtnLayout.styles";
  * </TwoBtnLayout>
  *
  */
-export const TwotBtnLayout = ({ lineColor = "bk", isAbsolute = "true", children }) => {
+export const TwotBtnTemplate = ({ lineColor = "bk", isAbsolute = "true", children }) => {
   return (
     <S.Container lineColor={lineColor} isAbsolute={isAbsolute}>
       <S.Divider />

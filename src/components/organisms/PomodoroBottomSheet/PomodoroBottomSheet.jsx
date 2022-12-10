@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BottomSheetTemplate, TwotBtnLayout, TextBtn } from "components";
+import { BottomSheetTemplate, TwotBtnTemplate, TextBtn } from "components";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
 import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
@@ -93,7 +93,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
           <Time count={count} />
         </S.TimerText>
         <S.DesciptText>{desiptText}</S.DesciptText>
-        <TwotBtnLayout lineColor="wt">
+        <TwotBtnTemplate lineColor="wt">
           <TextBtn
             onClick={() => {
               onClick();
@@ -112,7 +112,7 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
           >
             {btnText}
           </TextBtn>
-        </TwotBtnLayout>
+        </TwotBtnTemplate>
       </S.Container>
     </BottomSheetTemplate>
   );

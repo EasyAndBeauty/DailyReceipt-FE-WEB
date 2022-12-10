@@ -36,7 +36,6 @@ export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { ToDoInsert } from "./molecules/ToDoInsert";
 export { TodoListBlock } from "./molecules/TodoListBlock";
-export { TwotBtnLayout } from "./molecules/TwotBtnLayout";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/ReceiptPaper";
@@ -69,6 +68,7 @@ export { NicknameModal } from "./organisms/NicknameModal";
  */
 export { ModalTemplate } from "./templates/ModalTemplate";
 export { BottomSheetTemplate } from "./templates/BottomSheetTemplate";
+export { TwotBtnTemplate } from "./templates/TwotBtnTemplate";
 
 /**
  * Pages
