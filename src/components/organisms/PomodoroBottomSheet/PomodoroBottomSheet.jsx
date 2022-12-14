@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { BottomSheetTemplate, TwotBtn } from "components";
-import { POMODORO_TIME } from "helper/constants";
+import { BottomSheetTemplate, TwotBtnTemplate, TextBtn, TimerAlertModal } from "components";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
-import { INTERVAL_PER_SECOND } from "helper/constants";
+import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
 
 /**
@@ -26,13 +25,13 @@ import * as S from "./PomodoroBottomSheet.styles";
  * @returns {JSX.Element} PomodoroBottomSheet
  */
 
-export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
-  const { task, timer, todoId } = todo || {};
-
+export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
+  const { task, timer, id } = todo || {};
+  const [visibleModal, setVisibleModal] = useState(false);
   const [accTime, setAccTime] = useState(timer);
-  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [count, setCount] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(null);
+  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [btnText, setBtnText] = useState("play");
   const [delay] = useState(INTERVAL_PER_SECOND);
 
@@ -58,8 +57,8 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
 
   useInterval(
     () => {
-      setCount((prv) => prv - 1000);
-      if (count === 1000) {
+      setCount((prv) => prv - SECOND);
+      if (count === SECOND) {
         onClickPlayOrPause("pause");
       }
     },
@@ -67,28 +66,37 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
   );
 
   useEffect(() => {
-    if (isRunning === false) {
+    if (!isRunning) {
       const remainTime = timer + POMODORO_TIME - count;
-
-      onEdit(todoId, {
+      onEdit(id, {
         ...todo,
         timer: remainTime,
       });
       setAccTime(remainTime);
     }
 
-    if (isOpen === false) {
+    if (!isOpen) {
       setCount(POMODORO_TIME);
     }
   }, [isRunning, isOpen]);
+
+  const showTimerAlertModal = () => {
+    document.body.style.overflow = "hidden";
+    setVisibleModal(true);
+  };
+
+  const closeTimerAlertModal = () => {
+    document.body.style.overflow = "unset";
+    setVisibleModal(false);
+  };
 
   return (
     <BottomSheetTemplate isOpen={isOpen}>
       <S.Container isOpen={isOpen}>
         <S.TaskText>TODO : {task}</S.TaskText>
-        {timer && (
+        {!isRunning && (
           <S.AccumulateText>
-            집중한시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
+            집중한 시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
             {getMin(accTime)}:{getSec(accTime)}
           </S.AccumulateText>
         )}
@@ -96,18 +104,29 @@ export function PomodoroBottomSheet({ isOpen, onClick, todo, onEdit }) {
           <Time count={count} />
         </S.TimerText>
         <S.DesciptText>{desiptText}</S.DesciptText>
-        <TwotBtn
-          onClick1={() => {
-            onClick();
-            isRunning && onClickPlayOrPause("pause");
-          }}
-          onClick2={() => {
-            onClickPlayOrPause(btnText);
-          }}
-          btnName1={"Stop"}
-          btnName2={btnText}
-          activeBtn={btnText === "play" ? 2 : 1}
-        />
+        <TwotBtnTemplate lineColor="wt">
+          <TextBtn
+            onClick={() => {
+              isRunning && onClickPlayOrPause("pause");
+              showTimerAlertModal();
+            }}
+            color="red"
+          >
+            Stop
+          </TextBtn>
+          <TextBtn
+            onClick={() => {
+              onClickPlayOrPause(btnText);
+            }}
+            type={btnText === "play" ? "bold" : ""}
+            color="wt"
+          >
+            {btnText}
+          </TextBtn>
+        </TwotBtnTemplate>
+        {visibleModal && (
+          <TimerAlertModal onStop={onClose} onClose={closeTimerAlertModal} task={task} />
+        )}
       </S.Container>
     </BottomSheetTemplate>
   );

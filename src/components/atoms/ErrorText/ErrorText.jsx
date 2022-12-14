@@ -1,9 +1,9 @@
 import * as S from "./ErrorText.styles";
 
 /**
- * Header component
+ * Error Text
  *
- * 상단 헤더에 사용되는 컴포넌트
+ * 에러 표시용 텍스트를 위한 컴포넌트
  * children에 text를 넣어 사용함
  *
  */

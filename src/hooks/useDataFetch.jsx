@@ -31,8 +31,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
     .toISOString()
     .split("T")[0];
 
-  const { setValue, getValue, getAllDateValue, clearAllDateValue } =
-    useLocalStorage(newDate, []);
+  const { setValue, getValue, getAllDateValue, clearAllDateValue } = useLocalStorage(newDate, []);
 
   /**
    * GET - 로그인 사용자 : 랜더링시 서버에서 데이터를 받아온다.
@@ -98,13 +97,13 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         }
         const { data } = res;
 
-        const todoId = data;
+        const id = data;
         const { task, timer, isDone } = newTodo;
 
         setTodos((pre) => [
           ...pre,
           {
-            todoId,
+            id,
             task,
             date: newDate,
             isDone,
@@ -115,7 +114,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         console.log(e);
       }
     },
-    [newDate, postTodo, setTodos]
+    [newDate, postTodo, setTodos],
   );
 
   // post - 게스트 사용자  : localStorage에 데이터를 저장한다
@@ -126,7 +125,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         const newData = [
           ...todos,
           {
-            todoId: uuidv4(),
+            id: uuidv4(),
             task,
             date: newDate,
             isDone,
@@ -140,7 +139,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         console.log(e);
       }
     },
-    [todos, newDate, setTodos, setValue]
+    [todos, newDate, setTodos, setValue],
   );
 
   const postDataLogic = isLoggedIn ? postUseData : postLocalData;
@@ -166,7 +165,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         const { data } = res;
         setTodos((pre) => {
           return pre.map((todo) => {
-            if (todo.todoId === id) {
+            if (todo.id === id) {
               return {
                 ...todo,
                 ...data,
@@ -179,7 +178,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         console.log(e);
       }
     },
-    [setTodos, updateTodo]
+    [setTodos, updateTodo],
   );
 
   // put - 게스트 사용자  : localStorage에 데이터를 수정한다.
@@ -187,7 +186,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
     async (id, task) => {
       try {
         const newData = [...todos].map((todo) => {
-          if (todo.todoId === id) {
+          if (todo.id === id) {
             return task;
           }
           return todo;
@@ -198,7 +197,7 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
         console.log(e);
       }
     },
-    [todos, setValue, setTodos, newDate]
+    [todos, setValue, setTodos, newDate],
   );
 
   const putDataLogic = isLoggedIn ? putUseData : putLocalData;
@@ -215,14 +214,14 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
   const deleteUseData = useCallback(
     async (id) => {
       try {
-        const newData = todos.filter((todo) => todo.todoId !== id);
+        const newData = todos.filter((todo) => todo.id !== id);
         await deleteTodo(id);
         setTodos(newData);
       } catch (e) {
         console.log(e);
       }
     },
-    [deleteTodo, setTodos, todos]
+    [deleteTodo, setTodos, todos],
   );
 
   // delete - 게스트 사용자  : localStorage에 데이터를 저장한다.
@@ -230,14 +229,14 @@ export default function useDataFetch({ todos, setTodos, setAllTodos, date }) {
   const deleteLocalData = useCallback(
     async (id) => {
       try {
-        const newData = todos.filter((todo) => todo.todoId !== id);
+        const newData = todos.filter((todo) => todo.id !== id);
         await setValue(newData, newDate);
         setTodos(newData);
       } catch (e) {
         console.log(e);
       }
     },
-    [newDate, setTodos, setValue, todos]
+    [newDate, setTodos, setValue, todos],
   );
 
   const deleteDataLogic = isLoggedIn ? deleteUseData : deleteLocalData;
