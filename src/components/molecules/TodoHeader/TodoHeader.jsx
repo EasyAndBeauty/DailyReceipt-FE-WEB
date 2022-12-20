@@ -30,18 +30,10 @@ export function TodoHeader({ selectedDate, onSelectDayOfWeek, navigateUserPage }
         <HeaderText>{selectedMonth(selectedDate)}</HeaderText>
         <div>
           <S.Btn onClick={() => setCalendarOn(true)}>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              size="2x"
-              color="#aaaaaa"
-            ></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faCalendarDays} size="2x" color="#aaaaaa" />
           </S.Btn>
           <S.Btn onClick={() => navigateUserPage()}>
-            <FontAwesomeIcon
-              icon={faReceipt}
-              size="2x"
-              color="#aaaaaa"
-            ></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faReceipt} size="2x" color="#aaaaaa" />
           </S.Btn>
         </div>
       </S.Container>

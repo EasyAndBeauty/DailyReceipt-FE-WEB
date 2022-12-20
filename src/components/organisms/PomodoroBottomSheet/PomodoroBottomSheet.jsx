@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BottomSheetTemplate, TwotBtnTemplate, TextBtn, TimerAlertModal } from "components";
 import { getHour, getMin, getSec } from "helper/getTime";
 import useInterval from "hooks/useInterval";
-import { SECOND, POMODORO_TIME, INTERVAL_PER_SECOND } from "helper/constants";
+import { SECOND, POMODORO_TIME, INTERVAL_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
 
 /**
@@ -33,7 +33,6 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
   const [isRunning, setIsRunning] = useState(null);
   const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
   const [btnText, setBtnText] = useState("play");
-  const [delay] = useState(INTERVAL_PER_SECOND);
 
   const onClickPlayOrPause = (type) => {
     switch (type) {
@@ -58,11 +57,11 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
   useInterval(
     () => {
       setCount((prv) => prv - SECOND);
-      if (count === SECOND) {
+      if (count <= 0) {
         onClickPlayOrPause("pause");
       }
     },
-    isRunning ? delay : null,
+    isRunning ? INTERVAL_SECOND : null,
   );
 
   useEffect(() => {

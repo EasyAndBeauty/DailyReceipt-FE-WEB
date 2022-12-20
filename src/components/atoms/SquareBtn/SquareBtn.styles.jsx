@@ -8,11 +8,11 @@ export const BtnContainer = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  background-color: ${(props) =>
-    props.type === "default" ? props.theme.wt : `#FFFFFF`};
+  background-color: ${(props) => (props.type === "default" ? props.theme.wt : `#FFFFFF`)};
   color: ${(props) => props.color};
   font-family: "Courier Prime", monospace;
   font-size: 1.125rem;
+  cursor: pointer;
 
   &:hover {
     font-weight: 700;
