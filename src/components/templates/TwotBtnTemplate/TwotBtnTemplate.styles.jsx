@@ -25,8 +25,9 @@ export const ButtonContainer = styled.div`
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 60%;
+  align-items: flex-end;
+  justify-content: space-around;
+  width: 70%;
 `;
 
 export const Divider = styled.hr`

@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useReceiptClient } from "controllers/receiptController";
 import { AbortIfError } from "controllers/error";
+import { PinnedModal } from "components/organisms/PinnedModal";
 
 export function PinBtn({ isPinned }) {
   const client = useReceiptClient();
   const [pinned, setPinned] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
 
   useEffect(() => {
     if (isPinned) setPinned(true);
@@ -15,16 +17,19 @@ export function PinBtn({ isPinned }) {
   const handlePin = async () => {
     if (!isPinned) {
       const famousSaying = sessionStorage.getItem("famous_saying");
-      const todos = sessionStorage.getItem("todos");
+      const todos = JSON.parse(sessionStorage.getItem("todos"));
       const userName = "test";
 
       try {
-        await client.postPinnedReceipt({
+        const response = await client.postPinnedReceipt({
           todos,
           famous_saying: famousSaying,
           receipt_name: userName,
           pinned: true,
         });
+        const receiptId = response.data;
+        console.log(receiptId);
+        setVisibleModal(!pinned);
       } catch (error) {
         AbortIfError(error);
       }
@@ -36,10 +41,15 @@ export function PinBtn({ isPinned }) {
     setPinned(!pinned);
   };
 
+  const closePinnedModal = () => {
+    setVisibleModal(false);
+  };
+
   return (
     <PinContainer onClick={handlePin} pinned={pinned}>
       <PinIcon />
       <span>{pinned ? "PINNED" : "PIN"}</span>
+      {visibleModal && <PinnedModal onClose={closePinnedModal} />}
     </PinContainer>
   );
 }
