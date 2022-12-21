@@ -9,8 +9,8 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.75rem;
-  //padding: 0.5rem;
   color: ${(props) => props.theme.wt};
+  cursor: pointer;
   ${(props) => props.isActive && "background-color: #efefef; color: #191919;"}
 `;
 

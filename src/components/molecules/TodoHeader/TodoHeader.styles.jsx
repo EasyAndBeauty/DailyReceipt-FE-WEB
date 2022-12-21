@@ -23,6 +23,7 @@ export const Btn = styled.button`
   margin-left: 8px;
   background-color: transparent;
   color: ${(props) => props.wt};
+  cursor: pointer;
 
   &:last-child {
     transform: translateY(1px);

@@ -7,4 +7,5 @@ export const TextContainer = styled.div`
   font-weight: ${(props) => (props.type === "bold" ? "bold" : "400")};
   font-size: ${(props) => fontSize[props.size]};
   color: ${(props) => props.theme[props.color]};
+  cursor: pointer;
 `;

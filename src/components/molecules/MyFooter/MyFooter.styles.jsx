@@ -23,6 +23,7 @@ export const Button = styled.div`
   background-position: top;
   background-size: 8px 1px; /*점선 간격 수정*/
   background-repeat: repeat-x;
+  cursor: pointer;
 `;
 
 export const ButtonText = styled.span`
