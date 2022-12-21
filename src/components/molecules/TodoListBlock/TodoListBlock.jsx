@@ -35,7 +35,7 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
     }
   };
 
-  const handleClickToDoRemoveButton = (e) => {
+  const handleClickToDoRemoveButton = () => {
     onRemove(todo.id);
   };
 
@@ -78,6 +78,7 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
  * @param {Array} todos - todo list
  * @param {Function} onRemove - todo 삭제
  * @param {Function} onEdit - todo 수정
+ * @param {Function} onOpenBottomSheet - 하단 포모도로 창 오픈
  * @returns
  */
 
@@ -86,12 +87,10 @@ export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
 
   const setRunningTimer = (key) => {
     setHasRuuningTimer(key);
-    return;
   };
 
   const resetRunningTimer = () => {
     setHasRuuningTimer("");
-    return;
   };
 
   useEffect(() => {

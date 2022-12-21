@@ -1,5 +1,4 @@
 import * as S from "./SquareBtn.styles";
-import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow_below_sm_icon.svg";
 
 /**
  * SquareBtn component
@@ -9,20 +8,15 @@ import { ReactComponent as ArrowBelowIcon } from "assets/svg/arrow_below_sm_icon
  *
  * @param {function} onClick - 버튼을 클릭했을 때 실행되는 이벤트
  * @param {React.Component} children - 버튼의 텍스트
- *
+ * @param type
+ * @param color
  * @returns {React.Component} 네모난 버튼 컴포넌트
  */
 
-export function SquareBtn({
-  onClick,
-  children,
-  type = "default",
-  color = "#191919",
-}) {
+export function SquareBtn({ onClick, children, type = "default", color = "#191919" }) {
   return (
     <S.BtnContainer onClick={onClick} color={color} type={type}>
       <span>{children}</span>
-      {/*<ArrowBelowIcon />*/}
     </S.BtnContainer>
   );
 }
