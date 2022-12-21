@@ -28,9 +28,7 @@ export function PinnedModal({ onClose }) {
             }}
             type="bold"
           >
-            Check
-            <br />
-            Receipts
+            My Page
           </TextBtn>
         </TwotBtnTemplate>
       </ModalTemplate>
