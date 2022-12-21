@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { isNull, isOverMaxLength } from "helper/validations";
 import { IS_NULL, IS_OVER } from "helper/constants";
 import { useUserClient } from "controllers/userController";
-
+import { AbortIfError } from "controllers/error";
 /**
  * NicknameModal
  *
@@ -24,15 +24,10 @@ export function NicknameModal({ onClose }) {
       return;
     }
 
-    const response = await client.putUser(newUserName);
-
-    if (response.status !== 200) {
-      alert("에러가 발생했습니다. 다시 시도해주세요.");
-      return;
-    }
-
-    if (response.status === 200) {
-      alert("닉네임 변경이 완료 되었습니다.");
+    try {
+      client.putUser(newUserName).then(alert("닉네임 변경이 완료 되었습니다."));
+    } catch (error) {
+      AbortIfError(error);
     }
     onClose();
   };

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ReceiptPaper, AlertModal, SaveBtn, CopyBtn, PinBtn } from "components";
+import { ReceiptPaper, AlertModal, SaveBtn, CopyBtn, PinBtn, PinnedModal } from "components";
 import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import * as S from "./ReceiptPage.styles";
 
@@ -13,6 +13,7 @@ export function ReceiptPage() {
 
   const [scale, setScale] = useState(1);
   const [modalOn, setModalOn] = useState(false);
+  const [pinBtnModalVisible, setPinBtnModalVisible] = useState(false);
 
   useEffect(() => {
     const ratio = window.innerHeight / 1700;
@@ -22,6 +23,10 @@ export function ReceiptPage() {
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <S.Container>
@@ -34,9 +39,10 @@ export function ReceiptPage() {
       <S.IconContainer>
         <CopyBtn />
         <SaveBtn date={date} />
-        <PinBtn isPinned={pinned} />
+        <PinBtn isPinned={pinned} toggleVisible={(bool) => setPinBtnModalVisible(bool)} />
       </S.IconContainer>
       {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
+      {pinBtnModalVisible && <PinnedModal onClose={() => setPinBtnModalVisible(false)} />}
     </S.Container>
   );
 }

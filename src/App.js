@@ -23,7 +23,7 @@ function App() {
           <Route path="*" element={<LoginPage />} />
         </>
       )}
-      <Route path="*" element={<RedirectionPage />} />
+      <Route path="/error" element={<RedirectionPage />} />
     </Routes>
   );
 }

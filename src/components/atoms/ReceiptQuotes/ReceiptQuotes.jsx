@@ -1,5 +1,6 @@
 import * as S from "./ReceiptQuotes.styles";
 import useAsync from "../../../hooks/useAsync";
+import { useEffect } from "react";
 
 /**
  * ReceiptQuotes
@@ -12,7 +13,11 @@ import useAsync from "../../../hooks/useAsync";
 export function ReceiptQuotes() {
   const [state] = useAsync(getQuotes, []);
   const { loading, data: quote, error } = state;
-  console.log(quote);
+
+  // TODO: 리팩토링 예정
+  useEffect(() => {
+    sessionStorage.setItem("famous_saying", quote);
+  }, [quote]);
 
   return <S.Quotes>{loading || error ? "Well done!" : quote}</S.Quotes>;
 }

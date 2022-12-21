@@ -4,6 +4,7 @@ const initialAuth = {
   isLoggedIn: false,
   accessToken: "",
   refreshToken: "",
+  // 유저 이름 추가
 };
 
 const AuthStateContext = createContext(initialAuth);
@@ -52,9 +53,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthStateContext.Provider value={user}>
-      <AuthDispatchContext.Provider value={dispatch}>
-        {children}
-      </AuthDispatchContext.Provider>
+      <AuthDispatchContext.Provider value={dispatch}>{children}</AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
   );
 };
