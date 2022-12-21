@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useReceiptClient } from "controllers/receiptController";
 import { AbortIfError } from "controllers/error";
-import { PinnedModal } from "components/organisms/PinnedModal";
 
-export function PinBtn({ isPinned }) {
+export function PinBtn({ isPinned, toggleVisible }) {
   const client = useReceiptClient();
   const [pinned, setPinned] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(false);
 
   useEffect(() => {
     if (isPinned) setPinned(true);
@@ -28,8 +26,7 @@ export function PinBtn({ isPinned }) {
           pinned: true,
         });
         const receiptId = response.data;
-        console.log(receiptId);
-        setVisibleModal(!pinned);
+        toggleVisible(!pinned);
       } catch (error) {
         AbortIfError(error);
       }
@@ -41,15 +38,10 @@ export function PinBtn({ isPinned }) {
     setPinned(!pinned);
   };
 
-  const closePinnedModal = () => {
-    setVisibleModal(false);
-  };
-
   return (
     <PinContainer onClick={handlePin} pinned={pinned}>
       <PinIcon />
       <span>{pinned ? "PINNED" : "PIN"}</span>
-      {visibleModal && <PinnedModal onClose={closePinnedModal} />}
     </PinContainer>
   );
 }

@@ -27,9 +27,10 @@ export function PinnedModal({ onClose }) {
               navigate("/my");
             }}
             type="bold"
-            size="sm"
           >
-            Check Receipt
+            Check
+            <br />
+            Receipts
           </TextBtn>
         </TwotBtnTemplate>
       </ModalTemplate>
