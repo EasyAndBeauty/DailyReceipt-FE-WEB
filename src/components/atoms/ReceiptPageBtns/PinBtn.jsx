@@ -1,11 +1,10 @@
-import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useReceiptClient } from "controllers/receiptController";
-import { AbortIfError } from "controllers/error";
+import { usePinnedReceipt } from "hooks/usePinnedReceipt";
+import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 
-export function PinBtn({ isPinned, toggleVisible }) {
-  const client = useReceiptClient();
+export function PinBtn({ isPinned, openModal }) {
+  const { postPinReceipt, updatePinReceipt } = usePinnedReceipt();
   const [pinned, setPinned] = useState(false);
 
   useEffect(() => {
@@ -14,27 +13,11 @@ export function PinBtn({ isPinned, toggleVisible }) {
 
   const handlePin = async () => {
     if (!isPinned) {
-      const famousSaying = sessionStorage.getItem("famous_saying");
-      const todos = JSON.parse(sessionStorage.getItem("todos"));
-      const userName = "test";
+      postPinReceipt();
+      openModal();
+    }
+    if (isPinned) updatePinReceipt();
 
-      try {
-        const response = await client.postPinnedReceipt({
-          todos,
-          famous_saying: famousSaying,
-          receipt_name: userName,
-          pinned: true,
-        });
-        const receiptId = response.data;
-        toggleVisible(!pinned);
-      } catch (error) {
-        AbortIfError(error);
-      }
-    }
-    if (isPinned) {
-      const id = "todo";
-      await client.updatePinnedReceipt({ pinned: false }, id);
-    }
     setPinned(!pinned);
   };
 
