@@ -9,7 +9,8 @@ export const BtnContainer = styled.div`
   align-items: center;
   box-sizing: border-box;
   background-color: ${(props) => (props.type === "default" ? props.theme.wt : `#FFFFFF`)};
-  color: ${(props) => props.color};
+  color: ${(props) => props.theme[props.color]};
+  font-weight: ${(props) => (props.type === "bold" ? "bold" : "400")};
   font-family: "Courier Prime", monospace;
   font-size: 1.125rem;
   cursor: pointer;

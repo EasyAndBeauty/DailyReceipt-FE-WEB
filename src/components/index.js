@@ -4,8 +4,6 @@
  * atoms
  */
 //TodoPage
-import SaveBtn from "./atoms/ReceiptPageBtns/SaveBtn";
-
 export { HeaderText } from "./atoms/HeaderText";
 export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
