@@ -6,7 +6,7 @@ export const Background = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 2;
   position: fixed;
   left: 0;
   top: 0;
@@ -14,16 +14,24 @@ export const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-export const Content = styled.div`
-  width: 20.5rem;
-  max-height: 19rem;
-  min-height: 250px;
-  border-radius: 24px;
-  background-color: white;
+export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
-  position: relative;
+  width: 80%;
+`;
+
+export const ModalTitle = styled.span`
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px;
+`;
+
+export const ModalMessage = styled.span`
+  width: 100%;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
 `;

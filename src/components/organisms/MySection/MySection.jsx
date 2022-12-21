@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
 import { useReceiptClient } from "controllers/receiptController";
-import { useEffect } from "react";
 import { formatReceiptDate } from "helper/formatter";
 
 /**
@@ -24,7 +23,7 @@ export const MySection = () => {
       const data = await getPinnedReceipts();
       setReceipts(data);
     })();
-  });
+  }, []);
 
   const renderReceipts = (receipts) => {
     const pinnedReceipts = receipts.map((receipt) => {
