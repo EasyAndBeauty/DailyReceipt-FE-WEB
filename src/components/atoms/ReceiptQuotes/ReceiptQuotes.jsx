@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import * as S from "./ReceiptQuotes.styles";
+import useAsync from "../../../hooks/useAsync";
+import { useEffect } from "react";
 
 /**
  * ReceiptQuotes
@@ -10,20 +11,21 @@ import * as S from "./ReceiptQuotes.styles";
  * @returns
  */
 export function ReceiptQuotes() {
-  const [quotesState, setQuotes] = useState();
+  const [state] = useAsync(getQuotes, []);
+  const { loading, data: quote, error } = state;
 
+  // TODO: 리팩토링 예정
   useEffect(() => {
-    (async () => {
-      await fetch("https://api.adviceslip.com/advice")
-        .then((response) => response.json())
-        .then((data) => setQuotes(data.slip.advice))
-        .catch((e) => console.error(e));
-    })();
-  }, []);
+    sessionStorage.setItem("famous_saying", quote);
+  }, [quote]);
 
-  useEffect(() => {
-    sessionStorage.setItem("famous_saying", quotesState);
-  }, [quotesState]);
+  return <S.Quotes>{loading || error ? "Well done!" : quote}</S.Quotes>;
+}
 
-  return <S.Quotes>{quotesState || "Well done!"}</S.Quotes>;
+async function getQuotes() {
+  const response = await fetch("https://api.adviceslip.com/advice").then((response) =>
+    response.json(),
+  );
+
+  return response.slip.advice;
 }
