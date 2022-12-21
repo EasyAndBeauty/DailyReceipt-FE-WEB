@@ -66,8 +66,7 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
 
   useEffect(() => {
     if (!isRunning) {
-      const remainTime = timer + (POMODORO_TIME - count);
-      console.log("remainTime:", remainTime);
+      const remainTime = timer + POMODORO_TIME - count;
       onEdit(id, {
         ...todo,
         timer: remainTime,
