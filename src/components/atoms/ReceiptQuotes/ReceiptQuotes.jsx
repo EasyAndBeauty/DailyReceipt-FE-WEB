@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import * as S from "./ReceiptQuotes.styles";
+import useAsync from "../../../hooks/useAsync";
 
 /**
  * ReceiptQuotes
@@ -10,18 +10,17 @@ import * as S from "./ReceiptQuotes.styles";
  * @returns
  */
 export function ReceiptQuotes() {
-  const [quotesState, setQuotes] = useState();
+  const [state] = useAsync(getQuotes, []);
+  const { loading, data: quote, error } = state;
+  console.log(quote);
 
-  useEffect(() => {
-    const getQuotes = async () => {
-      await fetch("https://api.adviceslip.com/advice")
-        .then((response) => response.json())
-        .then((data) => setQuotes(data.slip.advice))
-        .catch((e) => console.error(e));
-    };
+  return <S.Quotes>{loading || error ? "Well done!" : quote}</S.Quotes>;
+}
 
-    getQuotes();
-  }, []);
+async function getQuotes() {
+  const response = await fetch("https://api.adviceslip.com/advice").then((response) =>
+    response.json(),
+  );
 
-  return <S.Quotes>{quotesState || "Well done!"}</S.Quotes>;
+  return response.slip.advice;
 }
