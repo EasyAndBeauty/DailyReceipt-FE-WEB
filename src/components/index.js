@@ -5,7 +5,6 @@
  */
 //TodoPage
 export { HeaderText } from "./atoms/HeaderText";
-export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
 export { TimerImage } from "./atoms/TimerImage";

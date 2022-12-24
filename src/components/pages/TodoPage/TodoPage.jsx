@@ -58,8 +58,8 @@ export function TodoPage() {
     }
   };
 
-  const onSelectDayOfWeek = (DateTime) => {
-    setSelectedDate(DateTime);
+  const onSelectDayOfWeek = (index) => {
+    setSelectedDate(index);
     /**
      * 서버에 요청을 보내고, 응답을 받아서 처리한다.
      */

@@ -1,5 +1,7 @@
-import { DayOfWeek } from "components";
 import * as S from "./Week.style";
+import { findDayOfWeek } from "utils/findDayOfWeek";
+import { useState } from "react";
+
 const dayjs = require("dayjs");
 const weekday = require("dayjs/plugin/weekday");
 const isoWeek = require("dayjs/plugin/isoWeek");
@@ -14,30 +16,60 @@ dayjs.extend(weekOfYear);
  * Week component
  *
  * 상단 헤더에 사용되는 컴포넌트
- * 현재 더미데이터로 date 정보를 이용하고 있습니다
+ * 선택한 날짜에 해당하는 일주일을 렌더링합니다.
  *
- * @param {number} selectedDayOfWeek - 선택된 날짜의 index정보 (일요일이 0,토요일이 6)
+ * @param {Date} selectedDate - 선택된 날짜(Date 오브젝트) (일요일이 0,토요일이 6)
  * @param {Function} onSelectDayOfWeek - 선택된 날짜의 index정보를 받아와서 요일을 선택하는 함수
  *
  * @returns {JSX.Element} - 요일 컴포넌트들을 배치한 컴포넌트
  */
-export function Week({ selectedDate, selectedDayOfWeek, onSelectDayOfWeek }) {
-  const week = new Array(7).fill(0).map((_, index) => {
-    return dayjs(selectedDate).weekday(index);
-  });
+
+export function Week({ selectedDate, onSelectDayOfWeek }) {
+  /**
+   * 선택한 날짜의 일주일 정보를 획득 후, 컴포넌트에서 사용하기 편한 배열로 변환하여 반환합니다.
+   * */
+  const week = new Array(7)
+    .fill(0)
+    .map((_, index) => {
+      return dayjs(selectedDate).weekday(index);
+    })
+    .map((item) => {
+      return {
+        key: item.get("day"),
+        date: item.get("date"),
+        day: findDayOfWeek(item.get("day")),
+        fullDate: item,
+      };
+    });
+
+  /**
+   * 날짜에서 요일의 인덱스 획득  (일요일이 0,토요일이 6)
+   */
+  const selectedDayIndex = selectedDate.getDay();
+
+  /**
+   * 인덱스에서 오늘의 날짜를 구한 후, JS의 Date오브젝트를 Todo Page의 State에 저장합니다.
+   *
+   * @param {number} index  요일의 인덱스(일요일이 0,토요일이 6)
+   */
+  const handleOnClick = (index) => {
+    onSelectDayOfWeek(week[index].fullDate.toDate());
+  };
 
   return (
     <S.Container>
-      {week.map((date, index) => (
-        <DayOfWeek
-          key={index}
-          dayOfweek={index}
-          date={date.$D}
-          dateInfo={date}
-          selectedDayOfWeek={selectedDayOfWeek}
-          onSelectDayOfWeek={onSelectDayOfWeek}
-        />
-      ))}
+      {week.map((item) => {
+        return (
+          <S.DayContainer
+            isActive={item.key === selectedDayIndex}
+            onClick={() => handleOnClick(item.key)}
+            key={item.key}
+          >
+            <S.DayText>{item.date}</S.DayText>
+            <S.DayText>{item.day}</S.DayText>
+          </S.DayContainer>
+        );
+      })}
     </S.Container>
   );
 }
