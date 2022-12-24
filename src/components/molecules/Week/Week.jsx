@@ -27,6 +27,14 @@ dayjs.extend(weekOfYear);
 export function Week({ selectedDate, onSelectDayOfWeek }) {
   /**
    * 선택한 날짜의 일주일 정보를 획득 후, 컴포넌트에서 사용하기 편한 배열로 변환하여 반환합니다.
+   *
+   * @returns {Array} - 요일 컴포넌트들을 배치한 컴포넌트
+   *
+   * @type {number} index - 요일의 인덱스 (일요일이 0,토요일이 6)
+   * @type {number} date - 날짜(ex.25, 26....)
+   * @type {string} day - 요일(ex. SUN, MON...)
+   * @type {Date} 해당 날의 원본 JS Date오브젝트 (ex. Mon Dec 19 2022 00:00:00 GMT+0900 (일본 표준시))
+   *
    * */
   const week = new Array(7)
     .fill(0)
@@ -38,14 +46,9 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
         key: item.get("day"),
         date: item.get("date"),
         day: findDayOfWeek(item.get("day")),
-        fullDate: item,
+        fullDate: item.toDate(),
       };
     });
-
-  /**
-   * 날짜에서 요일의 인덱스 획득  (일요일이 0,토요일이 6)
-   */
-  const selectedDayIndex = selectedDate.getDay();
 
   /**
    * 인덱스에서 오늘의 날짜를 구한 후, JS의 Date오브젝트를 Todo Page의 State에 저장합니다.
@@ -53,7 +56,7 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
    * @param {number} index  요일의 인덱스(일요일이 0,토요일이 6)
    */
   const handleOnClick = (index) => {
-    onSelectDayOfWeek(week[index].fullDate.toDate());
+    onSelectDayOfWeek(week[index].fullDate);
   };
 
   return (
@@ -61,7 +64,7 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
       {week.map((item) => {
         return (
           <S.DayContainer
-            isActive={item.key === selectedDayIndex}
+            isActive={item.key === selectedDate.getDay()}
             onClick={() => handleOnClick(item.key)}
             key={item.key}
           >
