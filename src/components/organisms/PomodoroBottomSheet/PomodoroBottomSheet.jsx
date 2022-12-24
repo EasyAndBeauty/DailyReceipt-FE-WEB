@@ -28,7 +28,7 @@ import * as S from "./PomodoroBottomSheet.styles";
 export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
   const { task, timer, id } = todo || {};
   const [visibleModal, setVisibleModal] = useState(false);
-  const [accTime, setAccTime] = useState(timer);
+  const [accTime, setAccTime] = useState(Number(timer));
   const [count, setCount] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(null);
   const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
@@ -65,8 +65,8 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
   );
 
   useEffect(() => {
-    if (!isRunning) {
-      const remainTime = timer + POMODORO_TIME - count;
+    if (!isRunning && isOpen) {
+      const remainTime = Number(timer) + POMODORO_TIME - count;
       onEdit(id, {
         ...todo,
         timer: remainTime,
