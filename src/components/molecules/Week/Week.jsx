@@ -1,6 +1,5 @@
 import * as S from "./Week.style";
 import { findDayOfWeek } from "utils/findDayOfWeek";
-import { useState } from "react";
 
 const dayjs = require("dayjs");
 const weekday = require("dayjs/plugin/weekday");
@@ -36,7 +35,7 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
    * @type {Date} 해당 날의 원본 JS Date오브젝트 (ex. Mon Dec 19 2022 00:00:00 GMT+0900 (일본 표준시))
    *
    * */
-  const week = new Array(7)
+  const currentWeek = new Array(7)
     .fill(0)
     .map((_, index) => {
       return dayjs(selectedDate).weekday(index);
@@ -52,11 +51,11 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
 
   return (
     <S.Container>
-      {week.map((item) => {
+      {currentWeek.map((item) => {
         return (
           <S.DayContainer
             isActive={item.key === selectedDate.getDay()}
-            onClick={() => onSelectDayOfWeek(week[item.key].fullDate)}
+            onClick={() => onSelectDayOfWeek(currentWeek[item.key].fullDate)}
             key={item.key}
           >
             <S.DayText>{item.date}</S.DayText>
