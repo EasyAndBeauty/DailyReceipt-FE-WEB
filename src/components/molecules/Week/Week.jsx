@@ -50,22 +50,13 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
       };
     });
 
-  /**
-   * 인덱스에서 오늘의 날짜를 구한 후, JS의 Date오브젝트를 Todo Page의 State에 저장합니다.
-   *
-   * @param {number} index  요일의 인덱스(일요일이 0,토요일이 6)
-   */
-  const handleOnClick = (index) => {
-    onSelectDayOfWeek(week[index].fullDate);
-  };
-
   return (
     <S.Container>
       {week.map((item) => {
         return (
           <S.DayContainer
             isActive={item.key === selectedDate.getDay()}
-            onClick={() => handleOnClick(item.key)}
+            onClick={() => onSelectDayOfWeek(week[item.key].fullDate)}
             key={item.key}
           >
             <S.DayText>{item.date}</S.DayText>
