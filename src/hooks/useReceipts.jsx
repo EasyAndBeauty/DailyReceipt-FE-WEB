@@ -1,9 +1,8 @@
-import { useReceiptClient } from "controllers/receiptController";
-import { useUserClient } from "controllers/userController";
+import { postPinnedReceipt, updatePinnedReceipt } from "controllers/receiptController";
+import { getUser } from "controllers/userController";
 import { useEffect, useState } from "react";
 
 function useCreatePinnedReceipt() {
-  const { getUser } = useUserClient();
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
@@ -23,7 +22,6 @@ function useCreatePinnedReceipt() {
 
 export function usePinnedReceipt() {
   const { receiptBody } = useCreatePinnedReceipt();
-  const { postPinnedReceipt, updatePinnedReceipt } = useReceiptClient();
   const [id, setId] = useState("");
 
   // TODO : 에러 처리

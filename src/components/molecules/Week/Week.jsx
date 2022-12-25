@@ -17,7 +17,7 @@ dayjs.extend(weekOfYear);
  * 상단 헤더에 사용되는 컴포넌트
  * 선택한 날짜에 해당하는 일주일을 렌더링합니다.
  *
- * @param {Date} selectedDate - 선택된 날짜(Date 오브젝트) (일요일이 0,토요일이 6)
+ * @param {string} selectedDate - 선택된 날짜('YYYY-MM-DD')
  * @param {Function} onSelectDayOfWeek - 선택된 날짜의 index정보를 받아와서 요일을 선택하는 함수
  *
  * @returns {JSX.Element} - 요일 컴포넌트들을 배치한 컴포넌트
@@ -38,7 +38,7 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
   const currentWeek = new Array(7)
     .fill(0)
     .map((_, index) => {
-      return dayjs(selectedDate).weekday(index);
+      return dayjs(selectedDate).day(index);
     })
     .map((item) => {
       return {
@@ -54,8 +54,10 @@ export function Week({ selectedDate, onSelectDayOfWeek }) {
       {currentWeek.map((item) => {
         return (
           <S.DayContainer
-            isActive={item.key === selectedDate.getDay()}
-            onClick={() => onSelectDayOfWeek(currentWeek[item.key].fullDate)}
+            isActive={item.key === Number(dayjs(selectedDate).format("d"))}
+            onClick={() =>
+              onSelectDayOfWeek(dayjs(currentWeek[item.key].fullDate).format("YYYY-MM-DD"))
+            }
             key={item.key}
           >
             <S.DayText>{item.date}</S.DayText>

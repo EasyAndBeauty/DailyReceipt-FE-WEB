@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
-import { useReceiptClient } from "controllers/receiptController";
+import { getPinnedReceipts } from "controllers/receiptController";
 import { formatReceiptDate } from "helper/formatter";
 
 /**
@@ -15,7 +15,6 @@ import { formatReceiptDate } from "helper/formatter";
 export const MySection = () => {
   const navigate = useNavigate();
 
-  const { getPinnedReceipts } = useReceiptClient();
   const [receipts, setReceipts] = useState([]);
 
   useEffect(() => {

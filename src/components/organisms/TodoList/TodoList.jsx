@@ -18,16 +18,10 @@ const TodoTemplate = ({ children }) => {
   return <S.TodoTemplateBlock>{children}</S.TodoTemplateBlock>;
 };
 
-export function TodoList({
-  todos,
-  onInsert,
-  onRemove,
-  onEdit,
-  onOpenBottomSheet,
-}) {
+export function TodoList({ todos, onInsert, onRemove, onEdit, onOpenBottomSheet, selectedDate }) {
   return (
     <TodoTemplate>
-      <ToDoInsert onInsert={onInsert} />
+      <ToDoInsert onInsert={onInsert} selectedDate={selectedDate} />
       <TodoListBlock
         todos={todos}
         onRemove={onRemove}
