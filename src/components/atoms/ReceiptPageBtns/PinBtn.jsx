@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { usePinnedReceipt } from "hooks/usePinnedReceipt";
+import { usePinnedReceipt } from "hooks/useReceipts";
 import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 
 export function PinBtn({ isPinned, openModal }) {

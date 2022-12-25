@@ -30,7 +30,7 @@ export default function useLocalStorage(key, initialValue) {
         return initialValue;
       }
     },
-    [initialValue]
+    [initialValue],
   );
 
   /**
@@ -39,15 +39,12 @@ export default function useLocalStorage(key, initialValue) {
   const getAllDateValue = useCallback(() => {
     try {
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-      const allValue = Object.entries(window.localStorage).reduce(
-        (acc, [key, value]) => {
-          if (dateRegex.test(key)) {
-            acc[key] = JSON.parse(value);
-          }
-          return acc;
-        },
-        {}
-      );
+      const allValue = Object.entries(window.localStorage).reduce((acc, [key, value]) => {
+        if (dateRegex.test(key)) {
+          acc[key] = JSON.parse(value);
+        }
+        return acc;
+      }, {});
       return allValue;
     } catch (error) {
       console.log(error);
@@ -57,9 +54,7 @@ export default function useLocalStorage(key, initialValue) {
 
   const setValue = (value, key) => {
     try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      getValue(valueToStore);
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.log(error);

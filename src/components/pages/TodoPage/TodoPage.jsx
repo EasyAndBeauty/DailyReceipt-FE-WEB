@@ -8,7 +8,7 @@ import {
   ReceiptPaperTriangle,
   PomodoroBottomSheet,
 } from "components";
-import useDataFetch from "hooks/useDataFetch";
+import { useFetchTodos, usePostTodos, useDeleteTodos, useUpdateTodos } from "hooks/useTodos";
 import BaseContext from "store/baseContext";
 import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
@@ -23,32 +23,35 @@ import * as S from "./TodoPage.styles";
  */
 
 export function TodoPage() {
-  const [allTodos, setAllTodos] = useState([]);
-  const [todos, setTodos] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const BaseCtx = useContext(BaseContext);
+  const navigate = useNavigate();
+  const { todos, fetchTodos } = useFetchTodos();
+  const { postTodos } = usePostTodos();
+  const { updateTodos } = useUpdateTodos();
+  const { deleteTodos } = useDeleteTodos();
+  const [selectedDate, setSelectedDate] = useState();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
   const [selectedTodo, setSelectedTodo] = useState(null);
 
-  const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
-    todos,
-    setTodos,
-    setAllTodos,
-    date: selectedDate,
-  });
+  // const { postDataLogic, putDataLogic, deleteDataLogic } = useDataFetch({
+  //   todos,
+  //   fetchTodos,
+  //   date: selectedDate,
+  // });
+
+  /**
+   * 페이지 초기화
+   */
 
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} isPaper={false} />;
   });
 
-  const BaseCtx = useContext(BaseContext);
-
-  const navigate = useNavigate();
-
   const onSubmitTodoList = () => {
     if (!todos.length) {
       alert("항목을 작성해주세요");
     } else {
-      const date = allTodos.map((todo) => todo.date);
+      const date = todos.map((todo) => todo.date);
       const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
         return dayjs(date).format("YYYY-MM-DD") === dayjs(selectedDate).format("YYYY-MM-DD");
       });
@@ -69,10 +72,6 @@ export function TodoPage() {
     return Date.getDay();
   };
 
-  const navigateUserPage = () => {
-    navigate("/my", { state: { allTodos } });
-  };
-
   const onOpenBottomSheet = (todo) => {
     setIsBottomSheetOpen(!isBottomSheetOpen);
     setSelectedTodo(todo);
@@ -88,7 +87,7 @@ export function TodoPage() {
         <TodoHeader
           selectedDate={selectedDate}
           onSelectDayOfWeek={onSelectDayOfWeek}
-          navigateUserPage={navigateUserPage}
+          navigateUserPage={navigate("/my")}
         />
         <Week
           selectedDate={selectedDate}
@@ -98,9 +97,9 @@ export function TodoPage() {
         <S.Content>
           <TodoList
             todos={todos}
-            onInsert={postDataLogic}
-            onRemove={deleteDataLogic}
-            onEdit={putDataLogic}
+            onInsert={postTodos}
+            onRemove={deleteTodos}
+            onEdit={updateTodos}
             onOpenBottomSheet={onOpenBottomSheet}
           />
           <S.Bottom>
@@ -111,7 +110,7 @@ export function TodoPage() {
         <PomodoroBottomSheet
           isOpen={isBottomSheetOpen}
           todo={selectedTodo}
-          onEdit={putDataLogic}
+          onEdit={updateTodos}
           onClose={() => setIsBottomSheetOpen(false)}
         />
       </S.Container>

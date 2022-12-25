@@ -5,6 +5,8 @@ export const POMODORO_TIME = 25 * MINUTE;
 export const INTERVAL_SECOND = 1000;
 export const ELLIPSISLENGTH = 15;
 
+export const TODAY = new Date().toISOString().split("T")[0];
+
 export const TOKEN_KEY = "dr-tokens";
 
 /**
