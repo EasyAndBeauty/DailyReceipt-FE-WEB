@@ -3,7 +3,7 @@ import * as S from "./NicknameModal.styles";
 import { useState, useEffect } from "react";
 import { isNull, isOverMaxLength } from "helper/validations";
 import { IS_NULL, IS_OVER } from "helper/constants";
-import { useUserClient } from "controllers/userController";
+import { putUser, getUser } from "controllers/userController";
 import { AbortIfError } from "controllers/error";
 /**
  * NicknameModal
@@ -13,7 +13,6 @@ import { AbortIfError } from "controllers/error";
  * @returns {JSX.Element} 닉네임 변경 모달 컴포넌트
  */
 export function NicknameModal({ onClose }) {
-  const client = useUserClient();
   const [newUserName, setNewUserName] = useState("");
   const [userName, setUserName] = useState("");
   const [error, setError] = useState("");
@@ -25,7 +24,7 @@ export function NicknameModal({ onClose }) {
     }
 
     try {
-      client.putUser(newUserName).then(alert("닉네임 변경이 완료 되었습니다."));
+      putUser(newUserName).then(alert("닉네임 변경이 완료 되었습니다."));
     } catch (error) {
       AbortIfError(error);
     }
@@ -34,7 +33,7 @@ export function NicknameModal({ onClose }) {
 
   useEffect(() => {
     (async () => {
-      const response = await client.getUser();
+      const response = await getUser();
       setUserName(response.data.nickname);
     })();
   }, []);

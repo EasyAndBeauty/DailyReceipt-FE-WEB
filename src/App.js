@@ -2,13 +2,10 @@ import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import BaseContext from "store/baseContext";
 import { AuthPage, TodoPage, LoginPage, ReceiptPage, UserPage, RedirectionPage } from "components";
-import { useCurrentToken } from "hooks/useCurrentToken";
+import { isLoggedIn } from "utils/auth";
 
 function App() {
   const BaseCtx = useContext(BaseContext);
-  const { user } = useCurrentToken();
-  const { isLoggedIn } = user;
-  // const isLoggedIn = true;
   const isBase = BaseCtx.isBase;
 
   return (

@@ -5,7 +5,6 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
-import { AuthContextProvider } from "store/authContext";
 import { BaseContextProvider } from "store/baseContext";
 
 const theme = {
@@ -19,14 +18,12 @@ const theme = {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <BaseContextProvider>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Reset />
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
-    </BaseContextProvider>
-  </AuthContextProvider>,
+  <BaseContextProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Reset />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </BaseContextProvider>,
 );
