@@ -4,14 +4,13 @@ const wh = window.innerHeight;
 const wv = Math.floor(window.innerWidth) / 8;
 
 export const Container = styled.div`
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
   position: ${(props) => (props.isAbsolute ? "absolute" : "")};
-  bottom: ${wh * 0.05}px;
+  bottom: ${wh * 0.035}px;
   color: ${(props) => props.theme[props.lineColor]};
   span {
     color: ${(props) => props.theme[props.lineColor]};
@@ -26,8 +25,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  width: 84%;
+  justify-content: space-between;
+  width: 88%;
 `;
 
 export const Divider = styled.hr`
