@@ -16,7 +16,11 @@ export function PinnedModal({ onClose }) {
       <ModalTemplate>
         <Spacer />
         <S.ModalContainer>
-          <S.ModalMessage>영수증이 저장되었습니다</S.ModalMessage> {/* <Spacer /> */}
+          <S.ModalMessage>
+            영수증이 저장되었어요!
+            <br />
+            My Page에서 확인해보세요.
+          </S.ModalMessage>
         </S.ModalContainer>
         <TwotBtnTemplate isAbsolute={false}>
           <TextBtn onClick={onClose} color="lightGray">

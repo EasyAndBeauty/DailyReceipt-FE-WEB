@@ -109,7 +109,7 @@ export const TaskText = styled.p`
   position: relative;
   width: 166px;
   height: 18px;
-  top: 210px;
+  top: 22vh;
 
   font-family: "Gothic A1";
   font-style: normal;
@@ -127,7 +127,7 @@ export const AccumulateText = styled.p`
   position: relative;
   width: 115px;
   height: 18px;
-  top: 236px;
+  top: calc(22vh + 12px);
 
   font-family: "Gothic A1";
   font-style: normal;
@@ -138,15 +138,14 @@ export const AccumulateText = styled.p`
 
   text-align: center;
   letter-spacing: -0.005em;
-
-  color: #aaaaaa;
+  color: ${({ theme }) => theme.gray};
 `;
 
 export const TimerText = styled.div`
   position: relative;
   width: 274px;
   height: 103px;
-  top: 312px;
+  top: calc(22vh + 80px);
 
   font-family: "Courier Prime";
   font-style: normal;
@@ -156,13 +155,13 @@ export const TimerText = styled.div`
   text-align: center;
   letter-spacing: -0.005em;
 
-  color: #aaaaaa;
+  color: ${(props) => (props.isRunning ? props.theme.wt : props.theme.gray)};
 `;
 
 export const DesciptText = styled.p`
   position: relative;
   height: 44px;
-  top: 431px;
+  top: calc(22vh + 100px);
 
   font-family: "Courier Prime";
   font-style: normal;
@@ -171,5 +170,6 @@ export const DesciptText = styled.p`
   line-height: 20px;
   text-align: center;
   letter-spacing: -0.005em;
-  color: #efefef;
+  white-space: pre;
+  color: ${(props) => (props.isRunning ? props.theme.gray : props.theme.wt)};
 `;

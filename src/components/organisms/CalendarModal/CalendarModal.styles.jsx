@@ -14,23 +14,8 @@ export const CalendarContainer = styled.div`
   border-radius: 20px;
   box-sizing: border-box;
   color: ${({ theme }) => theme.bk};
-
-  @media screen and (min-width: 768px) {
-    width: 90%;
-    max-width: 500px;
-    top: 142px;
-    right: 8%;
-    padding: 40px 80px;
-  }
-
-  @media screen and (min-width: 1600px) {
-    right: 20%;
-  }
-
-  @media screen and (min-width: 2250px) {
-    right: 30%;
-  }
 `;
+
 export const CalendarHeader = styled.div`
   width: 100%;
   height: 40px;

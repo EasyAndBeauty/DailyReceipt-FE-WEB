@@ -22,16 +22,10 @@ export const ModalContainer = styled.div`
   width: 80%;
 `;
 
-export const ModalTitle = styled.span`
-  text-align: left;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 10px;
-`;
-
 export const ModalMessage = styled.span`
   width: 100%;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
+  line-height: 1.5;
   text-align: center;
 `;
