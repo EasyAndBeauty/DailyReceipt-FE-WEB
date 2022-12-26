@@ -11,6 +11,7 @@ export const TodoItemBlock = styled.li`
 
 export const CheckCircle = styled.div`
   width: 16px;
+  min-width: 16px;
   height: 16px;
   border: 3px solid ${(props) => props.theme.gray};
   border-radius: 16px;
