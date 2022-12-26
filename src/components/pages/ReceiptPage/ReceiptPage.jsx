@@ -22,7 +22,7 @@ export function ReceiptPage() {
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
   }, []);
-
+  console.log(pinned);
   useEffect(() => {
     sessionStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);

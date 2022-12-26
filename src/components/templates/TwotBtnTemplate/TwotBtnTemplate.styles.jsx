@@ -27,7 +27,7 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 70%;
+  width: 84%;
 `;
 
 export const Divider = styled.hr`
