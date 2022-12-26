@@ -60,17 +60,17 @@ export const TimerButton = styled.div`
 
 export const TodoListBlockStyle = styled.ul`
   width: 100%;
-  height: ${44 * 8}px;
+  height: calc(75vh - 100px);
   overflow-y: scroll;
-  @media (max-height: 600px) {
-    height: ${44 * 6}px;
+
+  @media (min-height: 1024px) {
+    height: 72vh;
   }
-  @media (max-height: 500px) {
-    height: ${44 * 4}px;
+
+  @media (min-height: 1400px) {
+    height: 76vh;
   }
-  @media (max-height: 400px) {
-    height: ${44 * 2}px;
-  }
+
   &::-webkit-scrollbar {
     display: none;
   }
