@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import { BaseContextProvider } from "store/baseContext";
+import { AuthContextProvider } from "store/authContext";
 
 const theme = {
   bk: "#191919",
@@ -18,12 +19,14 @@ const theme = {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BaseContextProvider>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Reset />
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
-  </BaseContextProvider>,
+  <AuthContextProvider>
+    <BaseContextProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Reset />
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </BaseContextProvider>
+  </AuthContextProvider>,
 );

@@ -1,4 +1,5 @@
-import { useState, Fragment, useContext, useEffect } from "react";
+import dayjs from "dayjs";
+import { useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TodoHeader,
@@ -9,8 +10,6 @@ import {
   PomodoroBottomSheet,
 } from "components";
 import { useFetchTodos, useAddTodo, useRemoveTodo, useUpdateTodo } from "hooks/useTodos";
-import BaseContext from "store/baseContext";
-import dayjs from "dayjs";
 import * as S from "./TodoPage.styles";
 import { TODAY } from "helper/constants";
 
@@ -26,20 +25,25 @@ import { TODAY } from "helper/constants";
  */
 
 export function TodoPage() {
-  const BaseCtx = useContext(BaseContext);
+  // const BaseCtx = useContext(BaseContext);
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(TODAY);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
+  const [selectedTodo, setSelectedTodo] = useState(null);
   const { todos, fetchTodoList } = useFetchTodos();
   const { addTodos } = useAddTodo(fetchTodoList);
   const { updateTodo } = useUpdateTodo(fetchTodoList);
   const { removeTodo } = useRemoveTodo(fetchTodoList);
-  const [selectedDate, setSelectedDate] = useState(TODAY);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
-  const [selectedTodo, setSelectedTodo] = useState(null);
 
   /**
    * 페이지 초기화
    */
-  console.log(todos);
+  useEffect(() => {
+    (async () => {
+      await fetchTodoList(selectedDate);
+    })();
+  }, [fetchTodoList, selectedDate]);
+
   const Triangle = new Array(9).fill(0).map((_, idx) => {
     return <ReceiptPaperTriangle key={idx} isPaper={false} />;
   });
@@ -73,10 +77,6 @@ export function TodoPage() {
     setIsBottomSheetOpen(!isBottomSheetOpen);
     setSelectedTodo(todo);
   };
-
-  useEffect(() => {
-    BaseCtx.setIsBase(true);
-  }, []);
 
   return (
     <Fragment>

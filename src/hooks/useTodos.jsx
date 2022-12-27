@@ -1,7 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
+import {
+  getMemberTodo,
+  getGuestTodo,
+  postMemberTodo,
+  postGuestTodo,
+  putMemberTodo,
+  putGuestTodo,
+  deleteMemberTodo,
+  deleteGuestTodo,
+} from "controllers/todoController";
 import { TODAY } from "helper/constants";
+import { useAuth } from "./useAuth";
 
-import { getTodoList, postTodo, putTodo, deleteTodo } from "controllers/todoController";
 /**
  * 해당 날짜의 todo리스트를 취득합니다.
  *
@@ -11,21 +21,27 @@ import { getTodoList, postTodo, putTodo, deleteTodo } from "controllers/todoCont
  * @returns {function} fetchTodos - todo리스트를 취득하는 함수
  */
 export function useFetchTodos() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useAuth();
 
-  const fetchTodoList = useCallback(async (date = TODAY) => {
-    try {
-      setLoading(true);
+  const fetchTodoList = useCallback(
+    async (date = TODAY) => {
+      try {
+        setLoading(true);
+        const res = isLoggedIn ? await getMemberTodo(date) : await getGuestTodo(date);
 
-      const res = await getTodoList(date);
-
-      setTodos(res);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+        if (isLoggedIn && res.status !== 200) {
+          return;
+        }
+        setTodos(res.data);
+        setLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [isLoggedIn],
+  );
 
   useEffect(() => {
     fetchTodoList();
@@ -43,12 +59,12 @@ export function useFetchTodos() {
  */
 export function useAddTodo(fetchTodos) {
   const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const addTodos = async (todo) => {
     if (loading) return;
     setLoading(true);
-
-    await postTodo(todo);
+    isLoggedIn ? await postMemberTodo(todo) : await postGuestTodo(todo);
     await fetchTodos(todo.date);
 
     setLoading(false);
@@ -60,32 +76,32 @@ export function useAddTodo(fetchTodos) {
 
 export function useUpdateTodo(fetchTodos) {
   const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const updateTodo = async (todo) => {
-    if (loading) return;
     setLoading(true);
 
-    await putTodo(todo);
+    isLoggedIn ? await putMemberTodo(todo) : await putGuestTodo(todo);
     await fetchTodos(todo.date);
 
     setLoading(false);
     return;
   };
-  return { updateTodo };
+  return { updateTodo, loading };
 }
 
 export function useRemoveTodo(fetchTodos) {
   const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const removeTodo = async (todo) => {
-    if (loading) return;
     setLoading(true);
 
-    await deleteTodo(todo);
+    isLoggedIn ? await deleteMemberTodo(todo) : await deleteGuestTodo(todo);
     await fetchTodos(todo.date);
 
     setLoading(false);
     return;
   };
-  return { removeTodo };
+  return { removeTodo, loading };
 }

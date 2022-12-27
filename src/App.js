@@ -1,25 +1,22 @@
-import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import BaseContext from "store/baseContext";
 import { AuthPage, TodoPage, LoginPage, ReceiptPage, UserPage, RedirectionPage } from "components";
-import { isLoggedIn } from "utils/auth";
+import { useAuth } from "hooks/useAuth";
 
 function App() {
-  const BaseCtx = useContext(BaseContext);
-  const isBase = BaseCtx.isBase;
+  const { isLoggedIn } = useAuth();
 
   return (
     <Routes>
       <Route path="/" element={<TodoPage />} />
       <Route path="/auth/kakao/callback" element={<AuthPage />} />
-      {isBase && (
-        <>
-          {isLoggedIn && <Route path="/my" element={<UserPage />} />}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/receipt" element={<ReceiptPage />} />
-          <Route path="*" element={<LoginPage />} />
-        </>
+      {isLoggedIn ? (
+        <Route path="/my" element={<UserPage />} />
+      ) : (
+        <Route path="/login" element={<LoginPage />} />
       )}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/receipt" element={<ReceiptPage />} />
+      <Route path="*" element={<LoginPage />} />
       <Route path="/error" element={<RedirectionPage />} />
     </Routes>
   );

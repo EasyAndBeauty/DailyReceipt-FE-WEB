@@ -10,7 +10,7 @@ function useCreatePinnedReceipt() {
       const response = await getUser();
       setUserName(response.data.nickname);
     })();
-  }, [getUser]);
+  }, []);
 
   const famousSaying = sessionStorage.getItem("famous_saying");
   const todos = JSON.parse(sessionStorage.getItem("todos"));

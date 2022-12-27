@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { NicknameModal } from "components";
 import { TOKEN_KEY } from "helper/constants";
 import * as S from "./MyFooter.styles";
+import { useAuthDispatch } from "store/authContext";
 
 /**
  * My page의 하단 부분입니다.
@@ -11,10 +12,12 @@ import * as S from "./MyFooter.styles";
  * @returns
  */
 export const MyFooter = () => {
+  const dispatch = useAuthDispatch();
   const navigate = useNavigate();
   const [visibleModal, setVisibleModal] = useState(false);
 
   const logout = () => {
+    dispatch({ type: "LOGOUT" });
     window.localStorage.removeItem(TOKEN_KEY);
 
     navigate("/");

@@ -1,104 +1,82 @@
 import { v4 as uuidv4 } from "uuid";
 import { client } from "./client";
-import { isLoggedIn } from "utils/auth";
 
-export const getTodoList = async (date) => {
-  console.log(isLoggedIn);
-  const getMemberTodo = (date) => {
-    return client.get("/api/v1/todo", {
-      params: { targetDate: date },
-    });
-  };
-
-  const getGuestTodo = (date) => {
-    const data = window.localStorage.getItem(date);
-    return data ? JSON.parse(data) : [];
-  };
-
-  // const test = isLoggedIn ? getMemberTodo(date) : getGuestTodo(date);
-  return isLoggedIn ? getMemberTodo(date) : getGuestTodo(date);
+export const getMemberTodo = (date) => {
+  return client.get("/api/v1/todo", {
+    params: { targetDate: date },
+  });
 };
 
-export const postTodo = async (todo) => {
-  const postMemberTodo = async (todo) => {
-    try {
-      const res = await client.post(`/api/v1/todo`, todo);
-
-      if (res.status !== 201) {
-        throw new Error(res.status);
-      }
-      return res;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const postGuestTodo = (todo) => {
-    try {
-      const data = JSON.parse(window.localStorage.getItem(todo.date));
-      const newTodo = { ...todo, id: uuidv4() };
-      const newArray = data ? [...data, newTodo] : [newTodo];
-      window.localStorage.setItem(todo.date, JSON.stringify(newArray));
-      return;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const test = isLoggedIn ? postMemberTodo(todo) : postGuestTodo(todo);
-  return test;
+export const getGuestTodo = (date) => {
+  const data = window.localStorage.getItem(date);
+  return data ? { data: JSON.parse(data) } : [];
 };
 
-export const putTodo = async (todo) => {
-  const putMemberTodo = async (todo) => {
-    try {
-      const res = await client.put(`/api/v1/todo/${todo.todo_id}`, todo);
+export const postMemberTodo = async (todo) => {
+  try {
+    const res = await client.post(`/api/v1/todo`, todo);
 
-      if (res.status !== 201) {
-        throw new Error(res.status);
-      }
-    } catch (e) {
-      console.log(e);
+    if (res.status !== 201) {
+      throw new Error(res.status);
     }
-  };
-
-  const putGuestTodo = (todo) => {
-    try {
-      const data = JSON.parse(window.localStorage.getItem(todo.date));
-      const newArray = [...data, todo];
-      window.localStorage.setItem(todo.date, JSON.stringify(newArray));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  isLoggedIn ? putMemberTodo(todo) : putGuestTodo(todo);
-  return;
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-export const deleteTodo = async (todo) => {
-  const deleteMemberTodo = async (todo) => {
-    try {
-      const res = await client.delete(`/api/v1/todo/${todo.todo_id}`);
+export const postGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newTodo = { ...todo, todoId: uuidv4() };
+    const newArray = data ? [...data, newTodo] : [newTodo];
+    window.localStorage.setItem(todo.date, JSON.stringify(newArray));
+    return;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-      if (res.status !== 201) {
-        throw new Error(res.status);
-      }
-    } catch (e) {
-      console.log(e);
+export const putMemberTodo = async (todo) => {
+  try {
+    const res = await client.put(`/api/v1/todo/${todo.todoId}`, todo);
+
+    if (res.status !== 201) {
+      throw new Error(res.status);
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  const deleteGuestTodo = (todo) => {
-    try {
-      const data = JSON.parse(window.localStorage.getItem(todo.date));
-      const newTodos = data.filter((item) => item.todo_id !== todo.todo_id);
-      window.localStorage.setItem(todo.date, JSON.stringify(newTodos));
-    } catch (e) {
-      console.log(e);
+export const putGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newArray = data.map((item) => (item.todoId === todo.todoId ? todo : item));
+    window.localStorage.setItem(todo.date, JSON.stringify(newArray));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteMemberTodo = async (todo) => {
+  try {
+    const res = await client.delete(`/api/v1/todo/${todo.todoId}`);
+
+    if (res.status !== 201) {
+      throw new Error(res.status);
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  isLoggedIn ? deleteMemberTodo(todo) : deleteGuestTodo(todo);
-  return;
+export const deleteGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newTodos = data.filter((item) => item.todoId !== todo.todoId);
+    window.localStorage.setItem(todo.date, JSON.stringify(newTodos));
+  } catch (e) {
+    console.log(e);
+  }
 };
