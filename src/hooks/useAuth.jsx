@@ -9,7 +9,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     const currentToken = localStorage.getItem(TOKEN_KEY);
-    console.log("token", currentToken);
     if (currentToken) {
       isValidToken(currentToken)
         ? dispatch({
@@ -20,8 +19,6 @@ export const useAuth = () => {
     }
   }, [dispatch]);
   return {
-    isLoggedIn: user.isLoggedIn,
-    accessToken: user.accessToken,
-    refreshToken: user.refreshToken,
+    ...user,
   };
 };

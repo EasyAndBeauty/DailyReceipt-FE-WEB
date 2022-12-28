@@ -41,7 +41,7 @@ export const putMemberTodo = async (todo) => {
   try {
     const res = await client.put(`/api/v1/todo/${todo.todoId}`, todo);
 
-    if (res.status !== 201) {
+    if (res.status !== 200) {
       throw new Error(res.status);
     }
   } catch (e) {
@@ -63,7 +63,7 @@ export const deleteMemberTodo = async (todo) => {
   try {
     const res = await client.delete(`/api/v1/todo/${todo.todoId}`);
 
-    if (res.status !== 201) {
+    if (res.status !== 200) {
       throw new Error(res.status);
     }
   } catch (e) {
