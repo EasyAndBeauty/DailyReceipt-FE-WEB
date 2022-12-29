@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReceiptPaper } from "components";
 import * as S from "./MySection.styles";
-import { getPinnedReceipts } from "controllers/receiptController";
 import { formatReceiptDate } from "helper/formatter";
-
+import { useFetchReceipt } from "hooks/useReceipts";
 /**
  * MySection
  *
@@ -14,27 +12,21 @@ import { formatReceiptDate } from "helper/formatter";
  * */
 export const MySection = () => {
   const navigate = useNavigate();
-
-  const [receipts, setReceipts] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const data = await getPinnedReceipts();
-      setReceipts(data);
-    })();
-  }, []);
+  const { pinnedReceipts: receipts } = useFetchReceipt();
 
   const renderReceipts = (receipts) => {
     const pinnedReceipts = receipts.map((receipt) => {
       return (
         <S.PaperContainer key={receipt.id}>
           <S.CreatedDate>{receipt.date && formatReceiptDate(receipt.date)}</S.CreatedDate>
+          {/* TODO: receipt id,명언 확인 */}
           <ReceiptPaper
             onClick={() => {
               navigate(`/receipt`, { state: { todos: receipt.todos, pinned: receipt.pinned } });
             }}
             todos={Array.from(receipt.todos)}
             key={receipt.id}
+            quote={receipt.famous_saying}
           />
         </S.PaperContainer>
       );

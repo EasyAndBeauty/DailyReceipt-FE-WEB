@@ -1,8 +1,16 @@
-import { postPinnedReceipt, updatePinnedReceipt } from "controllers/receiptController";
+import { useCallback, useEffect, useState } from "react";
+import {
+  getPinnedReceipts,
+  postPinnedReceipt,
+  updatePinnedReceipt,
+} from "controllers/receiptController";
 import { getUser } from "controllers/userController";
-import { useEffect, useState } from "react";
-
-function useCreatePinnedReceipt() {
+/**
+ * 세션 스토리지와 유저의 정보를 취합합니다.
+ *
+ * @returns {Object} Pinned Receipt
+ */
+function useGeneratePinnedReceipt() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
@@ -21,20 +29,33 @@ function useCreatePinnedReceipt() {
 }
 
 export function usePinnedReceipt() {
-  const { receiptBody } = useCreatePinnedReceipt();
+  const { receiptBody } = useGeneratePinnedReceipt();
   const [id, setId] = useState("");
 
   // TODO : 에러 처리
   async function postPinReceipt() {
     const response = await postPinnedReceipt(receiptBody);
-    console.log(response);
     setId(response.data.id);
   }
 
   async function updatePinReceipt() {
-    const response = await updatePinnedReceipt({ ...receiptBody, pinned: false }, id);
-    console.log(response);
+    await updatePinnedReceipt({ ...receiptBody, pinned: false }, id);
   }
 
   return { postPinReceipt, updatePinReceipt };
+}
+
+export function useFetchReceipt() {
+  const [pinnedReceipts, setPinnedReceipts] = useState();
+
+  const fetchReceipts = useCallback(async () => {
+    const data = await getPinnedReceipts();
+    setPinnedReceipts(data);
+  }, []);
+
+  useEffect(() => {
+    fetchReceipts();
+  }, [fetchReceipts]);
+
+  return { pinnedReceipts, fetchReceipts };
 }
