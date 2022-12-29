@@ -1,5 +1,6 @@
 /**
  * JWT를 파싱
+ *
  * @param {string} token
  * @returns
  */
@@ -14,13 +15,14 @@ const parseJWT = (token) => {
         .map(function (c) {
           return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
         })
-        .join("")
-    )
+        .join(""),
+    ),
   );
 };
 
 /**
  * 로컬에서 취득한 토큰이 유효한지 판단합니다.
+ *
  * @param {string} localToken
  * @returns
  */

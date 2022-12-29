@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BottomSheetTemplate, TwotBtnTemplate, TextBtn, TimerAlertModal } from "components";
-import { getHour, getMin, getSec } from "helper/getTime";
+import { getHour, getMin, getSec } from "helper/formatter";
 import useInterval from "hooks/useInterval";
 import { SECOND, POMODORO_TIME, INTERVAL_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
@@ -8,7 +8,7 @@ import * as S from "./PomodoroBottomSheet.styles";
 /**
  * PomodoroBottomSheet
  *
- * 뽀모도로 아이콘을 누르면 올라와야함
+ * 뽀모도로 아이콘을 누르면 올라오는 타이머
  * 첫 시작 위치가 botoom -10% - height
  * 끝나는 위치가 bottom -10% + height
  * stop을 눌렀을때 bottom sheet가 내려감

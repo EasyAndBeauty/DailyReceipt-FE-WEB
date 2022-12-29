@@ -57,11 +57,11 @@ export function useFetchTodos() {
  *
  * @returns {function} postTodos - todo를 post하는 함수
  */
-export function useAddTodo(fetchTodos) {
+export function useTodo(fetchTodos) {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useAuth();
 
-  const addTodos = async (todo) => {
+  const addTodo = async (todo) => {
     if (loading) return;
     setLoading(true);
     isLoggedIn ? await postMemberTodo(todo) : await postGuestTodo(todo);
@@ -71,14 +71,8 @@ export function useAddTodo(fetchTodos) {
     return;
   };
 
-  return { addTodos, loading };
-}
-
-export function useUpdateTodo(fetchTodos) {
-  const [loading, setLoading] = useState(false);
-  const { isLoggedIn } = useAuth();
-
   const updateTodo = async (todo) => {
+    if (loading) return;
     setLoading(true);
 
     isLoggedIn ? await putMemberTodo(todo) : await putGuestTodo(todo);
@@ -87,14 +81,9 @@ export function useUpdateTodo(fetchTodos) {
     setLoading(false);
     return;
   };
-  return { updateTodo, loading };
-}
-
-export function useRemoveTodo(fetchTodos) {
-  const [loading, setLoading] = useState(false);
-  const { isLoggedIn } = useAuth();
 
   const removeTodo = async (todo) => {
+    if (loading) return;
     setLoading(true);
 
     isLoggedIn ? await deleteMemberTodo(todo) : await deleteGuestTodo(todo);
@@ -103,5 +92,6 @@ export function useRemoveTodo(fetchTodos) {
     setLoading(false);
     return;
   };
-  return { removeTodo, loading };
+
+  return { addTodo, updateTodo, removeTodo, loading };
 }

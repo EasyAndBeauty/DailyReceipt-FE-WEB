@@ -9,9 +9,9 @@ import {
   ReceiptPaperTriangle,
   PomodoroBottomSheet,
 } from "components";
-import { useFetchTodos, useAddTodo, useRemoveTodo, useUpdateTodo } from "hooks/useTodos";
-import * as S from "./TodoPage.styles";
+import { useFetchTodos, useTodo } from "hooks/useTodos";
 import { TODAY } from "helper/constants";
+import * as S from "./TodoPage.styles";
 
 /**
  * TodoPage component
@@ -31,9 +31,7 @@ export function TodoPage() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(null);
   const [selectedTodo, setSelectedTodo] = useState(null);
   const { todos, fetchTodoList } = useFetchTodos();
-  const { addTodos } = useAddTodo(fetchTodoList);
-  const { updateTodo } = useUpdateTodo(fetchTodoList);
-  const { removeTodo } = useRemoveTodo(fetchTodoList);
+  const { addTodo, updateTodo, removeTodo } = useTodo(fetchTodoList);
 
   /**
    * 페이지 초기화
@@ -64,9 +62,6 @@ export function TodoPage() {
 
   const onSelectDayOfWeek = (date) => {
     setSelectedDate(date);
-    /**
-     * 서버에 요청을 보내고, 응답을 받아서 처리한다.
-     */
   };
 
   const selectedDayOfWeek = (index) => {
@@ -94,7 +89,7 @@ export function TodoPage() {
         <S.Content>
           <TodoList
             todos={todos}
-            onInsert={addTodos}
+            onInsert={addTodo}
             onRemove={removeTodo}
             onEdit={updateTodo}
             onOpenBottomSheet={onOpenBottomSheet}
