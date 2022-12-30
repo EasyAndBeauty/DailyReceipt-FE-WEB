@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { usePinnedReceipt } from "hooks/useReceipts";
 import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 
-export function PinBtn({ isPinned, openModal }) {
+export function PinBtn({ isPinned, openModal, id }) {
   const { postPinReceipt, updatePinReceipt } = usePinnedReceipt();
   const [pinned, setPinned] = useState(false);
 
@@ -16,7 +16,7 @@ export function PinBtn({ isPinned, openModal }) {
       postPinReceipt();
       openModal();
     }
-    if (isPinned) updatePinReceipt();
+    if (isPinned) updatePinReceipt(id);
 
     setPinned(!pinned);
   };

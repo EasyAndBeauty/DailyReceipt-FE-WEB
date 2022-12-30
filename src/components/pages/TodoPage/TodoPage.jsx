@@ -50,10 +50,6 @@ export function TodoPage() {
     if (!todos.length) {
       alert("항목을 작성해주세요");
     } else {
-      // const date = todos.map((todo) => todo.date);
-      // const receiptNumber = [...new Set(date)].reverse().findIndex((date) => {
-      //   return dayjs(date).format("YYYY-MM-DD") === selectedDate;
-      // });
       navigate("/receipt", {
         state: { todos, date: selectedDate },
       });

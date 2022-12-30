@@ -11,13 +11,13 @@ export const useFetchQuote = () => {
       .then((response) => response.json())
       .then((response) => {
         setQuote(response.slip.advice);
-        sessionStorage.setItem("famous_saying", response.slip.advice);
+        sessionStorage.setItem("famousSaying", response.slip.advice);
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
         setError(true);
-      })
-      .finally(setLoading(false));
+      });
   }, []);
 
   useEffect(() => {

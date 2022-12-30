@@ -9,5 +9,5 @@ export const postPinnedReceipt = async (receipt) => {
 };
 
 export const updatePinnedReceipt = async (receipt, receiptId) => {
-  return await client.put(`/api/v1/receipt/pinned/${receiptId}`, receipt);
+  return await client.put(`/api/v1/receipt/${receiptId}`, receipt);
 };

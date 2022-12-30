@@ -1,8 +1,9 @@
+import Loading from "react-loading";
 import { useNavigate } from "react-router-dom";
 import { ReceiptPaper } from "components";
-import * as S from "./MySection.styles";
-import { formatReceiptDate } from "helper/formatter";
 import { useFetchReceipt } from "hooks/useReceipts";
+import { formatReceiptDate } from "helper/formatter";
+import * as S from "./MySection.styles";
 /**
  * MySection
  *
@@ -12,21 +13,22 @@ import { useFetchReceipt } from "hooks/useReceipts";
  * */
 export const MySection = () => {
   const navigate = useNavigate();
-  const { pinnedReceipts: receipts } = useFetchReceipt();
+  const { pinnedReceipts: receipts, loading } = useFetchReceipt();
 
   const renderReceipts = (receipts) => {
     const pinnedReceipts = receipts.map((receipt) => {
       return (
         <S.PaperContainer key={receipt.id}>
           <S.CreatedDate>{receipt.date && formatReceiptDate(receipt.date)}</S.CreatedDate>
-          {/* TODO: receipt id,명언 확인 */}
           <ReceiptPaper
             onClick={() => {
-              navigate(`/receipt`, { state: { todos: receipt.todos, pinned: receipt.pinned } });
+              navigate(`/receipt`, {
+                state: { todos: receipt.todos, pinned: true, receiptNumber: receipt.id },
+              });
             }}
             todos={Array.from(receipt.todos)}
             key={receipt.id}
-            quote={receipt.famous_saying}
+            quote={receipt.famousSaying}
           />
         </S.PaperContainer>
       );
@@ -36,6 +38,7 @@ export const MySection = () => {
   };
 
   const renderBlankPage = () => {
+    console.log(receipts);
     return (
       <S.BlankContainer>
         <S.BlankTitle>Pinned Receipts</S.BlankTitle>
@@ -53,7 +56,13 @@ export const MySection = () => {
   return (
     <S.Container>
       <S.ScrollMenu>
-        {receipts.length > 0 ? renderReceipts(receipts) : renderBlankPage()}
+        {loading ? (
+          <Loading />
+        ) : receipts?.length > 0 ? (
+          renderReceipts(receipts)
+        ) : (
+          renderBlankPage()
+        )}
       </S.ScrollMenu>
     </S.Container>
   );

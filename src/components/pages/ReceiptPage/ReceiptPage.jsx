@@ -39,7 +39,11 @@ export function ReceiptPage() {
       <S.IconContainer>
         <CopyBtn />
         <SaveBtn date={date} />
-        <PinBtn isPinned={pinned} openModal={() => setPinBtnModalVisible(true)} />
+        <PinBtn
+          isPinned={pinned}
+          openModal={() => setPinBtnModalVisible(true)}
+          id={receiptNumber}
+        />
       </S.IconContainer>
       {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
       {pinBtnModalVisible && <PinnedModal onClose={() => setPinBtnModalVisible(false)} />}

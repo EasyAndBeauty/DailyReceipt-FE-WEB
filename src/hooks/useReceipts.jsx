@@ -8,17 +8,20 @@ import { getUser } from "controllers/userController";
 
 export function useFetchReceipt() {
   const [pinnedReceipts, setPinnedReceipts] = useState();
+  const [loading, setLoading] = useState(true);
 
   const fetchReceipts = useCallback(async () => {
-    const data = await getPinnedReceipts();
-    setPinnedReceipts(data);
+    setLoading(true);
+    const response = await getPinnedReceipts();
+    setPinnedReceipts(response.data);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
     fetchReceipts();
   }, [fetchReceipts]);
 
-  return { pinnedReceipts, fetchReceipts };
+  return { pinnedReceipts, fetchReceipts, loading };
 }
 
 /**
@@ -36,27 +39,24 @@ function useGeneratePinnedReceipt() {
     })();
   }, []);
 
-  const famousSaying = sessionStorage.getItem("famous_saying");
+  const famousSaying = sessionStorage.getItem("famousSaying");
   const todos = JSON.parse(sessionStorage.getItem("todos"));
+  const todoIds = todos.map(({ todoId }) => todoId);
 
   return {
-    receiptBody: { todos, famous_saying: famousSaying, receipt_name: userName, pinned: true },
+    receiptBody: { todoIds, famousSaying: famousSaying, receipt_name: userName, pinned: true },
   };
 }
 
 export function usePinnedReceipt() {
   const { receiptBody } = useGeneratePinnedReceipt();
-  // 여기에 아이디 저장한다고 업데이트가 정상적으로 되는지..?
-  const [id, setId] = useState("");
-
   // TODO : 에러 처리
   async function postPinReceipt() {
-    const response = await postPinnedReceipt(receiptBody);
-    setId(response.data.id);
+    await postPinnedReceipt(receiptBody);
   }
 
-  async function updatePinReceipt() {
-    await updatePinnedReceipt({ ...receiptBody, pinned: false }, id);
+  async function updatePinReceipt(receiptId) {
+    await updatePinnedReceipt({ pinned: false }, receiptId);
   }
 
   return { postPinReceipt, updatePinReceipt };

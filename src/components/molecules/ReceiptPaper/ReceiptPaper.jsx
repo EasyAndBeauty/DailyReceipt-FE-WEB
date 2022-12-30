@@ -1,6 +1,6 @@
 import Loading from "react-loading";
 import { ReceiptPaperTriangle, ReceiptPaperContents } from "components";
-import { useFetchQuote } from "hooks/useQuotes";
+import { useFetchQuote } from "hooks/useQuote";
 import * as S from "./ReceiptPaper.styles";
 
 /**
