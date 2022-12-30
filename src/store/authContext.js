@@ -4,7 +4,6 @@ const initialAuth = {
   isLoggedIn: false,
   accessToken: "",
   refreshToken: "",
-  // 유저 이름 추가
 };
 
 const AuthStateContext = createContext(initialAuth);
@@ -32,6 +31,7 @@ export const AuthReducer = (userState, action) => {
 
 export function useAuthState() {
   const context = useContext(AuthStateContext);
+
   if (context === undefined) {
     throw new Error("useAuthState must be used within a AuthProvider");
   }

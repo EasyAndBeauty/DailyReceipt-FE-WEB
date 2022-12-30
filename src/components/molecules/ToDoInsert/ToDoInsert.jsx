@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "./ToDoInsert.styles";
-import {ReactComponent as PlusIcon} from "assets/svg/plus_icon.svg";
+import { ReactComponent as PlusIcon } from "assets/svg/plus_icon.svg";
 
 /**
  * Todo Insert
@@ -10,25 +10,25 @@ import {ReactComponent as PlusIcon} from "assets/svg/plus_icon.svg";
  * @param {Function} onInsert - todo 추가 함수
  * @returns
  */
-export function ToDoInsert({ onInsert }) {
-	const [todoInput, setTodoInput] = useState("");
+export function ToDoInsert({ onInsert, selectedDate }) {
+  const [todoInput, setTodoInput] = useState("");
 
-	const handleChangeContentValue = e => {
-		setTodoInput(e.target.value);
-	};
+  const handleChangeContentValue = (e) => {
+    setTodoInput(e.target.value);
+  };
 
-	const onClickTodoItemCreateButton = e => {
-		if (todoInput.trim() !== "") {
-			e.preventDefault();
-			const todoItem = { task: todoInput, timer: 0, isDone: false };
-			onInsert(todoItem);
-			setTodoInput("");
-		}
-	};
+  const onClickTodoItemCreateButton = (e) => {
+    if (todoInput.trim() !== "") {
+      e.preventDefault();
+      const todoItem = { task: todoInput, timer: 0, isDone: false, date: selectedDate };
+      onInsert(todoItem);
+      setTodoInput("");
+    }
+  };
 
-	const onSubmit = e => {
-		onClickTodoItemCreateButton(e);
-	};
+  const onSubmit = (e) => {
+    onClickTodoItemCreateButton(e);
+  };
   return (
     <S.InsertForm onSubmit={onSubmit}>
       <S.Input

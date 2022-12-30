@@ -20,7 +20,7 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
   const [done, setDone] = useState(isDone);
 
   const handleClickCheckCircleToggle = () => {
-    onEdit(todo.id, { ...todo, isDone: !done });
+    onEdit({ ...todo, isDone: !done });
     setDone(!done);
   };
 
@@ -31,12 +31,12 @@ function TodoItem({ todo, onRemove, onEdit, onOpenBottomSheet }) {
   const handleClickToDoEditButton = () => {
     setIsEditing(!isEditing);
     if (isEditing === false) {
-      onEdit(todo.id, { ...todo, task: taskValue });
+      onEdit({ ...todo, task: taskValue });
     }
   };
 
   const handleClickToDoRemoveButton = () => {
-    onRemove(todo.id);
+    onRemove(todo);
   };
 
   const onChangeTaskValue = (e) => {
@@ -99,19 +99,20 @@ export function TodoListBlock({ todos, onRemove, onEdit, onOpenBottomSheet }) {
 
   return (
     <S.TodoListBlockStyle>
-      {todos?.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id}
-          todo={todo}
-          onRemove={onRemove}
-          onEdit={onEdit}
-          hasRunningTimer={hasRunningTimer}
-          setRunningTimer={setRunningTimer}
-          resetRunningTimer={resetRunningTimer}
-          onOpenBottomSheet={onOpenBottomSheet}
-        />
-      ))}
+      {todos?.length > 0 &&
+        todos.map((todo) => (
+          <TodoItem
+            key={todo.todoId}
+            id={todo.todoId}
+            todo={todo}
+            onRemove={onRemove}
+            onEdit={onEdit}
+            hasRunningTimer={hasRunningTimer}
+            setRunningTimer={setRunningTimer}
+            resetRunningTimer={resetRunningTimer}
+            onOpenBottomSheet={onOpenBottomSheet}
+          />
+        ))}
     </S.TodoListBlockStyle>
   );
 }

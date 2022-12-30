@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BottomSheetTemplate, TwotBtnTemplate, TextBtn, TimerAlertModal } from "components";
-import { getHour, getMin, getSec } from "helper/getTime";
+import { getHour, getMin, getSec } from "helper/formatter";
 import useInterval from "hooks/useInterval";
 import { SECOND, POMODORO_TIME, INTERVAL_SECOND } from "helper/constants";
 import * as S from "./PomodoroBottomSheet.styles";
@@ -8,7 +8,7 @@ import * as S from "./PomodoroBottomSheet.styles";
 /**
  * PomodoroBottomSheet
  *
- * 뽀모도로 아이콘을 누르면 올라와야함
+ * 뽀모도로 아이콘을 누르면 올라오는 타이머
  * 첫 시작 위치가 botoom -10% - height
  * 끝나는 위치가 bottom -10% + height
  * stop을 눌렀을때 bottom sheet가 내려감
@@ -26,20 +26,28 @@ import * as S from "./PomodoroBottomSheet.styles";
  */
 
 export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
-  const { task, timer, id } = todo || {};
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [accTime, setAccTime] = useState(Number(timer));
+  const { task, timer } = todo || {};
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [accTime, setAccTime] = useState(timer);
   const [count, setCount] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(null);
-  const [desiptText, setDesiptText] = useState("play를 눌러 타이머를 시작하세요");
+  const [displayText, setDisplayText] = useState("play를 눌러 타이머를 시작하세요");
   const [btnText, setBtnText] = useState("play");
 
-  const onClickPlayOrPause = (type) => {
+  // 초기화
+  useEffect(() => {
+    setAccTime(timer);
+    if (!isOpen) {
+      setCount(POMODORO_TIME);
+    }
+  }, [isOpen, timer]);
+
+  const togglePlay = async (type) => {
     switch (type) {
       case "play":
         setIsRunning(true);
         setBtnText("pause");
-        setDesiptText(`조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`);
+        setDisplayText(`조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`);
         if (count === 0) {
           setCount(POMODORO_TIME);
         }
@@ -47,7 +55,10 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
       case "pause":
         setIsRunning(false);
         setBtnText("play");
-        setDesiptText("play를 눌러 타이머를 재개하세요");
+        setDisplayText("play를 눌러 타이머를 재개하세요");
+        const newAccTime = Number(timer) + POMODORO_TIME - count;
+        await onEdit({ ...todo, timer: newAccTime });
+        setAccTime(newAccTime);
         break;
       default:
         break;
@@ -58,35 +69,20 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
     () => {
       setCount((prv) => prv - SECOND);
       if (count <= 0) {
-        onClickPlayOrPause("pause");
+        togglePlay("pause");
       }
     },
     isRunning ? INTERVAL_SECOND : null,
   );
 
-  useEffect(() => {
-    if (!isRunning && isOpen) {
-      const remainTime = Number(timer) + POMODORO_TIME - count;
-      onEdit(id, {
-        ...todo,
-        timer: remainTime,
-      });
-      setAccTime(remainTime);
-    }
-
-    if (!isOpen) {
-      setCount(POMODORO_TIME);
-    }
-  }, [isRunning, isOpen]);
-
   const showTimerAlertModal = () => {
     document.body.style.overflow = "hidden";
-    setVisibleModal(true);
+    setAlertVisible(true);
   };
 
   const closeTimerAlertModal = () => {
     document.body.style.overflow = "unset";
-    setVisibleModal(false);
+    setAlertVisible(false);
   };
 
   return (
@@ -102,11 +98,11 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
         <S.TimerText>
           <Time count={count} />
         </S.TimerText>
-        <S.DesciptText>{desiptText}</S.DesciptText>
+        <S.DesciptText>{displayText}</S.DesciptText>
         <TwotBtnTemplate lineColor="wt">
           <TextBtn
             onClick={() => {
-              isRunning && onClickPlayOrPause("pause");
+              isRunning && togglePlay("pause");
               showTimerAlertModal();
             }}
             color="red"
@@ -115,7 +111,7 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
           </TextBtn>
           <TextBtn
             onClick={() => {
-              onClickPlayOrPause(btnText);
+              togglePlay(btnText);
             }}
             type={btnText === "play" ? "bold" : ""}
             color="wt"
@@ -123,7 +119,7 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
             {btnText}
           </TextBtn>
         </TwotBtnTemplate>
-        {visibleModal && (
+        {alertVisible && (
           <TimerAlertModal onStop={onClose} onClose={closeTimerAlertModal} task={task} />
         )}
       </S.Container>

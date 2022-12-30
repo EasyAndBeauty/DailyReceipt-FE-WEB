@@ -5,8 +5,8 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
-import { AuthContextProvider } from "store/authContext";
 import { BaseContextProvider } from "store/baseContext";
+import { AuthContextProvider } from "store/authContext";
 
 const theme = {
   bk: "#191919",

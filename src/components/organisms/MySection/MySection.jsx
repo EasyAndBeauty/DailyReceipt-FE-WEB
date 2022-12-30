@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import Loading from "react-loading";
 import { useNavigate } from "react-router-dom";
 import { ReceiptPaper } from "components";
-import * as S from "./MySection.styles";
-import { useReceiptClient } from "controllers/receiptController";
+import { useFetchReceipt } from "hooks/useReceipts";
 import { formatReceiptDate } from "helper/formatter";
-
+import * as S from "./MySection.styles";
 /**
  * MySection
  *
@@ -14,16 +13,7 @@ import { formatReceiptDate } from "helper/formatter";
  * */
 export const MySection = () => {
   const navigate = useNavigate();
-
-  const { getPinnedReceipts } = useReceiptClient();
-  const [receipts, setReceipts] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const data = await getPinnedReceipts();
-      setReceipts(data);
-    })();
-  }, []);
+  const { pinnedReceipts: receipts, loading } = useFetchReceipt();
 
   const renderReceipts = (receipts) => {
     const pinnedReceipts = receipts.map((receipt) => {
@@ -32,10 +22,18 @@ export const MySection = () => {
           <S.CreatedDate>{receipt.date && formatReceiptDate(receipt.date)}</S.CreatedDate>
           <ReceiptPaper
             onClick={() => {
-              navigate(`/receipt`, { state: { todos: receipt.todos, pinned: receipt.pinned } });
+              navigate(`/receipt`, {
+                state: {
+                  todos: receipt.todos,
+                  pinned: true,
+                  receiptNumber: receipt.id,
+                  quote: receipt.famousSaying,
+                },
+              });
             }}
             todos={Array.from(receipt.todos)}
             key={receipt.id}
+            quote={receipt.famousSaying}
           />
         </S.PaperContainer>
       );
@@ -45,6 +43,7 @@ export const MySection = () => {
   };
 
   const renderBlankPage = () => {
+    console.log(receipts);
     return (
       <S.BlankContainer>
         <S.BlankTitle>Pinned Receipts</S.BlankTitle>
@@ -62,7 +61,13 @@ export const MySection = () => {
   return (
     <S.Container>
       <S.ScrollMenu>
-        {receipts.length > 0 ? renderReceipts(receipts) : renderBlankPage()}
+        {loading ? (
+          <Loading />
+        ) : receipts?.length > 0 ? (
+          renderReceipts(receipts)
+        ) : (
+          renderBlankPage()
+        )}
       </S.ScrollMenu>
     </S.Container>
   );
