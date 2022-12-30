@@ -25,7 +25,7 @@ export function useFetchReceipt() {
 }
 
 /**
- * 세션 스토리지와 유저의 정보를 취합하여 새 핀 영수증을 만듧니다.
+ * 세션 스토리지와 유저의 정보를 취합하여 새 핀 영수증을 만듭니다.
  *
  * @returns {Object} Pinned Receipt
  */
