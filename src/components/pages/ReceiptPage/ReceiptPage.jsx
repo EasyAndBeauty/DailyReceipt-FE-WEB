@@ -6,7 +6,7 @@ import * as S from "./ReceiptPage.styles";
 
 export function ReceiptPage() {
   const {
-    state: { todos, pinned, date, receiptNumber },
+    state: { todos, pinned, date, receiptNumber, quote },
   } = useLocation();
   const navigate = useNavigate();
   const receiptRef = useRef(null);
@@ -34,7 +34,7 @@ export function ReceiptPage() {
         <BackIcon />
       </S.BackIconContainer>
       <S.ReceiptContainer ref={receiptRef} scale={scale}>
-        <ReceiptPaper todos={todos} />
+        <ReceiptPaper todos={todos} quote={quote} />
       </S.ReceiptContainer>
       <S.IconContainer>
         <CopyBtn />

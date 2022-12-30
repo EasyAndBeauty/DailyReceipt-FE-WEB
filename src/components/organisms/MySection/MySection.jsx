@@ -23,7 +23,12 @@ export const MySection = () => {
           <ReceiptPaper
             onClick={() => {
               navigate(`/receipt`, {
-                state: { todos: receipt.todos, pinned: true, receiptNumber: receipt.id },
+                state: {
+                  todos: receipt.todos,
+                  pinned: true,
+                  receiptNumber: receipt.id,
+                  quote: receipt.famousSaying,
+                },
               });
             }}
             todos={Array.from(receipt.todos)}
