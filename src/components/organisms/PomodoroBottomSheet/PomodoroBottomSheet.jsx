@@ -47,7 +47,7 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
       case "play":
         setIsRunning(true);
         setBtnText("pause");
-        setDisplayText(`조금 더 집중한 이 시간이 ${"\n"} 더 빛나는 내일을 만들어 줄거예요`);
+        setDisplayText(`조금 더 집중한 이 시간이\n더 빛나는 내일을 만들어 줄 거예요.`);
         if (count === 0) {
           setCount(POMODORO_TIME);
         }
@@ -55,7 +55,7 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
       case "pause":
         setIsRunning(false);
         setBtnText("play");
-        setDisplayText("play를 눌러 타이머를 재개하세요");
+        setDisplayText("더 집중하고 싶다면\nplay를 다시 눌러주세요.");
         const newAccTime = Number(timer) + POMODORO_TIME - count;
         await onEdit({ ...todo, timer: newAccTime });
         setAccTime(newAccTime);
@@ -89,16 +89,20 @@ export function PomodoroBottomSheet({ isOpen, onClose, todo, onEdit }) {
     <BottomSheetTemplate isOpen={isOpen}>
       <S.Container isOpen={isOpen}>
         <S.TaskText>TODO : {task}</S.TaskText>
-        {!isRunning && (
+
+        {!isRunning ? (
           <S.AccumulateText>
             집중한 시간 {getHour(accTime) > 0 && getHour(accTime) + ":"}
             {getMin(accTime)}:{getSec(accTime)}
           </S.AccumulateText>
+        ) : (
+          <S.AccumulateText />
         )}
-        <S.TimerText>
+
+        <S.TimerText isRunning={isRunning}>
           <Time count={count} />
         </S.TimerText>
-        <S.DesciptText>{displayText}</S.DesciptText>
+        <S.DesciptText isRunning={isRunning}>{displayText}</S.DesciptText>
         <TwotBtnTemplate lineColor="wt">
           <TextBtn
             onClick={() => {

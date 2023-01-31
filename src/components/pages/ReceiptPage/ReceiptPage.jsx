@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ReceiptPaper, AlertModal, SaveBtn, CopyBtn, PinBtn, PinnedModal } from "components";
+import { ReceiptPaper, SaveBtn, CopyBtn, PinBtn, PinnedModal } from "components";
 import { ReactComponent as BackIcon } from "assets/svg/back_icon.svg";
 import * as S from "./ReceiptPage.styles";
 
@@ -12,7 +12,6 @@ export function ReceiptPage() {
   const receiptRef = useRef(null);
 
   const [scale, setScale] = useState(1);
-  const [modalOn, setModalOn] = useState(false);
   const [pinBtnModalVisible, setPinBtnModalVisible] = useState(false);
 
   useEffect(() => {
@@ -23,7 +22,6 @@ export function ReceiptPage() {
       setScale(receiptSectionHeight / receiptHeight - 0.01);
     }
   }, []);
-
   useEffect(() => {
     sessionStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -45,7 +43,6 @@ export function ReceiptPage() {
           id={receiptNumber}
         />
       </S.IconContainer>
-      {modalOn && <AlertModal onClick={() => setModalOn(false)} />}
       {pinBtnModalVisible && <PinnedModal onClose={() => setPinBtnModalVisible(false)} />}
     </S.Container>
   );
