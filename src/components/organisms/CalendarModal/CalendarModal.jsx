@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import { Calendar } from "components";
 import { ReactComponent as SmallArrowIcon } from "assets/svg/arrow-s.svg";
@@ -11,15 +12,12 @@ import * as S from "./CalendarModal.styles";
  *
  * @returns {JSX.Element} 달력 모달 컴포넌트
  */
-export function CalendarModal({
-  selectedDate,
-  onSelectDayOfWeek,
-  setCalendarOn,
-}) {
-  const [yearMonth, setYearMonth] = useState({
-    year: selectedDate.getFullYear(),
-    month: selectedDate.getMonth() + 1,
-  });
+export function CalendarModal({ selectedDate, onSelectDayOfWeek, setCalendarOn }) {
+  const initialDate = {
+    year: Number(dayjs(selectedDate).format("YYYY")),
+    month: Number(dayjs(selectedDate).format("MM")),
+  };
+  const [yearMonth, setYearMonth] = useState(initialDate);
 
   const changeMonth = (next) => {
     if (next) {

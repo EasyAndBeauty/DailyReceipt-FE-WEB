@@ -5,7 +5,6 @@
  */
 //TodoPage
 export { HeaderText } from "./atoms/HeaderText";
-export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
 export { TimerImage } from "./atoms/TimerImage";
@@ -16,9 +15,15 @@ export { ReceiptPaperTriangle } from "./atoms/ReceiptPaperTriangle";
 export { ReceiptPaperInfo } from "./atoms/ReceiptPaperInfo";
 export { ReceiptBarcode } from "./atoms/ReceiptBarcode";
 export { ReceiptQuotes } from "./atoms/ReceiptQuotes";
+export { SaveBtn } from "./atoms/ReceiptPageBtns/SaveBtn";
+export { CopyBtn } from "./atoms/ReceiptPageBtns/CopyBtn";
+export { PinBtn } from "./atoms/ReceiptPageBtns/PinBtn";
 
 // common
 export { BackBtn } from "./atoms/BackBtn";
+export { TextBtn } from "./atoms/TextBtn";
+export { ErrorText } from "./atoms/ErrorText";
+export { Spacer } from "./atoms/Spacer";
 
 /**
  * molecules
@@ -46,17 +51,23 @@ export { MyFooter } from "./molecules/MyFooter";
 export { TodoList } from "./organisms/TodoList";
 export { CalendarModal } from "./organisms/CalendarModal";
 export { Calendar } from "./organisms/Calendar";
+export { PomodoroBottomSheet } from "./organisms/PomodoroBottomSheet";
 
 // MyReceiptPage
 export { MySection } from "./organisms/MySection";
 
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
+export { NicknameModal } from "./organisms/NicknameModal";
+export { PinnedModal } from "./organisms/PinnedModal";
+export { TimerAlertModal } from "./organisms/TimerAlertModal";
 
 /**
  * templates
  */
 export { ModalTemplate } from "./templates/ModalTemplate";
+export { BottomSheetTemplate } from "./templates/BottomSheetTemplate";
+export { TwotBtnTemplate } from "./templates/TwotBtnTemplate";
 
 /**
  * Pages

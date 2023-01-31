@@ -22,10 +22,7 @@ export function AuthPage() {
 
         const { accessToken, refreshToken } = res;
 
-        window.localStorage.setItem(
-          TOKEN_KEY,
-          JSON.stringify({ accessToken, refreshToken })
-        );
+        window.localStorage.setItem(TOKEN_KEY, JSON.stringify({ accessToken, refreshToken }));
 
         dispatch({
           type: "LOGIN",
@@ -46,9 +43,7 @@ export function AuthPage() {
       <S.ImageContainer>
         <KakaoIcon />
       </S.ImageContainer>
-      {loading && (
-        <Loading type="spin" color="#fae100" height={144} width={144} />
-      )}
+      {loading && <Loading type="spin" color="#fae100" height={144} width={144} />}
     </S.Container>
   );
 }

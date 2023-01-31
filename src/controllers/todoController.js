@@ -1,26 +1,82 @@
-import { AuthClient } from "./client";
+import { v4 as uuidv4 } from "uuid";
+import { client } from "./client";
 
-export const useTodoClient = () => {
-  const authClient = AuthClient();
+export const getMemberTodo = (date) => {
+  return client.get("/api/v1/todo", {
+    params: { targetDate: date },
+  });
+};
 
-  // Todo: 백엔드 갱신 후 API요청 URL 수정
-  const getTodoList = async (date) => {
-    return await authClient.get("/api/v1/todo", {
-      params: { targetDate: date },
-    });
-  };
+export const getGuestTodo = (date) => {
+  const data = window.localStorage.getItem(date);
+  return data ? { data: JSON.parse(data) } : [];
+};
 
-  const postTodo = async (todo) => {
-    return await authClient.post(`/api/v1/todo`, todo);
-  };
+export const postMemberTodo = async (todo) => {
+  try {
+    const res = await client.post(`/api/v1/todo`, todo);
 
-  const updateTodo = async (todoId, todo) => {
-    return await authClient.put(`/api/v1/todo/${todoId}`, todo);
-  };
+    if (res.status !== 201) {
+      throw new Error(res.status);
+    }
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  const deleteTodo = async (todoId) => {
-    return await authClient.delete(`/api/v1/todo/${todoId}`);
-  };
+export const postGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newTodo = { ...todo, todoId: uuidv4() };
+    const newArray = data ? [...data, newTodo] : [newTodo];
+    window.localStorage.setItem(todo.date, JSON.stringify(newArray));
+    return;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-  return { getTodoList, postTodo, updateTodo, deleteTodo };
+export const putMemberTodo = async (todo) => {
+  try {
+    const res = await client.put(`/api/v1/todo/${todo.todoId}`, todo);
+
+    if (res.status !== 200) {
+      throw new Error(res.status);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const putGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newArray = data.map((item) => (item.todoId === todo.todoId ? todo : item));
+    window.localStorage.setItem(todo.date, JSON.stringify(newArray));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteMemberTodo = async (todo) => {
+  try {
+    const res = await client.delete(`/api/v1/todo/${todo.todoId}`);
+
+    if (res.status !== 200) {
+      throw new Error(res.status);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteGuestTodo = (todo) => {
+  try {
+    const data = JSON.parse(window.localStorage.getItem(todo.date));
+    const newTodos = data.filter((item) => item.todoId !== todo.todoId);
+    window.localStorage.setItem(todo.date, JSON.stringify(newTodos));
+  } catch (e) {
+    console.log(e);
+  }
 };

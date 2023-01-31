@@ -1,9 +1,9 @@
 import * as S from "./HeaderText.styles";
 
 /**
- * Header component
+ * Header Text
  *
- * 상단 헤더에 사용되는 컴포넌트
+ * Header에 표시되는 텍스트용 컴포넌트
  * children에 text를 넣어 사용함
  *
  */

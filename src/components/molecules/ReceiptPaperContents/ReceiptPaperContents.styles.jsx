@@ -16,7 +16,7 @@ export const Paper = styled(Center)`
   letter-spacing: -0.5px;
   line-height: 1.4;
   color: #2f2f2f;
-  background: url(${paperTexture});
+  background: url(${paperTexture}) no-repeat center/cover; ;
 `;
 
 export const Title = styled.h1`

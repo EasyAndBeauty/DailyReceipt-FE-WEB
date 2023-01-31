@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { CalendarModal, HeaderText } from "components";
 import * as S from "./TodoHeader.styles";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 /**
  * TodoHeader component
@@ -18,10 +18,8 @@ import { useState } from "react";
 export function TodoHeader({ selectedDate, onSelectDayOfWeek, navigateUserPage }) {
   const [calendarOn, setCalendarOn] = useState(false);
 
-  const selectedMonth = (Date) => {
-    return Date.toLocaleDateString("en-US", {
-      month: "long",
-    });
+  const selectedMonth = (date) => {
+    return dayjs(date).format("MMMM");
   };
 
   return (
@@ -30,18 +28,10 @@ export function TodoHeader({ selectedDate, onSelectDayOfWeek, navigateUserPage }
         <HeaderText>{selectedMonth(selectedDate)}</HeaderText>
         <div>
           <S.Btn onClick={() => setCalendarOn(true)}>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              size="2x"
-              color="#aaaaaa"
-            ></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faCalendarDays} size="2x" color="#aaaaaa" />
           </S.Btn>
           <S.Btn onClick={() => navigateUserPage()}>
-            <FontAwesomeIcon
-              icon={faReceipt}
-              size="2x"
-              color="#aaaaaa"
-            ></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faReceipt} size="2x" color="#aaaaaa" />
           </S.Btn>
         </div>
       </S.Container>

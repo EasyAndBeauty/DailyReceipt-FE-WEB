@@ -26,4 +26,5 @@ export const Input = styled.input`
 export const InputButton = styled.div`
   transform: scale(1.5);
   padding: 8px;
+  cursor: pointer;
 `;

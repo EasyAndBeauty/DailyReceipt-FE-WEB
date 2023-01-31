@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactLoading from "react-loading";
 import useInterval from "hooks/useInterval";
-import { TIME_HOUR } from "helper/constants";
+import { INTERVAL_SECOND } from "helper/constants";
 import * as S from "./TimerImage.styles";
 
 /**
@@ -17,7 +17,7 @@ import * as S from "./TimerImage.styles";
  * @returns
  */
 export function TimerImage({ isRunning, setIsRunning, count, setCount }) {
-  const [delay] = useState(TIME_HOUR); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
+  const [delay] = useState(INTERVAL_SECOND); // 여기에 몇 ms씩에 반복할지 작성하면 됩니다! => 나중에 상수로 만들면 좋을듯 합니다?
 
   useInterval(
     () => {
@@ -27,17 +27,12 @@ export function TimerImage({ isRunning, setIsRunning, count, setCount }) {
         setIsRunning(false);
       }
     },
-    isRunning ? delay : null
+    isRunning ? delay : null,
   );
 
   return (
     <S.TimerContainer>
-      <ReactLoading
-        type="spinningBubbles"
-        color="#aaaaaa"
-        height={20}
-        width={20}
-      />
+      <ReactLoading type="spinningBubbles" color="#aaaaaa" height={20} width={20} />
       <S.CountNumber>{count}</S.CountNumber>
     </S.TimerContainer>
   );
