@@ -1,5 +1,5 @@
 import axios from "axios";
-import AuthClient from "./client";
+import { client } from "./client";
 
 /**
  *  카카오 로그인 요청 및 인가코드 발급용 URL
@@ -14,7 +14,7 @@ export const KAKAO_LOGIN_URL = `${process.env.REACT_APP_KAKAO_BASE_URL}?client_i
 export const getUserToken = async (code) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`
+      `${process.env.REACT_APP_DAILY_RECEIPT_API_BASE_URL}/auth/kakao/callback?code=${code}`,
     );
 
     const accessToken = response.data.accessToken;
@@ -25,16 +25,10 @@ export const getUserToken = async (code) => {
   }
 };
 
-export const useUserClient = () => {
-  const authClient = AuthClient();
+export const getUser = async () => {
+  return await client.get("/api/v1/user");
+};
 
-  const getUser = async () => {
-    return await authClient.get("/api/v1/user");
-  };
-
-  const putUser = async (user) => {
-    return await authClient.put("/api/v1/user", user);
-  };
-
-  return { getUser, putUser };
+export const putUser = async (user) => {
+  return await client.put("/api/v1/user", { nickname: user });
 };

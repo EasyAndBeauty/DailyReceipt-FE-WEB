@@ -1,22 +1,13 @@
-import { AuthClient } from "./client";
-import { dummyPinnedReceipts } from "./dummy";
+import { client } from "./client";
 
-export const useReceiptClient = () => {
-  const authClient = AuthClient();
+export const getPinnedReceipts = async () => {
+  return await client.get("/api/v1/receipt/pinned");
+};
 
-  // Todo: 백엔드 갱신 후 API요청 URL 수정
-  const getPinnedReceipts = async () => {
-    return dummyPinnedReceipts;
-    // return await authClient.get("/api/v1/receipt/pinned");
-  };
+export const postPinnedReceipt = async (receipt) => {
+  return await client.post(`/api/v1/receipt/pinned`, receipt);
+};
 
-  const postPinnedReceipt = async (receipt) => {
-    return await authClient.post(`/api/v1/receipt/pinned`, receipt);
-  };
-
-  const updatePinnedReceipt = async (receipt, receiptId) => {
-    return await authClient.put(`/api/v1/receipt/pinned/${receiptId}`, receipt);
-  };
-
-  return { getPinnedReceipts, postPinnedReceipt, updatePinnedReceipt };
+export const updatePinnedReceipt = async (receipt, receiptId) => {
+  return await client.put(`/api/v1/receipt/${receiptId}`, receipt);
 };

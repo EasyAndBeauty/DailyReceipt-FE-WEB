@@ -31,6 +31,7 @@ export const AuthReducer = (userState, action) => {
 
 export function useAuthState() {
   const context = useContext(AuthStateContext);
+
   if (context === undefined) {
     throw new Error("useAuthState must be used within a AuthProvider");
   }
@@ -52,9 +53,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthStateContext.Provider value={user}>
-      <AuthDispatchContext.Provider value={dispatch}>
-        {children}
-      </AuthDispatchContext.Provider>
+      <AuthDispatchContext.Provider value={dispatch}>{children}</AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
   );
 };

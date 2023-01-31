@@ -1,1 +1,0 @@
-export { TwotBtn } from "./TwotBtn";

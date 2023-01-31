@@ -1,4 +1,3 @@
-import { BackBtn } from "components";
 import ReceiptImg from "assets/images/receipt_img.png";
 import * as S from "./RedirectionPage.styles";
 import { useNavigate } from "react-router-dom";

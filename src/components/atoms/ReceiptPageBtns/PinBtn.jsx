@@ -1,15 +1,25 @@
-import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { usePinnedReceipt } from "hooks/useReceipts";
+import { ReactComponent as PinIcon } from "assets/svg/pin_icon.svg";
 
-export function PinBtn() {
+export function PinBtn({ isPinned, openModal, id }) {
+  const { postPinReceipt, updatePinReceipt } = usePinnedReceipt();
   const [pinned, setPinned] = useState(false);
 
-  function handlePin() {
-    // todo: 서버로 pin 데이터 보내는 기능 추가
-    console.log("pinned", !pinned);
+  useEffect(() => {
+    if (isPinned) setPinned(true);
+  }, [isPinned]);
+
+  const handlePin = async () => {
+    if (!isPinned) {
+      postPinReceipt();
+      openModal();
+    }
+    if (isPinned) updatePinReceipt(id);
+
     setPinned(!pinned);
-  }
+  };
 
   return (
     <PinContainer onClick={handlePin} pinned={pinned}>

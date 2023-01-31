@@ -3,13 +3,12 @@ import { useAuthState, useAuthDispatch } from "store/authContext";
 import { TOKEN_KEY } from "helper/constants";
 import { isValidToken } from "helper/jwt";
 
-export const useCurrentToken = () => {
+export const useAuth = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
     const currentToken = localStorage.getItem(TOKEN_KEY);
-
     if (currentToken) {
       isValidToken(currentToken)
         ? dispatch({
@@ -19,5 +18,7 @@ export const useCurrentToken = () => {
         : dispatch({ type: "LOGOUT" });
     }
   }, [dispatch]);
-  return { user };
+  return {
+    ...user,
+  };
 };

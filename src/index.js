@@ -5,8 +5,8 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
-import { AuthContextProvider } from "store/authContext";
 import { BaseContextProvider } from "store/baseContext";
+import { AuthContextProvider } from "store/authContext";
 
 const theme = {
   bk: "#191919",
@@ -14,6 +14,7 @@ const theme = {
   red: "#F55959",
   gray: "#aaaaaa",
   green: "#81c944",
+  lightGray: "#797979",
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,5 +28,5 @@ root.render(
         </ThemeProvider>
       </BrowserRouter>
     </BaseContextProvider>
-  </AuthContextProvider>
+  </AuthContextProvider>,
 );

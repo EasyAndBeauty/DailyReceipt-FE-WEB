@@ -58,6 +58,7 @@ export const Btn = styled.div`
   font-family: "Courier Prime", monospace;
   font-size: 1rem;
   z-index: 1;
+  cursor: pointer;
 
   div {
     position: relative;

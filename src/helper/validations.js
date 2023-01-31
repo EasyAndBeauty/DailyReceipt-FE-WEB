@@ -4,5 +4,5 @@ export const isNull = (word) => {
 };
 
 export const isOverMaxLength = (word) => {
-  if (word.length > 7) return true;
+  if (Array.from(word).length > 7) return true;
 };

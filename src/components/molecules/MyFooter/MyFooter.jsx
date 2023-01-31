@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthDispatch } from "store/authContext";
 import { NicknameModal } from "components";
 import { TOKEN_KEY } from "helper/constants";
 import * as S from "./MyFooter.styles";
+import { useAuthDispatch } from "store/authContext";
 
 /**
  * My page의 하단 부분입니다.
@@ -24,10 +24,12 @@ export const MyFooter = () => {
   };
 
   const showModal = () => {
+    document.body.style.overflow = "hidden";
     setVisibleModal(true);
   };
 
   const closeModal = () => {
+    document.body.style.overflow = "unset";
     setVisibleModal(false);
   };
 

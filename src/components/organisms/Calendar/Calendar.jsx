@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { CalendarDay } from "components";
 import * as S from "./Calendar.styles";
+import dayjs from "dayjs";
 
-export function Calendar({
-  onSelectDayOfWeek,
-  year,
-  month,
-  setCalendarOn,
-  selectedDate,
-}) {
+export function Calendar({ onSelectDayOfWeek, year, month, setCalendarOn, selectedDate }) {
   const now = new Date();
   const startDay = new Date(year, month - 1, 1).getDay();
   const lastDay = new Date(year, month, 0).getDate();
@@ -17,8 +12,7 @@ export function Calendar({
   useEffect(() => {
     const dayArr = [];
     const needDays = startDay + lastDay;
-    const n =
-      needDays % 7 ? needDays + (7 - ((startDay + lastDay) % 7)) : needDays;
+    const n = needDays % 7 ? needDays + (7 - ((startDay + lastDay) % 7)) : needDays;
 
     for (let i = 0; i < n; i++) {
       if (i < startDay) {
@@ -36,26 +30,22 @@ export function Calendar({
     }
 
     setDays(dayArr);
-  }, [year, month]);
+  }, [year, month, startDay, lastDay]);
 
   function changeDay(day) {
-    onSelectDayOfWeek(new Date(year, month - 1, day));
+    onSelectDayOfWeek("" + year + "-" + month + "-" + day);
     setCalendarOn(false);
   }
 
   function checkToday(day) {
-    return (
-      now.getFullYear() === year &&
-      now.getMonth() + 1 === month &&
-      now.getDate() === day
-    );
+    return now.getFullYear() === year && now.getMonth() + 1 === month && now.getDate() === day;
   }
 
   function checkSelected(day) {
     return (
-      selectedDate.getFullYear() === year &&
-      selectedDate.getMonth() + 1 === month &&
-      selectedDate.getDate() === day
+      Number(dayjs(selectedDate).format("YYYY")) === year &&
+      Number(dayjs(selectedDate).format("MM")) === month &&
+      Number(dayjs(selectedDate).format("DD")) === day
     );
   }
 

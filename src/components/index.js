@@ -4,10 +4,7 @@
  * atoms
  */
 //TodoPage
-import SaveBtn from "./atoms/ReceiptPageBtns/SaveBtn";
-
 export { HeaderText } from "./atoms/HeaderText";
-export { DayOfWeek } from "./atoms/DayOfWeek";
 export { SquareBtn } from "./atoms/SquareBtn";
 export { Portal } from "./atoms/Portal";
 export { TimerImage } from "./atoms/TimerImage";
@@ -36,7 +33,6 @@ export { Week } from "./molecules/Week";
 export { TodoHeader } from "./molecules/TodoHeader";
 export { ToDoInsert } from "./molecules/ToDoInsert";
 export { TodoListBlock } from "./molecules/TodoListBlock";
-export { TwotBtn } from "./molecules/TwotBtn";
 
 //ReceiptPage
 export { ReceiptPaper } from "./molecules/ReceiptPaper";
@@ -63,12 +59,15 @@ export { MySection } from "./organisms/MySection";
 export { LoadingModal } from "./organisms/LoadingModal";
 export { AlertModal } from "./organisms/AlertModal";
 export { NicknameModal } from "./organisms/NicknameModal";
+export { PinnedModal } from "./organisms/PinnedModal";
+export { TimerAlertModal } from "./organisms/TimerAlertModal";
 
 /**
  * templates
  */
 export { ModalTemplate } from "./templates/ModalTemplate";
 export { BottomSheetTemplate } from "./templates/BottomSheetTemplate";
+export { TwotBtnTemplate } from "./templates/TwotBtnTemplate";
 
 /**
  * Pages

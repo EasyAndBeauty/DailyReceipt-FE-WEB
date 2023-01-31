@@ -5,10 +5,11 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 350px;
-  width: 70%;
+  width: 90%;
   position: fixed;
   bottom: 0;
+  background-color: ${(props) => props.theme.bk};
+  box-shadow: 0px -6px 10px ${(props) => props.theme.bk};
 `;
 
 export const Button = styled.div`
@@ -18,14 +19,11 @@ export const Button = styled.div`
 
   height: 66px;
   width: 100%;
-  background-image: linear-gradient(
-    to right,
-    white 33%,
-    rgba(255, 255, 255, 0) 0%
-  );
+  background-image: linear-gradient(to right, white 33%, rgba(255, 255, 255, 0) 0%);
   background-position: top;
   background-size: 8px 1px; /*점선 간격 수정*/
   background-repeat: repeat-x;
+  cursor: pointer;
 `;
 
 export const ButtonText = styled.span`

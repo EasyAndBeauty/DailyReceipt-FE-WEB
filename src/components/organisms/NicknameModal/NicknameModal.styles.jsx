@@ -6,7 +6,7 @@ export const Background = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 2;
   position: fixed;
   left: 0;
   top: 0;
@@ -14,7 +14,7 @@ export const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-export const NicknameContainer = styled.div`
+export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -22,7 +22,7 @@ export const NicknameContainer = styled.div`
   width: 80%;
 `;
 
-export const CurrentNickname = styled.span`
+export const ModalTitle = styled.span`
   text-align: left;
   font-size: 14px;
   font-weight: bold;
@@ -37,21 +37,6 @@ export const ErrorDiv = styled.div`
 
 export const ErrorNotification = styled.span`
   color: red;
-`;
-
-export const Divider = styled.hr`
-  border: none;
-  border-top: 1.5px dashed;
-  height: 1.5px;
-  width: 80%;
-  margin-top: 1rem;
-`;
-
-export const SelectDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
 `;
 
 export const NicknameInput = styled.input`
