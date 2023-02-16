@@ -31,6 +31,9 @@ export function useFetchReceipt() {
  */
 function useGeneratePinnedReceipt() {
   const [userName, setUserName] = useState("");
+  const [todoIds, setTodoIds] = useState([]);
+  const [todos, _] = useState(JSON.parse(sessionStorage.getItem("todos")));
+  const [famousSaying, __] = useState(sessionStorage.getItem("famousSaying"));
 
   useEffect(() => {
     (async () => {
@@ -39,9 +42,12 @@ function useGeneratePinnedReceipt() {
     })();
   }, []);
 
-  const famousSaying = sessionStorage.getItem("famousSaying");
-  const todos = JSON.parse(sessionStorage.getItem("todos"));
-  const todoIds = todos.map(({ todoId }) => todoId);
+  useEffect(() => {
+    // todos가 아직 세션 스토리지에 저장되지 않아서 null인 경우 return.
+    if (!todos) return;
+
+    setTodoIds(todos.map((todo) => todo.id));
+  }, [todos]);
 
   return {
     receiptBody: { todoIds, famousSaying: famousSaying, receipt_name: userName, pinned: true },
