@@ -21,7 +21,7 @@ export const postMemberTodo = async (todo) => {
     }
     return res;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -33,7 +33,7 @@ export const postGuestTodo = (todo) => {
     window.localStorage.setItem(todo.date, JSON.stringify(newArray));
     return;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -45,7 +45,7 @@ export const putMemberTodo = async (todo) => {
       throw new Error(res.status);
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -55,7 +55,7 @@ export const putGuestTodo = (todo) => {
     const newArray = data.map((item) => (item.todoId === todo.todoId ? todo : item));
     window.localStorage.setItem(todo.date, JSON.stringify(newArray));
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -67,7 +67,7 @@ export const deleteMemberTodo = async (todo) => {
       throw new Error(res.status);
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -77,6 +77,6 @@ export const deleteGuestTodo = (todo) => {
     const newTodos = data.filter((item) => item.todoId !== todo.todoId);
     window.localStorage.setItem(todo.date, JSON.stringify(newTodos));
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };

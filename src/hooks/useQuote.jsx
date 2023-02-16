@@ -15,7 +15,7 @@ export const useFetchQuote = () => {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
         setError(true);
       });
   }, []);

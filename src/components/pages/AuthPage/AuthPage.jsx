@@ -30,7 +30,7 @@ export function AuthPage() {
         });
       })
       .catch((error) => {
-        console.log("로그인 에러", error);
+        console.error("로그인 에러", error);
       })
       .finally(() => {
         setLoading(false);

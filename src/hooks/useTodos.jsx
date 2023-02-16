@@ -37,7 +37,7 @@ export function useFetchTodos() {
         setTodos(res.data);
         setLoading(false);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     },
     [isLoggedIn],
