@@ -43,7 +43,6 @@ export const MySection = () => {
   };
 
   const renderBlankPage = () => {
-    console.log(receipts);
     return (
       <S.BlankContainer>
         <S.BlankTitle>Pinned Receipts</S.BlankTitle>

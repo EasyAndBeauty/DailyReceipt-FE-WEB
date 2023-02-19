@@ -21,7 +21,7 @@ export const getUserToken = async (code) => {
     const refreshToken = response.data.refreshToken;
     return { accessToken, refreshToken };
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
