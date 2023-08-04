@@ -1,0 +1,94 @@
+{
+    "_id": "3ffcc096-4bd8-4501-af70-06c3c0203bf7",
+    "colName": "User",
+    "created": "2023-08-04T10:41:54.593Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "b7922cf3-16e1-4b8d-aa01-f521cfdaf3b9",
+            "colId": "3ffcc096-4bd8-4501-af70-06c3c0203bf7",
+            "containerId": "",
+            "name": "Get User",
+            "url": "{baseUrl}/auth/kakao/callback?code",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-08-04T10:41:59.186Z",
+            "modified": "2023-08-04T10:44:30.670Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                },
+                {
+                    "name": "code",
+                    "value": "",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "b6fab7c7-f0da-4a00-a90f-7e2edee09da2",
+            "colId": "3ffcc096-4bd8-4501-af70-06c3c0203bf7",
+            "containerId": "",
+            "name": "Post Re-issuance User Token",
+            "url": "{baseUrl}/api/v1/tokens/re-issuance ",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-08-04T10:49:18.596Z",
+            "modified": "2023-08-04T10:49:51.146Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "a9c48623-e0d7-4888-96f0-692b90c81563",
+            "colId": "3ffcc096-4bd8-4501-af70-06c3c0203bf7",
+            "containerId": "",
+            "name": "Get User",
+            "url": "{baseUrl}/api/v1/user ",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-08-04T10:49:38.978Z",
+            "modified": "2023-08-04T10:49:45.717Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "7bf0ab62-4139-441a-afa1-aef0f96e98c3",
+            "colId": "3ffcc096-4bd8-4501-af70-06c3c0203bf7",
+            "containerId": "",
+            "name": "Put User",
+            "url": "{baseUrl}/api/v1/user",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-08-04T10:49:57.580Z",
+            "modified": "2023-08-04T10:50:07.846Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

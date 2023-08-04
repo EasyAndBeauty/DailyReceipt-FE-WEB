@@ -1,0 +1,69 @@
+{
+    "_id": "13788720-a51c-4f46-8058-d9bf7901a75e",
+    "colName": "Receipt",
+    "created": "2023-08-04T10:52:12.157Z",
+    "sortNum": 30000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ed654052-ff91-4bcc-84e9-fcf1f330e7b7",
+            "colId": "13788720-a51c-4f46-8058-d9bf7901a75e",
+            "containerId": "",
+            "name": "Get Pinned Receipts",
+            "url": "{baseUrl}/api/v1/receipt/pinned ",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-04T10:52:40.948Z",
+            "modified": "2023-08-04T10:52:49.016Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "3f3336c1-5ec4-456d-8f82-f66d70fa6ddd",
+            "colId": "13788720-a51c-4f46-8058-d9bf7901a75e",
+            "containerId": "",
+            "name": "Post Pinned Receipt",
+            "url": "{baseUrl}/api/v1/receipt/pinned ",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-08-04T10:52:58.889Z",
+            "modified": "2023-08-04T10:53:06.313Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "8ddc8c81-106b-4819-817d-24820eae4351",
+            "colId": "13788720-a51c-4f46-8058-d9bf7901a75e",
+            "containerId": "",
+            "name": "Put Pinned Receipt",
+            "url": "{baseUrl}/api/v1/receipt/pinned/id ",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-08-04T10:53:16.873Z",
+            "modified": "2023-08-04T10:53:25.979Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "baseUrl",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        }
+    ]
+}
